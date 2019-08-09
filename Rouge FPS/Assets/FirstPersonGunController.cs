@@ -42,15 +42,26 @@ public class FirstPersonGunController : MonoBehaviour
     }
     void Update()
     {
+  
+        //リロード
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            InitGun();
+        }
+
         if (shootEnabled & ammo > 0 & GetInput())
         {
             StartCoroutine(ShootTimer());
         }
     }
+
+    //初期化
     void InitGun()
     {
         Ammo = maxAmmo;
     }
+
+    //セミオートかフルオートかの判定
     bool GetInput()
     {
         switch (shootMode)
@@ -103,6 +114,7 @@ public class FirstPersonGunController : MonoBehaviour
             yield return null;
         }
     }
+    //レイ判定(弾処理)
     void Shoot()
     {
         Ray ray = new Ray(transform.position, transform.forward);
@@ -128,7 +140,7 @@ public class FirstPersonGunController : MonoBehaviour
         }
         Ammo--;
  
-            //if (Ammo < 1) { Ammo = maxAmmo; }
+            
         
     }
 }
