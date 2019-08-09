@@ -6,7 +6,9 @@ using UnityEngine;
 public class MyStatus : MonoBehaviour
 {
 
-    private int hp;
+    private int hp=100;
+    private int Attack;
+    private int Deffend;
     private GameObject equip;
 
     public void SetHp(int hp)
@@ -16,7 +18,9 @@ public class MyStatus : MonoBehaviour
 
     public int GetHp()
     {
-        return hp;
+
+
+        return 100;
     }
 
     public void SetEquip(GameObject weapon)
