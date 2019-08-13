@@ -1,14 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 public class FirstPersonGunController : MonoBehaviour
 {
+
+    public Text AmmoCheck;
+    [SerializeField]
     public enum ShootMode { AUTO, SEMIAUTO }
+    public enum GunType { AssaultRifle, SubMachineGun, LightMachineGun, HandGun, SniperRifle }
     public bool shootEnabled = true;
+    [SerializeField]
+
+    //ステータス設定
+    GunType gunType = GunType.AssaultRifle;
     [SerializeField]
     ShootMode shootMode = ShootMode.AUTO;
     [SerializeField]
-    int maxAmmo = 100;
+    int OneMagazine = 0;
+    [SerializeField]
+    int MaxAmmo = 0;
     [SerializeField]
     int damage = 1;
     [SerializeField]
@@ -29,24 +40,26 @@ public class FirstPersonGunController : MonoBehaviour
     {
         set
         {
-            ammo = Mathf.Clamp(value, 0, maxAmmo);
+            ammo = Mathf.Clamp(value, 0, OneMagazine);
         }
         get
         {
             return ammo;
         }
     }
+   
     void Start()
     {
         InitGun();
+     
     }
     void Update()
     {
-  
+        AmmoCheck.text = Ammo + "/" + MaxAmmo;
         //リロード
         if (Input.GetKeyDown(KeyCode.R))
         {
-            InitGun();
+            Reload();
         }
 
         if (shootEnabled & ammo > 0 & GetInput())
@@ -58,7 +71,34 @@ public class FirstPersonGunController : MonoBehaviour
     //初期化
     void InitGun()
     {
-        Ammo = maxAmmo;
+        Ammo = OneMagazine;
+    }
+
+    void Reload()
+    {
+        
+        if (MaxAmmo >= OneMagazine)
+        {
+            MaxAmmo = MaxAmmo - (OneMagazine - Ammo);
+            Ammo = OneMagazine;
+        }
+        else {
+            int NowAmmo;
+            NowAmmo = OneMagazine - Ammo;
+            Debug.Log(NowAmmo);
+            if (NowAmmo > MaxAmmo)
+            {
+                Ammo = MaxAmmo+Ammo;
+                MaxAmmo = 0;
+
+            }
+            else {
+                MaxAmmo = MaxAmmo - NowAmmo;
+                Ammo = Ammo + NowAmmo;
+            }
+        }
+
+       
     }
 
     //セミオートかフルオートかの判定
