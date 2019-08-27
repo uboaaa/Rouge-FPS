@@ -304,7 +304,11 @@ GameObject:
 <<<<<<< HEAD:Rouge FPS/Assets/Assets/Standard Assets/Characters/FirstPersonCharacter/Prefabs/FPSController.prefab
   - component: {fileID: 7688224770960322204}
 =======
+<<<<<<< HEAD
 >>>>>>> origin/Stage:Rouge FPS/Assets/Standard Assets/Characters/FirstPersonCharacter/Prefabs/FPSController.prefab
+=======
+>>>>>>> Stage:Rouge FPS/Assets/Standard Assets/Characters/FirstPersonCharacter/Prefabs/FPSController.prefab
+>>>>>>> e2e1ff0d531f2c5cd1cb6a2214349f58c58ad00d
   m_Layer: 0
   m_Name: FirstPersonCharacter
   m_TagString: MainCamera
@@ -399,4 +403,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 100
 =======
+<<<<<<< HEAD
 >>>>>>> origin/Stage:Rouge FPS/Assets/Standard Assets/Characters/FirstPersonCharacter/Prefabs/FPSController.prefab
+=======
+>>>>>>> Stage:Rouge FPS/Assets/Standard Assets/Characters/FirstPersonCharacter/Prefabs/FPSController.prefab
+>>>>>>> e2e1ff0d531f2c5cd1cb6a2214349f58c58ad00d
