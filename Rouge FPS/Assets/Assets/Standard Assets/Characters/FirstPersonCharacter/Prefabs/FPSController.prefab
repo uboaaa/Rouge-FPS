@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 6, y: 100, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400002}
@@ -301,7 +301,10 @@ GameObject:
   - component: {fileID: 2000000}
   - component: {fileID: 8100000}
   - component: {fileID: 12474086}
+<<<<<<< HEAD:Rouge FPS/Assets/Assets/Standard Assets/Characters/FirstPersonCharacter/Prefabs/FPSController.prefab
   - component: {fileID: 7688224770960322204}
+=======
+>>>>>>> origin/Stage:Rouge FPS/Assets/Standard Assets/Characters/FirstPersonCharacter/Prefabs/FPSController.prefab
   m_Layer: 0
   m_Name: FirstPersonCharacter
   m_TagString: MainCamera
@@ -381,6 +384,7 @@ Behaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 100002}
   m_Enabled: 1
+<<<<<<< HEAD:Rouge FPS/Assets/Assets/Standard Assets/Characters/FirstPersonCharacter/Prefabs/FPSController.prefab
 --- !u!114 &7688224770960322204
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -394,3 +398,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 100
+=======
+>>>>>>> origin/Stage:Rouge FPS/Assets/Standard Assets/Characters/FirstPersonCharacter/Prefabs/FPSController.prefab
