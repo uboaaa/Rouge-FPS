@@ -85,7 +85,7 @@ public class FirstPersonGunController : MonoBehaviour
         else {
             int NowAmmo;
             NowAmmo = OneMagazine - Ammo;
-            Debug.Log(NowAmmo);
+            
             if (NowAmmo > MaxAmmo)
             {
                 Ammo = MaxAmmo+Ammo;

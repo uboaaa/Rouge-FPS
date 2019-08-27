@@ -11,18 +11,18 @@ public class HpBarCtrl : MonoBehaviour
     {
         // 値セット
         _slider = GameObject.Find("Slider").GetComponent<Slider>();
-         hp = GameObject.Find("FirstPersonCharacter").GetComponent<MyStatus>().GetHp();
-        firsthp = GameObject.Find("FirstPersonCharacter").GetComponent<MyStatus>().GetHp();
-        _slider.maxValue = GameObject.Find("FirstPersonCharacter").GetComponent<MyStatus>().GetHp();
+         hp = GameObject.Find("FPSController").GetComponent<MyStatus>().GetHp();
+        firsthp = GameObject.Find("FPSController").GetComponent<MyStatus>().GetHp();
+        _slider.maxValue = GameObject.Find("FPSController").GetComponent<MyStatus>().GetHp();
     }
 
   
     void Update()
     {
 
-        hp = GameObject.Find("FirstPersonCharacter").GetComponent<MyStatus>().GetHp();
+        hp = GameObject.Find("FPSController").GetComponent<MyStatus>().GetHp();
         //後で消す
-        GameObject.Find("FirstPersonCharacter").GetComponent<MyStatus>().downHp();
+        //GameObject.Find("FPSController").GetComponent<MyStatus>().downHp();
         if (hp > 100)
         {
             // 最大を超えたら0に戻す

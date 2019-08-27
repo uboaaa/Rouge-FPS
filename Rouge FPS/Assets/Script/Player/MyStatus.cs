@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public class MyStatus : MonoBehaviour
@@ -10,11 +11,22 @@ public class MyStatus : MonoBehaviour
     private int Attack;
     private int Deffend;
     private GameObject equip;
+    public Text HpShow;
 
+    void Start()
+    {
 
+    }
+
+    void Update()
+    {
+        HpShow.text = "HP "+hp;
+    }
     public void SetHp(int hp)
     {
+        
         this.hp = hp;
+        
     }
 
     public int GetHp()

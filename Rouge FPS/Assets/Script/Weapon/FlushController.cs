@@ -14,8 +14,8 @@ public class FlushController : MonoBehaviour
         img = GetComponent<Image>();
         img.color = Color.clear;
      
-        FirstHP = GameObject.Find("FirstPersonCharacter").GetComponent<MyStatus>().GetHp();
-        NowHP = GameObject.Find("FirstPersonCharacter").GetComponent<MyStatus>().GetHp();
+        FirstHP = GameObject.Find("FPSController").GetComponent<MyStatus>().GetHp();
+        NowHP = GameObject.Find("FPSController").GetComponent<MyStatus>().GetHp();
         
     }
 
@@ -25,8 +25,8 @@ public class FlushController : MonoBehaviour
      //HPを持ってくる
         if (Input.GetKeyDown(KeyCode.C))
         {
-            NowHP = GameObject.Find("FirstPersonCharacter").GetComponent<MyStatus>().downHp();
-       GameObject.Find("Canvas").GetComponent<Score>().RandomScore();
+            NowHP = GameObject.Find("FPSController").GetComponent<MyStatus>().downHp();
+ 
         }
    
 
