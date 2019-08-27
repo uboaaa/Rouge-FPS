@@ -421,7 +421,11 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+<<<<<<< HEAD
 >>>>>>> origin/Stage:Rouge FPS/Assets/Scenes/SampleScene.unity
+=======
+>>>>>>> Stage:Rouge FPS/Assets/Scenes/SampleScene.unity
+>>>>>>> e2e1ff0d531f2c5cd1cb6a2214349f58c58ad00d
   m_SourcePrefab: {fileID: 100100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
 --- !u!1001 &479284957
 PrefabInstance:
@@ -667,7 +671,11 @@ PrefabInstance:
 --- !u!1 &679308950
 =======
 --- !u!1 &776965187
+<<<<<<< HEAD
 >>>>>>> origin/Stage:Rouge FPS/Assets/Scenes/SampleScene.unity
+=======
+>>>>>>> Stage:Rouge FPS/Assets/Scenes/SampleScene.unity
+>>>>>>> e2e1ff0d531f2c5cd1cb6a2214349f58c58ad00d
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -688,7 +696,11 @@ GameObject:
   - component: {fileID: 776965188}
   m_Layer: 0
   m_Name: Cube
+<<<<<<< HEAD
 >>>>>>> origin/Stage:Rouge FPS/Assets/Scenes/SampleScene.unity
+=======
+>>>>>>> Stage:Rouge FPS/Assets/Scenes/SampleScene.unity
+>>>>>>> e2e1ff0d531f2c5cd1cb6a2214349f58c58ad00d
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -700,7 +712,11 @@ RectTransform:
 =======
 --- !u!65 &776965188
 BoxCollider:
+<<<<<<< HEAD
 >>>>>>> origin/Stage:Rouge FPS/Assets/Scenes/SampleScene.unity
+=======
+>>>>>>> Stage:Rouge FPS/Assets/Scenes/SampleScene.unity
+>>>>>>> e2e1ff0d531f2c5cd1cb6a2214349f58c58ad00d
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -765,7 +781,11 @@ CanvasRenderer:
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &776965189
 MeshRenderer:
+<<<<<<< HEAD
 >>>>>>> origin/Stage:Rouge FPS/Assets/Scenes/SampleScene.unity
+=======
+>>>>>>> Stage:Rouge FPS/Assets/Scenes/SampleScene.unity
+>>>>>>> e2e1ff0d531f2c5cd1cb6a2214349f58c58ad00d
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -815,7 +835,11 @@ MonoBehaviour:
   m_SortingOrder: 0
 --- !u!33 &776965190
 MeshFilter:
+<<<<<<< HEAD
 >>>>>>> origin/Stage:Rouge FPS/Assets/Scenes/SampleScene.unity
+=======
+>>>>>>> Stage:Rouge FPS/Assets/Scenes/SampleScene.unity
+>>>>>>> e2e1ff0d531f2c5cd1cb6a2214349f58c58ad00d
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -836,7 +860,11 @@ MonoBehaviour:
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!4 &776965191
 Transform:
+<<<<<<< HEAD
 >>>>>>> origin/Stage:Rouge FPS/Assets/Scenes/SampleScene.unity
+=======
+>>>>>>> Stage:Rouge FPS/Assets/Scenes/SampleScene.unity
+>>>>>>> e2e1ff0d531f2c5cd1cb6a2214349f58c58ad00d
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -859,7 +887,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
 >>>>>>> origin/Stage:Rouge FPS/Assets/Scenes/SampleScene.unity
+=======
+>>>>>>> Stage:Rouge FPS/Assets/Scenes/SampleScene.unity
+>>>>>>> e2e1ff0d531f2c5cd1cb6a2214349f58c58ad00d
 --- !u!1 &823039218
 GameObject:
   m_ObjectHideFlags: 0
@@ -1266,7 +1298,11 @@ MonoBehaviour:
   muzzleFlashPrefab: {fileID: 100000, guid: 03a4a1935a9f4454c861dfa0aa6df562, type: 3}
   hitEffectPrefab: {fileID: 100002, guid: 56bfc2f4b4a0c534c8ef3d0fd1124c44, type: 3}
 =======
+<<<<<<< HEAD
 >>>>>>> origin/Stage:Rouge FPS/Assets/Scenes/SampleScene.unity
+=======
+>>>>>>> Stage:Rouge FPS/Assets/Scenes/SampleScene.unity
+>>>>>>> e2e1ff0d531f2c5cd1cb6a2214349f58c58ad00d
 --- !u!1 &1290264967
 GameObject:
   m_ObjectHideFlags: 0
@@ -1490,7 +1526,11 @@ CanvasRenderer:
   m_GameObject: {fileID: 1408478896}
   m_CullTransparentMesh: 0
 =======
+<<<<<<< HEAD
 >>>>>>> origin/Stage:Rouge FPS/Assets/Scenes/SampleScene.unity
+=======
+>>>>>>> Stage:Rouge FPS/Assets/Scenes/SampleScene.unity
+>>>>>>> e2e1ff0d531f2c5cd1cb6a2214349f58c58ad00d
 --- !u!4 &1445713920 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400002, guid: ccac3f45f8b36dc4196bc991b941ea8e,
@@ -1575,7 +1615,11 @@ CanvasRenderer:
 --- !u!1 &1679193415
 =======
 --- !u!1 &1561167798
+<<<<<<< HEAD
 >>>>>>> origin/Stage:Rouge FPS/Assets/Scenes/SampleScene.unity
+=======
+>>>>>>> Stage:Rouge FPS/Assets/Scenes/SampleScene.unity
+>>>>>>> e2e1ff0d531f2c5cd1cb6a2214349f58c58ad00d
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1592,7 +1636,11 @@ GameObject:
   - component: {fileID: 1561167799}
   m_Layer: 0
   m_Name: SceneInitilizer
+<<<<<<< HEAD
 >>>>>>> origin/Stage:Rouge FPS/Assets/Scenes/SampleScene.unity
+=======
+>>>>>>> Stage:Rouge FPS/Assets/Scenes/SampleScene.unity
+>>>>>>> e2e1ff0d531f2c5cd1cb6a2214349f58c58ad00d
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1604,7 +1652,11 @@ RectTransform:
 =======
 --- !u!114 &1561167799
 MonoBehaviour:
+<<<<<<< HEAD
 >>>>>>> origin/Stage:Rouge FPS/Assets/Scenes/SampleScene.unity
+=======
+>>>>>>> Stage:Rouge FPS/Assets/Scenes/SampleScene.unity
+>>>>>>> e2e1ff0d531f2c5cd1cb6a2214349f58c58ad00d
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1635,7 +1687,11 @@ MonoBehaviour:
   m_mapScale: 4
   m_player: {fileID: 341609148}
 --- !u!4 &1561167800
+<<<<<<< HEAD
 >>>>>>> origin/Stage:Rouge FPS/Assets/Scenes/SampleScene.unity
+=======
+>>>>>>> Stage:Rouge FPS/Assets/Scenes/SampleScene.unity
+>>>>>>> e2e1ff0d531f2c5cd1cb6a2214349f58c58ad00d
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1693,4 +1749,8 @@ GameObject:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
 >>>>>>> origin/Stage:Rouge FPS/Assets/Scenes/SampleScene.unity
+=======
+>>>>>>> Stage:Rouge FPS/Assets/Scenes/SampleScene.unity
+>>>>>>> e2e1ff0d531f2c5cd1cb6a2214349f58c58ad00d

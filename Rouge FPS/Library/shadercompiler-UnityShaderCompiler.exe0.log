@@ -35,7 +35,11 @@ Cmd: initializeCompiler
 Cmd: initializeCompiler
 =======
 Base path: C:/Program Files/Unity/Editor/Data
+<<<<<<< HEAD
 >>>>>>> origin/Stage
+=======
+>>>>>>> Stage
+>>>>>>> e2e1ff0d531f2c5cd1cb6a2214349f58c58ad00d
 Cmd: initializeCompiler
 Cmd: initializeCompiler
 Cmd: initializeCompiler

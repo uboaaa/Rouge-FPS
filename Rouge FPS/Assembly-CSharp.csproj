@@ -257,7 +257,11 @@
     <None Include="Assets\JMO Assets\WarFX\Shaders\WFX_S Multiply Soft.shader" />
     <None Include="Assets\FreeMachineGun\documentation.txt" />
     <None Include="Assets\JMO Assets\WarFX\Shaders\WFX_S Alpha-Diffuse TintColor.shader" />
+<<<<<<< HEAD
 >>>>>>> origin/Stage
+=======
+>>>>>>> Stage
+>>>>>>> e2e1ff0d531f2c5cd1cb6a2214349f58c58ad00d
     <None Include="Assets\SampleScenes\Shaders\Skybox-Procedural.shader" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/tama127/Documents/Rouge-FPS/Rouge FPS/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
