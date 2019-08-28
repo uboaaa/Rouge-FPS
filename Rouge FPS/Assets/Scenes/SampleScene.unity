@@ -259,12 +259,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 341642270}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &341609148 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 100002, guid: 5e9e851c0e142814dac026a256ba2ac0,
-    type: 3}
-  m_PrefabInstance: {fileID: 341642270}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &341642270
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -857,7 +851,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_mapScale: 4
-  m_player: {fileID: 341609148}
+  m_player: {fileID: 776965187}
 --- !u!4 &1561167800
 Transform:
   m_ObjectHideFlags: 0
