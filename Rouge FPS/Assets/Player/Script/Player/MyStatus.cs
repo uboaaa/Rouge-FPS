@@ -24,7 +24,7 @@ public class MyStatus : MonoBehaviour
     }
 
     public int downHp() {
-        hp--;
+        hp=hp-9;
         return hp;
     }
     public void SetEquip(GameObject weapon)

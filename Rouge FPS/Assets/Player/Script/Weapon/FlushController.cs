@@ -14,19 +14,18 @@ public class FlushController : MonoBehaviour
         img = GetComponent<Image>();
         img.color = Color.clear;
         test = GetComponent<MyStatus>();
-        FirstHP = GameObject.Find("FirstPersonCharacter").GetComponent<MyStatus>().GetHp();
-        NowHP = GameObject.Find("FirstPersonCharacter").GetComponent<MyStatus>().GetHp();
+        FirstHP = GameObject.Find("FPSController").GetComponent<MyStatus>().GetHp();
+        NowHP = GameObject.Find("FPSController").GetComponent<MyStatus>().GetHp();
         
     }
 
     void Update()
     {
      //HPを持ってくる
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetKeyDown(KeyCode.C))
         {
-            //NowHP = GameObject.Find("FirstPersonCharacter").GetComponent<MyStatus>().downHp();
-            //Debug.Log(FirstHP);
-            //Debug.Log(NowHP);
+            NowHP = GameObject.Find("FPSController").GetComponent<MyStatus>().downHp();
+ 
         }
 
         //ここのif文に当たった処理を！
