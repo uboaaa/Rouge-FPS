@@ -179,7 +179,6 @@
     <Compile Include="Assets\Player\Assets\Standard Assets\Vehicles\Car\Scripts\SkidTrail.cs" />
     <Compile Include="Assets\Player\Assets\Standard Assets\Vehicles\Car\Scripts\Suspension.cs" />
     <Compile Include="Assets\Player\Assets\Standard Assets\Vehicles\Car\Scripts\WheelEffects.cs" />
-    <Compile Include="Assets\Player\HpBarCtrl.cs" />
     <Compile Include="Assets\Player\SampleScenes\Menu\Scripts\MenuSceneLoader.cs" />
     <Compile Include="Assets\Player\SampleScenes\Menu\Scripts\PauseMenu.cs" />
     <Compile Include="Assets\Player\SampleScenes\Menu\Scripts\SceneAndURLLoader.cs" />
@@ -188,10 +187,14 @@
     <Compile Include="Assets\Player\SampleScenes\Scripts\ParticleSceneControls.cs" />
     <Compile Include="Assets\Player\SampleScenes\Scripts\PlaceTargetWithMouse.cs" />
     <Compile Include="Assets\Player\SampleScenes\Scripts\SlowMoButton.cs" />
+    <Compile Include="Assets\Player\Script\Player\HpBarCtrl.cs" />
+    <Compile Include="Assets\Player\Script\Player\HpText.cs" />
     <Compile Include="Assets\Player\Script\Player\MyStatus.cs" />
     <Compile Include="Assets\Player\Script\Weapon\ChangeEquip.cs" />
     <Compile Include="Assets\Player\Script\Weapon\FirstPersonGunController.cs" />
     <Compile Include="Assets\Player\Script\Weapon\FlushController.cs" />
+    <Compile Include="Assets\Skill\SkillList.cs" />
+    <Compile Include="Assets\Skill\SkillLottery.cs" />
     <None Include="Assets\Player\Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
     <None Include="Assets\Player\Assets\Standard Assets\Effects\ToonShading\Shaders\ToonBasic.shader" />
     <None Include="Assets\Player\Assets\JMO Assets\WarFX\Shaders\WFX_S AlphaBlend Scroll.shader" />
