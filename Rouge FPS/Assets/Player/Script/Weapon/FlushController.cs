@@ -13,7 +13,7 @@ public class FlushController : MonoBehaviour
        
         img = GetComponent<Image>();
         img.color = Color.clear;
-     
+        test = GetComponent<MyStatus>();
         FirstHP = GameObject.Find("FPSController").GetComponent<MyStatus>().GetHp();
         NowHP = GameObject.Find("FPSController").GetComponent<MyStatus>().GetHp();
         
@@ -21,14 +21,12 @@ public class FlushController : MonoBehaviour
 
     void Update()
     {
-        
      //HPを持ってくる
         if (Input.GetKeyDown(KeyCode.C))
         {
             NowHP = GameObject.Find("FPSController").GetComponent<MyStatus>().downHp();
  
         }
-   
 
         //ここのif文に当たった処理を！
         if (FirstHP>NowHP)
