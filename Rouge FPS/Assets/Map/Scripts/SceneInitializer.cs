@@ -18,6 +18,8 @@ public class SceneInitializer : MonoBehaviour
 
     private GameObject m_floorPrefab;     //床のオブジェクト
     private GameObject m_wallPrefab;      //壁のオブジェクト
+    private GameObject m_celingPrefab;    //天井のオブジェクト
+
 
     private int[,] m_map;                 //マップ情報用の2次配列
 
@@ -26,7 +28,7 @@ public class SceneInitializer : MonoBehaviour
     {
         GenerateDungeon();
 
-        //SponePlayer();
+        SponePlayer();
     }
 
     
@@ -51,7 +53,7 @@ public class SceneInitializer : MonoBehaviour
         //床と壁のモデル読み込み
         m_floorPrefab = Resources.Load("Prefab/Floor") as GameObject;
         m_wallPrefab = Resources.Load("Prefab/Wall") as GameObject;
-
+        m_celingPrefab = Resources.Load("Prefab/Celing") as GameObject;
 
         //データからオブジェクトを配置
         for(int y = 0; y < MAP_SIZE_Y; y++)
@@ -66,6 +68,8 @@ public class SceneInitializer : MonoBehaviour
                 {
                     Instantiate(m_wallPrefab, new Vector3(x*m_mapScale, 0, y*m_mapScale), new Quaternion());
                 }
+
+                Instantiate(m_celingPrefab, new Vector3(x * m_mapScale, 6, y * m_mapScale), new Quaternion());
             }
         }
     }
@@ -88,7 +92,7 @@ public class SceneInitializer : MonoBehaviour
 
         Debug.Log(m_player.transform.position.x);
         //m_player.transform.position = new Vector3(10, 3, 10);
-        m_player.transform.position = new Vector3(position.X, 3, position.Y);
+        m_player.transform.position = new Vector3(position.X * m_mapScale, 3, position.Y * m_mapScale);
         Debug.Log(m_player.transform.position.x);
     }
 }
