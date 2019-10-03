@@ -62,7 +62,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private void Update()
         {
             if (Input.GetKey(KeyCode.Return))
-            { m_MouseLook.Init(transform, m_Camera.transform); }
+            { m_MouseLook.Init(transform, m_Camera.transform);
+                //m_Camera.transform.rotation = Quaternion.identity;
+            }
                 RotateView();
             // the jump state needs to read here to make sure it is not missed
             if (!m_Jump)
