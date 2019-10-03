@@ -189,6 +189,7 @@
     <Compile Include="Assets\Player\SampleScenes\Scripts\ParticleSceneControls.cs" />
     <Compile Include="Assets\Player\SampleScenes\Scripts\PlaceTargetWithMouse.cs" />
     <Compile Include="Assets\Player\SampleScenes\Scripts\SlowMoButton.cs" />
+    <Compile Include="Assets\Player\Script\Player\CameraReset.cs" />
     <Compile Include="Assets\Player\Script\Player\HpBarCtrl.cs" />
     <Compile Include="Assets\Player\Script\Player\HpText.cs" />
     <Compile Include="Assets\Player\Script\Player\MyStatus.cs" />
