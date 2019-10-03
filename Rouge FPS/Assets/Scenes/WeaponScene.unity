@@ -607,14 +607,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: FPSController
       objectReference: {fileID: 0}
-    - target: {fileID: 4739008998071994776, guid: c4f4ca3d8a80c7e4dbffd812e213bb34,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4739008998141475966, guid: c4f4ca3d8a80c7e4dbffd812e213bb34,
         type: 3}
       propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4739008998071994776, guid: c4f4ca3d8a80c7e4dbffd812e213bb34,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4739008998141475964, guid: c4f4ca3d8a80c7e4dbffd812e213bb34,
@@ -815,7 +815,7 @@ PrefabInstance:
     - target: {fileID: 4739008996897099401, guid: c4f4ca3d8a80c7e4dbffd812e213bb34,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4739008998732185110, guid: c4f4ca3d8a80c7e4dbffd812e213bb34,
         type: 3}
@@ -913,6 +913,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4739008996897099404, guid: c4f4ca3d8a80c7e4dbffd812e213bb34,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4739008996925950827, guid: c4f4ca3d8a80c7e4dbffd812e213bb34,
         type: 3}
