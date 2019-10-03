@@ -68,8 +68,8 @@ MonoBehaviour:
     y: 0
     width: 202
     height: 304
-  m_MinSize: {x: 202, y: 224}
-  m_MaxSize: {x: 4002, y: 4024}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 16}
@@ -99,7 +99,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 224}
   m_MaxSize: {x: 8006, y: 4024}
   vertical: 0
-  controlID: 56
+  controlID: 48
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -171,7 +171,7 @@ MonoBehaviour:
   m_MinSize: {x: 917, y: 448}
   m_MaxSize: {x: 22012, y: 10024}
   vertical: 0
-  controlID: 78
+  controlID: 34
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -217,7 +217,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 448}
   m_MaxSize: {x: 8006, y: 8048}
   vertical: 1
-  controlID: 55
+  controlID: 47
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -289,8 +289,8 @@ MonoBehaviour:
     y: 304
     width: 844
     height: 427
-  m_MinSize: {x: 202, y: 224}
-  m_MaxSize: {x: 4002, y: 4024}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 19}
   m_Panes:
   - {fileID: 19}
@@ -450,23 +450,23 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 14a8ffff
-      m_LastClickedID: -22508
-      m_ExpandedIDs: e0a7fffff2a7ffff16a8ffff9ce00000a0e00000
+      m_SelectedIDs: fc4c0000
+      m_LastClickedID: 19708
+      m_ExpandedIDs: b2fbffffd6fbffffee4c0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: FPSController (1)
-        m_OriginalName: FPSController (1)
+        m_Name: 
+        m_OriginalName: 
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: -24726
+        m_UserData: 0
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 0
+        m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 3}
       m_SearchString: 
@@ -561,9 +561,9 @@ MonoBehaviour:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 2cd30000
-    m_LastClickedID: 54060
-    m_ExpandedIDs: 000000007cca00001acc00003ecc0000e0ce000078cf000070d00000d0d00000dcd000000cd2000020d20000b4d20000d8d2000094d3000022d4000034d4000074d40000fad40000c8d50000ccd600003ad80000bcd80000f8d8000060d90000c0db00000edc000010de000082de00009ade0000bede0000ccde00003adf000090e1000092e1000094e1000096e1000000ca9a3b
+    m_SelectedIDs: 763b0000
+    m_LastClickedID: 15222
+    m_ExpandedIDs: 00000000cc2f0000de31000016320000a63500007a360000ce37000060380000743800000c3a00002a3a0000ee3a0000143b00000a3c0000be3c0000d63c00001e3d0000b43d0000b43e0000f23f0000dc4100007a420000ce420000584300009a460000fe460000944900003c4a0000564a00008c4a00009e4a0000304b0000fc4d0000fe4d0000004e0000024e000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -591,7 +591,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000007cca00001acc00003ecc0000e0ce000078cf000070d00000d0d00000dcd000000cd2000020d20000b4d20000d8d2000094d3000022d4000034d4000074d40000fad40000c8d50000ccd600003ad80000bcd80000f8d8000060d90000c0db00000edc0000bcdd000010de00009ade0000bede0000ccde00003adf000090e1000092e1000094e1000096e10000
+    m_ExpandedIDs: 00000000cc2f0000de31000016320000a63500007a360000ce37000060380000743800000c3a00002a3a0000ee3a0000143b00000a3c0000be3c0000d63c00001e3d0000b43d0000b43e0000f23f0000dc4100007a420000ce420000584300009a460000fe460000944900003c4a0000564a00008c4a00009e4a0000304b0000fc4d0000fe4d0000004e0000024e0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -618,7 +618,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 1
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: ee2d00000c3700001439000000000000cc3800001037000034360000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -792,9 +792,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: -0.16267873, y: -0.41404608, z: 0.07547648, w: -0.89241517}
   m_Size:
-    m_Target: 64.68192
+    m_Target: 25.75434
     speed: 2
-    m_Value: 64.68192
+    m_Value: 25.75434
   m_Ortho:
     m_Target: 0
     speed: 2
