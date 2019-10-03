@@ -61,9 +61,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Common Script\CameraSetting.cs" />
+    <Compile Include="Assets\Common Script\LightSetting.cs" />
     <Compile Include="Assets\Enemy\BillBoard.cs" />
     <Compile Include="Assets\Enemy\Flyer\Flyer.cs" />
     <Compile Include="Assets\Enemy\Lizard\Lizard.cs" />
+    <Compile Include="Assets\Enemy\Squid\Squid.cs" />
     <Compile Include="Assets\Game\MergeScenes.cs" />
     <Compile Include="Assets\Map\Scripts\DungeonGenerator.cs" />
     <Compile Include="Assets\Map\Scripts\SceneInitializer.cs" />
@@ -190,6 +192,10 @@
     <Compile Include="Assets\Player\Script\Player\HpBarCtrl.cs" />
     <Compile Include="Assets\Player\Script\Player\HpText.cs" />
     <Compile Include="Assets\Player\Script\Player\MyStatus.cs" />
+    <Compile Include="Assets\Player\Script\Player\PlayerController.cs" />
+    <Compile Include="Assets\Player\Script\Player\PlayerJump.cs" />
+    <Compile Include="Assets\Player\Script\Player\PlayerXYZ.cs" />
+    <Compile Include="Assets\Player\Script\Player\TransformExtension.cs" />
     <Compile Include="Assets\Player\Script\Weapon\ChangeEquip.cs" />
     <Compile Include="Assets\Player\Script\Weapon\FirstPersonGunController.cs" />
     <Compile Include="Assets\Player\Script\Weapon\FlushController.cs" />
