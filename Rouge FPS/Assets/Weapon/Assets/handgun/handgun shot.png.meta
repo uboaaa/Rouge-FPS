@@ -113,9 +113,9 @@ TextureImporter:
       name: handgun shot_0
       rect:
         serializedVersion: 2
-        x: 191
+        x: 0
         y: 0
-        width: 258
+        width: 612
         height: 441
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -124,7 +124,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 516cd8e680c434944a47c55fb6d50d94
+      spriteID: 7a2a30bc938e9bf46b1400131ee0a4c3
       vertices: []
       indices: 
       edges: []
@@ -133,9 +133,9 @@ TextureImporter:
       name: handgun shot_1
       rect:
         serializedVersion: 2
-        x: 803
+        x: 612
         y: 0
-        width: 258
+        width: 612
         height: 441
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -144,7 +144,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 07ffce140bd72504aa8abe5129f17d3f
+      spriteID: 861285974706a4141890ca3e0733e71d
       vertices: []
       indices: 
       edges: []
@@ -153,9 +153,9 @@ TextureImporter:
       name: handgun shot_2
       rect:
         serializedVersion: 2
-        x: 1309
+        x: 1224
         y: 0
-        width: 366
+        width: 612
         height: 441
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -164,7 +164,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 55caa647480ee084f8bf619aa0c559bd
+      spriteID: 08ec3ab28bafbcd468c546ae536f7efd
       vertices: []
       indices: 
       edges: []
@@ -173,9 +173,9 @@ TextureImporter:
       name: handgun shot_3
       rect:
         serializedVersion: 2
-        x: 1953
+        x: 1836
         y: 0
-        width: 331
+        width: 612
         height: 441
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -184,7 +184,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9becf5840bab53342a972de007fc8c90
+      spriteID: a2c02bc5a22a4d041a59ddd84ec56cbe
       vertices: []
       indices: 
       edges: []
