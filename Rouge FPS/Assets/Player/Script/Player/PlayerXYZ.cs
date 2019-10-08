@@ -18,6 +18,7 @@ public class PlayerXYZ : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //リセット処理その２(その１はFirstPersonController.cs)
         if (Input.GetKey(KeyCode.Return)) {
             GetComponent<CharacterController>().enabled = false;
             ClearCheckFlg = true; }
