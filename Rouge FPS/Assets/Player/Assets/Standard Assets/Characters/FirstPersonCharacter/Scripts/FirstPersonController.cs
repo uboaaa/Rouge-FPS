@@ -61,6 +61,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         // Update is called once per frame
         private void Update()
         {
+            //ÉäÉZÉbÉgèàóùÇªÇÃÇP(ÇªÇÃÇQÇÕPlayerXYZ.cs)
             if (Input.GetKey(KeyCode.Return))
             { m_MouseLook.Init(transform, m_Camera.transform);
                 //m_Camera.transform.rotation = Quaternion.identity;
@@ -219,7 +220,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_IsWalking = !Input.GetKey(KeyCode.LeftShift);
 #endif
             // set the desired speed to be walking or running
-            speed = m_IsWalking ? m_WalkSpeed : m_RunSpeed;
+            bool WalkFlg=GetComponent<SkillManagement>().GetWalkFlg();
+            if (WalkFlg) { speed = m_IsWalking ? m_WalkSpeed*5 : m_RunSpeed*5; }
+            else{speed = m_IsWalking ? m_WalkSpeed : m_RunSpeed; }
             m_Input = new Vector2(horizontal, vertical);
 
             // normalize input if it exceeds 1 in combined length:

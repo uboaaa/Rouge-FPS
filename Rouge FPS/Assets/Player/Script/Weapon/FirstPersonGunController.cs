@@ -36,6 +36,8 @@ public class FirstPersonGunController : MonoBehaviour
     int ammo;
     GameObject muzzleFlash;
     GameObject hitEffect;
+    [SerializeField]
+    private GameObject gameObject;
     public int Ammo
     {
         set
@@ -51,7 +53,7 @@ public class FirstPersonGunController : MonoBehaviour
     void Start()
     {
         InitGun();
-     
+        gameObject = GameObject.Find("FPSController");
     }
     void Update()
     {
@@ -178,8 +180,11 @@ public class FirstPersonGunController : MonoBehaviour
             }
             //★ここに敵へのダメージ処理などを追加
         }
-        Ammo--;
- 
+        bool InfinityFlg=gameObject.GetComponent<SkillManagement>().GetAmmoFlg();
+        if (!InfinityFlg)
+        {
+            Ammo--;
+        }
             
         
     }
