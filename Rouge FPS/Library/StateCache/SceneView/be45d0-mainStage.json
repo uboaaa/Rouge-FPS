@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 ﻿{"cameraMode":{"drawMode":0,"name":"Shaded","section":"Shading Mode"},"sceneLighting":false,"audioPlay":false,"sceneViewState":{"showFog":true,"showMaterialUpdate":false,"showSkybox":true,"showFlares":true,"showImageEffects":true,"showParticleSystems":true},"in2DMode":false,"pivot":{"x":563.0,"y":226.15228271484376,"z":421.6499938964844},"rotation":{"x":-0.03749871253967285,"y":0.2737441956996918,"z":-0.010681353509426117,"w":-0.9610119462013245},"size":1734.7156982421875,"orthographic":false}
 =======
 ﻿{"cameraMode":{"drawMode":0,"name":"Shaded","section":"Shading Mode"},"sceneLighting":false,"audioPlay":false,"sceneViewState":{"showFog":true,"showMaterialUpdate":false,"showSkybox":true,"showFlares":true,"showImageEffects":true,"showParticleSystems":true},"in2DMode":false,"pivot":{"x":-0.6230435371398926,"y":2.166299819946289,"z":1.488611102104187},"rotation":{"x":-0.06894316524267197,"y":0.010474716313183308,"z":-0.0007240952108986676,"w":-0.9975653886795044},"size":3.5165934562683107,"orthographic":false}
 >>>>>>> Stashed changes
+=======
+﻿{"cameraMode":{"drawMode":0,"name":"Shaded","section":"Shading Mode"},"sceneLighting":false,"audioPlay":false,"sceneViewState":{"showFog":true,"showMaterialUpdate":false,"showSkybox":true,"showFlares":true,"showImageEffects":true,"showParticleSystems":true},"in2DMode":false,"pivot":{"x":320.911865234375,"y":67.829833984375,"z":-98.44115447998047},"rotation":{"x":-0.04797552153468132,"y":0.01618093252182007,"z":-0.0007771626696921885,"w":-0.998717188835144},"size":399.3968505859375,"orthographic":false}
+>>>>>>> Weapon
