@@ -4,41 +4,44 @@ using UnityEngine;
 using UnityEngine.UI;
 public class FirstPersonGunController : MonoBehaviour
 {
-
+  
     public Text AmmoCheck;
     [SerializeField]
-    public enum ShootMode { AUTO, SEMIAUTO }
-    public enum GunType { AssaultRifle, SubMachineGun, LightMachineGun, HandGun, SniperRifle }
-    public bool shootEnabled = true;
+    private enum ShootMode { AUTO, SEMIAUTO }
+    [SerializeField]
+    private enum GunType { AssaultRifle, SubMachineGun, LightMachineGun, HandGun, SniperRifle }
+    [SerializeField]
+    private bool shootEnabled = true;
     [SerializeField]
 
     //ステータス設定
-    GunType gunType = GunType.AssaultRifle;
+    private GunType gunType = GunType.AssaultRifle;
     [SerializeField]
-    ShootMode shootMode = ShootMode.AUTO;
+    private ShootMode shootMode = ShootMode.AUTO;
     [SerializeField]
-    int OneMagazine = 0;
+    private float OneMagazine = 0;
     [SerializeField]
-    int MaxAmmo = 0;
+    private float MaxAmmo = 0;
     [SerializeField]
-    int damage = 1;
+    private int damage = 1;
     [SerializeField]
-    float shootInterval = 0.15f;
+    private float shootInterval = 0.15f;
     [SerializeField]
-    float shootRange = 50;
+    private float shootRange = 50;
     [SerializeField]
-    Vector3 muzzleFlashScale;
+    private Vector3 muzzleFlashScale;
     [SerializeField]
-    GameObject muzzleFlashPrefab;
+    private GameObject muzzleFlashPrefab;
     [SerializeField]
-    GameObject hitEffectPrefab;
-    bool shooting = false;
-    int ammo;
-    GameObject muzzleFlash;
-    GameObject hitEffect;
+    private GameObject hitEffectPrefab;
+    private bool shooting = false;
+    private float ammo;
+    private GameObject muzzleFlash;
+    private GameObject hitEffect;
     [SerializeField]
     private GameObject gameObject;
-    public int Ammo
+    private float AmmoPlus;
+    private float Ammo
     {
         set
         {
@@ -52,8 +55,12 @@ public class FirstPersonGunController : MonoBehaviour
    
     void Start()
     {
-        InitGun();
         gameObject = GameObject.Find("FPSController");
+        AmmoPlus=gameObject.GetComponent<SkillManagement>().GetAmmoPlus();
+        OneMagazine = OneMagazine + (OneMagazine * AmmoPlus);
+        InitGun();
+        MaxAmmo = MaxAmmo + (MaxAmmo * AmmoPlus);
+        
     }
     void Update()
     {
@@ -85,7 +92,7 @@ public class FirstPersonGunController : MonoBehaviour
             Ammo = OneMagazine;
         }
         else {
-            int NowAmmo;
+            float NowAmmo;
             NowAmmo = OneMagazine - Ammo;
             Debug.Log(NowAmmo);
             if (NowAmmo > MaxAmmo)
@@ -180,11 +187,10 @@ public class FirstPersonGunController : MonoBehaviour
             }
             //★ここに敵へのダメージ処理などを追加
         }
-        bool InfinityFlg=gameObject.GetComponent<SkillManagement>().GetAmmoFlg();
-        if (!InfinityFlg)
-        {
+
+    
             Ammo--;
-        }
+        
             
         
     }
