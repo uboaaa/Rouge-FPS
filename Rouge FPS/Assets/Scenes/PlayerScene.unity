@@ -330,6 +330,18 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
+      propertyPath: m_IsWalking
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
+      propertyPath: m_WalkSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
+      propertyPath: m_RunSpeed
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 5400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: m_UseGravity
       value: 1
@@ -348,7 +360,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8200000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
@@ -407,6 +423,7 @@ MonoBehaviour:
   muzzleFlashScale: {x: 0, y: 0, z: 0}
   muzzleFlashPrefab: {fileID: 0}
   hitEffectPrefab: {fileID: 100002, guid: 56bfc2f4b4a0c534c8ef3d0fd1124c44, type: 3}
+  gameObject: {fileID: 0}
 --- !u!1 &538433174
 GameObject:
   m_ObjectHideFlags: 0
@@ -834,6 +851,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 341642270}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &846986975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 846986974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 271e92be8eb29e940a060ab6e4a16078, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &846986979
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -858,20 +887,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11bc455906ab406419904a0236dc3529, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 100
---- !u!114 &846986981
+--- !u!114 &846986983
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 846986974}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf31926a4a39fe34c84279dce70c3664, type: 3}
+  m_Script: {fileID: 11500000, guid: 5f2e6d123ad3da144b00c67758b2a87d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpPower: 20
+  camera: {fileID: 1216628317}
+  thrust: 0
 --- !u!1 &902744943
 GameObject:
   m_ObjectHideFlags: 0
@@ -1056,7 +1085,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -249, y: -152}
+  m_AnchoredPosition: {x: -345.3, y: -152}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1070900793
@@ -1114,6 +1143,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 1070900793}
+--- !u!1 &1216628317 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100002, guid: 5e9e851c0e142814dac026a256ba2ac0,
+    type: 3}
+  m_PrefabInstance: {fileID: 341642270}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1319939661
 GameObject:
   m_ObjectHideFlags: 0
@@ -1215,6 +1250,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1357626412}
   - component: {fileID: 1357626413}
+  - component: {fileID: 1357626414}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
@@ -1240,7 +1276,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -325.2, y: -186}
+  m_AnchoredPosition: {x: -372.7, y: -186}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1357626413
@@ -1292,6 +1328,18 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &1357626414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1357626411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d919ecce0152a94ba398ab5c44b7c78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1382097555
 GameObject:
   m_ObjectHideFlags: 0
@@ -1679,7 +1727,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1971709045}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -337.05652, y: -34.91745, z: 0.4105}
+  m_LocalPosition: {x: -112.9, y: 69.8, z: 0.4105}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1701124615}
@@ -1709,6 +1757,7 @@ MonoBehaviour:
   muzzleFlashScale: {x: 0, y: 0, z: 0}
   muzzleFlashPrefab: {fileID: 0}
   hitEffectPrefab: {fileID: 100002, guid: 56bfc2f4b4a0c534c8ef3d0fd1124c44, type: 3}
+  gameObject: {fileID: 846986974}
 --- !u!1 &1986818892
 GameObject:
   m_ObjectHideFlags: 0
