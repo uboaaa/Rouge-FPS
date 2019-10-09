@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class HpText : MonoBehaviour
 {
-    private int LookHP = 0;
+    private float LookHP = 0;
     public Text text;
 
     // Start is called before the first frame update

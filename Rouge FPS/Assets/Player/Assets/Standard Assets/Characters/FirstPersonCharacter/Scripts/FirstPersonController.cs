@@ -220,9 +220,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_IsWalking = !Input.GetKey(KeyCode.LeftShift);
 #endif
             // set the desired speed to be walking or running
-            bool WalkFlg=GetComponent<SkillManagement>().GetWalkFlg();
-            if (WalkFlg) { speed = m_IsWalking ? m_WalkSpeed*5 : m_RunSpeed*5; }
-            else{speed = m_IsWalking ? m_WalkSpeed : m_RunSpeed; }
+         
+            float AccelSpeed= GetComponent<SkillManagement>().GetSpeedPlus();
+         speed = m_IsWalking ? m_WalkSpeed+(m_WalkSpeed*AccelSpeed) 
+                             : m_RunSpeed+(m_RunSpeed * AccelSpeed); 
+         
             m_Input = new Vector2(horizontal, vertical);
 
             // normalize input if it exceeds 1 in combined length:

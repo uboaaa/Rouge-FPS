@@ -4,50 +4,39 @@ using UnityEngine;
 
 public class SkillManagement : MonoBehaviour
 {
-    private bool WalkSkillActivate = false;
-    private bool InfinityAmmoActive = false;
-    private bool InfinityHealthActive = false;
+
+    private float[] SkillSpeed = new float[5];
+  
+
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        SkillSpeed[0] = 0.0f;
+        SkillSpeed[1] = 0.25f;
+        SkillSpeed[2] = 0.5f;
+        SkillSpeed[3] = 1.0f;
+        SkillSpeed[4] = 5.0f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.K) && !WalkSkillActivate) { WalkSkillActivate = true;
-            Debug.Log("WalkSkillActive=" + WalkSkillActivate);
-        }
-        else if (Input.GetKey(KeyCode.K) && WalkSkillActivate) { WalkSkillActivate = false;
-            Debug.Log("WalkSkillActive=" + WalkSkillActivate);
-        }
 
-        if (Input.GetKey(KeyCode.L) && !InfinityAmmoActive) { InfinityAmmoActive = true;
-            Debug.Log("InfinityAmmoActive=" + InfinityAmmoActive);
-        }
-        else if (Input.GetKey(KeyCode.L) && InfinityAmmoActive) { InfinityAmmoActive = false;
-            Debug.Log("InfinityAmmoActive=" + InfinityAmmoActive);
-        }
 
-        if (Input.GetKey(KeyCode.H) && !InfinityHealthActive) { InfinityHealthActive = true;
-            Debug.Log("InfinityHealthActive=" + InfinityHealthActive);
-        }
-        else if (Input.GetKey(KeyCode.H) && InfinityHealthActive) { InfinityHealthActive = false;
-            Debug.Log("InfinityHealthActive=" + InfinityHealthActive);
-        }
+      
+
     }
 
-    public bool GetWalkFlg() {
-        return WalkSkillActivate;
+    public float GetAmmoPlus() {
+        return SkillSpeed[1];
     }
 
-    public bool GetAmmoFlg() {
-        return InfinityAmmoActive;
+    public float GetSpeedPlus() {
+        return SkillSpeed[4];
     }
 
-    public bool GetHealthFlg()
+    public float GetHpPlus()
     {
-        return InfinityHealthActive;
-    }
+        return SkillSpeed[4];}
 }
