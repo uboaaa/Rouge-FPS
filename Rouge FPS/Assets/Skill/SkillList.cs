@@ -6,14 +6,14 @@ using UnityEngine;
 public class SkillList : MonoBehaviour
 {
 
-    class Skill
+    public class Skill
     {
         // 能力名
         public string skillName;
         // 効果値
         public float parameter;
         // 重み（数値が大きいほど出やすい）
-        public float weight;
+        public int ratio;
         // 確率
         public float probability;
         // 最低出現階層
@@ -25,58 +25,79 @@ public class SkillList : MonoBehaviour
         public Skill() { }
 
         // 初期化
-        public void Init(string _name, float _param, float _weight, int _low, int _high)
+        public void Init(string _name, float _param, int _ratio, int _low, int _high)
         {
             skillName = _name;
             parameter = _param;
-            weight = _weight;
+            ratio = _ratio;
             lowAppear = _low;
             highAppear = _high;
         }
     };
 
+
+
     // すべてのスキルのリスト
-    private Dictionary<string, Skill> skillList;
+   // private Dictionary<string, Skill> skillList;
     // 現在の階層で出現するスキルのリスト
     private List<Skill> nowFloorSkill = null;
     // 総重み
-    private float allWeight;
+    private float totalRatio;
+    // スキルのグレード
+    private int[] skillGrade;
+
+    public int[] GetSkillGrade()
+    {
+        return skillGrade;
+    }
+
+    // スキルリスト
+    private int[][] skillList;
+    // スキルスロット
+    private int[] skillSlot;
+    // スキル設定
+    public void SetSkillSlot(int _slot, int _grade, int _result)
+    {
+        skillSlot[_slot] = skillList[_grade][_result];
+    }
+
 
     // リスト取得
-    List<Skill> GetList()
+    public List<Skill> GetList()
     {
         return nowFloorSkill;
     }
-    // 現在の階層のスキルセット
-    void SetList(int _nowFloor)
-    {
-        // 重みリセット
-        allWeight = 0.0f;
-        // リストの値すべてを検索
-        foreach (Skill value in skillList.Values)
-        {
-            // 出現階層かどうか判定
-            if (value.lowAppear > _nowFloor) continue;
-            if (value.highAppear < _nowFloor) continue;
-            // 出現するスキルの重みを足し込む
-            allWeight += value.weight;
-            // リストに追加
-            nowFloorSkill.Add(value);
-        }
-    }
+    //// 現在の階層のスキルセット
+    //public void SetList(int _nowFloor)
+    //{
+    //    // 重みリセット
+    //    totalRatio = 0.0f;
+    //    // リストの値すべてを検索
+    //    foreach (Skill value in skillList.Values)
+    //    {
+    //        // 出現階層かどうか判定
+    //        if (value.lowAppear > _nowFloor) continue;
+    //        if (value.highAppear < _nowFloor) continue;
+    //        // 出現するスキルの重みを足し込む
+    //        totalRatio += value.ratio;
+    //        // リストに追加
+    //        nowFloorSkill.Add(value);
+    //    }
+    //}
     // スキルリストのリセット
-    void ListReset()
+    public void ListReset()
     {
         nowFloorSkill.Clear();
     }
+    // いらないかも（？）
     // スキルの出現確率
-    void ProbabilitySet()
+    public void ProbabilitySet()
     {
         // 出現階層のスキルから
         foreach (Skill s in nowFloorSkill)
         {
             // 出現確率 ＝ スキルの重み / すべての重み
-            s.probability = s.weight / allWeight;
+            s.probability = s.ratio / totalRatio;
         }
     }
 
@@ -89,6 +110,6 @@ public class SkillList : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }
