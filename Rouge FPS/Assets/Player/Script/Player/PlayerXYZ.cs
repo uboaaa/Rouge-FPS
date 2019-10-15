@@ -33,7 +33,7 @@ public class PlayerXYZ : MonoBehaviour
 
 
    public void UpdatePlayerXYZ(float x, float y ,float z){
-        this.transform.rotation = Quaternion.identity;
+        //this.transform.rotation = Quaternion.identity;
         transform.Reset();
         transform.Reset(isLocal: true);
         Vector3 XYZ = new Vector3(x, y, z);

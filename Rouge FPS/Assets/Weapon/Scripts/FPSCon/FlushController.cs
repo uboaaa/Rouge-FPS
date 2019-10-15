@@ -32,9 +32,9 @@ public class FlushController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.C))
         {
             Debug.Log("FirstHp" + FirstHP);
-            Debug.Log("NowHp" + NowHP);
             NowHP = game.GetComponent<MyStatus>().downHp();
- 
+            Debug.Log("NowHp" + NowHP);
+
         }
 
         //ここのif文に当たった処理を！
