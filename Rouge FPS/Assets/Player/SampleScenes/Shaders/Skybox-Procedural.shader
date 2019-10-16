@@ -210,7 +210,7 @@ SubShader {
 		}
 
 		// Calculates the Rayleigh phase function
-		half getRayleighPhase(half eyeCos2)
+		half getRayleigGetSpeedPlushase(half eyeCos2)
 		{
 			return 0.75 + 0.75*eyeCos2;
 		}
@@ -222,7 +222,7 @@ SubShader {
 			{
 				half eyeCos = dot(_WorldSpaceLightPos0.xyz, normalize(IN.rayDir.xyz));
 				half eyeCos2 = eyeCos * eyeCos;
-				col = getRayleighPhase(eyeCos2) * IN.cIn.xyz + getMiePhase(eyeCos, eyeCos2) * IN.cOut * _LightColor0.xyz * _SunTint * _SunStrength;
+				col = getRayleigGetSpeedPlushase(eyeCos2) * IN.cIn.xyz + getMiePhase(eyeCos, eyeCos2) * IN.cOut * _LightColor0.xyz * _SunTint * _SunStrength;
 			}
 			else
 			{
