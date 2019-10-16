@@ -4,26 +4,28 @@ using UnityEngine.UI; // ←※これを忘れずに入れる
 
 public class HpBarCtrl : MonoBehaviour
 {
-    int hp;
-    int firsthp;
+    float hp;
+    float firsthp;
     Slider _slider;
+    GameObject gameObject;
     void Start()
     {
+        gameObject = GameObject.Find("FPSController");
         // 値セット
         _slider = GameObject.Find("Slider").GetComponent<Slider>();
-         hp = GameObject.Find("FPSController").GetComponent<MyStatus>().GetHp();
-        firsthp = GameObject.Find("FPSController").GetComponent<MyStatus>().GetHp();
-        _slider.maxValue = GameObject.Find("FPSController").GetComponent<MyStatus>().GetHp();
+         hp = gameObject.GetComponent<MyStatus>().GetHp();
+        firsthp = gameObject.GetComponent<MyStatus>().GetHp();
+        _slider.maxValue = gameObject.GetComponent<MyStatus>().GetHp();
     }
 
   
     void Update()
     {
 
-        hp = GameObject.Find("FPSController").GetComponent<MyStatus>().GetHp();
+        hp = gameObject.GetComponent<MyStatus>().GetHp();
         //後で消す
         //GameObject.Find("FPSController").GetComponent<MyStatus>().downHp();
-        if (hp > 100)
+        if (hp > firsthp)
         {
             // 最大を超えたら0に戻す
             hp = 0;
