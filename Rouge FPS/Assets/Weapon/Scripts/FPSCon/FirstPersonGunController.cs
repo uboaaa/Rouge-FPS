@@ -17,9 +17,9 @@ public class FirstPersonGunController : MonoBehaviour
     [SerializeField]
     ShootMode shootMode = ShootMode.AUTO;
     [SerializeField]
-    int OneMagazine = 0;
+    public int OneMagazine = 0;
     [SerializeField]
-    int MaxAmmo = 0;
+    public int MaxAmmo = 0;
     [SerializeField]
     int damage = 1;
     [SerializeField]
@@ -51,7 +51,6 @@ public class FirstPersonGunController : MonoBehaviour
     void Start()
     {
         InitGun();
-     
     }
     void Update()
     {
@@ -132,7 +131,7 @@ public class FirstPersonGunController : MonoBehaviour
                     muzzleFlash.transform.localScale = muzzleFlashScale;
                 }
             }
-            Shoot();
+
             yield return new WaitForSeconds(shootInterval);
             //マズルフラッシュOFF
             if (muzzleFlash != null)
@@ -153,34 +152,5 @@ public class FirstPersonGunController : MonoBehaviour
         {
             yield return null;
         }
-    }
-    //レイ判定(弾処理)
-    void Shoot()
-    {
-        Ray ray = new Ray(transform.position, transform.forward);
-        RaycastHit hit;
-        //レイを飛ばして、ヒットしたオブジェクトの情報を得る
-        if (Physics.Raycast(ray, out hit, shootRange))
-        {
-            //ヒットエフェクトON
-            if (hitEffectPrefab != null)
-            {
-                if (hitEffect != null)
-                {
-                    hitEffect.transform.position = hit.point;
-                    hitEffect.transform.rotation = Quaternion.FromToRotation(Vector3.forward, hit.normal);
-                    hitEffect.SetActive(true);
-                }
-                else
-                {
-                    hitEffect = Instantiate(hitEffectPrefab, hit.point, Quaternion.identity);
-                }
-            }
-            //★ここに敵へのダメージ処理などを追加
-        }
-        Ammo--;
- 
-            
-        
     }
 }

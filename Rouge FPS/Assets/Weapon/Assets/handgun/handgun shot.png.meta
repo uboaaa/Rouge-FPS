@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 5373b41413b62ef4ba60e5c7a55f9a53
+guid: 3fe4fd875937c3f4687414c04b8fb7d1
 TextureImporter:
   fileIDToRecycleName:
     21300000: handgun shot_0
@@ -113,9 +113,9 @@ TextureImporter:
       name: handgun shot_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 191
         y: 0
-        width: 612
+        width: 258
         height: 441
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -124,7 +124,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7a2a30bc938e9bf46b1400131ee0a4c3
+      spriteID: 5852fb9ea6c4bcf478807db4541f1a24
       vertices: []
       indices: 
       edges: []
@@ -133,9 +133,9 @@ TextureImporter:
       name: handgun shot_1
       rect:
         serializedVersion: 2
-        x: 612
+        x: 803
         y: 0
-        width: 612
+        width: 258
         height: 441
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -144,7 +144,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 861285974706a4141890ca3e0733e71d
+      spriteID: 49e8eb703acc5c74388b663084ed1a58
       vertices: []
       indices: 
       edges: []
@@ -153,9 +153,9 @@ TextureImporter:
       name: handgun shot_2
       rect:
         serializedVersion: 2
-        x: 1224
+        x: 1460
         y: 0
-        width: 612
+        width: 215
         height: 441
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -164,7 +164,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 08ec3ab28bafbcd468c546ae536f7efd
+      spriteID: ccc6d6b2484e7804d913306b7ee1c9e7
       vertices: []
       indices: 
       edges: []
@@ -173,9 +173,9 @@ TextureImporter:
       name: handgun shot_3
       rect:
         serializedVersion: 2
-        x: 1836
+        x: 2051
         y: 0
-        width: 612
+        width: 233
         height: 441
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -184,7 +184,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a2c02bc5a22a4d041a59ddd84ec56cbe
+      spriteID: 9056cc9bf46553d4f9ce929583adf71d
       vertices: []
       indices: 
       edges: []
@@ -192,7 +192,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 7b3e4c1984eadb3439abc3b1090969f4
+    spriteID: 844595828c0adfa459ccf28ebb175365
     vertices: []
     indices: 
     edges: []
