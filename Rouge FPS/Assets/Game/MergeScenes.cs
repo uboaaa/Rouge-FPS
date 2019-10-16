@@ -16,7 +16,7 @@ public class MergeScenes : MonoBehaviour
         SceneManager.LoadScene("EnemyScene", LoadSceneMode.Additive);
 
 
-        SceneManager.LoadScene("SkillScene", LoadSceneMode.Additive);
+        //SceneManager.LoadScene("SkillScene", LoadSceneMode.Additive);
         SceneManager.LoadScene("WeaponScene", LoadSceneMode.Additive);
 
         //現在読み込まれているシーン数だけループ

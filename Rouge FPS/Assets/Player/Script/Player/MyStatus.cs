@@ -6,9 +6,9 @@ using UnityEngine;
 public class MyStatus : MonoBehaviour
 {
 
-    private float hp = 100;
-    private int Attack;
-    private float Deffend=1;
+    private float playerHP = 100;
+    private int playerATK;
+    private float playerDEF = 1;
     private float HpPlus;
     private float FirstHP;
     private GameObject equip;
@@ -20,34 +20,34 @@ public class MyStatus : MonoBehaviour
     {
         Skill = GameObject.Find("FPSController");
         HpPlus = Skill.GetComponent<SkillManagement>().GetHpPlus();
-        hp = hp + (hp * HpPlus);
-        FirstHP = hp;
+        playerHP = playerHP + (playerHP * HpPlus);
+        FirstHP = playerHP;
      
     }
     public void SetHp(float hp)
     {
-        this.hp = hp;
+        this.playerHP = hp;
     }
 
     public float GetHp()
     {
-        return hp;
+        return playerHP;
     }
 
     public float downHp() {
       
 
-            hp = hp - 300f;
+            playerHP = playerHP - 300f;
         for (int i = 0; i < 100; i++)
         {
             Invoke("CureHp", 1);
         }
-        return hp;
+        return playerHP;
     }
 
     public void CureHp() {
   
-            hp += (int)1;
+            playerHP += (int)1;
         
     }
 
