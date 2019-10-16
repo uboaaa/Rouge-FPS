@@ -4,17 +4,33 @@ using UnityEngine;
 
 public class Lizard : MonoBehaviour
 {
-
+    // プレイヤー
     public GameObject player;
-
-    public float speed = 0.0f;//移動スピード
-    private Vector3 vec;
-    private float rot = 0.0f;
-
+    // アニメータ
     private Animator animator;
+  
+    // 移動スピード
+    public float speed;
+    // 角度計算用
+    private float rot;
+    // 初期角度
+    public float startrot;
+    // 発見フラグ
+    bool foundflg = false;
+
+    // ヒットエフェクト関連
+    // マテリアル
+    public Material hitmaterial;
+    // シェーダパラメータ管理用
+    public int propID = 0;
+    // 輝度パラメータ調整用
+    private float brightness = 0.5f;
+    //  
+    private float i = 0.1f;
+    // ヒットエフェクトフラグ
+    private bool hitflg = false;
 
 
- 
     // p2からp1への角度を求める
     // @param p1 自分の座標
     // @param p2 相手の座標
@@ -28,35 +44,45 @@ public class Lizard : MonoBehaviour
     }
 
 
-
+    
 
     void Start()
     {
         //GetComponentを用いてAnimatorコンポーネントを取り出す.
         animator = GetComponent<Animator>();
-
-
-        // 角度計算
-        rot = GetAim(new Vector2(transform.position.x, transform.position.z),
-            new Vector2(player.gameObject.transform.position.x, player.gameObject.transform.position.z));
-
-        vec = Vector3.zero;
+        propID = Shader.PropertyToID("_Brightness");
 
     }
 
+
     void Update()
     {
+        // ヒットエフェクト
+        if (hitflg == false)
+        {
+            if (Input.GetKey("1"))
+            {
+                hitflg = true;
+            }
+        }
 
-        // 移動 =========
 
-        //targetに向かって進む
-        transform.position += transform.forward * speed;
+        if (hitflg == true)
+        {
+            brightness += i;
+            if (brightness > 1.0f)
+            {
+                i *= -1;
+            }
+            if (brightness < 0.5f)
+            {
+                brightness = 0.5f;
+                i = 0.1f;
+                hitflg = false;   
+            }
+        }
 
-
-        // ビルボード ========
-        Vector3 p = player.gameObject.transform.position;
-        p.y = transform.position.y;
-        transform.LookAt(p);
+        hitmaterial.SetFloat(propID, brightness);
 
 
         // アニメーション ========
@@ -64,53 +90,90 @@ public class Lizard : MonoBehaviour
         int trans = animator.GetInteger("trans");
 
 
-        // 角度計算
-        rot = GetAim(new Vector2(transform.position.x, transform.position.z),
-            new Vector2(player.gameObject.transform.position.x, player.gameObject.transform.position.z));
-
-
-        // 角度計算
-        // 正面
-        if (rot >= -45.0f && rot <= 45.0f)
+        // 発見フラグ条件判定
+        if (foundflg == false)
         {
-            trans = 0;
-            //speed = 0.05f;
+            // 敵が正面を向いていて知覚できる範囲内なら
+            if ((transform.position - player.gameObject.transform.position).magnitude < 15 && trans == 0)
+            {
+                foundflg = true;
+
+                trans = 0;
+                //intパラメーターの値を設定する.
+                animator.SetInteger("trans", trans);
+            }
+
+            // プレイヤーとの距離が範囲内なら
+            if ((transform.position - player.gameObject.transform.position).magnitude < 5)
+            {
+                foundflg = true;
+
+                trans = 0;
+                //intパラメーターの値を設定する.
+                animator.SetInteger("trans", trans);
+            }
+
+            // プレイヤーから攻撃を受けたら
+
 
         }
-        // 右面
-        else if (rot >= 45.0f && rot <= 135.0f)
+
+
+
+        // 発見フラグがONなら
+        if (foundflg == true)
         {
-            trans = 1;
-
-            //speed = 0.0f;
+            //targetに向かって進む
+            transform.position += transform.forward * speed * 0.1f;
         }
-        // 左面
-        else if (rot >= -135 && rot <= -45)
+        // 発見フラグがOFFなら
+        else if (foundflg == false)
         {
-            trans = 3;
+            // 角度計算
+            rot = GetAim(new Vector2(transform.position.x, transform.position.z),
+                new Vector2(player.gameObject.transform.position.x, player.gameObject.transform.position.z));
 
-            //speed = 0.0f;
+            rot = rot + startrot;
+
+
+            // 角度計算
+            // 正面
+            if (rot >= -45.0f && rot <= 45.0f)
+            {
+                trans = 0;
+
+            }
+            // 右面
+            else if (rot >= 45.0f && rot <= 135.0f)
+            {
+                trans = 1;
+
+            }
+            // 左面
+            else if (rot >= -135 && rot <= -45)
+            {
+                trans = 3;
+
+            }
+            // 後面
+            else
+            {
+                trans = 2;
+
+            }
+
+            //intパラメーターの値を設定する.
+            animator.SetInteger("trans", trans);
         }
-        // 後面
-        else
-        {
-            trans = 2;
-
-            //speed = 0.0f;
-        }
-
-        //intパラメーターの値を設定する.
-        animator.SetInteger("trans", trans);
 
 
-        // デバッグ表示
-        Debug.Log(rot);
+
+        // // デバッグ表示
+        // Debug.Log((transform.position - player.gameObject.transform.position).magnitude);
 
 
-        
+
     }
-
-
 }
 
 
