@@ -7,6 +7,7 @@ using System.Linq;
 public class CameraSetting : MonoBehaviour
 {
     private GameObject MainCam;
+    private GameObject DirecLight;
     public MergeScenes mergeScenes;
     GameObject mainCamObj;
     private bool aho=false;
@@ -16,10 +17,11 @@ public class CameraSetting : MonoBehaviour
     {
         aho = MergeScenes.CameraSet;
         MainCam = GameObject.Find("Main Camera");
+        DirecLight = GameObject.Find("Directional Light");
         //aho = mergeScenes.CameraSet();
         if (aho== true) {
             MainCam.SetActive(false);
-            
+            DirecLight.SetActive(false);
         }
 
     }
