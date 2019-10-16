@@ -4,39 +4,44 @@ using UnityEngine;
 using UnityEngine.UI;
 public class FirstPersonGunController : MonoBehaviour
 {
-
+  
     public Text AmmoCheck;
     [SerializeField]
-    public enum ShootMode { AUTO, SEMIAUTO }
-    public enum GunType { AssaultRifle, SubMachineGun, LightMachineGun, HandGun, SniperRifle }
-    public bool shootEnabled = true;
+    private enum ShootMode { AUTO, SEMIAUTO }
+    [SerializeField]
+    private enum GunType { AssaultRifle, SubMachineGun, LightMachineGun, HandGun, SniperRifle }
+    [SerializeField]
+    private bool shootEnabled = true;
     [SerializeField]
 
     //ステータス設定
-    GunType gunType = GunType.AssaultRifle;
+    private GunType gunType = GunType.AssaultRifle;
     [SerializeField]
-    ShootMode shootMode = ShootMode.AUTO;
+    private ShootMode shootMode = ShootMode.AUTO;
     [SerializeField]
-    public int OneMagazine = 0;
+    private float OneMagazine = 0;
     [SerializeField]
-    public int MaxAmmo = 0;
+    private float MaxAmmo = 0;
     [SerializeField]
-    int damage = 1;
+    private int damage = 1;
     [SerializeField]
-    float shootInterval = 0.15f;
+    private float shootInterval = 0.15f;
     [SerializeField]
-    float shootRange = 50;
+    private float shootRange = 50;
     [SerializeField]
-    Vector3 muzzleFlashScale;
+    private Vector3 muzzleFlashScale;
     [SerializeField]
-    GameObject muzzleFlashPrefab;
+    private GameObject muzzleFlashPrefab;
     [SerializeField]
-    GameObject hitEffectPrefab;
-    bool shooting = false;
-    int ammo;
-    GameObject muzzleFlash;
-    GameObject hitEffect;
-    public int Ammo
+    private GameObject hitEffectPrefab;
+    private bool shooting = false;
+    private float ammo;
+    private GameObject muzzleFlash;
+    private GameObject hitEffect;
+    [SerializeField]
+    private GameObject gameObject;
+    private float AmmoPlus;
+    private float Ammo
     {
         set
         {
@@ -50,7 +55,12 @@ public class FirstPersonGunController : MonoBehaviour
    
     void Start()
     {
+        gameObject = GameObject.Find("FPSController");
+        AmmoPlus=gameObject.GetComponent<SkillManagement>().GetAmmoPlus();
+        OneMagazine = OneMagazine + (OneMagazine * AmmoPlus);
         InitGun();
+        MaxAmmo = MaxAmmo + (MaxAmmo * AmmoPlus);
+        
     }
     void Update()
     {
@@ -82,9 +92,9 @@ public class FirstPersonGunController : MonoBehaviour
             Ammo = OneMagazine;
         }
         else {
-            int NowAmmo;
+            float NowAmmo;
             NowAmmo = OneMagazine - Ammo;
-            
+            Debug.Log(NowAmmo);
             if (NowAmmo > MaxAmmo)
             {
                 Ammo = MaxAmmo+Ammo;
@@ -131,7 +141,7 @@ public class FirstPersonGunController : MonoBehaviour
                     muzzleFlash.transform.localScale = muzzleFlashScale;
                 }
             }
-
+            Shoot();
             yield return new WaitForSeconds(shootInterval);
             //マズルフラッシュOFF
             if (muzzleFlash != null)
@@ -152,5 +162,36 @@ public class FirstPersonGunController : MonoBehaviour
         {
             yield return null;
         }
+    }
+    //レイ判定(弾処理)
+    void Shoot()
+    {
+        Ray ray = new Ray(transform.position, transform.forward);
+        RaycastHit hit;
+        //レイを飛ばして、ヒットしたオブジェクトの情報を得る
+        if (Physics.Raycast(ray, out hit, shootRange))
+        {
+            //ヒットエフェクトON
+            if (hitEffectPrefab != null)
+            {
+                if (hitEffect != null)
+                {
+                    hitEffect.transform.position = hit.point;
+                    hitEffect.transform.rotation = Quaternion.FromToRotation(Vector3.forward, hit.normal);
+                    hitEffect.SetActive(true);
+                }
+                else
+                {
+                    hitEffect = Instantiate(hitEffectPrefab, hit.point, Quaternion.identity);
+                }
+            }
+            //★ここに敵へのダメージ処理などを追加
+        }
+
+    
+            Ammo--;
+        
+            
+        
     }
 }
