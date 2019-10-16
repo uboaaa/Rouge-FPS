@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Flyer : MonoBehaviour
 {
-    public GameObject player;
+    private GameObject player;
+    public GameObject bullet;
 
     public float speed = 0.0f;//移動スピード
     private Vector3 vec;
@@ -13,6 +14,12 @@ public class Flyer : MonoBehaviour
     private Animator animator;
 
 
+    // 弾丸の速度
+    public float bspeed = 1000;
+
+    
+
+    
 
     // p2からp1への角度を求める
     // @param p1 自分の座標
@@ -34,6 +41,8 @@ public class Flyer : MonoBehaviour
         //GetComponentを用いてAnimatorコンポーネントを取り出す.
         animator = GetComponent<Animator>();
 
+        player = GameObject.Find("FPSController");
+
 
         // 角度計算
         rot = GetAim(new Vector2(transform.position.x, transform.position.z),
@@ -45,17 +54,9 @@ public class Flyer : MonoBehaviour
 
         // 移動 =========
 
-        ////targetの方に少しずつ向きが変わる
-        //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(player.gameObject.transform.position - transform.position), 0.009f);
-
         //targetに向かって進む
         transform.position += transform.forward * speed;
 
-
-        // ビルボード ========
-        Vector3 p = player.gameObject.transform.position;
-        p.y = transform.position.y;
-        transform.LookAt(p);
 
 
         // アニメーション ========
@@ -103,10 +104,35 @@ public class Flyer : MonoBehaviour
 
 
         // デバッグ表示
-        Debug.Log(rot);
+        //Debug.Log(rot);
+
+        // 弾発射
+        // z キーが押された時
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+
+            // 弾丸の複製
+            GameObject bullets = Instantiate(bullet) as GameObject;
+
+            // 向き方向の取得
+            Vector3 aim = player.gameObject.transform.position - this.transform.position;
+
+            // // 向き
+            // Vector3 force;
+
+            // force = aim * speed;
+
+            // Rigidbodyに力を加えて発射
+            bullets.GetComponent<Rigidbody>().AddForce(aim,ForceMode.Impulse);
+
+            // 弾丸の位置を調整
+            bullets.transform.position = this.gameObject.transform.position;
 
 
+            Destroy(bullets, 3.0f); // 三秒後に削除
 
+        }
     }
 
 }
+
