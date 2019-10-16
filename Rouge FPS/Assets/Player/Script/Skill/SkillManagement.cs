@@ -29,14 +29,14 @@ public class SkillManagement : MonoBehaviour
     }
 
     public float GetAmmoPlus() {
-        return SkillSpeed[1];
+        return SkillSpeed[0];
     }
 
     public float GetSpeedPlus() {
-        return SkillSpeed[4];
+        return SkillSpeed[0];
     }
 
     public float GetHpPlus()
     {
-        return SkillSpeed[4];}
+        return SkillSpeed[0];}
 }
