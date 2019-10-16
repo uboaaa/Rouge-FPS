@@ -6,7 +6,7 @@ using UnityEngine.UI;
 namespace UnityStandardAssets.CrossPlatformInput
 {
 	[RequireComponent(typeof(Image))]
-	public class TouchPad : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+	public class ToucGetSpeedPlusad : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 	{
 		// Options for which axes to use
 		public enum AxisOption
@@ -41,7 +41,7 @@ namespace UnityStandardAssets.CrossPlatformInput
 		CrossPlatformInputManager.VirtualAxis m_VerticalVirtualAxis; // Reference to the joystick in the cross platform input
 		bool m_Dragging;
 		int m_Id = -1;
-		Vector2 m_PreviousTouchPos; // swipe style control touch
+		Vector2 m_PreviousToucGetSpeedPlusos; // swipe style control touch
 
 
 #if !UNITY_EDITOR
@@ -120,8 +120,8 @@ namespace UnityStandardAssets.CrossPlatformInput
 
             if (controlStyle == ControlStyle.Swipe)
             {
-                m_Center = m_PreviousTouchPos;
-                m_PreviousTouchPos = Input.touches[m_Id].position;
+                m_Center = m_PreviousToucGetSpeedPlusos;
+                m_PreviousToucGetSpeedPlusos = Input.touches[m_Id].position;
             }
             Vector2 pointerDelta = new Vector2(Input.touches[m_Id].position.x - m_Center.x , Input.touches[m_Id].position.y - m_Center.y).normalized;
             pointerDelta.x *= Xsensitivity;
