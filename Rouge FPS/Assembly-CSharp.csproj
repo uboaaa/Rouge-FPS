@@ -57,6 +57,7 @@
      <Compile Include="Assets\Common Script\LightSetting.cs" />
      <Compile Include="Assets\Enemy\BillBoard.cs" />
      <Compile Include="Assets\Enemy\Flyer\Flyer.cs" />
+     <Compile Include="Assets\Enemy\ItemBox\FlyingObject.cs" />
      <Compile Include="Assets\Enemy\Lizard\Lizard.cs" />
      <Compile Include="Assets\Enemy\Squid\Squid.cs" />
      <Compile Include="Assets\Game\MergeScenes.cs" />
