@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 //シーン開始時のみ処理を行う
-public class SceneInitializer : MonoBehaviour
+public class MapInitializer : MonoBehaviour
 {
     //各種マップパラメータ
     public const int MAP_SIZE_X = 30;   //X軸のマップ最大サイズ
@@ -14,7 +14,9 @@ public class SceneInitializer : MonoBehaviour
     public int m_mapScale = 1;              //
 
     public GameObject m_player;          //プレイヤー用オブジェクト
-                                        //出現座標をマップ生成後に設定するために取得
+                                         //出現座標をマップ生成後に設定するために取得
+
+    public bool OnDevideColor = false;  //区画別カラー分け用フラグ
 
     private GameObject m_floorPrefab;     //床のオブジェクト
     private GameObject m_wallPrefab;      //壁のオブジェクト
@@ -28,7 +30,7 @@ public class SceneInitializer : MonoBehaviour
     {
         GenerateDungeon();
 
-        SponePlayer();
+        //SponePlayer();
     }
 
     
@@ -36,7 +38,7 @@ public class SceneInitializer : MonoBehaviour
     private void GenerateDungeon()
     {
         //ジェネレーターから生成したデータを取得
-        m_map = new DungeonGenerator().GenerateMap(MAP_SIZE_X, MAP_SIZE_Y, MAX_ROOM_NUMBER);
+        m_map = new DungeonGenerator().GenerateMap(MAP_SIZE_X, MAP_SIZE_Y, MAX_ROOM_NUMBER, OnDevideColor);
 
         //改行を入れてデータを整理
         string data = "";
@@ -44,7 +46,7 @@ public class SceneInitializer : MonoBehaviour
         {
             for(int x = 0; x < MAP_SIZE_X; x++)
             {
-                data += m_map[x, y] == 0 ? " " : "1";
+                data += m_map[x, y] == 0 ? "0" : "1";
             }
             data += "\n";
         }
@@ -60,7 +62,7 @@ public class SceneInitializer : MonoBehaviour
         {
             for(int x = 0; x < MAP_SIZE_X; x++)
             {
-                if (m_map[x, y] == 1)
+                if (m_map[x, y] >= 1)
                 {
                     Instantiate(m_floorPrefab, new Vector3(x*m_mapScale, 0, y*m_mapScale), new Quaternion());
                 }

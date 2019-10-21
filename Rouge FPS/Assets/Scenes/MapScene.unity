@@ -189,7 +189,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5609908407447607426, guid: ddf152a8522a64340b22d94e3a9d294c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ddf152a8522a64340b22d94e3a9d294c, type: 3}
 --- !u!1 &233678355
 GameObject:
@@ -316,7 +317,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa6728ab0cf818f44a63faa7d7c7332e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mergeScenes: {fileID: 0}
 --- !u!1 &1925906275
 GameObject:
   m_ObjectHideFlags: 0
@@ -386,3 +386,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &1984508788 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5609908407447607427, guid: ddf152a8522a64340b22d94e3a9d294c,
+    type: 3}
+  m_PrefabInstance: {fileID: 43452057}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1984508789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1984508788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4ae9764ab071ef44910cf054166aeac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_mapScale: 4
+  m_player: {fileID: 233678355}
+  OnDevideColor: 0

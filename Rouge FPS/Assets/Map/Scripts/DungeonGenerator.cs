@@ -2,20 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//***交差判定が上手く行ってない？***
+//***一つ前の判定に変更？***
+
+public enum Direction { LEFT, RIGHT, UP, DOWN };    //方向判定用のキー
+
 public class DungeonGenerator
 {
-    private const int MINIMUM_RANGE_WIDTH = 6;  //部屋の最小幅
+    private const int MINIMUM_RANGE_WIDTH = 6;  //区画の最小幅
 
-    private int m_mapSizeX;   //ダンジョンの最大X軸
-    private int m_mapSizeY;   //ダンジョンの最大Y軸
-    private int m_maxRoom;    //最大部屋数
+    private int m_mapSizeX;     //ダンジョンの最大X軸
+    private int m_mapSizeY;     //ダンジョンの最大Y軸
+    private int m_maxRoom;      //最大部屋数
+    private int m_idCount = 0;  //区画のIDのカウント
 
-    private List<Range> m_roomList = new List<Range>();     //部屋リスト
-    private List<Range> m_rangeList = new List<Range>();    //区画リスト
-    private List<Range> m_passList = new List<Range>();     //通路リスト
+    private Dictionary<int, Range> m_rangeList = new Dictionary<int, Range>();    //区画リスト
+
+    private List<Pass> m_passList = new List<Pass>();     //通路リスト
     private List<Range> m_roomPassList = new List<Range>(); //出入口リスト
+    private List<int[]> m_rangeIdComb = new List<int[]>();  //区画組み合わせリスト 
 
-    public int[,] GenerateMap(int mapSizeX, int mapSizeY, int maxRoom)
+
+    public int[,] GenerateMap(int mapSizeX, int mapSizeY, int maxRoom, bool dColor)
     {
         this.m_mapSizeX = mapSizeX;
         this.m_mapSizeY = mapSizeY;
@@ -23,53 +31,83 @@ public class DungeonGenerator
 
         int[,] map = new int[mapSizeX, mapSizeY];
 
-        CreateRange(maxRoom);
+        //指定の数値で初期化する
+        //for (int cnt_x = 0; cnt_x < mapSizeX; cnt_x++)
+        //{
+        //    for (int cnt_y = 0; cnt_y < mapSizeY; cnt_y++)
+        //    {
+        //        map[cnt_x, cnt_y] = 9;
+        //    }
+        //}
+
+        //区画を生成
+        CreateRange(m_maxRoom);
+
+        //Debug.Log(1);
+
+        //部屋を生成
         CreateRoom();
 
-        // ここまでの結果を一度配列に反映する
-        foreach (Range pass in m_passList)
+        //Debug.Log(2);
+
+        //通路を生成
+        CreatePass();
+
+        //Debug.Log(3);
+
+        // ここまでの結果を配列に反映する
+
+
+        //部屋
+        foreach (KeyValuePair<int, Range> range in m_rangeList)
         {
-            for (int x = pass.Start.X; x <= pass.End.X; x++)
+            if (range.Value.m_Room == null) continue;
+            for (int x = range.Value.m_Room.Start.X; x <= range.Value.m_Room.End.X; x++)
             {
-                for (int y = pass.Start.Y; y <= pass.End.Y; y++)
+                for (int y = range.Value.m_Room.Start.Y; y <= range.Value.m_Room.End.Y; y++)
                 {
                     map[x, y] = 1;
                 }
             }
         }
 
-        foreach (Range roomPass in m_roomPassList)
+        //通路
+        //***マップのログ出力データを16進数にして、各IDがわかるようにしたい
+        foreach (Pass pass in m_passList)
         {
-            for (int x = roomPass.Start.X; x <= roomPass.End.X; x++)
+            Position start = pass.Start;
+            Position end = pass.End;
+
+            if (start.X > end.X || start.Y > end.Y)
             {
-                for (int y = roomPass.Start.Y; y <= roomPass.End.Y; y++)
+                Position tmp = start;
+                start = end;
+                end = tmp;
+            }
+
+            for (int x = start.X; x <= end.X; x++)
+            {
+                for (int y = start.Y; y <= end.Y; y++)
                 {
-                    map[x, y] = 1;
+                    map[x, y] = 2;
                 }
             }
         }
-
-        foreach (Range room in m_roomList)
-        {
-            for (int x = room.Start.X; x <= room.End.X; x++)
-            {
-                for (int y = room.Start.Y; y <= room.End.Y; y++)
-                {
-                    map[x, y] = 1;
-                }
-            }
-        }
-
-        TrimPassList(ref map);
 
         return map;
     }
 
+    //===================================================================//
+    //区画を生成
+    //===================================================================//
     public void CreateRange(int maxRoom)
     {
         //区画のリストの初期値としてマップ全体を入れる
-        m_rangeList.Add(new Range(0, 0, m_mapSizeX - 1, m_mapSizeY - 1));
+        m_rangeList.Add(m_idCount, new Range(0, 0, m_mapSizeX - 1, m_mapSizeY - 1, m_idCount));
+        //区画id用のカウントをアップ
+        m_idCount += 1;
 
+        //最大部屋数まで区分け
         bool isDevided;
         do
         {
@@ -79,24 +117,40 @@ public class DungeonGenerator
 
             //最大区画数（部屋数）を超えたら終了
             if (m_rangeList.Count >= maxRoom) break;
-        } while (isDevided);
+        } while (isDevided || m_rangeList.Count < maxRoom);
+
+        //区画ごとに辺情報を設定
+        foreach (KeyValuePair<int, Range> range in m_rangeList)
+        {
+            range.Value.SetLines();
+        }
+
+        //区画ごとに隣接している区画の確認
+        foreach (KeyValuePair<int, Range> range in m_rangeList)
+        {
+            //Debug.Log("ID:" + range.Key + ",始点:(" + range.Value.Start.X + "," + range.Value.Start.Y + "),終点:(" + range.Value.End.X + "," + range.Value.End.Y + ")");
+            //隣接する区画をチェック
+            CheckNext(range.Value);
+        }
     }
 
+    //==================================================================//
     //マップ区切り処理
+    //==================================================================//
     public bool DevideRange(bool isVertical)
     {
         bool isDevided = false;
 
         //区画ごとに切るか判定
-        List<Range> newRangeList = new List<Range>();
-        foreach (Range range in m_rangeList)
+        Dictionary<int, Range> newRangeList = new Dictionary<int, Range>();
+        foreach (KeyValuePair<int, Range> range in m_rangeList)
         {
             //これ以上分割できない場合は次の区画へ
-            if (isVertical && range.GetWidthY() < MINIMUM_RANGE_WIDTH * 2 + 1)
+            if (isVertical && range.Value.width_Y() < MINIMUM_RANGE_WIDTH * 2 + 1)
             {
                 continue;
             }
-            else if (!isVertical && range.GetWidthX() < MINIMUM_RANGE_WIDTH * 2 + 1)
+            else if (!isVertical && range.Value.width_X() < MINIMUM_RANGE_WIDTH * 2 + 1)
             {
                 continue;
             }
@@ -111,255 +165,171 @@ public class DungeonGenerator
             }
 
             //長さから最小の区画サイズ２つ分を引き、残りからランダムで分割位置を決める
-            int length = isVertical ? range.GetWidthY() : range.GetWidthX();
-            int margin = length - MINIMUM_RANGE_WIDTH * 2;
-            int baseIndex = isVertical ? range.Start.Y : range.Start.X;
-            int devideIndex = baseIndex + MINIMUM_RANGE_WIDTH + Utility.GetRandomInt(1, margin) - 1;
+            int length = isVertical ? range.Value.width_Y() : range.Value.width_X();
+            int margin = length - MINIMUM_RANGE_WIDTH * 2;                                              //区分け可能の余分幅
+            int baseIndex = isVertical ? range.Value.Start.Y : range.Value.Start.X;                                 //最小基準の位置
+            int devideIndex = baseIndex + MINIMUM_RANGE_WIDTH + Utility.GetRandomInt(1, margin) - 1;    //分割位置
 
             //分割された区画の大きさを変更し、新しい区画を追加リストに追加
-            //同時に、分割した境界を通路として保存
+            //同時に、分割した境界を通路として保存→通路分を引かないので保存しない
             Range newRange = new Range();
             if (isVertical)
             {
-                m_passList.Add(new Range(range.Start.X, devideIndex, range.End.X, devideIndex));
-                newRange = new Range(range.Start.X, devideIndex + 1, range.End.X, range.End.Y);
-                range.End.Y = devideIndex - 1;
+                newRange = new Range(range.Value.Start.X, devideIndex, range.Value.End.X, range.Value.End.Y, m_idCount);             //新しい区画を生成
+                range.Value.End.Y = devideIndex;                                                                         //分割された区画の座標変更
             }
             else
             {
-                m_passList.Add(new Range(devideIndex, range.Start.Y, devideIndex, range.End.Y));
-                newRange = new Range(devideIndex + 1, range.Start.Y, range.End.X, range.End.Y);
-                range.End.X = devideIndex - 1;
+                newRange = new Range(devideIndex, range.Value.Start.Y, range.Value.End.X, range.Value.End.Y, m_idCount);
+                range.Value.End.X = devideIndex;
             }
 
             //追加リストに新しい区画を退避
-            newRangeList.Add(newRange);
+            newRangeList.Add(m_idCount, newRange);
+
+            //区画id用のカウントをアップ
+            m_idCount += 1;
 
             isDevided = true;
         }
 
         //追加リストに退避しておいた新しい区画を追加
+        //Dictionaryの拡張メソッドを導入する
         m_rangeList.AddRange(newRangeList);
 
         return isDevided;
     }
 
+    //=======================================================================//
+    //隣接する区画があるかチェックする処理
+    //=======================================================================//
+    private void CheckNext(Range self)
+    {
+        //各区画のChangeVertexで検索
+        foreach (KeyValuePair<int, Range> other in m_rangeList)
+        {
+            //同じ区画IDは飛ばす
+            if (self.Id == other.Value.Id) continue;
+            //隣接した場合、組み合わせをリストにセット
+            if (self.IsNext(other.Value))
+            {
+                int[] newComb = new int[2];
+                newComb[0] = self.Id;
+                newComb[1] = other.Value.Id;
+                if (newComb[0] > newComb[1])
+                {
+                    int tmp = newComb[0];
+                    newComb[0] = newComb[1];
+                    newComb[1] = tmp;
+                }
+                //組み合わせをセット
+                //交差判定が上手くいってない？
+                SetCombo(newComb);
+            }
+
+        }
+    }
+
+    //=========================================================================//
+    //組み合わせリスト内に同じ組み合わせがないか探査する処理
+    //****逐一探査するので、最後にまとめてソート後探査したい****
+    //=========================================================================//
+    private void SetCombo(int[] newComb)
+    {
+        //各組合せと比較する
+        foreach (int[] comb in m_rangeIdComb)
+        {
+            //組み合わせが違うなら次へ
+            if (comb[0] != newComb[0]) continue;
+            if (comb[1] != newComb[1]) continue;
+            //同じの場合はセットせずに関数を終了
+            return;
+        }
+        //組み合わせがリストになければ、新たに追加
+        m_rangeIdComb.Add(newComb);
+    }
+
+    //=======================================================================//
     //部屋を作る処理
+    //=======================================================================//
     private void CreateRoom()
     {
-        //部屋のない区画が偏らないようにリストをシャッフル
-        m_rangeList.Sort((a, b) => Utility.GetRandomInt(0, 1) - 1);
+        Debug.Log(m_rangeList.Count);
 
-        //１区画あたり１部屋を作成。作成しない区画もある
-        foreach (Range range in m_rangeList)
+        //１区画あたり１部屋を作成
+        foreach (KeyValuePair<int, Range> range in m_rangeList)
         {
             System.Threading.Thread.Sleep(1);
-            //30％の確率で部屋を作らない
-            //最大部屋数の半分に満たない場合は作る
-            if (m_roomList.Count > m_maxRoom / 2 && Utility.RandomJudge(0.3f)) continue;
 
-            //猶予を計算
-            int marginX = range.GetWidthX() - MINIMUM_RANGE_WIDTH + 1;
-            int marginY = range.GetWidthY() - MINIMUM_RANGE_WIDTH + 1;
+            ////猶予を計算
+            int marginX = range.Value.width_X() - MINIMUM_RANGE_WIDTH + 1;
+            int marginY = range.Value.width_Y() - MINIMUM_RANGE_WIDTH + 1;
 
-            //開始位置を決定
-            int randomX = Utility.GetRandomInt(1, marginX);
-            int randomY = Utility.GetRandomInt(1, marginY);
+            //部屋のサイズを決定
+            //***インスペクタで比率をいじれるようにする
+            int room_size_X = (int)(marginX * 0.9);
+            int room_size_Y = (int)(marginY * 0.9);
+
 
             //部屋の各座標を計算
-            int startX = range.Start.X + randomX;
-            int endX = range.End.X - Utility.GetRandomInt(0, (marginX - randomX)) - 1;
-            int startY = range.Start.Y + randomY;
-            int endY = range.End.Y - Utility.GetRandomInt(0, (marginY - randomY)) - 1;
+            int startX = range.Value.Start.X + 1;
+            int endX = startX + marginX;
+            int startY = range.Value.Start.Y + 1;
+            int endY = startY + marginY;
 
-            //部屋リストへ追加
-            Range room = new Range(startX, startY, endX, endY);
-            m_roomList.Add(room);
+            //if (marginX < 3) continue;
+            //if (marginY < 3) continue;
 
-            //通路を作る
-            CreatePass(range, room);
+            //開始位置を決定
+            //int randomX = range.Value.Start.X + Utility.GetRandomInt(1, marginX - 3);
+            //int randomY = range.Value.Start.Y + Utility.GetRandomInt(1, marginY - 3);
+
+            //この区画の部屋をセット
+            //***部屋のバリエーション増やす、区画をもっといじれるようにする
+            //Room room = new Room(randomX, randomY);
+            Room room = new Room(startX, startY, endX, endY);
+            range.Value.m_Room = room;
         }
     }
 
-
+    //=========================================================//
     //出入口を作る処理
-    private void CreatePass(Range range, Range room)
+    //=========================================================//
+    private void CreatePass()
     {
-        List<int> directionList = new List<int>();
-        if (range.Start.X != 0)
+        Debug.Log(m_rangeIdComb.Count);
+
+        foreach (int[] rangeId in m_rangeIdComb)
         {
-            //Xマイナス方向
-            directionList.Add(0);
+            //組み合わせリストのIDからそれぞれの区画を取得
+            Range rangeA = m_rangeList[rangeId[0]];
+            Range rangeB = m_rangeList[rangeId[1]];
+
+            //部屋がセットされていない場合次へ
+            if (rangeA.m_Room == null) continue;
+            if (rangeB.m_Room == null) continue;
+
+            //取得した向きから直線で通路を生成できるかを確認
+            //※できた場合：第二引数に通路クラスを返す,Trueを返す、できない場合：Falseを返す
+            Pass newPass;
+            bool isStraight = rangeA.IsStraight(rangeB, out newPass);
+
+            //失敗した時、生成元と先を交換して再度確認
+            if (!isStraight)
+            {
+                isStraight = rangeB.IsStraight(rangeA, out newPass);
+            }
+
+            if (!isStraight)
+            {
+                //角ありの通路の始点、中継点を求める
+                continue; //とりあえず直線のみ
+            }
+
+            //始点or中継点から終点までの通路をリストに追加
+            m_passList.Add(newPass);
+
         }
-        if (range.End.X != m_mapSizeX - 1)
-        {
-            //Xプラス方向
-            directionList.Add(1);
-        }
-        if (range.Start.Y != 0)
-        {
-            //Yマイナス方向
-            directionList.Add(2);
-        }
-        if (range.End.Y != m_mapSizeY - 1)
-        {
-            //Yプラス方向
-            directionList.Add(3);
-        }
-
-        //通路の有無が偏らないよう、リストをシャッフル
-        directionList.Sort((a, b) => Utility.GetRandomInt(0, 1) - 1);
-
-        bool isFirst = true;
-        foreach (int direction in directionList)
-        {
-            System.Threading.Thread.Sleep(1);
-            //80％の確率で通路を作らない
-            //通路がない場合は必ず作る
-            if (!isFirst && Utility.RandomJudge(0.8f))
-            {
-                continue;
-            }
-            else
-            {
-                isFirst = false;
-            }
-
-            //向きの判定
-            int random;
-            switch (direction)
-            {
-                case 0:// Xマイナス方向
-                    random = room.Start.Y + Utility.GetRandomInt(1, room.GetWidthY()) - 1;
-                    m_roomPassList.Add(new Range(range.Start.X, random, room.Start.X - 1, random));
-                    break;
-
-                case 1:// Xプラス方向
-                    random = room.Start.Y + Utility.GetRandomInt(1, room.GetWidthY()) - 1;
-                    m_roomPassList.Add(new Range(room.End.X + 1, random, range.End.X, random));
-                    break;
-
-                case 2:// Yマイナス方向
-                    random = room.Start.X + Utility.GetRandomInt(1, room.GetWidthX()) - 1;
-                    m_roomPassList.Add(new Range(random, range.Start.Y, random, room.Start.Y - 1));
-                    break;
-
-                case 3:// Yプラス方向
-                    random = room.Start.X + Utility.GetRandomInt(1, room.GetWidthX()) - 1;
-                    m_roomPassList.Add(new Range(random, room.End.Y + 1, random, range.End.Y));
-                    break;
-            }
-        }
-    }
-
-
-
-    //余分な通路を削除する処理
-    private void TrimPassList(ref int[,] map)
-    {
-        //どの部屋の通路からも接続されなかった通路を削除
-        for (int i = m_passList.Count - 1; i >= 0; i--)
-        {
-            Range pass = m_passList[i];
-
-            bool isVertical = pass.GetWidthY() > 1;
-
-            //通路が部屋通路から接続されているかチェック
-            bool isTrimTarget = true;
-            if (isVertical)
-            {
-                int x = pass.Start.X;
-                for (int y = pass.Start.Y; y <= pass.End.Y; y++)
-                {
-                    if (map[x - 1, y] == 1 || map[x + 1, y] == 1)
-                    {
-                        isTrimTarget = false;
-                        break;
-                    }
-                }
-            }
-            else
-            {
-                int y = pass.Start.Y;
-                for (int x = pass.Start.X; x <= pass.End.X; x++)
-                {
-                    if (map[x, y - 1] == 1 || map[x, y + 1] == 1)
-                    {
-                        isTrimTarget = false;
-                        break;
-                    }
-                }
-            }
-
-            //削除対象となった通路を削除
-            if (isTrimTarget)
-            {
-                m_passList.Remove(pass);
-
-                //マップ配列からも削除
-                if (isVertical)
-                {
-                    int x = pass.Start.X;
-                    for (int y = pass.Start.Y; y <= pass.End.Y; y++)
-                    {
-                        map[x, y] = 0;
-                    }
-                }
-                else
-                {
-                    int y = pass.Start.Y;
-                    for (int x = pass.Start.X; x <= pass.End.X; x++)
-                    {
-                        map[x, y] = 0;
-                    }
-                }
-            }
-        }
-
-        //外周に接している通路を別の通路との接続点まで削除
-        //上下基準で探査
-        for (int x = 0; x < m_mapSizeX - 1; x++)
-        {
-            if (map[x, 0] == 1)
-            {
-                for (int y = 0; y < m_mapSizeY; y++)
-                {
-                    if (map[x - 1, y] == 1 || map[x + 1, y] == 1) break;
-                    map[x, y] = 0;
-                }
-            }
-
-            if (map[x, m_mapSizeY - 1] == 1)
-            {
-                for (int y = m_mapSizeY - 1; y >= 0; y--)
-                {
-                    if (map[x - 1, y] == 1 || map[x + 1, y] == 1) break;
-                    map[x, y] = 0;
-                }
-            }
-        }
-
-        //左右基準で探査
-        for (int y = 0; y < m_mapSizeY - 1; y++)
-        {
-            if (map[0, y] == 1)
-            {
-                for (int x = 0; x < m_mapSizeY; x++)
-                {
-                    if (map[x, y - 1] == 1 || map[x, y + 1] == 1) break;
-                    map[x, y] = 0;
-                }
-            }
-
-            if (map[m_mapSizeX - 1, y] == 1)
-            {
-                for (int x = m_mapSizeX - 1; x >= 0; x--)
-                {
-                    if (map[x, y - 1] == 1 || map[x, y + 1] == 1) break;
-                    map[x, y] = 0;
-                }
-
-            }
-        }
+        Debug.Log(m_passList.Count);
     }
 }
