@@ -7,6 +7,7 @@ public class GunAnimation : MonoBehaviour
     Animator animator;
     AnimatorStateInfo animatorInfo;
     GunController GCScript;
+    bool animFlg = false;
     
     void Start()
     {
@@ -16,28 +17,31 @@ public class GunAnimation : MonoBehaviour
 
     void Update()
     {
-        /*
         animatorInfo = animator.GetCurrentAnimatorStateInfo(0);
         // アニメーションが終了
-        if(animatorInfo.normalizedTime > 1.0f){}
-        */
-
-        if(Input.GetMouseButtonDown(0) && GCScript.Ammo > 0)
+        if(animatorInfo.normalizedTime > 1.0f)
         {
-            animator.SetBool("ShootFlg",true);
+            // 射撃
+            if(Input.GetMouseButtonDown(0) && GCScript.Ammo > 0 && animFlg == false)
+            {
+                animator.SetBool("ShootFlg",true);
+                animFlg = true;
+            }
+
+            // リロード
+            if(Input.GetKeyDown(KeyCode.R) && GCScript.MaxAmmo > 0 && animFlg == false)// && GCScript.Ammo != GCScript.OneMagazine)
+            {
+                animator.SetBool("ReloadFlg",true);
+                animFlg = true;
+            }
         }
-        if(Input.GetMouseButtonUp(0))
+        else
         {
             animator.SetBool("ShootFlg",false);
-        }
-
-        if(Input.GetKeyDown(KeyCode.R) && GCScript.MaxAmmo > 0)// && Ammo != OneMagazine)
-        {
-            animator.SetBool("ReloadFlg",true);
-        }
-        if(Input.GetKeyUp(KeyCode.R))
-        {
+            
             animator.SetBool("ReloadFlg",false);
+
+            animFlg = false;
         }
     }
 }

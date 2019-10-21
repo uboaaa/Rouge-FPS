@@ -15,6 +15,7 @@ public class GunController : MonoBehaviour
     [SerializeField] GunType    gunType     = GunType.AssaultRifle;
     [SerializeField] ShootMode  shootMode   = ShootMode.AUTO;
     [SerializeField] GunRank    gunRank     = GunRank.Rank1;
+    [SerializeField] int        skillSlot   = 1;
     [SerializeField] int OneMagazine = 0;
     [SerializeField] public int MaxAmmo = 0;
     [SerializeField] int damage = 1;
@@ -30,7 +31,6 @@ public class GunController : MonoBehaviour
     public Text AmmoCheck;
     GameObject muzzleFlash;
     GameObject hitEffect;
-
     GunAnimation gunAnim;
     
     public int Ammo
@@ -135,13 +135,12 @@ public class GunController : MonoBehaviour
             }
 
              // 弾を減らす
-            Ammo--;
-
-            
-            shooting = false;
+            ammo--;
 
             // 連射速度の調整
             yield return new WaitForSeconds(shootInterval);
+
+            shooting = false;
         }
         else
         {
