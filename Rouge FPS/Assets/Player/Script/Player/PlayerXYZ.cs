@@ -8,16 +8,15 @@ public class PlayerXYZ : MonoBehaviour
     private Rigidbody rigidbody;
     private GameObject gameObject;
     Vector3 abc = new Vector3(0.0f, 0.0f, 0.0f);
-    float aaa = 0.0f;
-    int i = 0;
-    bool isFirst = true; // 最初の一回を判定するフラグ
-    Rigidbody rb;
+    private Vector3 moveDirection = Vector3.zero;
+    private CharacterController characterController;
+    bool moveFlg = false;
 
     // Start is called before the first frame update
     void Start()
     {
         gameObject = GameObject.Find("FPSController");
-       rb = this.GetComponent<Rigidbody>();  // rigidbodyを取得
+        characterController = GetComponent<CharacterController>();
 
     }
 
@@ -27,23 +26,36 @@ public class PlayerXYZ : MonoBehaviour
 
         //リセット処理その２(その１はFirstPersonController.cs)
         if (Input.GetKey(KeyCode.Return)) {
-            GetComponent<CharacterController>().enabled = false;
+            characterController.enabled = false;
             ClearCheckFlg = true; }
 
         if (ClearCheckFlg) {
 
             UpdatePlayerXYZ(6.0f, 0.0f, 15.0f);
-
         }
- 
+
+        //ノックバック処理
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            abc = this.transform.position;
+            for (int i = 0; i < 5; i++)
+            {
+                moveDirection.z -= 1.0f;
+                moveFlg = true;
+            }
+        }
+        if (moveFlg)
+        {
+            characterController.Move(moveDirection * Time.deltaTime);
+        }
+        if (abc.z -transform.position.z>10.0f) { moveFlg = false; }
     }
 
         void FixedUpdate()
         {
        
-            Vector3 force = new Vector3(0.0f, 100.0f, 1.0f);    // 力を設定
-            rb.AddForce(force);  // 力を加える
-        }
+
+    }
 
     
 

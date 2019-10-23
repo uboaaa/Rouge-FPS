@@ -33,6 +33,11 @@ public class MergeScenes : MonoBehaviour
             
         }
     }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape)) { SceneManager.LoadScene("TitleScene"); }
+    }
     public static bool CameraSet
     {
         get { return CameraSeter; }  //取得用

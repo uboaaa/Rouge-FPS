@@ -12,10 +12,12 @@ public class CameraReset : MonoBehaviour
     }
 
 
-    void FixedUpdate()
+    void Update()
     {
         //カメラの方向を取得
         //camera.transform.rotation  = Quaternion.identity;
+        if (Input.GetKey(KeyCode.Return)) { 
         this.transform.rotation =  Quaternion.Euler(0.0f, 0.0f, 0.0f);
+            }
     }
 }
