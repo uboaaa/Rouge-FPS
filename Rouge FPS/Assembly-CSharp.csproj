@@ -192,7 +192,10 @@
     <Compile Include="Assets\Player\Script\Weapon\ChangeEquip.cs" />
     <Compile Include="Assets\Player\Script\Weapon\FirstPersonGunController.cs" />
     <Compile Include="Assets\Player\Script\Weapon\FlushController.cs" />
+    <Compile Include="Assets\Skill\CSVReader.cs" />
+    <Compile Include="Assets\Skill\CSVWriter.cs" />
     <Compile Include="Assets\Skill\Lottery.cs" />
+    <Compile Include="Assets\Skill\Param.cs" />
     <Compile Include="Assets\Skill\SkillList.cs" />
     <None Include="Assets\Player\Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
     <None Include="Assets\Player\Assets\Standard Assets\Effects\ToonShading\Shaders\ToonBasic.shader" />
