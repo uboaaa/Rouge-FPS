@@ -23,7 +23,7 @@ public class DungeonGenerator
     private List<int[]> m_rangeIdComb = new List<int[]>();  //区画組み合わせリスト 
 
 
-    public int[,] GenerateMap(int mapSizeX, int mapSizeY, int maxRoom, bool dColor)
+    public int[,] GenerateMap(int mapSizeX, int mapSizeY, int maxRoom)
     {
         this.m_mapSizeX = mapSizeX;
         this.m_mapSizeY = mapSizeY;
@@ -107,17 +107,28 @@ public class DungeonGenerator
         //区画id用のカウントをアップ
         m_idCount += 1;
 
-        //最大部屋数まで区分け
-        bool isDevided;
+       
+        //部屋数に合わせて分割
+        //分割回数を設定
+        int devCount = maxRoom - 1;
+        int count = 0;
         do
         {
-            //タテ→ヨコの順で部屋を区切る
-            isDevided = DevideRange(false);
-            isDevided = DevideRange(true) || isDevided;
+            //ヨコ分割
+            //分割した時カウントアップ
+            count += SplitRange(true) ? 1 : 0;
 
-            //最大区画数（部屋数）を超えたら終了
-            if (m_rangeList.Count >= maxRoom) break;
-        } while (isDevided || m_rangeList.Count < maxRoom);
+            //部屋数チェック
+            if (count >= devCount) break;
+
+            //タテ分割
+            //分割した時カウントアップ
+            count += SplitRange(false) ? 1 : 0;
+
+            //部屋数チェック
+            if (count >= devCount) break;
+
+        } while (true);
 
         //区画ごとに辺情報を設定
         foreach (KeyValuePair<int, Range> range in m_rangeList)
@@ -135,15 +146,13 @@ public class DungeonGenerator
     }
 
     //==================================================================//
-    //マップ区切り処理
+    //部屋数に応じて分割する処理
     //==================================================================//
-    public bool DevideRange(bool isVertical)
+    private bool SplitRange(bool isVertical)
     {
-        bool isDevided = false;
+        bool isSplit = false;
 
-        //区画ごとに切るか判定
-        Dictionary<int, Range> newRangeList = new Dictionary<int, Range>();
-        foreach (KeyValuePair<int, Range> range in m_rangeList)
+        foreach (KeyValuePair<int,Range> range in m_rangeList)
         {
             //これ以上分割できない場合は次の区画へ
             if (isVertical && range.Value.width_Y() < MINIMUM_RANGE_WIDTH * 2 + 1)
@@ -154,7 +163,6 @@ public class DungeonGenerator
             {
                 continue;
             }
-
             System.Threading.Thread.Sleep(1);
 
             //40%の確率で分割
@@ -167,7 +175,7 @@ public class DungeonGenerator
             //長さから最小の区画サイズ２つ分を引き、残りからランダムで分割位置を決める
             int length = isVertical ? range.Value.width_Y() : range.Value.width_X();
             int margin = length - MINIMUM_RANGE_WIDTH * 2;                                              //区分け可能の余分幅
-            int baseIndex = isVertical ? range.Value.Start.Y : range.Value.Start.X;                                 //最小基準の位置
+            int baseIndex = isVertical ? range.Value.Start.Y : range.Value.Start.X;                     //最小基準の位置
             int devideIndex = baseIndex + MINIMUM_RANGE_WIDTH + Utility.GetRandomInt(1, margin) - 1;    //分割位置
 
             //分割された区画の大きさを変更し、新しい区画を追加リストに追加
@@ -175,8 +183,8 @@ public class DungeonGenerator
             Range newRange = new Range();
             if (isVertical)
             {
-                newRange = new Range(range.Value.Start.X, devideIndex, range.Value.End.X, range.Value.End.Y, m_idCount);             //新しい区画を生成
-                range.Value.End.Y = devideIndex;                                                                         //分割された区画の座標変更
+                newRange = new Range(range.Value.Start.X, devideIndex, range.Value.End.X, range.Value.End.Y, m_idCount);                //新しい区画を生成
+                range.Value.End.Y = devideIndex;                                                                                        //分割された区画の座標変更
             }
             else
             {
@@ -184,22 +192,22 @@ public class DungeonGenerator
                 range.Value.End.X = devideIndex;
             }
 
-            //追加リストに新しい区画を退避
-            newRangeList.Add(m_idCount, newRange);
+            //区画追加
+            m_rangeList.Add(m_idCount, newRange);
 
-            //区画id用のカウントをアップ
+            //区画id用のカウントをアップ、分割フラグをtrue
             m_idCount += 1;
+            isSplit = true;
 
-            isDevided = true;
+            //foreachを抜ける
+            break;
         }
 
-        //追加リストに退避しておいた新しい区画を追加
-        //Dictionaryの拡張メソッドを導入する
-        m_rangeList.AddRange(newRangeList);
-
-        return isDevided;
+        //分割したのでtrue
+        return isSplit;
     }
 
+    
     //=======================================================================//
     //隣接する区画があるかチェックする処理
     //=======================================================================//

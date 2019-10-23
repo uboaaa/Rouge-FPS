@@ -7,16 +7,14 @@ using UnityEngine;
 public class MapInitializer : MonoBehaviour
 {
     //各種マップパラメータ
-    public const int MAP_SIZE_X = 30;   //X軸のマップ最大サイズ
-    public const int MAP_SIZE_Y = 20;   //Y軸のマップ最大サイズ
+    [SerializeField]private int MAP_SIZE_X = 30;   //X軸のマップ最大サイズ
+    [SerializeField]private int MAP_SIZE_Y = 20;   //Y軸のマップ最大サイズ
 
-    public const int MAX_ROOM_NUMBER = 6;   //最大部屋数（これ以下の場合もある）
-    public int m_mapScale = 1;              //
+    [SerializeField]private int MAX_ROOM_NUMBER = 6;   //最大部屋数（これ以下の場合もある）
+    [SerializeField]private int m_mapScale = 1;              //
 
     public GameObject m_player;          //プレイヤー用オブジェクト
                                          //出現座標をマップ生成後に設定するために取得
-
-    public bool OnDevideColor = false;  //区画別カラー分け用フラグ
 
     private GameObject m_floorPrefab;     //床のオブジェクト
     private GameObject m_wallPrefab;      //壁のオブジェクト
@@ -38,7 +36,7 @@ public class MapInitializer : MonoBehaviour
     private void GenerateDungeon()
     {
         //ジェネレーターから生成したデータを取得
-        m_map = new DungeonGenerator().GenerateMap(MAP_SIZE_X, MAP_SIZE_Y, MAX_ROOM_NUMBER, OnDevideColor);
+        m_map = new DungeonGenerator().GenerateMap(MAP_SIZE_X, MAP_SIZE_Y, MAX_ROOM_NUMBER);
 
         //改行を入れてデータを整理
         string data = "";
