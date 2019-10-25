@@ -30,6 +30,7 @@ public class GunController : MonoBehaviour
     GameObject  bullet;
     public bool shootEnabled = true;
     bool        shooting = false;
+    bool        reloading = false;
     int         ammo;
     public Text AmmoCheck;
     GameObject  muzzleFlash;
@@ -66,18 +67,18 @@ public class GunController : MonoBehaviour
         }
         AmmoCheck.text = Ammo + "/" + MaxAmmo;
         
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R) && !shooting  && !reloading)
         {
+            reloading = true;
             Invoke("Reload",0.5f);
-            //Reload();
         }
 
-        if (shootEnabled & ammo > 0 & GetInput())
+        if (shootEnabled && ammo > 0 && GetInput() && !reloading)
         {
             StartCoroutine(ShootTimer());
         }
 
-
+        Debug.Log(reloading);
         // 射撃中画面を揺らす
         shakeScript.Shake(shakePow,shooting);
     }
@@ -97,6 +98,7 @@ public class GunController : MonoBehaviour
             {
                 MaxAmmo = MaxAmmo - (OneMagazine - Ammo);
                 Ammo = OneMagazine;
+                reloading = false;
             }
             else 
             {
@@ -112,6 +114,8 @@ public class GunController : MonoBehaviour
                     MaxAmmo = MaxAmmo - NowAmmo;
                     Ammo = Ammo + NowAmmo;
                 }
+
+                reloading = false;
             }
         }
     }
