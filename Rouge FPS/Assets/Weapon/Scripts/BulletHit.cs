@@ -15,15 +15,12 @@ public class BulletHit : MonoBehaviour
 
     void Start(){}
 
-    void Update()
-    {
-        
-    }
+    void Update(){}
 
     void HitEffect()
     {
         // エフェクトを生成
-        hitEffect = Instantiate<GameObject>(hitEffectPrefab,new Vector3(hitPos.x,hitPos.y,hitPos.z/* - hitEffectScale.z*/),rotation);
+        hitEffect = Instantiate<GameObject>(hitEffectPrefab,new Vector3(hitPos.x,hitPos.y,hitPos.z),rotation);
         hitEffect.transform.localScale = hitEffectScale;
 
         // エフェクト削除
