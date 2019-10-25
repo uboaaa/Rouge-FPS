@@ -8,30 +8,35 @@ using UnityEngine;
 using UnityEngine.UI;
 public class GunController : MonoBehaviour
 {
-    [SerializeField] public enum ShootMode { AUTO, SEMIAUTO }
     public enum GunType { AssaultRifle, SubMachineGun, LightMachineGun, HandGun, RocketLauncher, ShotGun, LaserGun, FlameThrower }
     public enum GunRank { Rank1, Rank2, Rank3 }
-    public bool shootEnabled = true;
+    [SerializeField] public enum ShootMode { AUTO, SEMIAUTO }
     [SerializeField] GunType    gunType     = GunType.AssaultRifle;
     [SerializeField] ShootMode  shootMode   = ShootMode.AUTO;
     [SerializeField] GunRank    gunRank     = GunRank.Rank1;
     [SerializeField] int        skillSlot   = 1;
-    [SerializeField] int OneMagazine = 0;
+    [SerializeField] int        OneMagazine = 0;
     [SerializeField] public int MaxAmmo = 0;
-    [SerializeField] int damage = 1;
-    [SerializeField] float shootInterval = 0.15f;
-    [SerializeField] Transform muzzle;
+    [SerializeField] int        damage = 1;
+    [SerializeField] float      shootInterval = 0.15f;
+	[SerializeField] float      bulletPower = 100.0f;
+    [SerializeField] Transform  muzzle;
+    // 弾情報
     [SerializeField] GameObject bulletPrefab;
+    [SerializeField] Vector3    bulletScale = new Vector3(1.0f,1.0f,1.0f);
+    // マズル情報
     [SerializeField] GameObject muzzleFlashPrefab;
-    [SerializeField] Vector3 muzzleFlashScale = new Vector3(1.0f,1.0f,1.0f);
-	[SerializeField] float bulletPower = 100.0f;
-    GameObject bullet;
-    bool shooting = false;
-    int ammo;
+    [SerializeField] Vector3    muzzleFlashScale = new Vector3(1.0f,1.0f,1.0f);
+    GameObject  bullet;
+    public bool shootEnabled = true;
+    bool        shooting = false;
+    int         ammo;
     public Text AmmoCheck;
-    GameObject muzzleFlash;
-    GameObject hitEffect;
+    GameObject  muzzleFlash;
+    GameObject  hitEffect;
     GunAnimation gunAnim;
+    CameraShake shakeScript;
+    [SerializeField] float shakePow;
     
     public int Ammo
     {
@@ -50,20 +55,31 @@ public class GunController : MonoBehaviour
         InitGun();
 
         gunAnim = GetComponent<GunAnimation>();
+
+        // 上の階層のオブジェクトにアタッチしているスクリプトを参照する
+        shakeScript = GetComponentInParent<CameraShake>();
     }
     void Update()
     {   
+        if(shakeScript == null){
+        Debug.Log(shakeScript);
+        }
         AmmoCheck.text = Ammo + "/" + MaxAmmo;
         
         if (Input.GetKeyDown(KeyCode.R))
         {
-            Reload();
+            Invoke("Reload",0.5f);
+            //Reload();
         }
 
         if (shootEnabled & ammo > 0 & GetInput())
         {
             StartCoroutine(ShootTimer());
         }
+
+
+        // 射撃中画面を揺らす
+        shakeScript.Shake(shakePow,shooting);
     }
 
     //初期化
@@ -75,29 +91,29 @@ public class GunController : MonoBehaviour
     // リロード処理
     void Reload()
     {
-        
-        if (MaxAmmo >= OneMagazine)
+        if(shootEnabled)
         {
-            MaxAmmo = MaxAmmo - (OneMagazine - Ammo);
-            Ammo = OneMagazine;
-        }
-        else {
-            int NowAmmo;
-            NowAmmo = OneMagazine - Ammo;
-            
-            if (NowAmmo > MaxAmmo)
+            if (MaxAmmo >= OneMagazine)
             {
-                Ammo = MaxAmmo+Ammo;
-                MaxAmmo = 0;
-
+                MaxAmmo = MaxAmmo - (OneMagazine - Ammo);
+                Ammo = OneMagazine;
             }
-            else {
-                MaxAmmo = MaxAmmo - NowAmmo;
-                Ammo = Ammo + NowAmmo;
+            else 
+            {
+                int NowAmmo;
+                NowAmmo = OneMagazine - Ammo;
+                if (NowAmmo > MaxAmmo)
+                {
+                    Ammo = MaxAmmo+Ammo;
+                    MaxAmmo = 0;
+                }
+                else 
+                {
+                    MaxAmmo = MaxAmmo - NowAmmo;
+                    Ammo = Ammo + NowAmmo;
+                }
             }
         }
-
-       
     }
 
     // セミオートかフルオートかの判定
@@ -116,7 +132,9 @@ public class GunController : MonoBehaviour
     {
         if (!shooting)
         {
+            // 射撃中は追加で撃てないようにする
             shooting = true;
+            shootEnabled = false;
 
             if (muzzleFlashPrefab != null)
             {
@@ -130,6 +148,7 @@ public class GunController : MonoBehaviour
             {
                 // 弾の生成
 		        bullet = Instantiate<GameObject>(bulletPrefab, muzzle.position, muzzle.rotation);
+                bullet.transform.localScale = bulletScale;
 		        bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * bulletPower);
 		        Destroy(bullet, 5.0f);
             }
@@ -141,6 +160,7 @@ public class GunController : MonoBehaviour
             yield return new WaitForSeconds(shootInterval);
 
             shooting = false;
+            shootEnabled = true;
         }
         else
         {

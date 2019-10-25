@@ -29,7 +29,7 @@ public class GunAnimation : MonoBehaviour
             }
 
             // リロード
-            if(Input.GetKeyDown(KeyCode.R) && GCScript.MaxAmmo > 0 && animFlg == false)// && GCScript.Ammo != GCScript.OneMagazine)
+            if(Input.GetKeyDown(KeyCode.R) && GCScript.MaxAmmo > 0 && animFlg == false && GCScript.shootEnabled)// && GCScript.Ammo != GCScript.OneMagazine)
             {
                 animator.SetBool("ReloadFlg",true);
                 animFlg = true;
