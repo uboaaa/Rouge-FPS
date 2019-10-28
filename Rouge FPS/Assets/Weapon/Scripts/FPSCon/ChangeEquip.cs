@@ -13,7 +13,7 @@ public class ChangeEquip : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
+        Weapon1.SetActive(true);
         Weapon2.SetActive(false);
     }
 
@@ -21,7 +21,6 @@ public class ChangeEquip : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
-
         {
             ChangeWeapon();
         }

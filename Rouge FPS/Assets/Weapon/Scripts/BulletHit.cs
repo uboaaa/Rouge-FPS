@@ -42,11 +42,22 @@ public class BulletHit : MonoBehaviour
         rotation = Quaternion.LookRotation(normalVector);
 
 
-        // "Enemy"タグに当たった場合、エフェクトを出して弾を削除する
-        if(collision.gameObject.tag == "Enemy")
+        switch (collision.gameObject.tag)
         {
-            HitEffect();
-            Destroy(gameObject);
+            // "Back"タグに当たった場合、エフェクトを出して弾を削除する
+            case "Back":
+                HitEffect();
+                Destroy(gameObject);
+                break;
+
+            // "Enemy"タグに当たった場合、エフェクトを出して弾を削除する
+            case "Enemy":
+                HitEffect();
+                Destroy(gameObject);
+                break;
+                
+            default:
+                break;
         }
     }
 }

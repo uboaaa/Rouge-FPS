@@ -11,12 +11,20 @@ public class GunController : MonoBehaviour
     public enum GunType { AssaultRifle, SubMachineGun, LightMachineGun, HandGun, RocketLauncher, ShotGun, LaserGun, FlameThrower }
     public enum GunRank { Rank1, Rank2, Rank3 }
     [SerializeField] public enum ShootMode { AUTO, SEMIAUTO }
+    [SerializeField] public ShootMode  shootMode = ShootMode.AUTO;
     [SerializeField] GunType    gunType     = GunType.AssaultRifle;
-    [SerializeField] ShootMode  shootMode   = ShootMode.AUTO;
     [SerializeField] GunRank    gunRank     = GunRank.Rank1;
     [SerializeField] int        skillSlot   = 1;
     [SerializeField] int        OneMagazine = 0;
-    [SerializeField] public int MaxAmmo = 0;
+    public int oneMagazine
+    {
+        get{return OneMagazine;}
+    }
+    [SerializeField] int        MaxAmmo = 0;
+    public int maxAmmo
+    {
+        get{return MaxAmmo;}
+    }
     [SerializeField] int        damage = 1;
     [SerializeField] float      shootInterval = 0.15f;
 	[SerializeField] float      bulletPower = 100.0f;
@@ -32,24 +40,17 @@ public class GunController : MonoBehaviour
     bool        shooting = false;
     bool        reloading = false;
     int         ammo;
+    public int Ammo
+    {
+        get { return ammo;}
+        set { ammo = Mathf.Clamp(value, 0, OneMagazine);}
+    }
     public Text AmmoCheck;
     GameObject  muzzleFlash;
     GameObject  hitEffect;
     GunAnimation gunAnim;
     CameraShake shakeScript;
     [SerializeField] float shakePow;
-    
-    public int Ammo
-    {
-        set
-        {
-            ammo = Mathf.Clamp(value, 0, OneMagazine);
-        }
-        get
-        {
-            return ammo;
-        }
-    }
    
     void Start()
     {
@@ -62,23 +63,17 @@ public class GunController : MonoBehaviour
     }
     void Update()
     {   
-        if(shakeScript == null){
-        Debug.Log(shakeScript);
-        }
         AmmoCheck.text = Ammo + "/" + MaxAmmo;
         
-        if (Input.GetKeyDown(KeyCode.R) && !shooting  && !reloading)
+        if (Input.GetKeyDown(KeyCode.R) && !shooting  && !reloading && ammo != OneMagazine)
         {
             reloading = true;
             Invoke("Reload",0.5f);
         }
-
-        if (shootEnabled && ammo > 0 && GetInput() && !reloading)
+        if (shootEnabled && ammo > 0 && GetInput(shootMode) && !reloading)
         {
             StartCoroutine(ShootTimer());
         }
-
-        Debug.Log(reloading);
         // 射撃中画面を揺らす
         shakeScript.Shake(shakePow,shooting);
     }
@@ -121,7 +116,7 @@ public class GunController : MonoBehaviour
     }
 
     // セミオートかフルオートかの判定
-    bool GetInput()
+    public bool GetInput(ShootMode shootMode)
     {
         switch (shootMode)
         {

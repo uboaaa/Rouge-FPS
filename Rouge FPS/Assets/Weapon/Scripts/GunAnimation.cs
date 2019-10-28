@@ -22,14 +22,14 @@ public class GunAnimation : MonoBehaviour
         if(animatorInfo.normalizedTime > 1.0f)
         {
             // 射撃
-            if(Input.GetMouseButtonDown(0) && GCScript.Ammo > 0 && animFlg == false)
+            if(GCScript.GetInput(GCScript.shootMode) && GCScript.Ammo > 0 && animFlg == false)
             {
                 animator.SetBool("ShootFlg",true);
                 animFlg = true;
             }
 
             // リロード
-            if(Input.GetKeyDown(KeyCode.R) && GCScript.MaxAmmo > 0 && animFlg == false && GCScript.shootEnabled)// && GCScript.Ammo != GCScript.OneMagazine)
+            if(Input.GetKeyDown(KeyCode.R) && GCScript.maxAmmo > 0 && animFlg == false && GCScript.shootEnabled && GCScript.Ammo != GCScript.oneMagazine)
             {
                 animator.SetBool("ReloadFlg",true);
                 animFlg = true;
