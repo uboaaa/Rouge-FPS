@@ -1,0 +1,10 @@
+HP,50
+ATK,200
+isATK,true
+DEF,50
+isDEF,false
+SPD,1
+isSPD,false
+Magazine,10
+Ammo,1000
+isPrimary,true
