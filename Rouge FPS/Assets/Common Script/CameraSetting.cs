@@ -16,7 +16,7 @@ public class CameraSetting : MonoBehaviour
     {
         SceneName = SceneManager.GetActiveScene().name;
         aho = MergeScenes.CameraSet;
-        MainCam = GameObject.Find("CommonFPSController");
+        MainCam = GameObject.Find("FPSController");
         DirecLight = GameObject.Find("Directional Light");
        
         //aho = mergeScenes.CameraSet();

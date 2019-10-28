@@ -5,8 +5,6 @@ using UnityEngine;
 public class PlayerXYZ : MonoBehaviour
 {
     private bool ClearCheckFlg=true;
-    private Rigidbody rigidbody;
-    private GameObject gameObject;
     Vector3 abc = new Vector3(0.0f, 0.0f, 0.0f);
     private Vector3 moveDirection = Vector3.zero;
     private CharacterController characterController;
@@ -15,7 +13,7 @@ public class PlayerXYZ : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameObject = GameObject.Find("FPSController");
+    
         characterController = GetComponent<CharacterController>();
 
     }
@@ -57,8 +55,8 @@ public class PlayerXYZ : MonoBehaviour
 
     }
 
-    
 
+    public bool GetClearCheckFlg() { return ClearCheckFlg; }
 
     public void UpdatePlayerXYZ(float x, float y ,float z){
         //this.transform.rotation = Quaternion.identity;
@@ -71,11 +69,5 @@ public class PlayerXYZ : MonoBehaviour
         //GetComponent<Rigidbody>().position = XYZ;
     }
 
-    public void DamagePlayer()
-    {
-
-
-        
-
-    }
+  
 }

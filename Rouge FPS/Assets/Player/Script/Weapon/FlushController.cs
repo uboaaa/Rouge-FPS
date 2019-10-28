@@ -33,7 +33,6 @@ public class FlushController : MonoBehaviour
         {
             Debug.Log("FirstHp" + FirstHP);
             NowHP = game.GetComponent<MyStatus>().downHp();
-            game.GetComponent<PlayerXYZ>().DamagePlayer();
             Debug.Log("NowHp" + NowHP);
 
         }
