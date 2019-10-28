@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 //シーン開始時のみ処理を行う
 public class MapInitializer : MonoBehaviour
 {
@@ -13,9 +12,16 @@ public class MapInitializer : MonoBehaviour
     [SerializeField]private int MAX_ROOM_NUMBER = 6;   //最大部屋数（これ以下の場合もある）
     [SerializeField]private int m_mapScale = 1;              //
 
-    public GameObject m_player;          //プレイヤー用オブジェクト
-                                         //出現座標をマップ生成後に設定するために取得
+    //初期座標
+    //***初期座標をグローバルで返すようにする
+    public static float g_spawn_posX;
+    public static float g_spawn_posY;
+    public static float g_spawn_posZ;
+    public static float g_spawn_rotX;
+    public static float g_spawn_rotY;
+    public static float g_spawn_rotZ;
 
+    //prefab
     private GameObject m_floorPrefab;     //床のオブジェクト
     private GameObject m_wallPrefab;      //壁のオブジェクト
     private GameObject m_celingPrefab;    //天井のオブジェクト
@@ -28,13 +34,15 @@ public class MapInitializer : MonoBehaviour
     {
         GenerateDungeon();
 
-        //SponePlayer();
+        
     }
 
     
     // ダンジョンマップ生成
     private void GenerateDungeon()
     {
+        //階層数分あらかじめ生成後、テキストorCSVに出力
+
         //ジェネレーターから生成したデータを取得
         m_map = new DungeonGenerator().GenerateMap(MAP_SIZE_X, MAP_SIZE_Y, MAX_ROOM_NUMBER);
 
@@ -44,7 +52,7 @@ public class MapInitializer : MonoBehaviour
         {
             for(int x = 0; x < MAP_SIZE_X; x++)
             {
-                data += m_map[x, y] == 0 ? "0" : "1";
+                data += m_map[x, y] == 0 ? "0" : m_map[x, y].ToString();
             }
             data += "\n";
         }
@@ -72,15 +80,14 @@ public class MapInitializer : MonoBehaviour
                 Instantiate(m_celingPrefab, new Vector3(x * m_mapScale, 6, y * m_mapScale), new Quaternion());
             }
         }
+
+        //プレイヤー出現座標を設定
+        SponePlayer();
     }
 
     // プレイヤーの出現座標を設定
     private void SponePlayer()
     {
-        if (!m_player)
-        {
-            return;
-        }
 
         Position position;
         do
@@ -90,9 +97,52 @@ public class MapInitializer : MonoBehaviour
             position = new Position(x, y);
         } while (m_map[position.X, position.Y] != 1);
 
-        Debug.Log(m_player.transform.position.x);
-        //m_player.transform.position = new Vector3(10, 3, 10);
-        m_player.transform.position = new Vector3(position.X * m_mapScale, 3, position.Y * m_mapScale);
-        Debug.Log(m_player.transform.position.x);
+
+        //***初期座標をグローバル変数に設定
+        SetSpawnData(position);
     }
+
+    private void SetSpawnData(Position pos)
+    {
+        g_spawn_posX = pos.X * m_mapScale;
+        g_spawn_posY = 3;
+        g_spawn_posZ = pos.Y * m_mapScale;
+        g_spawn_rotX = 0;
+        g_spawn_rotY = 0;
+        g_spawn_rotZ = 0;
+    }
+
+    //初期地点取得関数
+    //座標…"p"or回転…"r" + 各軸(x,y,z)を引数で指定
+    //（例）x座標：px
+    public static float GetSpawnData(string element)
+    {
+        float result = 0;
+        switch (element)
+        {
+            case "px":
+                result = g_spawn_posX;
+                break;
+            case "py":
+                result = g_spawn_posY;
+                break;
+            case "pz":
+                result = g_spawn_posZ;
+                break;
+            case "rx":
+                result = g_spawn_rotX;
+                break;
+            case "ry":
+                result = g_spawn_rotY;
+                break;
+            case "rz":
+                result = g_spawn_rotZ;
+                break;
+            default:
+                break;
+        }
+
+        return result;
+    }
+
 }

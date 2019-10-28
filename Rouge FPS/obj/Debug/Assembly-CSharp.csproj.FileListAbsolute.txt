@@ -281,3 +281,7 @@ C:\Users\1104028\Documents\三期制作\Rouge FPS\obj\Debug\Assembly-CSharp.cspr
 C:\Users\1104028\Documents\三期制作\Rouge FPS\obj\Debug\Assembly-CSharp.csproj.CopyComplete
 C:\Users\1104028\Documents\三期制作\Rouge FPS\obj\Debug\Assembly-CSharp.dll
 C:\Users\1104028\Documents\三期制作\Rouge FPS\obj\Debug\Assembly-CSharp.pdb
+C:\Users\tama127\Documents\Rouge-FPS\Rouge FPS\obj\Debug\Assembly-CSharp.csprojAssemblyReference.cache
+C:\Users\tama127\Documents\Rouge-FPS\Rouge FPS\obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.cache
+C:\Users\tama127\Documents\Rouge-FPS\Rouge FPS\obj\Debug\Assembly-CSharp.dll
+C:\Users\tama127\Documents\Rouge-FPS\Rouge FPS\obj\Debug\Assembly-CSharp.pdb

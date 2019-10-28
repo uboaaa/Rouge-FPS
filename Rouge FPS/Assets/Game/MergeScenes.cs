@@ -2,7 +2,8 @@
 using UnityEngine.SceneManagement;
 public class MergeScenes : MonoBehaviour
 {
-    private static bool CameraSeter = false;
+    private static bool CameraSetter = false;
+    private static bool isMerge = false;
 
  
 
@@ -27,15 +28,22 @@ public class MergeScenes : MonoBehaviour
           
             if (sceneName == "GameScene")
             {
-                CameraSeter = true;
+                CameraSetter = true;
+                isMerge = true;
                 break;
             }
             
         }
     }
+
     public static bool CameraSet
     {
-        get { return CameraSeter; }  //取得用
+        get { return CameraSetter; }  //取得用
 
+    }
+
+    public static bool isMergeScene
+    {
+        get { return isMerge; }
     }
 }
