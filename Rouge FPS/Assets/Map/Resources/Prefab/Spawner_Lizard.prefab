@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1660400524206868065}
-  - component: {fileID: 3870761194261462950}
+  - component: {fileID: 3651750023738888091}
   m_Layer: 0
   m_Name: Spawner_Lizard
   m_TagString: Untagged
@@ -31,7 +31,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3870761194261462950
+--- !u!114 &3651750023738888091
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43,4 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1151a4ca57ffd1d479e2f43941b0263e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Enemy: {fileID: 332212476597975616, guid: 91b9f190123511c498d98a3d12d36a23, type: 3}
+  m_Enemy: {fileID: 0}
+  m_SpawnNum: 2
+  m_SpawnRange: 1
+  m_SpawnInterval: 20
