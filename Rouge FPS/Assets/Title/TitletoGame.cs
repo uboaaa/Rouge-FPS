@@ -5,10 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class TitletoGame : MonoBehaviour
 {
+    private GameObject gameObject;
+    private bool GoGame=true;
     // Start is called before the first frame update
     void Start()
     {
-        
+        gameObject = GameObject.Find("Panel");
     }
     void Quit()
     {
@@ -22,7 +24,14 @@ public class TitletoGame : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       GoGame=gameObject.GetComponent<FadePanel>().GetAllBlack();
         if (Input.GetKeyDown(KeyCode.Escape)) { Quit(); }
-        if (Input.GetKeyDown(KeyCode.Return)){SceneManager.LoadScene("GameScene");}
+     
+            if (GoGame) { EnterGame(); }
+        
+    }
+
+    void EnterGame() {
+        SceneManager.LoadScene("GameScene");
     }
 }
