@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 public class FadePanel : MonoBehaviour
 {
     float fadeSpeed = 0.02f;        //透明度が変わるスピードを管理
@@ -24,7 +25,12 @@ public class FadePanel : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return)) { isFadeOut = true; }
+        if (Input.GetKeyDown(KeyCode.Return) ) {
+            if (SceneManager.GetActiveScene().name == "TitleScene")
+            {
+                isFadeOut = true;
+            }
+        }
         if (isFadeIn)
         {
             StartFadeIn();
