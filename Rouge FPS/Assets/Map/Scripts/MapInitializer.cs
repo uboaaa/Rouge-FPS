@@ -33,8 +33,6 @@ public class MapInitializer : MonoBehaviour
     void Start()
     {
         GenerateDungeon();
-
-        
     }
 
     

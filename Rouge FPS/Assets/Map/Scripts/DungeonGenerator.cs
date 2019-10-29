@@ -35,20 +35,16 @@ public class DungeonGenerator
         //区画を生成
         CreateRange(m_maxRoom);
 
-        //Debug.Log(1);
-
         //部屋を生成
         CreateRoom();
-
-        //Debug.Log(2);
-
+        
         //通路を生成
         CreatePass();
 
-        //Debug.Log(3);
+        //余分な通路を削除
+        DeletePass();
 
         // ここまでの結果を配列に反映する
-
 
         //部屋
         foreach (KeyValuePair<int, Range> range in m_rangeList)
@@ -341,5 +337,10 @@ public class DungeonGenerator
 
         }
         Debug.Log(m_passList.Count);
+    }
+
+    private void DeletePass()
+    {
+
     }
 }
