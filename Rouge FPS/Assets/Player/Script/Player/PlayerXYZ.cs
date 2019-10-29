@@ -15,7 +15,9 @@ public class PlayerXYZ : MonoBehaviour
     {
     
         characterController = GetComponent<CharacterController>();
-
+        abc.x = MapInitializer.GetSpawnData("px");
+        abc.y = MapInitializer.GetSpawnData("py") ;
+        abc.z = MapInitializer.GetSpawnData("pz");
     }
 
     // Update is called once per frame
@@ -29,7 +31,7 @@ public class PlayerXYZ : MonoBehaviour
 
         if (ClearCheckFlg) {
 
-            UpdatePlayerXYZ(6.0f, 0.0f, 15.0f);
+            UpdatePlayerXYZ(abc.x, abc.y, abc.z);
         }
 
         //ノックバック処理
