@@ -31,14 +31,6 @@ public class DungeonGenerator
 
         int[,] map = new int[mapSizeX, mapSizeY];
 
-        //指定の数値で初期化する
-        //for (int cnt_x = 0; cnt_x < mapSizeX; cnt_x++)
-        //{
-        //    for (int cnt_y = 0; cnt_y < mapSizeY; cnt_y++)
-        //    {
-        //        map[cnt_x, cnt_y] = 9;
-        //    }
-        //}
 
         //区画を生成
         CreateRange(m_maxRoom);
@@ -112,6 +104,7 @@ public class DungeonGenerator
         //分割回数を設定
         int devCount = maxRoom - 1;
         int count = 0;
+        int loopCnt = 0;
         do
         {
             //ヨコ分割
@@ -127,6 +120,15 @@ public class DungeonGenerator
 
             //部屋数チェック
             if (count >= devCount) break;
+
+            //一定ループ回数を超過した場合、分割数を減らす
+            loopCnt++;
+            if (loopCnt > 100)
+            {
+                Debug.Log("分割数を削減");
+                devCount -= 1;
+                loopCnt = 0;
+            }
 
         } while (true);
 

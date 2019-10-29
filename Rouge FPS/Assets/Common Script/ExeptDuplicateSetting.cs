@@ -11,7 +11,8 @@ public class ExeptDuplicateSetting : MonoBehaviour
 
     void Start()
     {
-        active = MergeScenes.isMergeScene;
+        //MergeScenesスクリプトにフラグ作り直す
+        //active = MergeScenes.isMergeScene;
 
         duplicateObj = this.gameObject;
         if (active == true)

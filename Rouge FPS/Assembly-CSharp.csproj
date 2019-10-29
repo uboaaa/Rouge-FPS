@@ -61,12 +61,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Common Script\CameraSetting.cs" />
+    <Compile Include="Assets\Common Script\ExeptDuplicateSetting.cs" />
+    <Compile Include="Assets\Common Script\FadePanel.cs" />
     <Compile Include="Assets\Enemy\BillBoard.cs" />
     <Compile Include="Assets\Enemy\Flyer\Flyer.cs" />
+    <Compile Include="Assets\Enemy\ItemBox\FlyingObject.cs" />
     <Compile Include="Assets\Enemy\Lizard\Lizard.cs" />
+    <Compile Include="Assets\Enemy\Squid\Squid.cs" />
     <Compile Include="Assets\Game\MergeScenes.cs" />
     <Compile Include="Assets\Map\Scripts\DungeonGenerator.cs" />
-    <Compile Include="Assets\Map\Scripts\SceneInitializer.cs" />
+    <Compile Include="Assets\Map\Scripts\MapAI.cs" />
+    <Compile Include="Assets\Map\Scripts\MapInitializer.cs" />
+    <Compile Include="Assets\Map\Scripts\Spawner.cs" />
+    <Compile Include="Assets\Map\Scripts\Utility\Expantion.cs" />
+    <Compile Include="Assets\Map\Scripts\Utility\Line.cs" />
+    <Compile Include="Assets\Map\Scripts\Utility\Parts.cs" />
     <Compile Include="Assets\Map\Scripts\Utility\Position.cs" />
     <Compile Include="Assets\Map\Scripts\Utility\Range.cs" />
     <Compile Include="Assets\Map\Scripts\Utility\Utility.cs" />
@@ -179,7 +188,6 @@
     <Compile Include="Assets\Player\Assets\Standard Assets\Vehicles\Car\Scripts\SkidTrail.cs" />
     <Compile Include="Assets\Player\Assets\Standard Assets\Vehicles\Car\Scripts\Suspension.cs" />
     <Compile Include="Assets\Player\Assets\Standard Assets\Vehicles\Car\Scripts\WheelEffects.cs" />
-    <Compile Include="Assets\Player\HpBarCtrl.cs" />
     <Compile Include="Assets\Player\SampleScenes\Menu\Scripts\MenuSceneLoader.cs" />
     <Compile Include="Assets\Player\SampleScenes\Menu\Scripts\PauseMenu.cs" />
     <Compile Include="Assets\Player\SampleScenes\Menu\Scripts\SceneAndURLLoader.cs" />
@@ -188,25 +196,55 @@
     <Compile Include="Assets\Player\SampleScenes\Scripts\ParticleSceneControls.cs" />
     <Compile Include="Assets\Player\SampleScenes\Scripts\PlaceTargetWithMouse.cs" />
     <Compile Include="Assets\Player\SampleScenes\Scripts\SlowMoButton.cs" />
+    <Compile Include="Assets\Player\Script\Player\CameraReset.cs" />
+    <Compile Include="Assets\Player\Script\Player\HpBarCtrl.cs" />
+    <Compile Include="Assets\Player\Script\Player\HpText.cs" />
     <Compile Include="Assets\Player\Script\Player\MyStatus.cs" />
-    <Compile Include="Assets\Player\Script\Weapon\ChangeEquip.cs" />
-    <Compile Include="Assets\Player\Script\Weapon\FirstPersonGunController.cs" />
+    <Compile Include="Assets\Player\Script\Player\PlayerXYZ.cs" />
+    <Compile Include="Assets\Player\Script\Player\TransformExtension.cs" />
+    <Compile Include="Assets\Player\Script\Skill\SkillManagement.cs" />
     <Compile Include="Assets\Player\Script\Weapon\FlushController.cs" />
     <Compile Include="Assets\Skill\CSVReader.cs" />
     <Compile Include="Assets\Skill\CSVWriter.cs" />
     <Compile Include="Assets\Skill\Lottery.cs" />
     <Compile Include="Assets\Skill\Param.cs" />
     <Compile Include="Assets\Skill\SkillList.cs" />
+    <Compile Include="Assets\Title\TitletoGame.cs" />
+    <Compile Include="Assets\Weapon\Epic Toon FX\Demo\ParticleEffectsShowcase\Scripts\ParticleEffectsLibrary.cs" />
+    <Compile Include="Assets\Weapon\Epic Toon FX\Demo\ParticleEffectsShowcase\Scripts\PEButtonScript.cs" />
+    <Compile Include="Assets\Weapon\Epic Toon FX\Demo\ParticleEffectsShowcase\Scripts\PEDestoryTimed.cs" />
+    <Compile Include="Assets\Weapon\Epic Toon FX\Demo\ParticleEffectsShowcase\Scripts\UICanvasManager.cs" />
+    <Compile Include="Assets\Weapon\Epic Toon FX\Demo\Scripts\ETFXButtonScript.cs" />
+    <Compile Include="Assets\Weapon\Epic Toon FX\Demo\Scripts\ETFXFireProjectile.cs" />
+    <Compile Include="Assets\Weapon\Epic Toon FX\Demo\Scripts\ETFXLoopScript.cs" />
+    <Compile Include="Assets\Weapon\Epic Toon FX\Demo\Scripts\ETFXMouseOrbit.cs" />
+    <Compile Include="Assets\Weapon\Epic Toon FX\Demo\Scripts\ETFXProjectileScript.cs" />
+    <Compile Include="Assets\Weapon\Epic Toon FX\Demo\Scripts\ETFXSceneManager.cs" />
+    <Compile Include="Assets\Weapon\Epic Toon FX\Scripts\ETFXLightFade.cs" />
+    <Compile Include="Assets\Weapon\Epic Toon FX\Scripts\ETFXPitchRandomizer.cs" />
+    <Compile Include="Assets\Weapon\Epic Toon FX\Scripts\ETFXRotation.cs" />
+    <Compile Include="Assets\Weapon\RetroSuite3D-master\Assets\Scripts\Cam\Effects\Dither.cs" />
+    <Compile Include="Assets\Weapon\RetroSuite3D-master\Assets\Scripts\Cam\Effects\Posterize.cs" />
+    <Compile Include="Assets\Weapon\RetroSuite3D-master\Assets\Scripts\Cam\Effects\RetroPixelMax.cs" />
+    <Compile Include="Assets\Weapon\RetroSuite3D-master\Assets\Scripts\Cam\Effects\RetroPixelPalette.cs" />
+    <Compile Include="Assets\Weapon\RetroSuite3D-master\Assets\Scripts\Cam\Effects\RetroSize.cs" />
+    <Compile Include="Assets\Weapon\Scripts\BulletHit.cs" />
+    <Compile Include="Assets\Weapon\Scripts\FPSCon\ChangeEquip.cs" />
+    <Compile Include="Assets\Weapon\Scripts\FPSCon\FirstPersonGunController.cs" />
+    <Compile Include="Assets\Weapon\Scripts\GunAnimation.cs" />
+    <Compile Include="Assets\Weapon\Scripts\GunController.cs" />
     <None Include="Assets\Player\Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
     <None Include="Assets\Player\Assets\Standard Assets\Effects\ToonShading\Shaders\ToonBasic.shader" />
     <None Include="Assets\Player\Assets\JMO Assets\WarFX\Shaders\WFX_S AlphaBlend Scroll.shader" />
     <None Include="Assets\Player\Assets\Standard Assets\Prototyping\Shaders\WorldCoordDiffuse.shader" />
+    <None Include="Assets\Pixel-Burn-Effect-master\Assets\Shaders\PixelBurnEffect.shader" />
     <None Include="Assets\Player\Assets\JMO Assets\WarFX\Shaders\WFX_S Particle AddSoft A8.shader" />
     <None Include="Assets\Player\Assets\Standard Assets\Environment\Water (Basic)\DO_NOT_WORK_IN_VR.txt" />
     <None Include="Assets\Player\Assets\JMO Assets\WarFX\Shaders\WFX_S Alpha-Specular TintColor.shader" />
     <None Include="Assets\Player\Assets\JMO Assets\WarFX\Shaders\WFX_S AlphaBlend NoSoftParticles.shader" />
     <None Include="Assets\Player\Assets\Standard Assets\Effects\TessellationShaders\Shaders\BumpedSpecularSmooth.shader" />
     <None Include="Assets\Player\Assets\Standard Assets\Effects\Projectors\Guidelines.txt" />
+    <None Include="Assets\Weapon\RetroSuite3D-master\Assets\Shaders\Custom\Posterize.shader" />
     <None Include="Assets\Player\Assets\JMO Assets\WarFX\_Effects\MuzzleFlashes\!MuzzleFlash Differences.txt" />
     <None Include="Assets\Player\Assets\JMO Assets\WarFX\Shaders\WFX_S Smoke Scroll.shader" />
     <None Include="Assets\Player\Assets\Standard Assets\Effects\ImageEffects\Readme.txt" />
@@ -214,7 +252,10 @@
     <None Include="Assets\Player\Assets\Standard Assets\Vehicles\Car\Shaders\DiffuseReflectiveShader.shader" />
     <None Include="Assets\Player\Assets\JMO Assets\WarFX\!WarFX Readme.txt" />
     <None Include="Assets\Player\Assets\Standard Assets\Environment\Water\Water4\Shaders\FXWater4Simple.shader" />
+    <None Include="Assets\Pixel-Burn-Effect-master\Assets\Shaders\PixelBurn3DEffect.shader" />
     <None Include="Assets\Player\Assets\Standard Assets\Vehicles\Aircraft\AircraftGuidelines.txt" />
+    <None Include="Assets\Weapon\Epic Toon FX\Prefabs\Combat\Combat FX.txt" />
+    <None Include="Assets\Weapon\RetroSuite3D-master\ProjectSettings\ProjectVersion.txt" />
     <None Include="Assets\Player\Assets\Standard Assets\Vehicles\Car\Shaders\ReflectiveDiffuseSpecTransp.shader" />
     <None Include="Assets\Player\3D Model\Weapon\FreeMachineGun\Shader\BDCS.shader" />
     <None Include="Assets\Player\Assets\Standard Assets\Effects\ToonShading\Shaders\ToonBasicOutline.shader" />
@@ -227,42 +268,50 @@
     <None Include="Assets\Player\Assets\Standard Assets\ParticleSystems\ParticleSystemsGuidelines.txt" />
     <None Include="Assets\Player\Assets\Standard Assets\Environment\Water (Basic)\Shaders\FXWaterBasic.shader" />
     <None Include="Assets\Player\Assets\Standard Assets\Fonts\OpenSans\License!.txt" />
+    <None Include="Assets\Weapon\RetroSuite3D-master\Assets\Shaders\Custom\RetroPixelMax.shader" />
     <None Include="Assets\Player\Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
     <None Include="Assets\Player\Assets\Standard Assets\ParticleSystems\Shaders\PriorityParticleAddSoft.shader" />
     <None Include="Assets\Player\Assets\Standard Assets\Effects\ToonShading\Shaders\ToonLitOutline.shader" />
     <None Include="Assets\Player\Assets\Standard Assets\Effects\ToonShading\Shaders\ToonLit.shader" />
     <None Include="Assets\Player\Assets\JMO Assets\WarFX\Shaders\WFX_S Multiply Soft Scroll.shader" />
     <None Include="Assets\Player\Assets\JMO Assets\WarFX\Shaders\WFX_S Particle Multiply A8.shader" />
+    <None Include="Assets\Pixel-Burn-Effect-master\ProjectSettings\ProjectVersion.txt" />
     <None Include="Assets\Player\Assets\Standard Assets\Effects\Projectors\Shaders\ProjectorLight.shader" />
+    <None Include="Assets\Weapon\Epic Toon FX\Prefabs\Interactive\Interactive FX.txt" />
     <None Include="Assets\Player\Assets\JMO Assets\WarFX\Shaders\WFX_S Multiply Soft.shader" />
     <None Include="Assets\Player\Assets\Standard Assets\Environment\Water\Water\Shaders\FXWaterPro.shader" />
     <None Include="Assets\Player\3D Model\Weapon\FreeMachineGun\documentation.txt" />
+    <None Include="Assets\Weapon\RetroSuite3D-master\Assets\Shaders\Custom\Dither.shader" />
     <None Include="Assets\Player\Assets\JMO Assets\WarFX\Shaders\WFX_S Alpha-Diffuse TintColor.shader" />
     <None Include="Assets\Player\Assets\Standard Assets\Vehicles\Car\CarGuidelines.txt" />
     <None Include="Assets\Player\Assets\Standard Assets\Effects\Projectors\Shaders\ProjectorMultiply.shader" />
     <None Include="Assets\Player\Assets\Standard Assets\Characters\ThirdPersonCharacter\ThirdPersonCharacterGuidelines.txt" />
     <None Include="Assets\Player\Assets\Standard Assets\Cameras\CameraGuidelines.txt" />
+    <None Include="Assets\Enemy\HSBC Effect.shader" />
     <None Include="Assets\Player\Assets\Standard Assets\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />
     <None Include="Assets\Player\Assets\Standard Assets\Environment\Water\Water4\Shaders\WaterInclude.cginc" />
     <None Include="Assets\Player\Assets\Standard Assets\Environment\Water\Water4\Shaders\FXWater4Advanced.shader" />
     <None Include="Assets\Player\Assets\Standard Assets\Characters\RollerBall\RollerBallGuidelines.txt" />
+    <None Include="Assets\Weapon\Epic Toon FX\ETFX Readme.txt" />
     <None Include="Assets\Player\Assets\Standard Assets\ParticleSystems\Shaders\PriorityParticleAdd.shader" />
     <None Include="Assets\Player\Assets\Standard Assets\Effects\TessellationShaders\Shaders\BumpedSpecularDisplacement.shader" />
+    <None Include="Assets\Weapon\Epic Toon FX\Prefabs\Environment\Environment FX.txt" />
+    <None Include="Assets\Pixel-Burn-Effect-master\Assets\Shaders\BurnRevealEffect.shader" />
     <None Include="Assets\Player\SampleScenes\Shaders\Skybox-Procedural.shader" />
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>C:/Users/mtst37/Documents/Rouge-FPS/Rouge FPS/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>C:/Users/tama127/Documents/Rouge-FPS/Rouge FPS/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.PackageManagerUI.Editor">
-      <HintPath>C:/Users/mtst37/Documents/Rouge-FPS/Rouge FPS/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+      <HintPath>C:/Users/tama127/Documents/Rouge-FPS/Rouge FPS/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>C:/Users/mtst37/Documents/Rouge-FPS/Rouge FPS/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+      <HintPath>C:/Users/tama127/Documents/Rouge-FPS/Rouge FPS/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>C:/Users/mtst37/Documents/Rouge-FPS/Rouge FPS/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>C:/Users/tama127/Documents/Rouge-FPS/Rouge FPS/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.DataPrivacy">
-      <HintPath>C:/Users/mtst37/Documents/Rouge-FPS/Rouge FPS/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
+      <HintPath>C:/Users/tama127/Documents/Rouge-FPS/Rouge FPS/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -466,13 +515,13 @@
       <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Editor">
-      <HintPath>C:/Users/mtst37/Documents/Rouge-FPS/Rouge FPS/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
+      <HintPath>C:/Users/tama127/Documents/Rouge-FPS/Rouge FPS/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.StandardEvents">
-      <HintPath>C:/Users/mtst37/Documents/Rouge-FPS/Rouge FPS/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
+      <HintPath>C:/Users/tama127/Documents/Rouge-FPS/Rouge FPS/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Tracker">
-      <HintPath>C:/Users/mtst37/Documents/Rouge-FPS/Rouge FPS/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
+      <HintPath>C:/Users/tama127/Documents/Rouge-FPS/Rouge FPS/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:/Program Files/Unity/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>

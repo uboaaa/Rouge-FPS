@@ -236,8 +236,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4ae9764ab071ef44910cf054166aeac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MAP_SIZE_X: 30
-  MAP_SIZE_Y: 20
+  MAP_SIZE_X: 50
+  MAP_SIZE_Y: 40
   MAX_ROOM_NUMBER: 6
   m_mapScale: 4
 --- !u!4 &1249066334
@@ -264,7 +264,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1925906277}
   - component: {fileID: 1925906276}
-  - component: {fileID: 1925906278}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -324,15 +323,3 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -24, y: -30, z: 0}
---- !u!114 &1925906278
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1925906275}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fb3d1386a474a342929b7e0bfb539fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

@@ -70,11 +70,11 @@ public class MapInitializer : MonoBehaviour
             {
                 if (m_map[x, y] >= 1)
                 {
-                    Instantiate(m_floorPrefab, new Vector3(x*m_mapScale, 0, y*m_mapScale), new Quaternion());
+                    Instantiate(m_floorPrefab, new Vector3(x * m_mapScale, 0, y * m_mapScale), new Quaternion());
                 }
                 else
                 {
-                    Instantiate(m_wallPrefab, new Vector3(x*m_mapScale, 0, y*m_mapScale), new Quaternion());
+                    Instantiate(m_wallPrefab, new Vector3(x * m_mapScale, 0, y * m_mapScale), new Quaternion());
                 }
 
                 Instantiate(m_celingPrefab, new Vector3(x * m_mapScale, 6, y * m_mapScale), new Quaternion());
