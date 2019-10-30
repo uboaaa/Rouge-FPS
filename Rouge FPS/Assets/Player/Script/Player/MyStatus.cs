@@ -38,10 +38,9 @@ public class MyStatus : MonoBehaviour
       
 
             playerHP = playerHP - 300f;
-        for (int i = 0; i < 100; i++)
-        {
+     
             Invoke("CureHp", 1);
-        }
+        
         return playerHP;
     }
 
