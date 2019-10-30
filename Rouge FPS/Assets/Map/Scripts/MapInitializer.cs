@@ -14,12 +14,12 @@ public class MapInitializer : MonoBehaviour
 
     //初期座標
     //***初期座標をグローバルで返すようにする
-    public static float g_spawn_posX;
-    public static float g_spawn_posY;
-    public static float g_spawn_posZ;
-    public static float g_spawn_rotX;
-    public static float g_spawn_rotY;
-    public static float g_spawn_rotZ;
+    private static float g_spawn_posX;
+    private static float g_spawn_posY;
+    private static float g_spawn_posZ;
+    private static float g_spawn_rotX;
+    private static float g_spawn_rotY;
+    private static float g_spawn_rotZ;
 
     //prefab
     private GameObject m_floorPrefab;     //床のオブジェクト
@@ -29,10 +29,15 @@ public class MapInitializer : MonoBehaviour
 
     private int[,] m_map;                 //マップ情報用の2次配列
 
+    private void Awake()
+    {
+        GenerateDungeon();
+    }
+
     // 初期化
     void Start()
     {
-        GenerateDungeon();
+        
     }
 
     
@@ -103,7 +108,7 @@ public class MapInitializer : MonoBehaviour
     private void SetSpawnData(Position pos)
     {
         g_spawn_posX = pos.X * m_mapScale;
-        g_spawn_posY = 3;
+        g_spawn_posY = 1;
         g_spawn_posZ = pos.Y * m_mapScale;
         g_spawn_rotX = 0;
         g_spawn_rotY = 0;

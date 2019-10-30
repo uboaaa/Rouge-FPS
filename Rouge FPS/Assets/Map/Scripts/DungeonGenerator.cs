@@ -332,6 +332,10 @@ public class DungeonGenerator
                 continue; //とりあえず直線のみ
             }
 
+            //生成された通路データに区画の組み合わせを保存
+            newPass.m_idComb[0] = rangeId[0];
+            newPass.m_idComb[1] = rangeId[1];
+
             //始点or中継点から終点までの通路をリストに追加
             m_passList.Add(newPass);
 
