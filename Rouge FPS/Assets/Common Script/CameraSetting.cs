@@ -16,20 +16,20 @@ public class CameraSetting : MonoBehaviour
     {
         SceneName = SceneManager.GetActiveScene().name;
         aho = MergeScenes.CameraSet;
-        MainCam = GameObject.Find("FPSController");
+        MainCam = GameObject.Find("Main Camera");
         DirecLight = GameObject.Find("Directional Light");
        
         //aho = mergeScenes.CameraSet();
-        if (SceneName == "PlayerScene" || SceneName=="EnemyScene" ||SceneName=="MapScene")
-        {
+        //if (SceneName == "PlayerScene" || SceneName=="EnemyScene" ||SceneName=="MapScene")
+        //{
 
             if (aho == true)
             {
-                MainCam.SetActive(false);
-                DirecLight.SetActive(false);
-            }
-
+            Destroy(MainCam.GetComponent<Camera>());
+            //DirecLight.SetActive(false);
         }
+
+        //}
     }
     // Update is called once per frame
     void Update()

@@ -8,10 +8,11 @@ public class MergeScenes : MonoBehaviour
 
     void Start()
     {
- 
+
+        //SceneManager.LoadScene("MapScene", LoadSceneMode.Additive);
+
         SceneManager.LoadScene("MapScene", LoadSceneMode.Additive);
         SceneManager.LoadScene("PlayerScene", LoadSceneMode.Additive);
-
 
         //SceneManager.LoadScene("EnemyScene", LoadSceneMode.Additive);
 
@@ -36,7 +37,7 @@ public class MergeScenes : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) { SceneManager.LoadScene("TitleScene"); }
+        if (Input.GetKeyDown(KeyCode.Q)) { SceneManager.LoadScene("TitleScene"); }
     }
     public static bool CameraSet
     {

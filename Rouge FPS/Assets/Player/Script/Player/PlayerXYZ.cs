@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerXYZ : MonoBehaviour
 {
@@ -10,10 +11,13 @@ public class PlayerXYZ : MonoBehaviour
     private CharacterController characterController;
     bool moveFlg = false;
 
+    private void Awake()
+    {
+
+    }
     // Start is called before the first frame update
     void Start()
     {
-    
         characterController = GetComponent<CharacterController>();
         abc.x = MapInitializer.GetSpawnData("px");
         abc.y = MapInitializer.GetSpawnData("py") ;
