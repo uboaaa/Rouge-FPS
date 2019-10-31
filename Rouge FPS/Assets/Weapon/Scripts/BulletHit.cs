@@ -7,7 +7,8 @@ using UnityEngine;
 
 public class BulletHit : MonoBehaviour
 {
-    [SerializeField] GameObject hitEffectPrefab;
+    [SerializeField] GameObject backHitEffectPrefab;
+    [SerializeField] GameObject enemyHitEffectPrefab;
     [SerializeField] Vector3 hitEffectScale = new Vector3(1.0f,1.0f,1.0f);
     GameObject hitEffect;
     Vector3 hitPos;
@@ -17,10 +18,10 @@ public class BulletHit : MonoBehaviour
 
     void Update(){}
 
-    void HitEffect()
+    void HitEffect(GameObject Prefab)
     {
         // エフェクトを生成
-        hitEffect = Instantiate<GameObject>(hitEffectPrefab,new Vector3(hitPos.x,hitPos.y,hitPos.z),rotation);
+        hitEffect = Instantiate<GameObject>(Prefab,new Vector3(hitPos.x,hitPos.y,hitPos.z),rotation);
         hitEffect.transform.localScale = hitEffectScale;
 
         // エフェクト削除
@@ -46,16 +47,21 @@ public class BulletHit : MonoBehaviour
         {
             // "Back"タグに当たった場合、エフェクトを出して弾を削除する
             case "Back":
-                HitEffect();
+                HitEffect(backHitEffectPrefab);
                 Destroy(gameObject);
                 break;
 
             // "Enemy"タグに当たった場合、エフェクトを出して弾を削除する
             case "Enemy":
-                HitEffect();
+                HitEffect(enemyHitEffectPrefab);
                 Destroy(gameObject);
                 break;
-                
+            
+            // タグをつけてないものに当たった場合、物理マテリアルに応じる
+            case "Untagged":
+                Destroy(gameObject,5.0f);   // 今のところ弾は適当に消す
+                break;
+
             default:
                 break;
         }
