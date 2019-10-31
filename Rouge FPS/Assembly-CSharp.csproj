@@ -209,7 +209,8 @@
     <Compile Include="Assets\Skill\Lottery.cs" />
     <Compile Include="Assets\Skill\Param.cs" />
     <Compile Include="Assets\Skill\SkillList.cs" />
-    <Compile Include="Assets\Title\TitletoGame.cs" />
+    <Compile Include="Assets\Title\Script\TextColorChange.cs" />
+    <Compile Include="Assets\Title\Script\TitletoGame.cs" />
     <Compile Include="Assets\Weapon\Epic Toon FX\Demo\ParticleEffectsShowcase\Scripts\ParticleEffectsLibrary.cs" />
     <Compile Include="Assets\Weapon\Epic Toon FX\Demo\ParticleEffectsShowcase\Scripts\PEButtonScript.cs" />
     <Compile Include="Assets\Weapon\Epic Toon FX\Demo\ParticleEffectsShowcase\Scripts\PEDestoryTimed.cs" />

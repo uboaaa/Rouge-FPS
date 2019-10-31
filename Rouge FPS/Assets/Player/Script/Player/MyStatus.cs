@@ -39,7 +39,7 @@ public class MyStatus : MonoBehaviour
 
             playerHP = playerHP - 300f;
      
-            Invoke("CureHp", 1);
+
         
         return playerHP;
     }
