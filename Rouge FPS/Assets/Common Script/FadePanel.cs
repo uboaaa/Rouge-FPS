@@ -14,6 +14,7 @@ public class FadePanel : MonoBehaviour
     private bool Black;
     Image fadeImage;                //透明度を変更するパネルのイメージ
 
+    GameObject gameObject;
     void Start()
     {
         fadeImage = GetComponent<Image>();
@@ -21,6 +22,7 @@ public class FadePanel : MonoBehaviour
         green = fadeImage.color.g;
         blue = fadeImage.color.b;
         alfa = fadeImage.color.a;
+        gameObject = GameObject.Find("GameObject");
     }
 
     void Update()
@@ -28,7 +30,11 @@ public class FadePanel : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Return) ) {
             if (SceneManager.GetActiveScene().name == "TitleScene")
             {
-                isFadeOut = true;
+                if (gameObject.GetComponent<TitletoGame>().GetModeSelect() == "Start")
+                {
+                    isFadeOut = true;
+                }
+                else { isFadeOut = false; }
             }
         }
         if (isFadeIn)

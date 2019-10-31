@@ -19,10 +19,10 @@ public class CameraReset : MonoBehaviour
         //カメラの方向を取得
         //camera.transform.rotation  = Quaternion.identity;
         if (Input.GetKey(KeyCode.Return)) {
-            //abc.x = MapInitializer.GetSpawnData("rx");
-            //abc.y = MapInitializer.GetSpawnData("ry");
-            //abc.z = MapInitializer.GetSpawnData("rz");
-            //this.transform.rotation =  Quaternion.Euler(abc);
-            }
+            abc.x = MapInitializer.GetSpawnData("rx");
+            abc.y = MapInitializer.GetSpawnData("ry");
+            abc.z = MapInitializer.GetSpawnData("rz");
+            this.transform.rotation = Quaternion.Euler(abc);
+        }
     }
 }
