@@ -123,7 +123,6 @@ GameObject:
   - component: {fileID: 817326294}
   - component: {fileID: 817326293}
   - component: {fileID: 817326292}
-  - component: {fileID: 817326295}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -195,18 +194,6 @@ Transform:
   m_Father: {fileID: 1278710103}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &817326295
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 817326291}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fb3d1386a474a342929b7e0bfb539fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1249066332
 GameObject:
   m_ObjectHideFlags: 0
@@ -266,6 +253,7 @@ GameObject:
   - component: {fileID: 1278710106}
   - component: {fileID: 1278710105}
   - component: {fileID: 1278710104}
+  - component: {fileID: 1278710107}
   m_Layer: 0
   m_Name: CheckSight
   m_TagString: Untagged
@@ -333,6 +321,18 @@ MonoBehaviour:
   speed: 10
   playerTransform: {fileID: 1278710103}
   cameraTransform: {fileID: 817326294}
+--- !u!114 &1278710107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1278710102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fb3d1386a474a342929b7e0bfb539fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1925906275
 GameObject:
   m_ObjectHideFlags: 0
