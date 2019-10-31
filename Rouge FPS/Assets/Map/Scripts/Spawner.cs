@@ -8,7 +8,7 @@ public class Spawner : MonoBehaviour
     private GameObject m_Enemy = null;
 
     [SerializeField]
-    private int m_SpawnNum = 2;
+    private int m_SpawnMax = 2;
 
     [SerializeField]
     private float m_SpawnRange = 1.0f;
@@ -17,6 +17,7 @@ public class Spawner : MonoBehaviour
     private float m_SpawnInterval = 20.0f;
 
     private float m_timeElapsed = 0.0f;
+    private int m_spawnCnt = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +28,11 @@ public class Spawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (m_spawnCnt >= m_SpawnMax)
+        {
+            return;
+        }
+
         //経過時間を加算
         m_timeElapsed += Time.deltaTime;
 
@@ -35,6 +41,7 @@ public class Spawner : MonoBehaviour
             Instantiate(m_Enemy, new Vector3(0, 10, 0), new Quaternion());
 
             m_timeElapsed = 0.0f;
+            m_spawnCnt++;
         }
     }
 }

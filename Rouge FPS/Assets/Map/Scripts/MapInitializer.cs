@@ -25,6 +25,9 @@ public class MapInitializer : MonoBehaviour
     private GameObject m_floorPrefab;     //床のオブジェクト
     private GameObject m_wallPrefab;      //壁のオブジェクト
     private GameObject m_celingPrefab;    //天井のオブジェクト
+    private GameObject m_spawner_Lizard;  //リザードのスポナー
+
+    public GameObject cube = null;
 
 
     private int[,] m_map;                 //マップ情報用の2次配列
@@ -65,6 +68,7 @@ public class MapInitializer : MonoBehaviour
         m_floorPrefab = Resources.Load("Prefab/Floor") as GameObject;
         m_wallPrefab = Resources.Load("Prefab/Wall") as GameObject;
         m_celingPrefab = Resources.Load("Prefab/Celing") as GameObject;
+        m_spawner_Lizard = Resources.Load("Prefab/Spawner_Lizard") as GameObject;
 
         //データからオブジェクトを配置
         for(int y = 0; y < MAP_SIZE_Y; y++)
@@ -85,11 +89,14 @@ public class MapInitializer : MonoBehaviour
         }
 
         //プレイヤー出現座標を設定
-        SponePlayer();
+        SpawnPlayer();
+
+        //スポナーを設定
+        SpawnEnemy();
     }
 
     // プレイヤーの出現座標を設定
-    private void SponePlayer()
+    private void SpawnPlayer()
     {
 
         Position position;
@@ -103,6 +110,23 @@ public class MapInitializer : MonoBehaviour
 
         //***初期座標をグローバル変数に設定
         SetSpawnData(position);
+    }
+
+    // エネミースポナーの設置
+    private void SpawnEnemy()
+    {
+        Position position;
+        do
+        {
+            var x = Utility.GetRandomInt(0, MAP_SIZE_X - 1);
+            var y = Utility.GetRandomInt(0, MAP_SIZE_Y - 1);
+            position = new Position(x, y);
+        } while (m_map[position.X, position.Y] != 1);
+
+        Instantiate(m_spawner_Lizard, new Vector3(position.X, 1, position.Y), new Quaternion());
+
+        //確認用
+        cube.transform.position = new Vector3(position.X, 0, position.Y);
     }
 
     private void SetSpawnData(Position pos)
