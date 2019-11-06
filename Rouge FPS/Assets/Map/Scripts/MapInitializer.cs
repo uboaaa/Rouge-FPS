@@ -81,10 +81,10 @@ public class MapInitializer : MonoBehaviour
                 }
                 else
                 {
-                    Instantiate(m_wallPrefab, new Vector3(x * m_mapScale, 0, y * m_mapScale), new Quaternion());
+                    Instantiate(m_wallPrefab, new Vector3(x * m_mapScale, 5, y * m_mapScale), new Quaternion());
                 }
 
-                Instantiate(m_celingPrefab, new Vector3(x * m_mapScale, 6, y * m_mapScale), new Quaternion());
+                //Instantiate(m_celingPrefab, new Vector3(x * m_mapScale, 6, y * m_mapScale), new Quaternion());
             }
         }
 
@@ -123,10 +123,10 @@ public class MapInitializer : MonoBehaviour
             position = new Position(x, y);
         } while (m_map[position.X, position.Y] != 1);
 
-        Instantiate(m_spawner_Lizard, new Vector3(position.X, 1, position.Y), new Quaternion());
+        Instantiate(m_spawner_Lizard, new Vector3(position.X*m_mapScale, 1, position.Y*m_mapScale), new Quaternion());
 
         //確認用
-        cube.transform.position = new Vector3(position.X, 0, position.Y);
+        cube.transform.position = new Vector3(position.X*m_mapScale, 0, position.Y*m_mapScale);
     }
 
     private void SetSpawnData(Position pos)

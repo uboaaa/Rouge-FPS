@@ -38,7 +38,7 @@ public class Spawner : MonoBehaviour
 
         if (m_timeElapsed > m_SpawnInterval)
         {
-            Instantiate(m_Enemy, new Vector3(0, 10, 0), new Quaternion());
+            Instantiate(m_Enemy, this.transform.position, new Quaternion());
 
             m_timeElapsed = 0.0f;
             m_spawnCnt++;

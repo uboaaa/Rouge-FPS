@@ -145,7 +145,7 @@ MonoBehaviour:
   m_MinSize: {x: 915, y: 448}
   m_MaxSize: {x: 22010, y: 10024}
   vertical: 0
-  controlID: 148
+  controlID: 142
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -191,7 +191,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 448}
   m_MaxSize: {x: 8006, y: 8048}
   vertical: 1
-  controlID: 48
+  controlID: 72
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -352,9 +352,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
-      m_LastClickedID: 0
-      m_ExpandedIDs: ced1f9ff7ce6fcff5883fdff7222feff26bffeff3cc0feff245dffff6cfaffff16fbffff76540000
+      m_SelectedIDs: 34540000
+      m_LastClickedID: 21556
+      m_ExpandedIDs: 8a4dfcff76eafcff46fbffffd6fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -451,20 +451,20 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Enemy/Materials
+    - Assets/Map/Resources/Prefab
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Enemy/Materials
+  - Assets/Map/Resources/Prefab
   m_LastFoldersGridSize: 16
   m_LastProjectPath: C:\Users\tama127\Documents\Rouge-FPS\Rouge FPS
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: ba4b0000
-    m_LastClickedID: 19386
-    m_ExpandedIDs: 000000008031000076320000b63300006c34000076340000c83700009a3800008c3a0000a23a0000b63b0000503c00006e3c0000683d00007e3d00005c3e0000c63e0000503f0000523f00009a3f0000dc4400004e450000aa490000664c0000de4c0000364d0000a64e0000ac510000ae510000b0510000b251000000ca9a3b
+    m_SelectedIDs: 3e170000
+    m_LastClickedID: 5950
+    m_ExpandedIDs: 00000000d6130000cc14000010160000c6160000d0160000241a0000f61a0000ea1c0000001d0000141e0000ae1e0000cc1e0000c61f0000dc1f0000be20000028210000b4210000fc21000040270000b4270000102c0000ce2e0000462f00009e2f0000103100005250000054500000565000005850000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -492,7 +492,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000008031000076320000b63300006c34000076340000c83700009a3800008c3a0000a23a0000b63b0000503c00006e3c0000683d00007e3d00005c3e0000c63e0000523f00009a3f0000a2440000dc4400004e450000aa490000664c0000de4c0000364d0000a64e0000ac510000ae510000b0510000b2510000
+    m_ExpandedIDs: 00000000d6130000cc14000010160000c6160000d0160000241a0000f61a0000ea1c0000001d0000141e0000ae1e0000cc1e0000c61f0000dc1f0000be20000028210000b2210000b4210000fc21000040270000b4270000102c0000ce2e0000462f00009e2f00001031000052500000545000005650000058500000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -658,9 +658,9 @@ MonoBehaviour:
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 30.74414, y: 26, z: 61.71875}
+    m_Target: {x: 141.93959, y: 15.745595, z: 109.203125}
     speed: 2
-    m_Value: {x: 30.74414, y: 26, z: 61.71875}
+    m_Value: {x: 141.93959, y: 15.745595, z: 109.203125}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -688,13 +688,13 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: -0.68832403, y: 0.028264256, z: 0.026858225, w: 0.7243558}
+    m_Target: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
     speed: 2
-    m_Value: {x: -0.68832356, y: 0.028264236, z: 0.026858207, w: 0.7243553}
+    m_Value: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_Size:
-    m_Target: 129.06137
+    m_Target: 285.48584
     speed: 2
-    m_Value: 129.06137
+    m_Value: 285.48584
   m_Ortho:
     m_Target: 1
     speed: 2
