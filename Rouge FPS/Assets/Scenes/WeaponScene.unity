@@ -236,6 +236,7 @@ GameObject:
   m_Component:
   - component: {fileID: 192100993}
   - component: {fileID: 192100994}
+  - component: {fileID: 192100995}
   m_Layer: 5
   m_Name: EXPSlider
   m_TagString: Untagged
@@ -313,6 +314,20 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &192100995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 192100992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad5e2cf0fe979eb40bd50e6bd484d013, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PrimaryObject: {fileID: 789248243}
+  SecondaryObject: {fileID: 1218649434}
 --- !u!1 &229199683
 GameObject:
   m_ObjectHideFlags: 0

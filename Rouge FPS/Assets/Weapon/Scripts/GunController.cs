@@ -79,6 +79,7 @@ public class GunController : MonoBehaviour
         {
             StartCoroutine(ShootTimer());
         }
+
         // 射撃中画面を揺らす
         shakeScript.Shake(shakePow,shooting);
     }
