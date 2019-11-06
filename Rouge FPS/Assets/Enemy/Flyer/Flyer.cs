@@ -4,14 +4,35 @@ using UnityEngine;
 
 public class Flyer : MonoBehaviour
 {
-    private GameObject player;
+    // private GameObject player;
     public GameObject bullet;
 
-    public float speed = 0.0f;//移動スピード
-    private Vector3 vec;
-    private float rot = 0.0f;
+    // public float speed = 0.0f;//移動スピード
+    // private Vector3 vec;
+    // private float rot = 0.0f;
 
+    // private Animator animator;
+
+    // プレイヤー
+    private GameObject player;
+    // アニメータ
     private Animator animator;
+    // エネミーパラメータ
+    private EnemyParameter ep;
+    // ヒットエフェクト
+    //private EnemyHitEffect eh;
+
+    // 角度計算用
+    private float rot;
+
+    // 発見フラグ
+    bool foundflg = false;
+    
+    // アニメ関数
+    int trans;
+
+    // デッドエフェクト
+    public GameObject deadeffect;
 
 
     // 弾丸の速度
@@ -38,73 +59,123 @@ public class Flyer : MonoBehaviour
 
     void Start()
     {
-        //GetComponentを用いてAnimatorコンポーネントを取り出す.
-        animator = GetComponent<Animator>();
-
+        // プレイヤー情報取得
         player = GameObject.Find("FPSController");
 
-
-        // 角度計算
-        rot = GetAim(new Vector2(transform.position.x, transform.position.z),
-            new Vector2(player.gameObject.transform.position.x, player.gameObject.transform.position.z));
+        //GetComponentを用いてコンポーネントを取り出す.
+        // アニメータ
+        animator = GetComponent<Animator>();
+        // エネミーパラメータ
+        ep = GetComponent<EnemyParameter>();
+        // // エネミーヒットエフェクト
+        // eh = GetComponent<EnemyHitEffect>();
     }
 
     void Update()
     {
 
-        // 移動 =========
-
-        //targetに向かって進む
-        transform.position += transform.forward * speed;
-
-
-
-        // アニメーション ========
+        // ========
+        // アニメーション 
+        // ========
         //あらかじめ設定していたintパラメーター「trans」の値を取り出す.
-        int trans = animator.GetInteger("trans");
+        trans = animator.GetInteger("trans");
 
 
-        // 角度計算
-        rot = GetAim(new Vector2(transform.position.x, transform.position.z),
-            new Vector2(player.gameObject.transform.position.x, player.gameObject.transform.position.z));
-
-
-        // 角度計算
-        // 正面
-        if (rot >= -45.0f && rot <= 45.0f)
+        // 発見フラグ条件判定
+        if (foundflg == false)
         {
+            // 敵が正面を向いていて知覚できる範囲内なら
+            if ((transform.position - player.gameObject.transform.position).magnitude < 15 && trans == 0)
+            {
+                foundflg = true;
+
+                trans = 0;
+                //intパラメーターの値を設定する.
+                animator.SetInteger("trans", trans);
+            }
+
+            // プレイヤーとの距離が範囲内なら
+            if ((transform.position - player.gameObject.transform.position).magnitude < 5)
+            {
+                foundflg = true;
+
+                trans = 0;
+                //intパラメーターの値を設定する.
+                animator.SetInteger("trans", trans);
+            }
+
+            // プレイヤーから攻撃を受けたら
+
+
+        }
+
+        // 発見フラグがONなら
+        if (foundflg == true)
+        {
+            // 正面を向き
             trans = 0;
-            //speed = 0.05f;
-
+            animator.SetInteger("trans", trans);
+            
+            //targetに向かって進む
+            transform.position += transform.forward * ep.speed * 0.1f;
         }
-        // 右面
-        else if (rot >= 45.0f && rot <= 135.0f)
+        // 発見フラグがOFFなら
+        else if (foundflg == false)
         {
-            trans = 1;
+            // 角度計算
+            rot = GetAim(new Vector2(transform.position.x, transform.position.z),
+                new Vector2(player.gameObject.transform.position.x, player.gameObject.transform.position.z));
 
-            speed = 0.0f;
+            rot = rot + ep.startrot;
+
+
+            // 角度計算
+            // 正面
+            if (rot >= -45.0f && rot <= 45.0f)
+            {
+                trans = 0;
+
+            }
+            // 右面
+            else if (rot >= 45.0f && rot <= 135.0f)
+            {
+                trans = 1;
+
+            }
+            // 左面
+            else if (rot >= -135 && rot <= -45)
+            {
+                trans = 3;
+
+            }
+            // 後面
+            else
+            {
+                trans = 2;
+
+            }
+
+            //intパラメーターの値を設定する
+            animator.SetInteger("trans", trans);
         }
-        // 左面
-        else if (rot >= -135 && rot <= -45)
-        {
-            trans = 3;
-
-            speed = 0.0f;
-        }
-        // 後面
-        else
-        {
-            trans = 2;
-
-            speed = 0.0f;
-        }
-
-        //intパラメーターの値を設定する.
-        animator.SetInteger("trans", trans);
 
 
         // デバッグ表示
-        //Debug.Log(rot);
+        Debug.Log("FlyerHP");
+        Debug.Log(ep.hp);
+
+        if(ep.hp == 0)
+        {
+             GameObject de = Instantiate(deadeffect) as GameObject;
+             de.transform.position = this.gameObject.transform.position;
+             de.transform.position = new Vector3(de.transform.position.x,de.transform.position.y,de.transform.position.z);
+             Destroy(this.gameObject);
+        }
+
+
+
+
+        
 
         // 弾発射
         // z キーが押された時
@@ -132,6 +203,23 @@ public class Flyer : MonoBehaviour
             Destroy(bullets, 3.0f); // 三秒後に削除
 
         }
+    }
+
+
+    // 弾との当たり判定
+    private void OnCollisionEnter(Collision collision)
+    {
+
+        if (collision.gameObject.tag == "Bullet")
+        {
+            //eh.hitflg = true;
+            foundflg = true;
+            ep.hp -= 10;
+            if(ep.hp < 0){ep.hp = 0;}
+             //intパラメーターの値を設定する.
+            animator.SetInteger("trans", trans);
+        }
+
     }
 
 }
