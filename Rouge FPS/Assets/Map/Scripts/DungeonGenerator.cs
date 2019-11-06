@@ -35,20 +35,16 @@ public class DungeonGenerator
         //区画を生成
         CreateRange(m_maxRoom);
 
-        //Debug.Log(1);
-
         //部屋を生成
         CreateRoom();
-
-        //Debug.Log(2);
-
+        
         //通路を生成
         CreatePass();
 
-        //Debug.Log(3);
+        //余分な通路を削除
+        DeletePass();
 
         // ここまでの結果を配列に反映する
-
 
         //部屋
         foreach (KeyValuePair<int, Range> range in m_rangeList)
@@ -336,10 +332,19 @@ public class DungeonGenerator
                 continue; //とりあえず直線のみ
             }
 
+            //生成された通路データに区画の組み合わせを保存
+            //newPass.m_idComb[0] = rangeId[0];
+            //newPass.m_idComb[1] = rangeId[1];
+
             //始点or中継点から終点までの通路をリストに追加
             m_passList.Add(newPass);
 
         }
         Debug.Log(m_passList.Count);
+    }
+
+    private void DeletePass()
+    {
+
     }
 }

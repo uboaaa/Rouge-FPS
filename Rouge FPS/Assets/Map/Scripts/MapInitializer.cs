@@ -14,26 +14,32 @@ public class MapInitializer : MonoBehaviour
 
     //初期座標
     //***初期座標をグローバルで返すようにする
-    public static float g_spawn_posX;
-    public static float g_spawn_posY;
-    public static float g_spawn_posZ;
-    public static float g_spawn_rotX;
-    public static float g_spawn_rotY;
-    public static float g_spawn_rotZ;
+    private static float g_spawn_posX;
+    private static float g_spawn_posY;
+    private static float g_spawn_posZ;
+    private static float g_spawn_rotX;
+    private static float g_spawn_rotY;
+    private static float g_spawn_rotZ;
 
     //prefab
     private GameObject m_floorPrefab;     //床のオブジェクト
     private GameObject m_wallPrefab;      //壁のオブジェクト
     private GameObject m_celingPrefab;    //天井のオブジェクト
+    private GameObject m_spawner_Lizard;  //リザードのスポナー
+
+    public GameObject cube = null;
 
 
     private int[,] m_map;                 //マップ情報用の2次配列
 
+    private void Awake()
+    {
+        GenerateDungeon();
+    }
+
     // 初期化
     void Start()
     {
-        GenerateDungeon();
-
         
     }
 
@@ -62,6 +68,7 @@ public class MapInitializer : MonoBehaviour
         m_floorPrefab = Resources.Load("Prefab/Floor") as GameObject;
         m_wallPrefab = Resources.Load("Prefab/Wall") as GameObject;
         m_celingPrefab = Resources.Load("Prefab/Celing") as GameObject;
+        m_spawner_Lizard = Resources.Load("Prefab/Spawner_Lizard") as GameObject;
 
         //データからオブジェクトを配置
         for(int y = 0; y < MAP_SIZE_Y; y++)
@@ -74,19 +81,22 @@ public class MapInitializer : MonoBehaviour
                 }
                 else
                 {
-                    Instantiate(m_wallPrefab, new Vector3(x * m_mapScale, 0, y * m_mapScale), new Quaternion());
+                    Instantiate(m_wallPrefab, new Vector3(x * m_mapScale, 5, y * m_mapScale), new Quaternion());
                 }
 
-                Instantiate(m_celingPrefab, new Vector3(x * m_mapScale, 6, y * m_mapScale), new Quaternion());
+                //Instantiate(m_celingPrefab, new Vector3(x * m_mapScale, 6, y * m_mapScale), new Quaternion());
             }
         }
 
         //プレイヤー出現座標を設定
-        SponePlayer();
+        SpawnPlayer();
+
+        //スポナーを設定
+        SpawnEnemy();
     }
 
     // プレイヤーの出現座標を設定
-    private void SponePlayer()
+    private void SpawnPlayer()
     {
 
         Position position;
@@ -102,10 +112,27 @@ public class MapInitializer : MonoBehaviour
         SetSpawnData(position);
     }
 
+    // エネミースポナーの設置
+    private void SpawnEnemy()
+    {
+        Position position;
+        do
+        {
+            var x = Utility.GetRandomInt(0, MAP_SIZE_X - 1);
+            var y = Utility.GetRandomInt(0, MAP_SIZE_Y - 1);
+            position = new Position(x, y);
+        } while (m_map[position.X, position.Y] != 1);
+
+        Instantiate(m_spawner_Lizard, new Vector3(position.X*m_mapScale, 1, position.Y*m_mapScale), new Quaternion());
+
+        //確認用
+        cube.transform.position = new Vector3(position.X*m_mapScale, 0, position.Y*m_mapScale);
+    }
+
     private void SetSpawnData(Position pos)
     {
         g_spawn_posX = pos.X * m_mapScale;
-        g_spawn_posY = 3;
+        g_spawn_posY = 1;
         g_spawn_posZ = pos.Y * m_mapScale;
         g_spawn_rotX = 0;
         g_spawn_rotY = 0;

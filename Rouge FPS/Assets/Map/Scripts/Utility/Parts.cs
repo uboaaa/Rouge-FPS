@@ -34,6 +34,8 @@ public class Pass
     public Position Start { get; set; } //始点
     public Position End { get; set; }   //終点
 
+    public int[] m_idComb;
+
     public bool m_passEnable = true;
 
     Pass(Position start, Position end)
