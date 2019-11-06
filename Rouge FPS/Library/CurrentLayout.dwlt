@@ -73,7 +73,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 224}
   m_MaxSize: {x: 8006, y: 4024}
   vertical: 0
-  controlID: 49
+  controlID: 137
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -96,7 +96,7 @@ MonoBehaviour:
     y: 0
     width: 1920
     height: 997
-  m_MinSize: {x: 950, y: 300}
+  m_MinSize: {x: 950, y: 498}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &5
 MonoBehaviour:
@@ -142,10 +142,10 @@ MonoBehaviour:
     y: 30
     width: 1920
     height: 947
-  m_MinSize: {x: 915, y: 448}
-  m_MaxSize: {x: 22010, y: 10024}
+  m_MinSize: {x: 917, y: 448}
+  m_MaxSize: {x: 22012, y: 10024}
   vertical: 0
-  controlID: 142
+  controlID: 39
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -191,7 +191,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 448}
   m_MaxSize: {x: 8006, y: 8048}
   vertical: 1
-  controlID: 72
+  controlID: 96
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -238,8 +238,8 @@ MonoBehaviour:
     y: 0
     width: 278
     height: 947
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 277, y: 74}
+  m_MaxSize: {x: 4002, y: 4024}
   m_ActualView: {fileID: 15}
   m_Panes:
   - {fileID: 15}
@@ -352,9 +352,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 34540000
-      m_LastClickedID: 21556
-      m_ExpandedIDs: 8a4dfcff76eafcff46fbffffd6fbffff
+      m_SelectedIDs: 
+      m_LastClickedID: 0
+      m_ExpandedIDs: 3aefffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -451,20 +451,20 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Map/Resources/Prefab
+    - Assets/Enemy
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Map/Resources/Prefab
+  - Assets/Enemy
   m_LastFoldersGridSize: 16
   m_LastProjectPath: C:\Users\tama127\Documents\Rouge-FPS\Rouge FPS
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 3e170000
-    m_LastClickedID: 5950
-    m_ExpandedIDs: 00000000d6130000cc14000010160000c6160000d0160000241a0000f61a0000ea1c0000001d0000141e0000ae1e0000cc1e0000c61f0000dc1f0000be20000028210000b4210000fc21000040270000b4270000102c0000ce2e0000462f00009e2f0000103100005250000054500000565000005850000000ca9a3b
+    m_SelectedIDs: ae460000
+    m_LastClickedID: 18094
+    m_ExpandedIDs: 00000000d6380000043d0000ec3e00001c3f0000b24300003244000084440000c44400008c460000ae460000a4480000404c0000ca4c0000464d0000e04d0000d25100000454000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -492,7 +492,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000d6130000cc14000010160000c6160000d0160000241a0000f61a0000ea1c0000001d0000141e0000ae1e0000cc1e0000c61f0000dc1f0000be20000028210000b2210000b4210000fc21000040270000b4270000102c0000ce2e0000462f00009e2f00001031000052500000545000005650000058500000
+    m_ExpandedIDs: 00000000d6380000043d0000ec3e00001c3f0000b243000032440000844400008c460000ae460000a4480000404c0000464d0000e04d0000d251000004540000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
