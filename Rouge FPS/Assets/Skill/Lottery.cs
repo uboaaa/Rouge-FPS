@@ -9,36 +9,19 @@ using UnityEngine;
 // 選ばれたグレードの中からランダムで１つスキルを抽選する
 // グレードは重みとしても計算する
 public class Lottery : MonoBehaviour
-{
-    // スキルリスト
-    private SkillList sl;
-    // 重みテーブル
-    private List<int> ratioTable;       // いらないかも？
-    // グレードをいれる配列(GradeLotteryで渡す変数)
-    private int[] skillGrade;
-    // グレード毎のスキルリスト
-    private List<int> gradeList;
-    // 付与されるスキル
-    private int skillResult = 0;
-
-    // 抽選準備・・・現在いる階層の出現するスキルリストから重みテーブルを作成
-    public void Init()
-    {
-        var i = 0;
-        // 出現スキルすべての重みを計算
-        foreach (SkillList.Skill s in sl.GetList())
-        {
-            ratioTable[i++] += s.ratio;
-        }
-    }
-
+{   
     // =============
     // 抽体の関数
     // =============
-    // スキルのグレードを決める・・・（おおざっぱなカテゴリに分ける）
+    // スキルのグレードを決める・・・（おおざっぱなカテゴリに分ける）数字が大きいほど出やすい
     // ※　ratioTableは抽選のアルゴリズムの関係上、必ず降順(5,4,3･･･)で渡すこと！　※
-    public int GradeLottery(params int[] ratioTable)
+    // 第1引数は最低グレードです(1を指定すると1以上のグレードを返す)
+    // ex) var i = GradeLottery("3", 94, 5, 1)の場合94%で3、5%で4、1%で5を返します。
+    public int GradeLottery(string _grade, params int[] ratioTable)
     {
+        // グレードが数字かチェック
+        var result = int.TryParse(_grade, out int n);
+        int grade = result ? int.Parse(_grade) : n;
         // 渡された重みでインデックス作成
         var totalRatio = ratioTable.Sum();
         // 総重みの範囲内でランダムで値を返す（int型のRandom.Rangeはmax-1の値まで返すため+1）
@@ -55,52 +38,37 @@ public class Lottery : MonoBehaviour
             }
             value -= ratioTable[i];
         }
-        return retIndex;
+        return retIndex + grade;
     }
     // 付けるスキルそのものを抽選する
-    public int SkillLottery(int _grade)
+    public string SkillLottery(int _grade)
     {
-        skillResult = 0;
-        // グレードごとのスキルをまとめたリストを取得
-        // var list = GetList(_grade)的なやつ
-        // var len = list.Length;
-        // skillResult = Random.Range(1, len + 1);
-        return skillResult;
-    }
-    // 一連の流れをまとめる
-    public void TotalLottery()
-    {
-        var s = 0;
-        skillGrade = sl.GetSkillGrade();
-        s = SkillLottery(GradeLottery(skillGrade));
-
-
+        // グレード文字結合
+        var s = "Grade" + _grade.ToString();
+        // CSV読み込み
+        var list = new List<string[]>();
+        var c = new CSV();
+        c.Read(ref list, s);
+        // 行数取得、ランダム抽選
+        var len = list.Count();
+        var rnd = Random.Range(1, len + 1);
+        return list[rnd][2];
     }
 
+
+    void Awake()
+    {
+        
+    }
     // Start is called before the first frame update
     void Start()
     {
-        sl = new SkillList();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        // お試し
-        if (Input.GetKey(KeyCode.Return))
-        {
 
-            var count = new int[3];
-            for (int i = 0; i < 100000; ++i)
-            {
-                var index = GradeLottery(1000, 50, 1);
-                count[index]++;
-            }
-
-            for (int index = 0; index < count.Length; index++)
-            {
-                Debug.Log(index + ":" + count[index]);
-            }
-        }
     }
 }
