@@ -10,12 +10,11 @@ public class GunController : MonoBehaviour
 {
     public enum GunType { AssaultRifle, SubMachineGun, LightMachineGun, HandGun, RocketLauncher, ShotGun, LaserGun, FlameThrower }
     public enum GunRank { Rank1, Rank2, Rank3 }
-    public float GunEXP = 0;
-    [SerializeField] public float GunMaxEXP;
     [SerializeField] public enum ShootMode { AUTO, SEMIAUTO }
     [SerializeField] public ShootMode  shootMode = ShootMode.AUTO;
     [SerializeField] GunType    gunType     = GunType.AssaultRifle;
     [SerializeField] GunRank    gunRank     = GunRank.Rank1;
+    public float GunEXP;
     [SerializeField] int        skillSlot   = 1;
     [SerializeField] int        OneMagazine = 0;
     public int oneMagazine
@@ -27,11 +26,10 @@ public class GunController : MonoBehaviour
     {
         get{return MaxAmmo;}
     }
-    [SerializeField] int        damage = 1;
-    public int damege
+    [SerializeField] int        Damage = 1;
+    public int damage
     {
-        get{return damege;}
-
+        get{return Damage;}
     }
     [SerializeField] float      shootInterval = 0.15f;
 	[SerializeField] float      bulletPower = 100.0f;
@@ -43,8 +41,9 @@ public class GunController : MonoBehaviour
     [SerializeField] GameObject muzzleFlashPrefab;
     [SerializeField] Vector3    muzzleFlashScale = new Vector3(1.0f,1.0f,1.0f);
     GameObject  bullet;
-    public bool actionEnabled = true;
+    public bool shootEnabled = true;
     bool        shooting = false;
+    bool        reloading = false;
     int         ammo;
     public int Ammo
     {
@@ -70,24 +69,16 @@ public class GunController : MonoBehaviour
     void Update()
     {   
         AmmoCheck.text = Ammo + "/" + MaxAmmo;
-
-        if (Input.GetKeyDown(KeyCode.X)){GunEXP+=400;}
         
-        if (Input.GetKeyDown(KeyCode.R) && actionEnabled && ammo != OneMagazine)
+        if (Input.GetKeyDown(KeyCode.R) && !shooting  && !reloading && ammo != OneMagazine)
         {
-            actionEnabled = false;
+            reloading = true;
             Invoke("Reload",0.5f);
         }
-
-        if (ammo > 0 && GetInput(shootMode))
+        if (shootEnabled && ammo > 0 && GetInput(shootMode) && !reloading)
         {
             StartCoroutine(ShootTimer());
         }
-        else if(Input.GetMouseButtonUp(0))
-        {
-            actionEnabled = true;
-        }
-
         // 射撃中画面を揺らす
         shakeScript.Shake(shakePow,shooting);
     }
@@ -101,27 +92,32 @@ public class GunController : MonoBehaviour
     // リロード処理
     void Reload()
     {
-        if (MaxAmmo >= OneMagazine)
+        if(shootEnabled)
         {
-            MaxAmmo = MaxAmmo - (OneMagazine - Ammo);
-            Ammo = OneMagazine;
-        }
-        else 
-        {
-            int NowAmmo;
-            NowAmmo = OneMagazine - Ammo;
-            if (NowAmmo > MaxAmmo)
+            if (MaxAmmo >= OneMagazine)
             {
-                Ammo = MaxAmmo+Ammo;
-                MaxAmmo = 0;
+                MaxAmmo = MaxAmmo - (OneMagazine - Ammo);
+                Ammo = OneMagazine;
+                reloading = false;
             }
             else 
             {
-                MaxAmmo = MaxAmmo - NowAmmo;
-                Ammo = Ammo + NowAmmo;
+                int NowAmmo;
+                NowAmmo = OneMagazine - Ammo;
+                if (NowAmmo > MaxAmmo)
+                {
+                    Ammo = MaxAmmo+Ammo;
+                    MaxAmmo = 0;
+                }
+                else 
+                {
+                    MaxAmmo = MaxAmmo - NowAmmo;
+                    Ammo = Ammo + NowAmmo;
+                }
+
+                reloading = false;
             }
         }
-        actionEnabled = true;
     }
 
     // セミオートかフルオートかの判定
@@ -137,79 +133,42 @@ public class GunController : MonoBehaviour
         return false;
     }
     IEnumerator ShootTimer()
-    {   
-        if (shooting) yield break;
-
-        // 射撃中は追加で撃てないようにする
-        shooting = true;
-        actionEnabled = false;
-        if (muzzleFlashPrefab != null)
+    {
+        if (!shooting)
         {
-            // マズルフラッシュの生成
-            muzzleFlash = Instantiate<GameObject>(muzzleFlashPrefab,muzzle.position,muzzle.rotation);
-            muzzleFlash.transform.localScale = muzzleFlashScale;
-            Destroy(muzzleFlash,1.0f);
-        }
+            // 射撃中は追加で撃てないようにする
+            shooting = true;
+            shootEnabled = false;
 
-        if (bulletPrefab != null)
+            if (muzzleFlashPrefab != null)
+            {
+                // マズルフラッシュの生成
+                muzzleFlash = Instantiate<GameObject>(muzzleFlashPrefab,muzzle.position,muzzle.rotation);
+                muzzleFlash.transform.localScale = muzzleFlashScale;
+                Destroy(muzzleFlash,1.0f);
+            }
+
+            if (bulletPrefab != null)
+            {
+                // 弾の生成
+		        bullet = Instantiate<GameObject>(bulletPrefab, muzzle.position, muzzle.rotation);
+                bullet.transform.localScale = bulletScale;
+		        bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * bulletPower);
+		        Destroy(bullet, 5.0f);
+            }
+
+             // 弾を減らす
+            ammo--;
+
+            // 連射速度の調整
+            yield return new WaitForSeconds(shootInterval);
+
+            shooting = false;
+            shootEnabled = true;
+        }
+        else
         {
-            // 弾の生成
-		    bullet = Instantiate<GameObject>(bulletPrefab, muzzle.position, muzzle.rotation);
-            bullet.transform.localScale = bulletScale;
-	        bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * bulletPower);
-	        Destroy(bullet, 5.0f);
+            yield return null;
         }
-
-         // 弾を減らす
-        ammo--;
-
-
-        // 連射速度の調整
-        yield return new WaitForSeconds(shootInterval);
-        
-        shooting = false;
-        
     }
-
-    // IEnumerator ShootTimer()
-    // {
-    //     if (!shooting)
-    //     {
-    //         // 射撃中は追加で撃てないようにする
-    //         shooting = true;
-    //         shootEnabled = false;
-
-    //         if (muzzleFlashPrefab != null)
-    //         {
-    //             // マズルフラッシュの生成
-    //             muzzleFlash = Instantiate<GameObject>(muzzleFlashPrefab,muzzle.position,muzzle.rotation);
-    //             muzzleFlash.transform.localScale = muzzleFlashScale;
-    //             Destroy(muzzleFlash,1.0f);
-    //         }
-
-    //         if (bulletPrefab != null)
-    //         {
-    //             // 弾の生成
-	// 	        bullet = Instantiate<GameObject>(bulletPrefab, muzzle.position, muzzle.rotation);
-    //             bullet.transform.localScale = bulletScale;
-	// 	        bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * bulletPower);
-	// 	        Destroy(bullet, 5.0f);
-    //         }
-
-    //          // 弾を減らす
-    //         ammo--;
-
-
-    //         // 連射速度の調整
-    //         yield return new WaitForSeconds(shootInterval);
-            
-    //         shooting = false;
-    //         shootEnabled = true;
-    //     }
-    //     else
-    //     {
-            
-    //         yield return null;
-    //     }
-    // }
 }

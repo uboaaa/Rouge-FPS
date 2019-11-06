@@ -8,7 +8,6 @@ public class GunAnimation : MonoBehaviour
     AnimatorStateInfo animatorInfo;
     GunController GCScript;
     bool animFlg = false;
-    float animSpeedParm = 1.0f;
     
     void Start()
     {
@@ -18,12 +17,6 @@ public class GunAnimation : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Z))
-        {
-            animSpeedParm = 0.5f;
-            animator.SetFloat("Speed", animSpeedParm);
-        }
-
         animatorInfo = animator.GetCurrentAnimatorStateInfo(0);
         // アニメーションが終了
         if(animatorInfo.normalizedTime > 1.0f)
@@ -36,7 +29,7 @@ public class GunAnimation : MonoBehaviour
             }
 
             // リロード
-            if(Input.GetKeyDown(KeyCode.R) && GCScript.maxAmmo > 0 && animFlg == false && GCScript.actionEnabled && GCScript.Ammo != GCScript.oneMagazine)
+            if(Input.GetKeyDown(KeyCode.R) && GCScript.maxAmmo > 0 && animFlg == false && GCScript.shootEnabled && GCScript.Ammo != GCScript.oneMagazine)
             {
                 animator.SetBool("ReloadFlg",true);
                 animFlg = true;
