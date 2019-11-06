@@ -12,18 +12,39 @@ public class BulletHit : MonoBehaviour
     GameObject hitEffect;
     Vector3 hitPos;
     Quaternion rotation;
+    ChangeEquip CEScript;
+    GunController GCScript;
+    int Damage;
 
-    void Start(){}
+
+    void Start()
+    {
+        GameObject FPSCon = GameObject.Find("FPSController");
+        CEScript = FPSCon.GetComponent<ChangeEquip>();
+
+        if(CEScript.ownGun == 1)
+        {
+            GameObject anotherObject = GameObject.Find(CEScript.Weapon1.name);
+            GCScript = anotherObject.GetComponent<GunController>();
+        }
+        else if(CEScript.ownGun == 2)
+        {
+            GameObject anotherObject = GameObject.Find(CEScript.Weapon2.name);
+            GCScript = anotherObject.GetComponent<GunController>();
+        }
+        
+        Damage = GCScript.damage;
+    }
 
     void Update()
     {
-        
+        Debug.Log(Damage);
     }
 
     void HitEffect()
     {
         // エフェクトを生成
-        hitEffect = Instantiate<GameObject>(hitEffectPrefab,new Vector3(hitPos.x,hitPos.y,hitPos.z/* - hitEffectScale.z*/),rotation);
+        hitEffect = Instantiate<GameObject>(hitEffectPrefab,new Vector3(hitPos.x,hitPos.y,hitPos.z),rotation);
         hitEffect.transform.localScale = hitEffectScale;
 
         // エフェクト削除
@@ -45,11 +66,22 @@ public class BulletHit : MonoBehaviour
         rotation = Quaternion.LookRotation(normalVector);
 
 
-        // "Enemy"タグに当たった場合、エフェクトを出して弾を削除する
-        if(collision.gameObject.tag == "Enemy")
+        switch (collision.gameObject.tag)
         {
-            HitEffect();
-            Destroy(gameObject);
+            // "Back"タグに当たった場合、エフェクトを出して弾を削除する
+            case "Back":
+                HitEffect();
+                Destroy(gameObject);
+                break;
+
+            // "Enemy"タグに当たった場合、エフェクトを出して弾を削除する
+            case "Enemy":
+                HitEffect();
+                Destroy(gameObject);
+                break;
+                
+            default:
+                break;
         }
     }
 }
