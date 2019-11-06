@@ -11,7 +11,10 @@ GameObject:
   - component: {fileID: 1625668510554113489}
   - component: {fileID: 1625668510554113488}
   - component: {fileID: 1625668510554113491}
+  - component: {fileID: 7613477797406578434}
+  - component: {fileID: 5262508087837231451}
   - component: {fileID: 1625668510554113494}
+  - component: {fileID: 5016441053883166873}
   m_Layer: 0
   m_Name: Flyer
   m_TagString: Untagged
@@ -100,6 +103,36 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!65 &7613477797406578434
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1625668510554113490}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.4, y: 3.2, z: 0.2}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5262508087837231451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1625668510554113490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b06b0bdbff30ff044bee6963b05c6540, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 0
+  atk: 0
+  def: 0
+  speed: 0
+  startrot: 0
 --- !u!114 &1625668510554113494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,5 +145,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baf799be1782b374783ee2c346c2c51e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  speed: 0
+  bullet: {fileID: 0}
+  deadeffect: {fileID: 0}
+  bspeed: 1000
+--- !u!114 &5016441053883166873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1625668510554113490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8206a5d658efa0f4d8a3ebb2268c3be5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

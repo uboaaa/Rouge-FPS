@@ -11,9 +11,12 @@ GameObject:
   - component: {fileID: 332212476597975621}
   - component: {fileID: 332212476597975622}
   - component: {fileID: 332212476597975623}
-  - component: {fileID: 332212476597975620}
   - component: {fileID: 332212476597975675}
   - component: {fileID: 332212476597975674}
+  - component: {fileID: 5768619088965787409}
+  - component: {fileID: 332212476597975620}
+  - component: {fileID: 2168084607118545262}
+  - component: {fileID: 4138066440863333321}
   m_Layer: 0
   m_Name: Lizard
   m_TagString: Untagged
@@ -102,20 +105,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &332212476597975620
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 332212476597975616}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eefc305cd40319345a9b8f50e514e3c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  speed: 0.05
 --- !u!65 &332212476597975675
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -145,3 +134,58 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &5768619088965787409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 332212476597975616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b06b0bdbff30ff044bee6963b05c6540, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 0
+  atk: 0
+  def: 0
+  speed: 0
+  startrot: 0
+--- !u!114 &332212476597975620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 332212476597975616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eefc305cd40319345a9b8f50e514e3c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deadeffect: {fileID: 0}
+--- !u!114 &2168084607118545262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 332212476597975616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a289e73edcbd2d44aa401b415b91959, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitflg: 0
+--- !u!114 &4138066440863333321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 332212476597975616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8206a5d658efa0f4d8a3ebb2268c3be5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
