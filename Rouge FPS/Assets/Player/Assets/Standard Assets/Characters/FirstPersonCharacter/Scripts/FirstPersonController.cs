@@ -41,10 +41,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private float m_NextStep;
         private bool m_Jumping;
         private AudioSource m_AudioSource;
+        private GameObject Pause;
 
         // Use this for initialization
         private void Start()
         {
+            Pause = GameObject.Find("MainCanvas");
             m_CharacterController = GetComponent<CharacterController>();
             m_Camera = Camera.main;
             m_OriginalCameraPosition = m_Camera.transform.localPosition;
@@ -66,7 +68,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
             { m_MouseLook.Init(transform, m_Camera.transform);
                 //m_Camera.transform.rotation = Quaternion.identity;
             }
+            if (!Pause.GetComponent<PauseScript>().pause())
+            {
                 RotateView();
+            }
             // the jump state needs to read here to make sure it is not missed
             if (!m_Jump)
             {
@@ -246,6 +251,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void RotateView()
         {
+
             m_MouseLook.LookRotation (transform, m_Camera.transform);
         }
 
