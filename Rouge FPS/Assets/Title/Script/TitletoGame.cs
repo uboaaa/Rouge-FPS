@@ -32,7 +32,7 @@ public class TitletoGame : MonoBehaviour
     {
        GoGame=gameObject.GetComponent<FadePanel>().GetAllBlack();
         if (Input.GetKeyDown(KeyCode.Escape)) { Quit(); }
-
+        Debug.Log(Mode[0]);
         
         switch (ModeSelect)
         {

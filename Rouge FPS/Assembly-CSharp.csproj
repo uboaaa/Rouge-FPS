@@ -71,8 +71,10 @@
     <Compile Include="Assets\Enemy\Scripts\EnemyParameter.cs" />
     <Compile Include="Assets\Enemy\Squid\Squid.cs" />
     <Compile Include="Assets\Enemy\UI\ItemBox\FlyingObject.cs" />
+    <Compile Include="Assets\Game\GametoTitle.cs" />
     <Compile Include="Assets\Game\MergeScenes.cs" />
     <Compile Include="Assets\Game\PauseScript.cs" />
+    <Compile Include="Assets\Game\TextColorChangeScript.cs" />
     <Compile Include="Assets\Map\Scripts\CheckPlayer.cs" />
     <Compile Include="Assets\Map\Scripts\DungeonGenerator.cs" />
     <Compile Include="Assets\Map\Scripts\MapAI.cs" />

@@ -24,7 +24,7 @@ public class PauseScript : MonoBehaviour
             //　ポーズUIが表示されてる時は停止
             if (pauseUI.activeSelf)
             {
-                Time.timeScale = 0f;
+                Time.timeScale = 1f;
                 //　ポーズUIが表示されてなければ通常通り進行
             }
             else
