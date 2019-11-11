@@ -71,6 +71,7 @@
     <Compile Include="Assets\Game\MergeScenes.cs" />
     <Compile Include="Assets\Map\Scripts\CheckPlayer.cs" />
     <Compile Include="Assets\Map\Scripts\DungeonGenerator.cs" />
+    <Compile Include="Assets\Map\Scripts\DungeonGenerator2.cs" />
     <Compile Include="Assets\Map\Scripts\MapAI.cs" />
     <Compile Include="Assets\Map\Scripts\MapInitializer.cs" />
     <Compile Include="Assets\Map\Scripts\Spawner.cs" />

@@ -18,11 +18,11 @@ public class DungeonGenerator
 
     private Dictionary<int, Range> m_rangeList = new Dictionary<int, Range>();    //区画リスト
 
-    private List<Pass> m_passList = new List<Pass>();     //通路リスト
-    private List<Range> m_roomPassList = new List<Range>(); //出入口リスト
+    private List<Pass> m_passList = new List<Pass>();       //通路リスト
     private List<int[]> m_rangeIdComb = new List<int[]>();  //区画組み合わせリスト 
 
-
+    //ダンジョン生成関数
+    //※生成後、二次配列を返す
     public int[,] GenerateMap(int mapSizeX, int mapSizeY, int maxRoom)
     {
         this.m_mapSizeX = mapSizeX;
@@ -88,7 +88,7 @@ public class DungeonGenerator
     //===================================================================//
     //区画を生成
     //===================================================================//
-    public void CreateRange(int maxRoom)
+    private void CreateRange(int maxRoom)
     {
         //区画のリストの初期値としてマップ全体を入れる
         m_rangeList.Add(m_idCount, new Range(0, 0, m_mapSizeX - 1, m_mapSizeY - 1, m_idCount));
