@@ -53,15 +53,15 @@ public class GunController : MonoBehaviour
     public Text AmmoCheck;
     GameObject  muzzleFlash;
     GameObject  hitEffect;
-    GunAnimation gunAnim;
     CameraShake shakeScript;
     [SerializeField] float shakePow;
+    Animator animator;
+    AnimatorStateInfo animatorInfo;
    
     void Start()
     {
         InitGun();
-
-        gunAnim = GetComponent<GunAnimation>();
+        animator = GetComponent<Animator>();
 
         // 上の階層のオブジェクトにアタッチしているスクリプトを参照する
         shakeScript = GetComponentInParent<CameraShake>();
@@ -69,19 +69,43 @@ public class GunController : MonoBehaviour
     void Update()
     {   
         AmmoCheck.text = Ammo + "/" + MaxAmmo;
-        
-        if (Input.GetKeyDown(KeyCode.R) && !shooting  && !reloading && ammo != OneMagazine)
+
+        animatorInfo = animator.GetCurrentAnimatorStateInfo(0);
+        // アニメーションが終了
+        if(animatorInfo.normalizedTime > 1.0f)
         {
-            reloading = true;
-            Invoke("Reload",0.5f);
+            // 単発武器の射撃
+            if(GetInput(shootMode) && Ammo > 0 && !shooting  && !reloading && shootMode == ShootMode.SEMIAUTO)
+            {
+                StartCoroutine(ShootTimer());
+                animator.SetBool("ShootFlg",true);
+            }
+
+            // リロード
+            if(Input.GetKeyDown(KeyCode.R) && maxAmmo > 0 && Ammo != oneMagazine && !shooting  && !reloading)
+            {
+                reloading = true;
+                Invoke("Reload",0.5f);
+                animator.SetBool("ReloadFlg",true);
+            }
         }
-        if (shootEnabled && ammo > 0 && GetInput(shootMode) && !reloading)
+        else
+        {
+            animator.SetBool("ShootFlg",false);
+            animator.SetBool("ReloadFlg",false);
+        }
+
+        // 連射武器の射撃
+        if(GetInput(ShootMode.AUTO) && Ammo > 0 && !reloading && shootMode == ShootMode.AUTO)
         {
             StartCoroutine(ShootTimer());
+            animator.SetBool("ShootFlg",true);
         }
 
         // 射撃中画面を揺らす
         shakeScript.Shake(shakePow,shooting);
+
+        Debug.Log("animatorInfo" + animatorInfo.normalizedTime);
     }
 
     //初期化
