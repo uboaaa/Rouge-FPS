@@ -414,6 +414,7 @@ GameObject:
   - component: {fileID: 1964011955}
   - component: {fileID: 1964011954}
   - component: {fileID: 1964011953}
+  - component: {fileID: 1964011956}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -480,3 +481,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1964011956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1964011952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1151a4ca57ffd1d479e2f43941b0263e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Enemy: {fileID: 2744920058350558036, guid: ad2933c45f2f2244dae888f40fca6734, type: 3}
+  m_SpawnMax: 2
+  m_SpawnInterval: 20

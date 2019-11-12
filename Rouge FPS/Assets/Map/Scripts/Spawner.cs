@@ -16,7 +16,8 @@ public class Spawner : MonoBehaviour
     private List<GameObject> m_enemyList = null;    //敵リスト
 
     private float m_timeElapsed = 0.0f;             //出現からの経過時間
-    private int m_spawnCnt = 0;                     //出現数
+    private int m_spawnCnt = 0;                     //スポーン数
+    private int m_aliveCnt = 0;                     //生存している敵の数
 
     // Start is called before the first frame update
     void Start()
@@ -41,14 +42,15 @@ public class Spawner : MonoBehaviour
         {
             m_enemyList.Add(Instantiate(m_Enemy, this.transform.position, new Quaternion()));
 
+            m_spawnCnt++;
             m_timeElapsed = 0.0f;
         }
     }
 
     private void FixedUpdate()
     {
-        //出現数を更新
-        m_spawnCnt = m_enemyList.Count;
+        //生存数を更新
+        m_aliveCnt = m_enemyList.Count;
     }
 
     //出現数取得用の関数

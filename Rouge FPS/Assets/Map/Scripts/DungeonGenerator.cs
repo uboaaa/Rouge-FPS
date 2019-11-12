@@ -347,4 +347,29 @@ public class DungeonGenerator
     {
 
     }
+
+
+    //========================================
+    //取得用関数群
+    //========================================
+    public Room SmallistRoom()
+    {
+        //最小面積の部屋のIDを取得
+        int smallist = 0;
+        int id = -1;
+        foreach(KeyValuePair<int,Range> pair in m_rangeList)
+        {
+            int tmp = pair.Value.m_Room.calcArea();
+            if(smallist==0 || tmp <= smallist)
+            {
+                smallist = tmp;
+                id = pair.Key;
+            }
+        }
+
+        //取得したIDの情報を返す
+
+        Room room = m_rangeList[id].m_Room;
+        return room;
+    }
 }

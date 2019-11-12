@@ -103,10 +103,11 @@ public class MapInitializer : MonoBehaviour
     {
 
         Position position;
+        Room small = DG.SmallistRoom();
         do
         {
-            var x = Utility.GetRandomInt(0, MAP_SIZE_X - 1);
-            var y = Utility.GetRandomInt(0, MAP_SIZE_Y - 1);
+            var x = Utility.GetRandomInt(small.Start.X, small.End.X - 1);
+            var y = Utility.GetRandomInt(small.Start.Y, small.End.Y - 1);
             position = new Position(x, y);
         } while (m_map[position.X, position.Y] != 1);
 

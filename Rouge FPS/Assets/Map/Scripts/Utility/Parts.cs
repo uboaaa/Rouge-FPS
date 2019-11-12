@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Room
 {
@@ -11,6 +12,13 @@ public class Room
     //部屋データ取得関連
     //***部屋パターン制作後、ランダム取得し設定
     //***スタート部屋、ゴール部屋を先に設定するようにする
+
+    //面積
+    public int calcArea()
+    {
+        int answer = Math.Abs(End.X - Start.X) * Math.Abs(End.Y - Start.Y);
+        return answer;
+    }
 
     //コンストラクタ(始点、終点)
     Room(Position start, Position end)
