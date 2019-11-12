@@ -66,14 +66,6 @@ public class Lizard : MonoBehaviour
     {
 
 
-        // if (hitflg == true)
-        // {
-        //     // ヒットエフェクト
-        //     HitEffect();
-        // }
-
-        // hitmaterial.SetFloat(propID, brightness);
-
         
 
 

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7613477797406578434}
   - component: {fileID: 5262508087837231451}
   - component: {fileID: 1625668510554113494}
+  - component: {fileID: 1451534847837710716}
   - component: {fileID: 5016441053883166873}
   m_Layer: 0
   m_Name: Flyer
@@ -148,6 +149,19 @@ MonoBehaviour:
   bullet: {fileID: 0}
   deadeffect: {fileID: 0}
   bspeed: 1000
+--- !u!114 &1451534847837710716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1625668510554113490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a289e73edcbd2d44aa401b415b91959, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitflg: 0
 --- !u!114 &5016441053883166873
 MonoBehaviour:
   m_ObjectHideFlags: 0
