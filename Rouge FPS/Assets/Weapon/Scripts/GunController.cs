@@ -8,62 +8,80 @@ using UnityEngine;
 using UnityEngine.UI;
 public class GunController : MonoBehaviour
 {
-    [SerializeField] public enum ShootMode { AUTO, SEMIAUTO }
     public enum GunType { AssaultRifle, SubMachineGun, LightMachineGun, HandGun, RocketLauncher, ShotGun, LaserGun, FlameThrower }
     public enum GunRank { Rank1, Rank2, Rank3 }
-    public bool shootEnabled = true;
+    [SerializeField] public enum ShootMode { AUTO, SEMIAUTO }
+    [SerializeField] public ShootMode  shootMode = ShootMode.AUTO;
     [SerializeField] GunType    gunType     = GunType.AssaultRifle;
-    [SerializeField] ShootMode  shootMode   = ShootMode.AUTO;
     [SerializeField] GunRank    gunRank     = GunRank.Rank1;
+    public float GunEXP;
     [SerializeField] int        skillSlot   = 1;
-    [SerializeField] int OneMagazine = 0;
-    [SerializeField] public int MaxAmmo = 0;
-    [SerializeField] int damage = 1;
-    [SerializeField] float shootInterval = 0.15f;
-    [SerializeField] Transform muzzle;
+    [SerializeField] int        OneMagazine = 0;
+    public int oneMagazine
+    {
+        get{return OneMagazine;}
+    }
+    [SerializeField] int        MaxAmmo = 0;
+    public int maxAmmo
+    {
+        get{return MaxAmmo;}
+    }
+    [SerializeField] int        Damage = 1;
+    public int damage
+    {
+        get{return Damage;}
+    }
+    [SerializeField] float      shootInterval = 0.15f;
+	[SerializeField] float      bulletPower = 100.0f;
+    [SerializeField] Transform  muzzle;
+    // 弾情報
     [SerializeField] GameObject bulletPrefab;
+    [SerializeField] Vector3    bulletScale = new Vector3(1.0f,1.0f,1.0f);
+    // マズル情報
     [SerializeField] GameObject muzzleFlashPrefab;
-    [SerializeField] Vector3 muzzleFlashScale = new Vector3(1.0f,1.0f,1.0f);
-	[SerializeField] float bulletPower = 100.0f;
-    GameObject bullet;
-    bool shooting = false;
-    int ammo;
-    public Text AmmoCheck;
-    GameObject muzzleFlash;
-    GameObject hitEffect;
-    GunAnimation gunAnim;
-    
+    [SerializeField] Vector3    muzzleFlashScale = new Vector3(1.0f,1.0f,1.0f);
+    GameObject  bullet;
+    public bool shootEnabled = true;
+    bool        shooting = false;
+    bool        reloading = false;
+    int         ammo;
     public int Ammo
     {
-        set
-        {
-            ammo = Mathf.Clamp(value, 0, OneMagazine);
-        }
-        get
-        {
-            return ammo;
-        }
+        get { return ammo;}
+        set { ammo = Mathf.Clamp(value, 0, OneMagazine);}
     }
+    public Text AmmoCheck;
+    GameObject  muzzleFlash;
+    GameObject  hitEffect;
+    GunAnimation gunAnim;
+    CameraShake shakeScript;
+    [SerializeField] float shakePow;
    
     void Start()
     {
         InitGun();
 
         gunAnim = GetComponent<GunAnimation>();
+
+        // 上の階層のオブジェクトにアタッチしているスクリプトを参照する
+        shakeScript = GetComponentInParent<CameraShake>();
     }
     void Update()
     {   
         AmmoCheck.text = Ammo + "/" + MaxAmmo;
         
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R) && !shooting  && !reloading && ammo != OneMagazine)
         {
-            Reload();
+            reloading = true;
+            Invoke("Reload",0.5f);
         }
-
-        if (shootEnabled & ammo > 0 & GetInput())
+        if (shootEnabled && ammo > 0 && GetInput(shootMode) && !reloading)
         {
             StartCoroutine(ShootTimer());
         }
+
+        // 射撃中画面を揺らす
+        shakeScript.Shake(shakePow,shooting);
     }
 
     //初期化
@@ -75,33 +93,36 @@ public class GunController : MonoBehaviour
     // リロード処理
     void Reload()
     {
-        
-        if (MaxAmmo >= OneMagazine)
+        if(shootEnabled)
         {
-            MaxAmmo = MaxAmmo - (OneMagazine - Ammo);
-            Ammo = OneMagazine;
-        }
-        else {
-            int NowAmmo;
-            NowAmmo = OneMagazine - Ammo;
-            
-            if (NowAmmo > MaxAmmo)
+            if (MaxAmmo >= OneMagazine)
             {
-                Ammo = MaxAmmo+Ammo;
-                MaxAmmo = 0;
-
+                MaxAmmo = MaxAmmo - (OneMagazine - Ammo);
+                Ammo = OneMagazine;
+                reloading = false;
             }
-            else {
-                MaxAmmo = MaxAmmo - NowAmmo;
-                Ammo = Ammo + NowAmmo;
+            else 
+            {
+                int NowAmmo;
+                NowAmmo = OneMagazine - Ammo;
+                if (NowAmmo > MaxAmmo)
+                {
+                    Ammo = MaxAmmo+Ammo;
+                    MaxAmmo = 0;
+                }
+                else 
+                {
+                    MaxAmmo = MaxAmmo - NowAmmo;
+                    Ammo = Ammo + NowAmmo;
+                }
+
+                reloading = false;
             }
         }
-
-       
     }
 
     // セミオートかフルオートかの判定
-    bool GetInput()
+    public bool GetInput(ShootMode shootMode)
     {
         switch (shootMode)
         {
@@ -116,7 +137,9 @@ public class GunController : MonoBehaviour
     {
         if (!shooting)
         {
+            // 射撃中は追加で撃てないようにする
             shooting = true;
+            shootEnabled = false;
 
             if (muzzleFlashPrefab != null)
             {
@@ -130,6 +153,7 @@ public class GunController : MonoBehaviour
             {
                 // 弾の生成
 		        bullet = Instantiate<GameObject>(bulletPrefab, muzzle.position, muzzle.rotation);
+                bullet.transform.localScale = bulletScale;
 		        bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * bulletPower);
 		        Destroy(bullet, 5.0f);
             }
@@ -141,6 +165,7 @@ public class GunController : MonoBehaviour
             yield return new WaitForSeconds(shootInterval);
 
             shooting = false;
+            shootEnabled = true;
         }
         else
         {

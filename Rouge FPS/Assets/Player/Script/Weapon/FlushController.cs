@@ -33,7 +33,6 @@ public class FlushController : MonoBehaviour
         {
             Debug.Log("FirstHp" + FirstHP);
             NowHP = game.GetComponent<MyStatus>().downHp();
-            game.GetComponent<PlayerXYZ>().DamagePlayer();
             Debug.Log("NowHp" + NowHP);
 
         }
@@ -44,6 +43,7 @@ public class FlushController : MonoBehaviour
             this.img.color = new Color(0.5f, 0f, 0f, 0.5f);
   
             FirstHP = NowHP;
+
         }
         else
         {

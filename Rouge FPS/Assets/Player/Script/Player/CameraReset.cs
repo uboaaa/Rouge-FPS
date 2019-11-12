@@ -4,18 +4,25 @@ using UnityEngine;
 
 public class CameraReset : MonoBehaviour
 {
- 
+    Vector3 abc = new Vector3(0.0f, 0.0f,0.0f);
 
     void Start()
     {
-
+        abc.x= MapInitializer.GetSpawnData("rx");
+        abc.y= MapInitializer.GetSpawnData("ry");
+        abc.z= MapInitializer.GetSpawnData("rz");
     }
 
 
-    void FixedUpdate()
+    void Update()
     {
         //カメラの方向を取得
         //camera.transform.rotation  = Quaternion.identity;
-        this.transform.rotation =  Quaternion.Euler(0.0f, 0.0f, 0.0f);
+        if (Input.GetKey(KeyCode.Return)) {
+            abc.x = MapInitializer.GetSpawnData("rx");
+            abc.y = MapInitializer.GetSpawnData("ry");
+            abc.z = MapInitializer.GetSpawnData("rz");
+            this.transform.rotation = Quaternion.Euler(abc);
+        }
     }
 }

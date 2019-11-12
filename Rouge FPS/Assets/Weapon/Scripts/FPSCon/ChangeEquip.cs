@@ -9,11 +9,14 @@ public class ChangeEquip : MonoBehaviour
     [SerializeField]
     public GameObject Weapon2;
 
+    public int ownGun;          // 1:メイン 2:サブ
+
 
     // Use this for initialization
     void Start()
     {
-
+        ownGun = 1;
+        Weapon1.SetActive(true);
         Weapon2.SetActive(false);
     }
 
@@ -21,7 +24,6 @@ public class ChangeEquip : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
-
         {
             ChangeWeapon();
         }
@@ -32,12 +34,14 @@ public class ChangeEquip : MonoBehaviour
     {
         if (Weapon2.activeSelf)
         {
+            ownGun = 1;
             Weapon2.SetActive(false);
             Weapon1.SetActive(true);
 
         }
         else
         {
+            ownGun = 2;
             Weapon1.SetActive(false);
             Weapon2.SetActive(true);
 
