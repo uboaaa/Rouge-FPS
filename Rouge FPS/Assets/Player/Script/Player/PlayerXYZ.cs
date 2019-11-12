@@ -11,6 +11,11 @@ public class PlayerXYZ : MonoBehaviour
     private CharacterController characterController;
     bool moveFlg = false;
 
+    private static float px;
+    private static float py;
+    private static float pz;
+
+private float aaaaa;
     private void Awake()
     {
 
@@ -27,7 +32,10 @@ public class PlayerXYZ : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        px=this.transform.position.x;
+        py=this.transform.position.y;
+        pz=this.transform.position.z;
+       
         //リセット処理その２(その１はFirstPersonController.cs)
         if (Input.GetKey(KeyCode.Return)) {
             characterController.enabled = false;
@@ -63,6 +71,30 @@ public class PlayerXYZ : MonoBehaviour
 
 
     public bool GetClearCheckFlg() { return ClearCheckFlg; }
+
+    public static float GetPlayerPosition(string element){
+        float result=0.0f;
+        switch (element)
+        {
+            case "px":
+            result=px;
+            break;
+
+            case "py":
+            result=py;
+            break;
+
+            case "pz":
+            result=pz;
+            break;
+
+            default:
+            break;
+        }
+        Debug.Log(result);
+        return result;
+        
+    }
 
     public void UpdatePlayerXYZ(float x, float y ,float z){
         //this.transform.rotation = Quaternion.identity;
