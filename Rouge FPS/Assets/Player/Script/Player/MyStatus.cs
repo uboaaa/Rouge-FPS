@@ -6,7 +6,7 @@ using UnityEngine;
 public class MyStatus : MonoBehaviour
 {
 
-    private float playerHP = 100;
+    public static float playerHP = 100;
     private int playerATK;
     private float playerDEF = 1;
     private float HpPlus;
@@ -26,22 +26,20 @@ public class MyStatus : MonoBehaviour
     }
     public void SetHp(float hp)
     {
-        this.playerHP = hp;
+        playerHP = hp;
     }
 
-    public float GetHp()
+    public static float GetHp()
     {
         return playerHP;
     }
 
-    public float downHp() {
+    public static void downHp(float damage) {
       
 
-            playerHP = playerHP - 300f;
+            playerHP = playerHP - damage;
      
 
-        
-        return playerHP;
     }
 
     public void CureHp() {

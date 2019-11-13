@@ -29,8 +29,7 @@ public class GametoTitle : MonoBehaviour
     void Update()
     {
 
-        Debug.Log(RTitle);
-
+  
 
         switch (ModeSelect)
         {

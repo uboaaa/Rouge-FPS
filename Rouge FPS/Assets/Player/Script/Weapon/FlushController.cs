@@ -22,17 +22,19 @@ public class FlushController : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(NowHP);
 
         if (!once) {
-            FirstHP = game.GetComponent<MyStatus>().GetHp();
-            NowHP = game.GetComponent<MyStatus>().GetHp();
+            FirstHP = MyStatus.GetHp();
+            NowHP = MyStatus.GetHp();
             once = true;
         }
      //HPを持ってくる
         if (Input.GetKeyDown(KeyCode.C))
         {
             Debug.Log("FirstHp" + FirstHP);
-            NowHP = game.GetComponent<MyStatus>().downHp();
+            MyStatus.downHp(1.0f);
+            NowHP = MyStatus.GetHp();
             Debug.Log("NowHp" + NowHP);
 
         }
