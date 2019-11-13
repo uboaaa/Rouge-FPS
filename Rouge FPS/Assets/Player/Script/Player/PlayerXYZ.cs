@@ -1,23 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerXYZ : MonoBehaviour
 {
     private bool ClearCheckFlg=true;
-    private Rigidbody rigidbody;
-    private GameObject gameObject;
     Vector3 abc = new Vector3(0.0f, 0.0f, 0.0f);
     private Vector3 moveDirection = Vector3.zero;
     private CharacterController characterController;
     bool moveFlg = false;
 
+    private void Awake()
+    {
+
+    }
     // Start is called before the first frame update
     void Start()
     {
-        gameObject = GameObject.Find("FPSController");
         characterController = GetComponent<CharacterController>();
-
+        abc.x = MapInitializer.GetSpawnData("px");
+        abc.y = MapInitializer.GetSpawnData("py") ;
+        abc.z = MapInitializer.GetSpawnData("pz");
     }
 
     // Update is called once per frame
@@ -31,7 +35,7 @@ public class PlayerXYZ : MonoBehaviour
 
         if (ClearCheckFlg) {
 
-            UpdatePlayerXYZ(6.0f, 0.0f, 15.0f);
+            UpdatePlayerXYZ(abc.x, abc.y, abc.z);
         }
 
         //ノックバック処理
@@ -57,8 +61,8 @@ public class PlayerXYZ : MonoBehaviour
 
     }
 
-    
 
+    public bool GetClearCheckFlg() { return ClearCheckFlg; }
 
     public void UpdatePlayerXYZ(float x, float y ,float z){
         //this.transform.rotation = Quaternion.identity;
@@ -71,11 +75,5 @@ public class PlayerXYZ : MonoBehaviour
         //GetComponent<Rigidbody>().position = XYZ;
     }
 
-    public void DamagePlayer()
-    {
-
-
-        
-
-    }
+  
 }

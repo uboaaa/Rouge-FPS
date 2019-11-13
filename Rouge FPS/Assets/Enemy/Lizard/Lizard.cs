@@ -5,30 +5,27 @@ using UnityEngine;
 public class Lizard : MonoBehaviour
 {
     // プレイヤー
-    public GameObject player;
+    private GameObject player = null;
     // アニメータ
-    private Animator animator;
-  
-    // 移動スピード
-    public float speed;
+    private Animator animator = null;
+    // エネミーパラメータ
+    private EnemyParameter ep = null;
+    // ヒットエフェクト
+    private EnemyHitEffect eh = null;
+
     // 角度計算用
-    private float rot;
-    // 初期角度
-    public float startrot;
+    private float rot = 0;
+
     // 発見フラグ
     bool foundflg = false;
+    
+    // アニメ関数
+    int trans = 0;
 
-    // ヒットエフェクト関連
-    // マテリアル
-    public Material hitmaterial;
-    // シェーダパラメータ管理用
-    public int propID = 0;
-    // 輝度パラメータ調整用
-    private float brightness = 0.5f;
-    //  
-    private float i = 0.1f;
-    // ヒットエフェクトフラグ
-    private bool hitflg = false;
+    // デッドエフェクト
+    public GameObject deadeffect = null;
+
+
 
 
     // p2からp1への角度を求める
@@ -44,50 +41,47 @@ public class Lizard : MonoBehaviour
     }
 
 
-    
 
     void Start()
     {
-        //GetComponentを用いてAnimatorコンポーネントを取り出す.
-        animator = GetComponent<Animator>();
-        propID = Shader.PropertyToID("_Brightness");
+        // プレイヤー情報取得
+        player = GameObject.Find("FPSController");
 
+
+        //GetComponentを用いてコンポーネントを取り出す.
+        // アニメータ
+        animator = GetComponent<Animator>();
+        // エネミーパラメータ
+        ep = GetComponent<EnemyParameter>();
+        // エネミーヒットエフェクト
+        eh = GetComponent<EnemyHitEffect>();
+
+
+        
+        
     }
 
 
     void Update()
     {
-        // ヒットエフェクト
-        if (hitflg == false)
-        {
-            if (Input.GetKey("1"))
-            {
-                hitflg = true;
-            }
-        }
 
 
-        if (hitflg == true)
-        {
-            brightness += i;
-            if (brightness > 1.0f)
-            {
-                i *= -1;
-            }
-            if (brightness < 0.5f)
-            {
-                brightness = 0.5f;
-                i = 0.1f;
-                hitflg = false;   
-            }
-        }
+        // if (hitflg == true)
+        // {
+        //     // ヒットエフェクト
+        //     HitEffect();
+        // }
 
-        hitmaterial.SetFloat(propID, brightness);
+        // hitmaterial.SetFloat(propID, brightness);
+
+        
 
 
-        // アニメーション ========
+        // ========
+        // アニメーション 
+        // ========
         //あらかじめ設定していたintパラメーター「trans」の値を取り出す.
-        int trans = animator.GetInteger("trans");
+        trans = animator.GetInteger("trans");
 
 
         // 発見フラグ条件判定
@@ -118,13 +112,15 @@ public class Lizard : MonoBehaviour
 
         }
 
-
-
         // 発見フラグがONなら
         if (foundflg == true)
         {
+            // 正面を向き
+            trans = 0;
+            animator.SetInteger("trans", trans);
+            
             //targetに向かって進む
-            transform.position += transform.forward * speed * 0.1f;
+            transform.position += transform.forward * ep.speed * 0.1f;
         }
         // 発見フラグがOFFなら
         else if (foundflg == false)
@@ -133,7 +129,7 @@ public class Lizard : MonoBehaviour
             rot = GetAim(new Vector2(transform.position.x, transform.position.z),
                 new Vector2(player.gameObject.transform.position.x, player.gameObject.transform.position.z));
 
-            rot = rot + startrot;
+            rot = rot + ep.startrot;
 
 
             // 角度計算
@@ -162,16 +158,45 @@ public class Lizard : MonoBehaviour
 
             }
 
-            //intパラメーターの値を設定する.
+            //intパラメーターの値を設定する
             animator.SetInteger("trans", trans);
         }
 
 
 
-        // // デバッグ表示
-        // Debug.Log((transform.position - player.gameObject.transform.position).magnitude);
+        // デバッグ表示
+        Debug.Log("LizardHP");
+        Debug.Log(ep.hp);
 
+        if(ep.hp == 0)
+        {
+             GameObject de = Instantiate(deadeffect) as GameObject;
+             de.transform.position = this.gameObject.transform.position;
+             de.transform.position = new Vector3(de.transform.position.x,de.transform.position.y - 1.2f,de.transform.position.z);
+             Destroy(this.gameObject);
+        }
 
+        // スペースキーを押したら
+        if (Input.GetKey(KeyCode.X))
+        {
+            GameObject go = Instantiate(this.gameObject) as GameObject;
+            go.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z + 5);
+        }
+    }
+
+    // 弾との当たり判定
+    private void OnCollisionEnter(Collision collision)
+    {
+
+        if (collision.gameObject.tag == "Bullet")
+        {
+            eh.hitflg = true;
+            foundflg = true;
+            ep.hp -= 10;
+            if(ep.hp < 0){ep.hp = 0;}
+             //intパラメーターの値を設定する.
+            animator.SetInteger("trans", trans);
+        }
 
     }
 }

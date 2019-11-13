@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 // スキルドラッグ時
-public class DragDrop : MonoBehaviour
+public class DragDrop : MonoBehaviour 
 {
     private Vector3 screenPoint;
     private Vector3 offset;
@@ -66,7 +66,11 @@ public class DragDrop : MonoBehaviour
     void OnTriggerStay2D(Collider2D col)
     {
         if (col.tag != "DroppableField") return;
-        // マウスの座標が対象の矩形内の判定
+        // マウスの座標が対象の矩形内かどうか
+        //var check = col.GetComponent<MousePositionEnter>().CheckStandby();
+        //if (!check) return;
+        // マウスボタン推してるとき
+        
 
         // 取得
         var my = this.GetComponent<SpriteRenderer>();
@@ -85,6 +89,10 @@ public class DragDrop : MonoBehaviour
         currentRenderer.sprite = currentSprite;
         currentRenderer.color = new Color(1, 1, 1, 1);
     }
+
+   
+
+
 
     void Update()
     {

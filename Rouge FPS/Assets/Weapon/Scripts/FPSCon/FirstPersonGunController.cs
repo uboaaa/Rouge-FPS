@@ -56,7 +56,7 @@ public class FirstPersonGunController : MonoBehaviour
     void Start()
     {
         gameObject = GameObject.Find("FPSController");
-        AmmoPlus=gameObject.GetComponent<SkillManagement>().GetAmmoPlus();
+        AmmoPlus=gameObject.GetComponent<SkillManagement>().GetAmmoPlus(0);
         OneMagazine = OneMagazine + (OneMagazine * AmmoPlus);
         InitGun();
         MaxAmmo = MaxAmmo + (MaxAmmo * AmmoPlus);
