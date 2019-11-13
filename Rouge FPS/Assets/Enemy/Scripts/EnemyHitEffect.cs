@@ -81,13 +81,14 @@ public class EnemyHitEffect : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // ヒットエフェクト更新
+            hitmaterial.SetFloat(propID, brightness);
         // ヒットフラグがONなら
         if (hitflg == true)
         {
             // ヒットエフェクト
             HitEffect();
-            // ヒットエフェクト更新
-            hitmaterial.SetFloat(propID, brightness);
+            
 
         }
 

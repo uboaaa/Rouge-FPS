@@ -65,16 +65,15 @@ namespace UnityStandardAssets.Characters.FirstPerson
         // Update is called once per frame
         private void Update()
         {
-            aaa = Pause.GetComponent<PauseScript>().pause();
-            //ƒŠƒZƒbƒgˆ—‚»‚Ì‚P(‚»‚Ì‚Q‚ÍPlayerXYZ.cs)
+     
+            //ï¿½ï¿½ï¿½Zï¿½bï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì‚P(ï¿½ï¿½ï¿½Ì‚Qï¿½ï¿½PlayerXYZ.cs)
             if (Input.GetKey(KeyCode.Return))
             { m_MouseLook.Init(transform, m_Camera.transform);
                 //m_Camera.transform.rotation = Quaternion.identity;
             }
-            if (!aaa)
-            {
+ 
                 RotateView();
-            }
+            
             // the jump state needs to read here to make sure it is not missed
             if (!m_Jump)
             {
@@ -229,7 +228,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 #endif
             // set the desired speed to be walking or running
          
-            //ˆÚ“®‘¬“x‚Ìİ’è
+            //ï¿½Ú“ï¿½ï¿½ï¿½ï¿½xï¿½Ìİ’ï¿½
             float AccelSpeed= GetComponent<SkillManagement>().GetSpeedPlus(0);
          speed = m_IsWalking ? m_WalkSpeed+(m_WalkSpeed*AccelSpeed) 
                              : m_RunSpeed+(m_RunSpeed * AccelSpeed); 
