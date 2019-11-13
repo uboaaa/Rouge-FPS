@@ -34,7 +34,7 @@ public class MergeScenes : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q)) { SceneManager.LoadScene("TitleScene"); }
+      
     }
     public static bool CameraSet
     {

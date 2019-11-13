@@ -72,7 +72,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             { m_MouseLook.Init(transform, m_Camera.transform);
                 //m_Camera.transform.rotation = Quaternion.identity;
             }
-
+                if(!PauseScript.pause()){
                 RotateView();
             
             // the jump state needs to read here to make sure it is not missed
@@ -94,6 +94,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
  
             m_PreviouslyGrounded = m_CharacterController.isGrounded;
+                }
         }
 
 

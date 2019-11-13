@@ -25,7 +25,7 @@ public class TextColorChangeScript : MonoBehaviour
 
     public void ColorChange(string Search)
     {
-        text.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+        text.color = new Color(0.0f, 0.0f, 0.0f, 1.0f);
         switch (Search)
         {
             case "ReturnGame":

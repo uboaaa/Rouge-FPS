@@ -24,9 +24,11 @@ private float aaaaa;
     void Start()
     {
         characterController = GetComponent<CharacterController>();
+            characterController.enabled = false;
         abc.x = MapInitializer.GetSpawnData("px");
         abc.y = MapInitializer.GetSpawnData("py") ;
         abc.z = MapInitializer.GetSpawnData("pz");
+        UpdatePlayerXYZ(abc.x, abc.y, abc.z);
     }
 
     // Update is called once per frame
