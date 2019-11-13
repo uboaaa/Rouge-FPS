@@ -32,6 +32,7 @@ public class GunController : MonoBehaviour
         get{return Damage;}
     }
     [SerializeField] float      shootInterval = 0.15f;
+    [SerializeField] float      reloadInterval = 5.0f;
 	[SerializeField] float      bulletPower = 100.0f;
     [SerializeField] Transform  muzzle;
     // 弾情報
@@ -85,8 +86,8 @@ public class GunController : MonoBehaviour
             if(Input.GetKeyDown(KeyCode.R) && maxAmmo > 0 && Ammo != oneMagazine && !shooting  && !reloading)
             {
                 reloading = true;
-                Invoke("Reload",0.5f);
                 animator.SetBool("ReloadFlg",true);
+                StartCoroutine(ReloadTimer());
             }
         }
         else
@@ -94,18 +95,26 @@ public class GunController : MonoBehaviour
             animator.SetBool("ShootFlg",false);
             animator.SetBool("ReloadFlg",false);
         }
+        
+        if(animatorInfo.shortNameHash ==  Animator.StringToHash("Idle")){Debug.Log("現在は：Idle");}
+        if(animatorInfo.shortNameHash ==  Animator.StringToHash("Shot")){Debug.Log("現在は：Shot");}
+        if(animatorInfo.shortNameHash ==  Animator.StringToHash("Reload")){Debug.Log("現在は：Reload");}
+        if(animatorInfo.shortNameHash ==  Animator.StringToHash("Get")){Debug.Log("現在は：Get");}
 
         // 連射武器の射撃
-        if(GetInput(ShootMode.AUTO) && Ammo > 0 && !reloading && shootMode == ShootMode.AUTO)
+        if(GetInput(ShootMode.AUTO) && Ammo > 0 && !shooting && !reloading && shootMode == ShootMode.AUTO)
         {
             StartCoroutine(ShootTimer());
             animator.SetBool("ShootFlg",true);
+            
+        }
+        if(Input.GetMouseButtonUp(0))
+        {
+            animator.SetBool("ShootFlg",false);
         }
 
         // 射撃中画面を揺らす
         shakeScript.Shake(shakePow,shooting);
-
-        Debug.Log("animatorInfo" + animatorInfo.normalizedTime);
     }
 
     //初期化
@@ -114,8 +123,7 @@ public class GunController : MonoBehaviour
         Ammo = OneMagazine;
     }
 
-    // リロード処理
-    void Reload()
+        void Reload()
     {
         if(shootEnabled)
         {
@@ -157,6 +165,8 @@ public class GunController : MonoBehaviour
         }
         return false;
     }
+
+    // 射撃処理
     IEnumerator ShootTimer()
     {
         if (!shooting)
@@ -195,5 +205,44 @@ public class GunController : MonoBehaviour
         {
             yield return null;
         }
+    }
+
+    // リロード処理
+    IEnumerator ReloadTimer()
+    {
+        if(shootEnabled)
+        {
+            // 連射速度の調整
+            yield return new WaitForSeconds(reloadInterval);
+
+            if (MaxAmmo >= OneMagazine)
+            {
+                MaxAmmo = MaxAmmo - (OneMagazine - Ammo);
+                Ammo = OneMagazine;
+                reloading = false;
+            }
+            else 
+            {
+                int NowAmmo;
+                NowAmmo = OneMagazine - Ammo;
+                if (NowAmmo > MaxAmmo)
+                {
+                    Ammo = MaxAmmo+Ammo;
+                    MaxAmmo = 0;
+                }
+                else 
+                {
+                    MaxAmmo = MaxAmmo - NowAmmo;
+                    Ammo = Ammo + NowAmmo;
+                }
+
+                reloading = false;
+            }
+        }
+        else
+        {
+            yield return null;
+        }
+
     }
 }

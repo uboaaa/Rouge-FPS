@@ -1,10 +1,15 @@
 fileFormatVersion: 2
-guid: f482f2bd03811db47834ba0e048c3bfa
+guid: 0928fdc2044e7f14d97e2360fce3268f
 TextureImporter:
   fileIDToRecycleName:
-    21300000: LMG shot_0
-    21300002: LMG shot_1
-    21300004: LMG shot_2
+    21300000: LMG reload_0
+    21300002: LMG reload_1
+    21300004: LMG reload_2
+    21300006: LMG reload_3
+    21300008: LMG reload_4
+    21300010: LMG reload_5
+    21300012: LMG reload_6
+    21300014: LMG reload_7
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -109,7 +114,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: LMG shot_0
+      name: LMG reload_0
       rect:
         serializedVersion: 2
         x: 0
@@ -123,13 +128,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 692420c239953674a8f4a7d3dddbdef5
+      spriteID: 6fd0235246f19d24582c1ef8bfc7b818
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: LMG shot_1
+      name: LMG reload_1
       rect:
         serializedVersion: 2
         x: 787
@@ -143,13 +148,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 298de4417df8874488c279d73b021a36
+      spriteID: d372eaaba45077443a0938e4f4ab62ce
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: LMG shot_2
+      name: LMG reload_2
       rect:
         serializedVersion: 2
         x: 1574
@@ -163,7 +168,67 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 81b376dcee2b46d4d8f94ae698ed625e
+      spriteID: c2fe53219853b0c4eabe5fb058fbae7f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LMG reload_3
+      rect:
+        serializedVersion: 2
+        x: 2361
+        y: 0
+        width: 787
+        height: 441
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb4c7b534155d2045a4f18635dd3be47
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LMG reload_4
+      rect:
+        serializedVersion: 2
+        x: 3148
+        y: 0
+        width: 787
+        height: 441
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d515468f64422ab42af649bf12fb256d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LMG reload_5
+      rect:
+        serializedVersion: 2
+        x: 3935
+        y: 0
+        width: 787
+        height: 441
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c1534f729467b14e958cedd9283d4f1
       vertices: []
       indices: 
       edges: []
@@ -171,7 +236,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 8b4165ff01a115c4ba55604156876bcc
+    spriteID: 7d14d8660199b274c8d7a6faa253484e
     vertices: []
     indices: 
     edges: []

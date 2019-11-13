@@ -619,6 +619,7 @@ MonoBehaviour:
   MaxAmmo: 360
   Damage: 1
   shootInterval: 0.15
+  reloadInterval: 0
   bulletPower: 1000
   muzzle: {fileID: 0}
   bulletPrefab: {fileID: 0}
@@ -739,7 +740,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0eff6704159ccb4429377615386319ab, type: 2}
+  - {fileID: 2100000, guid: a6ea01b705dcf044c9ced70c85af0ef1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1259,7 +1260,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0eff6704159ccb4429377615386319ab, type: 2}
+  - {fileID: 2100000, guid: a6ea01b705dcf044c9ced70c85af0ef1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1424,6 +1425,7 @@ MonoBehaviour:
   MaxAmmo: 160
   Damage: 8
   shootInterval: 0.15
+  reloadInterval: 0
   bulletPower: 100
   muzzle: {fileID: 1091589135}
   bulletPrefab: {fileID: 7749700451724911344, guid: 6b60447f6cc998147a7a704471a5e292,
@@ -1996,7 +1998,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1218649434}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.91, y: -1.73, z: 6.678725}
+  m_LocalPosition: {x: 3, y: -1.73, z: 6.678725}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1312656499}
@@ -2045,7 +2047,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 6.12, y: 4.41}
+  m_Size: {x: 7.87, y: 4.41}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -2071,12 +2073,13 @@ MonoBehaviour:
   OneMagazine: 120
   MaxAmmo: 360
   Damage: 5
-  shootInterval: 0.15
+  shootInterval: 0.1
+  reloadInterval: 1.5
   bulletPower: 1000
   muzzle: {fileID: 1312656499}
   bulletPrefab: {fileID: 7749700451724911344, guid: 6b60447f6cc998147a7a704471a5e292,
     type: 3}
-  bulletScale: {x: 1, y: 1, z: 1}
+  bulletScale: {x: 0.5, y: 0.5, z: 0.5}
   muzzleFlashPrefab: {fileID: 5657120087087244624, guid: d350cb83ef033eb4b9ed15b5054ff9fa,
     type: 3}
   muzzleFlashScale: {x: 1, y: 1, z: 1}
@@ -2167,6 +2170,7 @@ MonoBehaviour:
   MaxAmmo: 360
   Damage: 1
   shootInterval: 0.15
+  reloadInterval: 0
   bulletPower: 1000
   muzzle: {fileID: 0}
   bulletPrefab: {fileID: 0}
@@ -2344,7 +2348,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1312656498}
   m_LocalRotation: {x: -0.008646686, y: -0.016437005, z: -0.0013332674, w: 0.9998266}
-  m_LocalPosition: {x: -3.59, y: 1.48, z: -5.61}
+  m_LocalPosition: {x: -2.7, y: 1.5, z: -5.6}
   m_LocalScale: {x: 0.13448006, y: 0.13448, z: 0.67443997}
   m_Children: []
   m_Father: {fileID: 1218649435}
@@ -2823,6 +2827,7 @@ MonoBehaviour:
   MaxAmmo: 360
   Damage: 1
   shootInterval: 0.15
+  reloadInterval: 0
   bulletPower: 1000
   muzzle: {fileID: 0}
   bulletPrefab: {fileID: 0}
@@ -2929,7 +2934,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0eff6704159ccb4429377615386319ab, type: 2}
+  - {fileID: 2100000, guid: a2784742399c89f489d9703351c865aa, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3580,6 +3585,7 @@ MonoBehaviour:
   MaxAmmo: 360
   Damage: 1
   shootInterval: 0.15
+  reloadInterval: 0
   bulletPower: 1000
   muzzle: {fileID: 0}
   bulletPrefab: {fileID: 0}
@@ -3690,6 +3696,7 @@ MonoBehaviour:
   MaxAmmo: 360
   Damage: 1
   shootInterval: 0.15
+  reloadInterval: 0
   bulletPower: 1000
   muzzle: {fileID: 0}
   bulletPrefab: {fileID: 0}
@@ -3834,7 +3841,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0eff6704159ccb4429377615386319ab, type: 2}
+  - {fileID: 2100000, guid: a6ea01b705dcf044c9ced70c85af0ef1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
