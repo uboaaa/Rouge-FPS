@@ -20,8 +20,7 @@ public class BulletController : MonoBehaviour
     GunController PrimaryScript;
     GunController SecondaryScript;
     ChangeEquip CEScript;
-    int Damage;
-    
+    public int Damage;
 
     void Start()
     {

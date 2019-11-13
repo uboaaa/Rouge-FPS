@@ -12,6 +12,10 @@ public class Lizard : MonoBehaviour
     private EnemyParameter ep = null;
     // ヒットエフェクト
     private EnemyHitEffect eh = null;
+    // ダメージナンバーエフェクト
+    private DamageNumEffect dn = null;
+    // デッドエフェクト
+    public GameObject deadeffect = null;
 
     // 角度計算用
     private float rot = 0;
@@ -22,8 +26,9 @@ public class Lizard : MonoBehaviour
     // アニメ関数
     int trans = 0;
 
-    // デッドエフェクト
-    public GameObject deadeffect = null;
+    
+
+    
 
 
 
@@ -55,6 +60,8 @@ public class Lizard : MonoBehaviour
         ep = GetComponent<EnemyParameter>();
         // エネミーヒットエフェクト
         eh = GetComponent<EnemyHitEffect>();
+        // ダメージナンバーエフェクト
+        dn = GetComponent<DamageNumEffect>();
 
 
         
@@ -65,14 +72,6 @@ public class Lizard : MonoBehaviour
     void Update()
     {
 
-
-        // if (hitflg == true)
-        // {
-        //     // ヒットエフェクト
-        //     HitEffect();
-        // }
-
-        // hitmaterial.SetFloat(propID, brightness);
 
         
 
@@ -168,20 +167,26 @@ public class Lizard : MonoBehaviour
         Debug.Log("LizardHP");
         Debug.Log(ep.hp);
 
+        // 敵の体力が０になったら
         if(ep.hp == 0)
         {
-             GameObject de = Instantiate(deadeffect) as GameObject;
-             de.transform.position = this.gameObject.transform.position;
-             de.transform.position = new Vector3(de.transform.position.x,de.transform.position.y - 1.2f,de.transform.position.z);
-             Destroy(this.gameObject);
+            // 死亡時の爆発エフェクトを再生
+            GameObject de = Instantiate(deadeffect) as GameObject;
+            de.transform.position = this.gameObject.transform.position;
+            de.transform.position = new Vector3(de.transform.position.x,de.transform.position.y - 1.2f,de.transform.position.z);
+            // 解放処理
+            Destroy(de,2.0f);
+            Destroy(this.gameObject);
         }
 
-        // スペースキーを押したら
-        if (Input.GetKey(KeyCode.X))
-        {
-            GameObject go = Instantiate(this.gameObject) as GameObject;
-            go.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z + 5);
-        }
+        // // Xを押したら
+        // if (Input.GetKey(KeyCode.X))
+        // {
+        //     GameObject go = Instantiate(this.gameObject) as GameObject;
+        //     go.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z + 5);
+        // }
+
+
     }
 
     // 弾との当たり判定
@@ -190,9 +195,13 @@ public class Lizard : MonoBehaviour
 
         if (collision.gameObject.tag == "Bullet")
         {
+            // 弾のダメージを取得
+            dn.BulletDamage = collision.gameObject.GetComponent<BulletController>().Damage;
+
             eh.hitflg = true;
+            dn.hitflg = true;
             foundflg = true;
-            ep.hp -= 10;
+            ep.hp -= dn.BulletDamage;
             if(ep.hp < 0){ep.hp = 0;}
              //intパラメーターの値を設定する.
             animator.SetInteger("trans", trans);
