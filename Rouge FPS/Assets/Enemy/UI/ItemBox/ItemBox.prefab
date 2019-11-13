@@ -108,6 +108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FlyPow: 0.1
+  posisionY: 0.5
 --- !u!65 &843231230053260572
 BoxCollider:
   m_ObjectHideFlags: 0
