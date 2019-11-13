@@ -68,10 +68,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             aaa = true;
             //���Z�b�g�������̂P(���̂Q��PlayerXYZ.cs)
-            if (Input.GetKey(KeyCode.Return))
-            { m_MouseLook.Init(transform, m_Camera.transform);
-                //m_Camera.transform.rotation = Quaternion.identity;
-            }
+            // if (Input.GetKey(KeyCode.Return))
+            // { m_MouseLook.Init(transform, m_Camera.transform);
+            //     //m_Camera.transform.rotation = Quaternion.identity;
+            // }
                 if(!PauseScript.pause()){
                 RotateView();
             

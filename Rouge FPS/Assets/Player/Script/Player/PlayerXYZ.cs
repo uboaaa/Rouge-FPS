@@ -39,9 +39,9 @@ private float aaaaa;
         pz=this.transform.position.z;
        
         //リセット処理その２(その１はFirstPersonController.cs)
-        if (Input.GetKey(KeyCode.Return)) {
-            characterController.enabled = false;
-            ClearCheckFlg = true; }
+        // if (Input.GetKey(KeyCode.Return)) {
+        //     characterController.enabled = false;
+        //     ClearCheckFlg = true; }
 
         if (ClearCheckFlg) {
 

@@ -17,6 +17,14 @@ public class PauseScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(pauseUI.activeSelf){
+            if(Input.GetKeyDown(KeyCode.Return)){ 
+                if(GametoTitle.GetAnswer()){       //　ポーズUIのアクティブ、非アクティブを切り替え
+            pauseUI.SetActive(!pauseUI.activeSelf);
+            Time.timeScale=1f;
+            }
+            }
+        }
         abc=pauseUI.activeSelf;
         if (Input.GetKeyDown(KeyCode.Escape))
         {

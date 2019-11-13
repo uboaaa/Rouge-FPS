@@ -58,6 +58,7 @@ public class GametoTitle : MonoBehaviour
     }
     public bool GetEnterGame() { return GoGame; }
     public string GetModeSelect() { return ModeSelect; }
+    public static bool GetAnswer(){return Gett;}
     void EnterGame()
     {
       
