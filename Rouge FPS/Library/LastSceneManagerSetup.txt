@@ -1,4 +1,8 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/Scenes/SkillScene.unity
+=======
+- path: Assets/Scenes/GameScene.unity
+>>>>>>> 2730de8271b882057b6baf94ed3ee00b02f86deb
   isLoaded: 1
   isActive: 1
