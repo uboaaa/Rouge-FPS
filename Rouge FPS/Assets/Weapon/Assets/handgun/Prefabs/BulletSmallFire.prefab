@@ -18555,9 +18555,9 @@ GameObject:
   - component: {fileID: 8052225378432778063}
   - component: {fileID: 8052225379692998854}
   - component: {fileID: 8052225379692998853}
-  - component: {fileID: 8052225379692998852}
+  - component: {fileID: 5119570475844605473}
   m_Layer: 11
-  m_Name: Bullet
+  m_Name: BulletSmallFire
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23338,7 +23338,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.00001
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8052225379692998852
+--- !u!114 &5119570475844605473
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -23347,9 +23347,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 8052225378428835069}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b413a1dfb7df0247880bcfbcc86ec62, type: 3}
+  m_Script: {fileID: 11500000, guid: 68db6363547ec5a4a9d05769e2431fa4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitEffectPrefab: {fileID: 2722678073241494824, guid: 608f5d1b858d3724996b1a569e45dcb9,
+  backHitEffectPrefab: {fileID: 2722678073241494824, guid: 608f5d1b858d3724996b1a569e45dcb9,
+    type: 3}
+  enemyHitEffectPrefab: {fileID: 2722678073241494824, guid: 608f5d1b858d3724996b1a569e45dcb9,
     type: 3}
   hitEffectScale: {x: 1, y: 1, z: 1}
+  Damage: 0

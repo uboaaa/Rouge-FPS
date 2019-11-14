@@ -35,7 +35,7 @@ public class EnemyHitEffect : MonoBehaviour
         {
             brightness = 0.5f;
             i = 0.1f;
-            hitflg = false;   
+            hitflg = false;
         }
     }
 
@@ -48,18 +48,24 @@ public class EnemyHitEffect : MonoBehaviour
 
         // ヒットマテリアル情報取得
         hitmaterial = Resources.Load("HitMaterial") as Material;
+
         // ヒットマテリアル挿入
         enemy.GetComponent<SpriteRenderer>().material = hitmaterial;
 
         // // コピー
-        // //Material hm = Instantiate(hitmaterial);
+        // Material hm = Instantiate(hitmaterial);
+        
         // //対象のシェーダー情報を取得
         // Shader sh = enemy.GetComponent<SpriteRenderer>().material.shader;
 
         // //取得したシェーダーを元に新しいマテリアルを作成
         // Material mat = new Material(sh);
 
-        // enemy.GetComponent<SpriteRenderer>().material = mat;
+
+        // // 新しいマテリアルを挿入
+        // enemy.GetComponent<SpriteRenderer>().material = hm;
+
+
 
         
         
@@ -75,16 +81,20 @@ public class EnemyHitEffect : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // ヒットエフェクト更新
+            hitmaterial.SetFloat(propID, brightness);
         // ヒットフラグがONなら
         if (hitflg == true)
         {
             // ヒットエフェクト
             HitEffect();
+            
+
         }
 
-        // ヒットエフェクト更新
-        hitmaterial.SetFloat(propID, brightness);
         
-        Debug.Log(hitmaterial);
+        
+        
+        Debug.Log(brightness);
     }
 }

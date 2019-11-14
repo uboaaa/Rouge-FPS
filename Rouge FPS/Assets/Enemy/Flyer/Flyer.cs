@@ -21,6 +21,10 @@ public class Flyer : MonoBehaviour
     private EnemyParameter ep;
     // ヒットエフェクト
     //private EnemyHitEffect eh;
+    // ダメージナンバーエフェクト
+    private DamageNumEffect dn = null;
+    // デッドエフェクト
+    public GameObject deadeffect;
 
     // 角度計算用
     private float rot;
@@ -31,8 +35,7 @@ public class Flyer : MonoBehaviour
     // アニメ関数
     int trans;
 
-    // デッドエフェクト
-    public GameObject deadeffect;
+    
 
 
     // 弾丸の速度
@@ -69,6 +72,8 @@ public class Flyer : MonoBehaviour
         ep = GetComponent<EnemyParameter>();
         // // エネミーヒットエフェクト
         // eh = GetComponent<EnemyHitEffect>();
+        // ダメージナンバーエフェクト
+        dn = GetComponent<DamageNumEffect>();
     }
 
     void Update()
@@ -164,12 +169,17 @@ public class Flyer : MonoBehaviour
         Debug.Log("FlyerHP");
         Debug.Log(ep.hp);
 
+
+        // 敵の体力が０になったら
         if(ep.hp == 0)
         {
-             GameObject de = Instantiate(deadeffect) as GameObject;
-             de.transform.position = this.gameObject.transform.position;
-             de.transform.position = new Vector3(de.transform.position.x,de.transform.position.y,de.transform.position.z);
-             Destroy(this.gameObject);
+            // 死亡時の爆発エフェクトを再生
+            GameObject de = Instantiate(deadeffect) as GameObject;
+            de.transform.position = this.gameObject.transform.position;
+            de.transform.position = new Vector3(de.transform.position.x,de.transform.position.y,de.transform.position.z);
+            // 解放処理
+            Destroy(de,2.0f);
+            Destroy(this.gameObject);
         }
 
 
@@ -212,7 +222,11 @@ public class Flyer : MonoBehaviour
 
         if (collision.gameObject.tag == "Bullet")
         {
+            // 弾のダメージを取得
+            dn.BulletDamage = collision.gameObject.GetComponent<BulletController>().Damage;
+            
             //eh.hitflg = true;
+            dn.hitflg = true;
             foundflg = true;
             ep.hp -= 10;
             if(ep.hp < 0){ep.hp = 0;}

@@ -43,7 +43,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private AudioSource m_AudioSource;
         private GameObject Pause;
         private bool aaa;
-        
 
         // Use this for initialization
         private void Start()
@@ -66,13 +65,13 @@ namespace UnityStandardAssets.Characters.FirstPerson
         // Update is called once per frame
         private void Update()
         {
-            aaa = true;
+     
             //���Z�b�g�������̂P(���̂Q��PlayerXYZ.cs)
-            // if (Input.GetKey(KeyCode.Return))
-            // { m_MouseLook.Init(transform, m_Camera.transform);
-            //     //m_Camera.transform.rotation = Quaternion.identity;
-            // }
-                if(!PauseScript.pause()){
+            if (Input.GetKey(KeyCode.Return))
+            { m_MouseLook.Init(transform, m_Camera.transform);
+                //m_Camera.transform.rotation = Quaternion.identity;
+            }
+ 
                 RotateView();
             
             // the jump state needs to read here to make sure it is not missed
@@ -94,7 +93,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
  
             m_PreviouslyGrounded = m_CharacterController.isGrounded;
-                }
         }
 
 
