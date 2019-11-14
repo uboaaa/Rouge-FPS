@@ -19,7 +19,12 @@ public class EnemyHitEffect : MonoBehaviour
     // 輝度パラメータ調整用
     private float i = 0.1f;
     // ヒットエフェクトフラグ
-    public bool hitflg = false;
+    private bool hitflg = false;
+    public bool GetHitFlg(){ return hitflg;}
+    public void SetHitFlg(bool _a)
+    {
+        hitflg = _a;
+    }
 
 
 
@@ -82,7 +87,7 @@ public class EnemyHitEffect : MonoBehaviour
     void Update()
     {
         // ヒットエフェクト更新
-            hitmaterial.SetFloat(propID, brightness);
+        hitmaterial.SetFloat(propID, brightness);
         // ヒットフラグがONなら
         if (hitflg == true)
         {
@@ -91,10 +96,7 @@ public class EnemyHitEffect : MonoBehaviour
             
 
         }
-
         
-        
-        
-        Debug.Log(brightness);
+        //Debug.Log(brightness);
     }
 }

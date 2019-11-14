@@ -166,8 +166,8 @@ public class Flyer : MonoBehaviour
 
 
         // デバッグ表示
-        Debug.Log("FlyerHP");
-        Debug.Log(ep.hp);
+        //Debug.Log("FlyerHP");
+        //Debug.Log(ep.hp);
 
 
         // 敵の体力が０になったら
@@ -223,12 +223,12 @@ public class Flyer : MonoBehaviour
         if (collision.gameObject.tag == "Bullet")
         {
             // 弾のダメージを取得
-            dn.BulletDamage = collision.gameObject.GetComponent<BulletController>().Damage;
+            dn.SetBulletDamage(collision.gameObject.GetComponent<BulletController>().Damage);
             
             //eh.hitflg = true;
-            dn.hitflg = true;
+            dn.SetHitFlg(true);
             foundflg = true;
-            ep.hp -= 10;
+            ep.hp -= collision.gameObject.GetComponent<BulletController>().Damage;
             if(ep.hp < 0){ep.hp = 0;}
              //intパラメーターの値を設定する.
             animator.SetInteger("trans", trans);

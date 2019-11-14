@@ -249,7 +249,7 @@ PrefabInstance:
     - target: {fileID: 5262508087837231451, guid: 14719484a0612014eaa6a9e3870f317c,
         type: 3}
       propertyPath: hp
-      value: 50
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 5262508087837231451, guid: 14719484a0612014eaa6a9e3870f317c,
         type: 3}
@@ -696,13 +696,40 @@ PrefabInstance:
     - target: {fileID: 1313344855283631134, guid: a64950f165fdd0e44875f22c1ba0b2ad,
         type: 3}
       propertyPath: bulletPower
-      value: 2000
+      value: 3000
       objectReference: {fileID: 0}
     - target: {fileID: 1313344855283631134, guid: a64950f165fdd0e44875f22c1ba0b2ad,
         type: 3}
       propertyPath: Damage
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1313344855283631134, guid: a64950f165fdd0e44875f22c1ba0b2ad,
+        type: 3}
+      propertyPath: bulletScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1313344855283631134, guid: a64950f165fdd0e44875f22c1ba0b2ad,
+        type: 3}
+      propertyPath: bulletScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1313344855283631134, guid: a64950f165fdd0e44875f22c1ba0b2ad,
+        type: 3}
+      propertyPath: bulletScale.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1313344855283631134, guid: a64950f165fdd0e44875f22c1ba0b2ad,
+        type: 3}
+      propertyPath: bulletPrefab
+      value: 
+      objectReference: {fileID: 4462241966910905477, guid: ae23e0be363e3ce4ab7ebcab4f5271ac,
+        type: 3}
+    - target: {fileID: 1313344855283631134, guid: a64950f165fdd0e44875f22c1ba0b2ad,
+        type: 3}
+      propertyPath: muzzleFlashPrefab
+      value: 
+      objectReference: {fileID: 5657120087087244624, guid: d350cb83ef033eb4b9ed15b5054ff9fa,
+        type: 3}
     - target: {fileID: 1313344853224433820, guid: a64950f165fdd0e44875f22c1ba0b2ad,
         type: 3}
       propertyPath: m_LocalPosition.z
@@ -808,7 +835,7 @@ PrefabInstance:
     - target: {fileID: 1313344853447878179, guid: a64950f165fdd0e44875f22c1ba0b2ad,
         type: 3}
       propertyPath: m_JumpSpeed
-      value: 10
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1313344854831686053, guid: a64950f165fdd0e44875f22c1ba0b2ad,
         type: 3}
@@ -1261,8 +1288,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcce13b603378504f81acde980db4b6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitflg: 0
-  BulletDamage: 0
+  positionY: 2
 --- !u!224 &1067081580 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1313344853224433820, guid: a64950f165fdd0e44875f22c1ba0b2ad,
@@ -1909,6 +1935,26 @@ PrefabInstance:
     - target: {fileID: 3528107588450384863, guid: 91b9f190123511c498d98a3d12d36a23,
         type: 3}
       propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3528107588450384866, guid: 91b9f190123511c498d98a3d12d36a23,
+        type: 3}
+      propertyPath: m_Mass
+      value: 100000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3528107588450384867, guid: 91b9f190123511c498d98a3d12d36a23,
+        type: 3}
+      propertyPath: hp
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 3528107588450384867, guid: 91b9f190123511c498d98a3d12d36a23,
+        type: 3}
+      propertyPath: speed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3528107588450384871, guid: 91b9f190123511c498d98a3d12d36a23,
+        type: 3}
+      propertyPath: positionY
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
