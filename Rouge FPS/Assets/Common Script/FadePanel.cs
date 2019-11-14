@@ -6,7 +6,8 @@ using UnityEngine.SceneManagement;
 public class FadePanel : MonoBehaviour
 {
     float fadeSpeed = 0.02f;        //透明度が変わるスピードを管理
-    float red, green, blue, alfa;   //パネルの色、不透明度を管理
+    float red, green, blue;
+    public static float alfa;   //パネルの色、不透明度を管理
 
     public bool isFadeOut = false;  //フェードアウト処理の開始、完了を管理するフラグ
     public bool isFadeIn = false;   //フェードイン処理の開始、完了を管理するフラグ
@@ -30,13 +31,24 @@ public class FadePanel : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Return) ) {
             if (SceneManager.GetActiveScene().name == "TitleScene")
             {
-                if (gameObject.GetComponent<TitletoGame>().GetModeSelect() == "Start")
+                if (gameObject.GetComponent<TitletoGame>().GetModeSelect() == "Start" )
                 {
                     isFadeOut = true;
                 }
                 else { isFadeOut = false; }
             }
         }
+
+        
+                if (GametoTitle.GetModeSelect()=="ReturnTitle" )
+                {
+                    if (Input.GetKeyDown(KeyCode.Return) ) {
+                    isFadeOut = true;
+                    }
+                }
+                else { isFadeOut = false; }
+            
+        
         if (isFadeIn)
         {
             StartFadeIn();
@@ -76,4 +88,6 @@ public class FadePanel : MonoBehaviour
         fadeImage.color = new Color(red, green, blue, alfa);
     }
     public  bool GetAllBlack() { return Black; }
+
+    public static float AlphaGet(){return alfa;}
 }

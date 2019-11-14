@@ -49,20 +49,20 @@ private float aaaaa;
         }
 
         //ノックバック処理
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            abc = this.transform.position;
-            for (int i = 0; i < 5; i++)
-            {
-                moveDirection.z -= 1.0f;
-                moveFlg = true;
-            }
-        }
-        if (moveFlg)
-        {
-            characterController.Move(moveDirection * Time.deltaTime);
-        }
-        if (abc.z -transform.position.z>10.0f) { moveFlg = false; }
+        // if (Input.GetKeyDown(KeyCode.C))
+        // {
+        //     abc = this.transform.position;
+        //     for (int i = 0; i < 5; i++)
+        //     {
+        //         moveDirection.z -= 1.0f;
+        //         moveFlg = true;
+        //     }
+        // }
+        // if (moveFlg)
+        // {
+        //     characterController.Move(moveDirection * Time.deltaTime);
+        // }
+        // if (abc.z -transform.position.z>10.0f) { moveFlg = false; }
     }
 
         void FixedUpdate()

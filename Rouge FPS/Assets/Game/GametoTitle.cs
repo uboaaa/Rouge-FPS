@@ -8,7 +8,7 @@ public class GametoTitle : MonoBehaviour
 {
     private GameObject gameObject;
     private bool GoGame = false;
-    private string ModeSelect="ReturnGame";
+    public static  string ModeSelect="ReturnGame";
     public static bool Gett=false;
 
     [SerializeField]
@@ -19,6 +19,7 @@ public class GametoTitle : MonoBehaviour
     private GameObject Settings;
    private void Start() {
        Gett=false;
+       ModeSelect="ReturnGame";
    }
 
     // Update is called once per frame
@@ -42,7 +43,7 @@ public class GametoTitle : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.UpArrow)) { ModeSelect = "ReturnGame"; }
                 if (Input.GetKeyDown(KeyCode.DownArrow)) { ModeSelect = "Settings"; }
                RTitle.GetComponent<TextColorChangeScript>().ColorChange(ModeSelect);
-                 if (Input.GetKeyDown(KeyCode.Return)) {SceneManager.LoadScene("TitleScene");}
+                  if (FadePanel.AlphaGet()>1.0f) {SceneManager.LoadScene("TitleScene");}
                 break;
 
             case "Settings":
@@ -57,7 +58,7 @@ public class GametoTitle : MonoBehaviour
 
     }
     public bool GetEnterGame() { return GoGame; }
-    public string GetModeSelect() { return ModeSelect; }
+    public  static string GetModeSelect() { return ModeSelect; }
     public static bool GetAnswer(){return Gett;}
     void EnterGame()
     {

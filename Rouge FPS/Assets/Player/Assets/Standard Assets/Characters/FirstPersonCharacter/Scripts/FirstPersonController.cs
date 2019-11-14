@@ -66,11 +66,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private void Update()
         {
      
-            //���Z�b�g�������̂P(���̂Q��PlayerXYZ.cs)
+        
             if (Input.GetKey(KeyCode.Return))
             { m_MouseLook.Init(transform, m_Camera.transform);
                 //m_Camera.transform.rotation = Quaternion.identity;
             }
+            if(!PauseScript.pause()){
  
                 RotateView();
             
@@ -93,6 +94,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
  
             m_PreviouslyGrounded = m_CharacterController.isGrounded;
+            }
         }
 
 
