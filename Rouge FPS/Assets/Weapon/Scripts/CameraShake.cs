@@ -7,7 +7,8 @@ using UnityEngine;
 
 public class CameraShake : MonoBehaviour 
 {
-    float duration;
+    // パラメーター関係==============================================
+    float duration;             // 揺れ時間
 
     public void Shake(float magnitude,bool loopFlg)
     {
