@@ -19,6 +19,24 @@ public class DragDrop : MonoBehaviour
     [SerializeField] private readonly float alpha = 0.5f;
     // ドラッグ中判定
     private bool dragFlag = false;
+    // UI内判定
+    private bool insideFlag = false;
+    private string currentSkill = "";
+    public string GetSkillName()
+    {
+        return currentSkill;
+    }
+    // スプライトの名前記憶用
+    private string spriteName = "";
+    Parameter param = new Parameter();
+    
+    void Start()
+    {
+        
+        // スプライトの名前を記憶
+        //spriteName = param.
+        
+    }
 
     // マウスクリックしたとき
     void OnMouseDown()
@@ -34,6 +52,12 @@ public class DragDrop : MonoBehaviour
     // マウスボタンを離したとき
     void OnMouseUp()
     {
+        //  UI内で離したとき
+        if(insideFlag)
+        {
+            var swicth = new SkillSwitch();
+            swicth.SetFlag(true);
+        }
         // ドラッグ中フラグオフ
         dragFlag = false;
         // 透明度を下げて表示しない
@@ -57,9 +81,12 @@ public class DragDrop : MonoBehaviour
     void OnTriggerEnter2D(Collider2D col)
     {
         if (col.tag != "DroppableField") return;
+        insideFlag = true;
         // 直前の画像を保存
         currentRenderer = col.GetComponent<SpriteRenderer>();
         currentSprite = currentRenderer.sprite;
+        // 画像の名前を保存
+        currentSkill = currentSprite.name;
     }
 
     // ドロップ可能エリア内にいる間
@@ -85,10 +112,13 @@ public class DragDrop : MonoBehaviour
     void OnTriggerExit2D(Collider2D col)
     {
         if (col.tag != "DroppableField") return;
+        // 
+        insideFlag = false;
         // 直前の画像・色に戻す
         currentRenderer.sprite = currentSprite;
         currentRenderer.color = new Color(1, 1, 1, 1);
     }
+
 
    
 

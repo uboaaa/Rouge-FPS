@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -20,6 +21,8 @@ public class PushKey : MonoBehaviour
     private CSV csv = null;
 
     private GameObject[] text = null;
+    // 抽選されたスキル保存
+    private string[] Skill = new string[3];
 
     // Start is called before the first frame update
     void Start()
@@ -72,12 +75,24 @@ public class PushKey : MonoBehaviour
             // いったん確認
             for (int i = 0; i < 3; i++) 
             {
-                // グレード抽選
-                var grade = lot.GradeLottery("0", 4, 3, 3);
-                // スキル抽選
-                var rnd = lot.SkillLottery(grade);
+                // レベルアップ時呼び出すスキル抽選関数
+                var rnd = lot.LevelUp("0", 4, 3, 3);
+
                 // 仮文字表示
-                ssText[i] = rnd;
+                var text = rnd[(int)Lottery.SKILL.Ability] + ", " + rnd[(int)Lottery.SKILL.Parameter] + ", " + rnd[(int)Lottery.SKILL.Name];
+                ssText[i] = text;
+                // 保存
+                Skill[i] = rnd[(int)Lottery.SKILL.Ability];
+                var s = "Skill/" + Skill[i];
+                var go = "Choice" + (i + 1).ToString();
+                // テクスチャ切り替え
+                GameObject.Find(go).GetComponent<SpriteRenderer>().sprite = null;
+                GameObject.Find(go).GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(s);
+                
+                go += "t";
+                GameObject.Find(go).GetComponent<SpriteRenderer>().sprite = null;
+                GameObject.Find(go).GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(s);
+                
             }
             levelFlag = false;
         }
