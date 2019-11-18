@@ -22,7 +22,7 @@ public class FlushController : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(NowHP);
+        // Debug.Log(NowHP);
 
         if (!once) {
             FirstHP = MyStatus.GetHp();
@@ -30,12 +30,12 @@ public class FlushController : MonoBehaviour
             once = true;
         }
      //HPを持ってくる
-        if (Input.GetKeyDown(KeyCode.C))
+        if (EnemyAttackPower.GetEnemyBHitGet())
         {
-            Debug.Log("FirstHp" + FirstHP);
-            MyStatus.downHp(1.0f);
+            // Debug.Log("FirstHp" + FirstHP);
+          
             NowHP = MyStatus.GetHp();
-            Debug.Log("NowHp" + NowHP);
+            // Debug.Log("NowHp" + NowHP);
 
         }
 

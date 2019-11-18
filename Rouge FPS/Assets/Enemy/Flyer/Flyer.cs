@@ -166,8 +166,8 @@ public class Flyer : MonoBehaviour
 
 
         // デバッグ表示
-        Debug.Log("FlyerHP");
-        Debug.Log(ep.hp);
+        // Debug.Log("FlyerHP");
+        // Debug.Log(ep.hp);
 
 
         // 敵の体力が０になったら
