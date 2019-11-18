@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//マップ生成クラス
 //シーン開始時のみ処理を行う
 public class MapInitializer : MonoBehaviour
 {
@@ -25,12 +26,9 @@ public class MapInitializer : MonoBehaviour
     private GameObject m_floorPrefab;     //床のオブジェクト
     private GameObject m_wallPrefab;      //壁のオブジェクト
     private GameObject m_celingPrefab;    //天井のオブジェクト
-    private GameObject m_spawner_Lizard;  //リザードのスポナー
-
-    public GameObject cube = null;
 
     private DungeonGenerator DG = null;
-    private int[,] m_map;                 //マップ情報用の2次配列
+    private int[,] m_map;                   //マップ情報用の2次配列
 
     private void Awake()
     {
@@ -43,7 +41,12 @@ public class MapInitializer : MonoBehaviour
         
     }
 
-    
+    //更新
+    void Update()
+    {
+        
+    }
+
     // ダンジョンマップ生成
     private void GenerateDungeon()
     {
@@ -71,7 +74,6 @@ public class MapInitializer : MonoBehaviour
         m_wallPrefab = Resources.Load("Prefab/Wall") as GameObject;
         m_floorPrefab = Resources.Load("Prefab/Floor") as GameObject;
         m_celingPrefab = Resources.Load("Prefab/Celing") as GameObject;
-        m_spawner_Lizard = Resources.Load("Prefab/Spawner_Lizard") as GameObject;
 
         //データからオブジェクトを配置
         for(int y = 0; y < MAP_SIZE_Y; y++)
@@ -93,9 +95,6 @@ public class MapInitializer : MonoBehaviour
 
         //プレイヤー出現座標を設定
         SpawnPlayer();
-
-        //スポナーを設定
-        SpawnEnemy();
     }
 
     // プレイヤーの出現座標を設定
@@ -112,44 +111,24 @@ public class MapInitializer : MonoBehaviour
         } while (m_map[position.X, position.Y] != 1);
 
 
-        //***初期座標をグローバル変数に設定
-        SetSpawnData(position);
-    }
-
-    // エネミースポナーの設置
-    private void SpawnEnemy()
-    {
-        Position position;
-        do
-        {
-            var x = Utility.GetRandomInt(0, MAP_SIZE_X - 1);
-            var y = Utility.GetRandomInt(0, MAP_SIZE_Y - 1);
-            position = new Position(x, y);
-        } while (m_map[position.X, position.Y] != 1);
-
-        Instantiate(m_spawner_Lizard, new Vector3(position.X*m_mapScale, 1, position.Y*m_mapScale), new Quaternion());
-
-        //確認用
-        cube.transform.position = new Vector3(position.X*m_mapScale, 0, position.Y*m_mapScale);
-    }
-
-    private void SetSpawnData(Position pos)
-    {
-        g_spawn_posX = pos.X * m_mapScale;
+        //初期座標をグローバル変数に設定
+        g_spawn_posX = position.X * m_mapScale;
         g_spawn_posY = 1;
-        g_spawn_posZ = pos.Y * m_mapScale;
+        g_spawn_posZ = position.Y * m_mapScale;
         g_spawn_rotX = 0;
         g_spawn_rotY = 0;
         g_spawn_rotZ = 0;
     }
 
+    
+
     //初期地点取得関数
     //座標…"p"or回転…"r" + 各軸(x,y,z)を引数で指定
     //（例）x座標：px
-    public static float GetSpawnData(string element)
+    public static float GetSpawnData(string _element)
     {
         float result = 0;
-        switch (element)
+        switch (_element)
         {
             case "px":
                 result = g_spawn_posX;
@@ -179,6 +158,17 @@ public class MapInitializer : MonoBehaviour
     public int[,] GetMap()
     {
         return m_map;
+    }
+
+    public int GetScale()
+    {
+        return m_mapScale;
+    }
+
+    public void GetRoomList(out Dictionary<int,Room> _roomList)
+    {
+        _roomList = new Dictionary<int, Room>();
+        _roomList.AddRange(DG.GetRoomList());
     }
 
 }

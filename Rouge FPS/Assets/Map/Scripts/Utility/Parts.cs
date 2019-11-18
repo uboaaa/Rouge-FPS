@@ -20,6 +20,17 @@ public class Room
         return answer;
     }
 
+    //
+    public bool contains(Position pos)
+    {
+        if(pos.X>Start.X && pos.X<End.X && pos.Y>Start.Y && pos.Y < End.Y)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
     //コンストラクタ(始点、終点)
     Room(Position start, Position end)
     {

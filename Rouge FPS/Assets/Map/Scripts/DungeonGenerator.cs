@@ -23,13 +23,13 @@ public class DungeonGenerator
 
     //ダンジョン生成関数
     //※生成後、二次配列を返す
-    public int[,] GenerateMap(int mapSizeX, int mapSizeY, int maxRoom)
+    public int[,] GenerateMap(int _mapSizeX, int _mapSizeY, int _maxRoom)
     {
-        this.m_mapSizeX = mapSizeX;
-        this.m_mapSizeY = mapSizeY;
-        this.m_maxRoom = maxRoom;
+        this.m_mapSizeX = _mapSizeX;
+        this.m_mapSizeY = _mapSizeY;
+        this.m_maxRoom = _maxRoom;
 
-        int[,] map = new int[mapSizeX, mapSizeY];
+        int[,] map = new int[_mapSizeX, _mapSizeY];
 
 
         //区画を生成
@@ -88,7 +88,7 @@ public class DungeonGenerator
     //===================================================================//
     //区画を生成
     //===================================================================//
-    private void CreateRange(int maxRoom)
+    private void CreateRange(int _maxRoom)
     {
         //区画のリストの初期値としてマップ全体を入れる
         m_rangeList.Add(m_idCount, new Range(0, 0, m_mapSizeX - 1, m_mapSizeY - 1, m_idCount));
@@ -98,7 +98,7 @@ public class DungeonGenerator
        
         //部屋数に合わせて分割
         //分割回数を設定
-        int devCount = maxRoom - 1;
+        int devCount = _maxRoom - 1;
         int count = 0;
         int loopCnt = 0;
         do
@@ -146,18 +146,18 @@ public class DungeonGenerator
     //==================================================================//
     //部屋数に応じて分割する処理
     //==================================================================//
-    private bool SplitRange(bool isVertical)
+    private bool SplitRange(bool _isVertical)
     {
         bool isSplit = false;
 
         foreach (KeyValuePair<int,Range> range in m_rangeList)
         {
             //これ以上分割できない場合は次の区画へ
-            if (isVertical && range.Value.width_Y() < MINIMUM_RANGE_WIDTH * 2 + 1)
+            if (_isVertical && range.Value.width_Y() < MINIMUM_RANGE_WIDTH * 2 + 1)
             {
                 continue;
             }
-            else if (!isVertical && range.Value.width_X() < MINIMUM_RANGE_WIDTH * 2 + 1)
+            else if (!_isVertical && range.Value.width_X() < MINIMUM_RANGE_WIDTH * 2 + 1)
             {
                 continue;
             }
@@ -171,15 +171,15 @@ public class DungeonGenerator
             }
 
             //長さから最小の区画サイズ２つ分を引き、残りからランダムで分割位置を決める
-            int length = isVertical ? range.Value.width_Y() : range.Value.width_X();
+            int length = _isVertical ? range.Value.width_Y() : range.Value.width_X();
             int margin = length - MINIMUM_RANGE_WIDTH * 2;                                              //区分け可能の余分幅
-            int baseIndex = isVertical ? range.Value.Start.Y : range.Value.Start.X;                     //最小基準の位置
+            int baseIndex = _isVertical ? range.Value.Start.Y : range.Value.Start.X;                     //最小基準の位置
             int devideIndex = baseIndex + MINIMUM_RANGE_WIDTH + Utility.GetRandomInt(1, margin) - 1;    //分割位置
 
             //分割された区画の大きさを変更し、新しい区画を追加リストに追加
             //同時に、分割した境界を通路として保存→通路分を引かないので保存しない
             Range newRange = new Range();
-            if (isVertical)
+            if (_isVertical)
             {
                 newRange = new Range(range.Value.Start.X, devideIndex, range.Value.End.X, range.Value.End.Y, m_idCount);                //新しい区画を生成
                 range.Value.End.Y = devideIndex;                                                                                        //分割された区画の座標変更
@@ -209,18 +209,18 @@ public class DungeonGenerator
     //=======================================================================//
     //隣接する区画があるかチェックする処理
     //=======================================================================//
-    private void CheckNext(Range self)
+    private void CheckNext(Range _self)
     {
         //各区画のChangeVertexで検索
         foreach (KeyValuePair<int, Range> other in m_rangeList)
         {
             //同じ区画IDは飛ばす
-            if (self.Id == other.Value.Id) continue;
+            if (_self.Id == other.Value.Id) continue;
             //隣接した場合、組み合わせをリストにセット
-            if (self.IsNext(other.Value))
+            if (_self.IsNext(other.Value))
             {
                 int[] newComb = new int[2];
-                newComb[0] = self.Id;
+                newComb[0] = _self.Id;
                 newComb[1] = other.Value.Id;
                 if (newComb[0] > newComb[1])
                 {
@@ -240,19 +240,19 @@ public class DungeonGenerator
     //組み合わせリスト内に同じ組み合わせがないか探査する処理
     //****逐一探査するので、最後にまとめてソート後探査したい****
     //=========================================================================//
-    private void SetCombo(int[] newComb)
+    private void SetCombo(int[] _newComb)
     {
         //各組合せと比較する
         foreach (int[] comb in m_rangeIdComb)
         {
             //組み合わせが違うなら次へ
-            if (comb[0] != newComb[0]) continue;
-            if (comb[1] != newComb[1]) continue;
+            if (comb[0] != _newComb[0]) continue;
+            if (comb[1] != _newComb[1]) continue;
             //同じの場合はセットせずに関数を終了
             return;
         }
         //組み合わせがリストになければ、新たに追加
-        m_rangeIdComb.Add(newComb);
+        m_rangeIdComb.Add(_newComb);
     }
 
     //=======================================================================//
@@ -352,6 +352,17 @@ public class DungeonGenerator
     //========================================
     //取得用関数群
     //========================================
+    public Dictionary<int,Room> GetRoomList()
+    {
+        Dictionary<int, Room> _list = new Dictionary<int, Room>();
+        foreach(KeyValuePair<int,Range> range in m_rangeList)
+        {
+            _list.Add(range.Key, range.Value.m_Room);
+        }
+
+        return _list;
+    }
+
     public Room SmallistRoom()
     {
         //最小面積の部屋のIDを取得

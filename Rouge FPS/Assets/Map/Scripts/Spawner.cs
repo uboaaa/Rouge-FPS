@@ -8,7 +8,7 @@ public class Spawner : MonoBehaviour
     private GameObject m_Enemy = null;              //出現する敵オブジェクト
 
     [SerializeField]
-    private int m_SpawnMax = 2;                     //スポーン最大数
+    private int m_SpawnMax = 5;                     //スポーン最大数
 
     [SerializeField]
     private float m_SpawnInterval = 20.0f;          //スポーン待機時間
