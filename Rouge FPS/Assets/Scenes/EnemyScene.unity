@@ -603,6 +603,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FPSController
       objectReference: {fileID: 0}
+    - target: {fileID: 1313344853447878168, guid: a64950f165fdd0e44875f22c1ba0b2ad,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1313344853447878176, guid: a64950f165fdd0e44875f22c1ba0b2ad,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -820,7 +825,23 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 1313344855234376560, guid: a64950f165fdd0e44875f22c1ba0b2ad,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1313344854940966400, guid: a64950f165fdd0e44875f22c1ba0b2ad,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 1313344854940966409, guid: a64950f165fdd0e44875f22c1ba0b2ad, type: 3}
+    - {fileID: 1313344854940966410, guid: a64950f165fdd0e44875f22c1ba0b2ad, type: 3}
+    - {fileID: 1313344854940966411, guid: a64950f165fdd0e44875f22c1ba0b2ad, type: 3}
+    - {fileID: 1313344854940966404, guid: a64950f165fdd0e44875f22c1ba0b2ad, type: 3}
+    - {fileID: 1313344854940966405, guid: a64950f165fdd0e44875f22c1ba0b2ad, type: 3}
+    - {fileID: 1313344854940966400, guid: a64950f165fdd0e44875f22c1ba0b2ad, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a64950f165fdd0e44875f22c1ba0b2ad, type: 3}
 --- !u!1 &648867174 stripped
 GameObject:
@@ -1263,6 +1284,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitflg: 0
   BulletDamage: 0
+  FeedOutFlg: 0
+  AlphaTime: 0
 --- !u!224 &1067081580 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1313344853224433820, guid: a64950f165fdd0e44875f22c1ba0b2ad,

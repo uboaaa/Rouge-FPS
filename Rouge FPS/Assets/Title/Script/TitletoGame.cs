@@ -39,7 +39,7 @@ public class TitletoGame : MonoBehaviour
             case "Start":
                 if (Input.GetKeyDown(KeyCode.RightArrow)) { ModeSelect = "Setting"; }
                 if (Input.GetKeyDown(KeyCode.LeftArrow)) { ModeSelect = "Exit"; }
-                if (GoGame) { EnterGame(); }
+                if (Input.GetKeyDown(KeyCode.Return)) { EnterGame(); }
                 Mode[0].GetComponent<TextColorChange>().ColorChange(ModeSelect);
                 break;
 

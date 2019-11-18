@@ -45,7 +45,7 @@ private float aaaaa;
 
         if (ClearCheckFlg) {
 
-            UpdatePlayerXYZ(abc.x, abc.y, abc.z);
+            UpdatePlayerXYZ(abc.x, 15, abc.z);
         }
 
         //ノックバック処理
