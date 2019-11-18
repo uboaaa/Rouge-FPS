@@ -95,6 +95,6 @@ public class EnemyHitEffect : MonoBehaviour
         
         
         
-        Debug.Log(brightness);
+        // Debug.Log(brightness);
     }
 }

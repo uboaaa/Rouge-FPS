@@ -12,7 +12,11 @@ public class MergeScenes : MonoBehaviour
         SceneManager.LoadScene("MapScene", LoadSceneMode.Additive);
         SceneManager.LoadScene("PlayerScene", LoadSceneMode.Additive);
 
+<<<<<<< Updated upstream
         SceneManager.LoadScene("EnemyScene", LoadSceneMode.Additive);
+=======
+        // SceneManager.LoadScene("EnemyScene", LoadSceneMode.Additive);
+>>>>>>> Stashed changes
         //SceneManager.LoadScene("SkillScene", LoadSceneMode.Additive);
         //SceneManager.LoadScene("WeaponScene", LoadSceneMode.Additive);
 

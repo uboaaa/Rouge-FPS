@@ -8,8 +8,12 @@ public class EnemyAttackPower : MonoBehaviour
     private EnemyParameter ep = null;
     public int enemyatkpow = 0;
     public bool SelfFlg = false;
+
+    public static bool DamageFlg;
     void Start()
     {
+        DamageFlg=false;
+
         if(SelfFlg == false)
         {
             ep = GetComponent<EnemyParameter>();
@@ -24,4 +28,13 @@ public class EnemyAttackPower : MonoBehaviour
     {
         //Debug.Log(enemyatkpow);
     }
+        void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "Player"){
+        MyStatus.downHp((float)enemyatkpow);
+        DamageFlg=true;
+        Destroy(this);}
+
+    }
+   public static bool GetEnemyBHitGet(){return DamageFlg;}
 }
