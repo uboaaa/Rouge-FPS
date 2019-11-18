@@ -606,7 +606,7 @@ PrefabInstance:
     - target: {fileID: 1313344853447878168, guid: a64950f165fdd0e44875f22c1ba0b2ad,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1313344853447878176, guid: a64950f165fdd0e44875f22c1ba0b2ad,
         type: 3}
@@ -1947,6 +1947,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Sample Map
+      objectReference: {fileID: 0}
+    - target: {fileID: 4187096943413967225, guid: c0cc9fb75c076b94ebfecfecbf4cdccd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4187096943413967224, guid: c0cc9fb75c076b94ebfecfecbf4cdccd,
         type: 3}
