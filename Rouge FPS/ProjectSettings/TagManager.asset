@@ -6,7 +6,8 @@ TagManager:
   tags:
   - Enemy
   - Bullet
-  - EnemyBullet
+  - DroppableField
+  - mousePoint
   layers:
   - Default
   - TransparentFX

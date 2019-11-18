@@ -9,7 +9,21 @@ using UnityEngine;
 // 選ばれたグレードの中からランダムで１つスキルを抽選する
 // グレードは重みとしても計算する
 public class Lottery : MonoBehaviour
-{   
+{
+    // CSV読み込みと保存リスト
+    private List<string[]> list = new List<string[]>();
+    private CSV csv = new CSV();
+    // enumで用意
+    public enum SKILL
+    {
+        // 能力(ATK,DEF...等)
+        Ability = 0,
+        // 効果値(int)
+        Parameter = 1,
+        // 表示するテクスチャの名前
+        Name = 2
+    };
+
     // =============
     // 抽体の関数
     // =============
@@ -41,21 +55,24 @@ public class Lottery : MonoBehaviour
         return retIndex + grade;
     }
     // 付けるスキルそのものを抽選する
-    public string SkillLottery(int _grade)
+    public string[] SkillLottery(int _grade)
     {
         // グレード文字結合
         var s = "Grade" + _grade.ToString();
         // CSV読み込み
-        var list = new List<string[]>();
-        var c = new CSV();
-        c.Read(ref list, s);
+        csv.Read(ref list, s);
         // 行数取得、ランダム抽選
         var len = list.Count();
         var rnd = Random.Range(1, len + 1);
-        return list[rnd][2];
+        return list[rnd];
     }
-
-
+    // 上の関数二つをまとめたもの
+    public string[] LevelUp(string _grade, params int[] _ratioTable)
+    {
+        var grade = GradeLottery(_grade, _ratioTable);
+        var skill = SkillLottery(grade);
+        return skill;
+    }
     void Awake()
     {
         
@@ -65,7 +82,6 @@ public class Lottery : MonoBehaviour
     {
 
     }
-
     // Update is called once per frame
     void Update()
     {
