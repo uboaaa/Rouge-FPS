@@ -7,6 +7,7 @@ public enum Group
     easy,normal,hard
 }
 
+[System.Serializable]
 public class EnemyGroup
 {
     public Group group = Group.easy;
@@ -41,9 +42,6 @@ public class MapAI : MonoBehaviour
         m_mapScale = initializer.GetScale();
         //ID・部屋リストを取得
         initializer.GetRoomList(out m_roomList);
-
-        //リストに初期敵を設定
-        m_enemyList.Add(new EnemyGroup());
     }
 
     //
