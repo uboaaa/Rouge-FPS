@@ -21,8 +21,39 @@ public class Parameter : MonoBehaviour
         public int Ammo;
         public bool isPrimary;
     }
+    // CSVDATAの順番
+    public enum CSVValue
+    {
+        NAME = 0,
+        VALUE = 1,
+        ACTIVE = 2,
+        SLOTNUMBER = 3
+    };
+
+    public class SkillSlot
+    {
+        // スキルスロット枠が使えるかどうか(1:ON 0:OFF)
+        public int active;
+        // スプライトの名前
+        public string name;
+        // 効果
+        public int value;
+    }
+
     // パラメーター実体
     private Param param;
+
+
+
+    // スキルスロット最大値
+    public const int SLOTMAX = 3;
+    // スキルスロット実体
+    private SkillSlot[] skillSlot = new SkillSlot[SLOTMAX];
+    public SkillSlot[] GetSkillSlot()
+    {
+        return skillSlot;
+    }
+
 
     // CSV読み込み用
     private CSV csv;
@@ -113,11 +144,40 @@ public class Parameter : MonoBehaviour
         param.isPrimary = csvDatas[9][1] == "true" ? true : false;
     }
 
+    // csvDataからskillSlotへ変換
+    public void CSVToSkillSlot()
+    {
+        // スキルスロットのカウンター
+        var cnt = 0;
+        // CSVの縦分回す
+        for(var i = 0; i < csvDatas.Count(); i++)
+        {
+            // CSVデータからアクティブのパラメータをスキルスロットにセット
+            if(csvDatas[i][(int)CSVValue.ACTIVE] == "1")
+            {
+                skillSlot[(int)CSVValue.SLOTNUMBER].name = csvDatas[i][(int)CSVValue.NAME];
+                skillSlot[(int)CSVValue.SLOTNUMBER].value = int.Parse(csvDatas[i][(int)CSVValue.VALUE]);
+                skillSlot[(int)CSVValue.SLOTNUMBER].active = 1;
+                cnt++;
+            }
+        }
+        // 3枠未満だった場合の処理
+    }
+
+
     // Start is called before the first frame update
     void Start()
     {
         text = new GameObject();
         text = GameObject.Find("CheckParameter");
+
+        // 初期スキル設定
+        for (var i = 0; i < 3; i++)
+        {
+            skillSlot[i].active = 1;
+            skillSlot[i].name = "ATK";
+            skillSlot[i].value = 10;
+        }
     }
     // Update is called once per frame
     void Update()
