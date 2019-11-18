@@ -14,7 +14,7 @@ public class Initialize : MonoBehaviour
         levelUpFlag = _result;
     }
     Parameter param = new Parameter();
-
+    GameObject skillSlot = new GameObject();
     // プレハブの名前
     const string WEAPONSLOT = "Skill/WeaponSlot";
 
@@ -29,29 +29,34 @@ public class Initialize : MonoBehaviour
         WeaponPos[2].x = -5;
         WeaponPos[2].y = -2;
         // プレハブ読み込み
-        GameObject skillSlot = (GameObject)Resources.Load(WEAPONSLOT);
-        // スプライト変更
-        var sprite = skillSlot.GetComponent<SpriteRenderer>().sprite;
-        // var skill = param.GetSkillSlot();
-        //string s;
+        skillSlot = (GameObject)Resources.Load(WEAPONSLOT);
+        string s;
         // 現在のついているスキル設定
-        //for (var i = 0; i < Parameter.SLOTMAX; i++)
-        //{
-            //s = "Skill/" + skill[i].name;
-            sprite = null;
-            sprite = Resources.Load<Sprite>("Skill/SPD");
-        // 生成
-            Instantiate(skillSlot, new Vector3(WeaponPos[0].x, WeaponPos[0].y, 0), Quaternion.identity);
-        //}
+        for (var i = 0; i < Parameter.SLOTMAX; i++)
+        {
+            s = "Skill/" + param.GetSkillSlot()[i].name;
+            skillSlot.GetComponent<SpriteRenderer>().sprite = null;
+            skillSlot.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(s);
+        }
     }
 
     // Update is called once per frame
     void Update()
-    {
+    { 
+        if(Input.GetKeyDown(KeyCode.A))
+        {
+            levelUpFlag = true;
+        }
+        // レベルアップ時
         if(levelUpFlag)
         {
-            // スプライト配置
-
+            levelUpFlag = false;
+            // スプライト配置　細かい演出はこの辺に書く
+            for (var i = 0; i < Parameter.SLOTMAX; i++)
+            {
+                // 現在のスキルスプライト
+                Instantiate(skillSlot, new Vector3(WeaponPos[i].x, WeaponPos[i].y, 0), Quaternion.identity);
+            }
         }
     }
 }

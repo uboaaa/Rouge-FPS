@@ -13,34 +13,30 @@ public class PushKey : MonoBehaviour
     private bool levelFlag;
     // スキルスロット
     private string[] ssText;
-    private GameObject[] skillSlot;
+    private GameObject[] skillSlot = new GameObject[Parameter.SLOTMAX];
     // 抽選用
-    private Lottery lot = null;
-    private List<string[]> skillList = null;
+    private Lottery lot = new Lottery();
+    private List<string[]> skillList = new List<string[]>();
     // CSV読み書き
-    private CSV csv = null;
-
-    private GameObject[] text = null;
+    private CSV csv = new CSV();
+    
     // 抽選されたスキル保存
     private string[] Skill = new string[3];
 
     // Start is called before the first frame update
     void Start()
     {
-        lot = new Lottery();
         levelFlag = false;
         // 確定しているスキルのテキスト表示用
         ssText = new string[3];
         ssText[0] = "none";
         ssText[1] = "none";
         ssText[2] = "none";
-        skillSlot = new GameObject[3];
+
         skillSlot[0] = GameObject.Find("SkillSlot1");
         skillSlot[1] = GameObject.Find("SkillSlot2");
         skillSlot[2] = GameObject.Find("SkillSlot3");
-
-        skillList = new List<string[]>();
-        csv = new CSV();
+        
         /*
         text = new GameObject[6];
         text[0] = GameObject.Find("Skill1-2");

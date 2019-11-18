@@ -113,11 +113,6 @@ public class Parameter : MonoBehaviour
         // パラメーター設定
         param = new Param();
         CSVToParam();
-        //skillSlot[0].active = 0;
-        for (var i = 0; i < 3; i++)
-        {
-          //  skillSlot[i].name = "SPD";
-        }
     }
 
     // ParamをCSVData用に変換
@@ -175,6 +170,14 @@ public class Parameter : MonoBehaviour
     {
         text = new GameObject();
         text = GameObject.Find("CheckParameter");
+
+        // 初期スキル設定
+        for (var i = 0; i < 3; i++)
+        {
+            skillSlot[i].active = 1;
+            skillSlot[i].name = "ATK";
+            skillSlot[i].value = 10;
+        }
     }
     // Update is called once per frame
     void Update()
