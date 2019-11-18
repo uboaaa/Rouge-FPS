@@ -164,8 +164,8 @@ public class Lizard : MonoBehaviour
 
 
         // デバッグ表示
-        Debug.Log("LizardHP");
-        Debug.Log(ep.hp);
+        // Debug.Log("LizardHP");
+        // Debug.Log(ep.hp);
 
         // 敵の体力が０になったら
         if(ep.hp == 0)
