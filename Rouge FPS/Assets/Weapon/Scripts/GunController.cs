@@ -37,7 +37,8 @@ public class GunController : MonoBehaviour
     [SerializeField] Vector3    bulletScale = new Vector3(1.0f,1.0f,1.0f);  // 弾の大きさ変更用
     [SerializeField] GameObject muzzleFlashPrefab;                          // マズルフラッシュのPrefab
     [SerializeField] Vector3    muzzleFlashScale = new Vector3(1.0f,1.0f,1.0f);     // マズルフラッシュの大きさ変更用
-    [SerializeField] float shakePow;                                        // 射撃時の揺れの強さ
+    [SerializeField] float cameraShakePow;                                          // カメラ揺らし用
+    [SerializeField] float muzzleShakePow;                                          // マズル揺らし用
     // パラメーター関係==============================================
     public float GunEXP;                                    // 経験値
     public Text AmmoCheck;                                  // 残弾数テキスト用
@@ -49,9 +50,10 @@ public class GunController : MonoBehaviour
     private float AmmoPlus;
     // スクリプト関係================================================
     ChangeEquip CEScript;                   // [ChangeEquip]用の変数
-    CameraShake shakeScript;                // [shakeScript]用の変数
+    CameraShake cameraScript;                // [CameraShake]用の変数
     Animator animator;                      // [Animator]用の変数
     AnimatorStateInfo animatorInfo;         // Animatorの情報を入れる
+
     // プロパティ====================================================
     public int damage
     {
@@ -74,8 +76,9 @@ public class GunController : MonoBehaviour
         animator = GetComponent<Animator>();
 
         // 上の階層のオブジェクトにアタッチしているスクリプトを参照する
-        shakeScript = GetComponentInParent<CameraShake>();
+        cameraScript = GetComponentInParent<CameraShake>();
     }
+
     void Update()
     {   
         AmmoCheck.text = Ammo + "/" + MaxAmmo;
@@ -109,9 +112,7 @@ public class GunController : MonoBehaviour
                 animator.SetBool("ReloadFlg",true);
                 StartCoroutine(ReloadTimer());
             }
-        }
-        else
-        {
+        } else {
             animator.SetBool("ShootFlg",false);
             animator.SetBool("ReloadFlg",false);
         }
@@ -134,8 +135,8 @@ public class GunController : MonoBehaviour
             animator.SetBool("ShootFlg",false);
         }
 
-        // 射撃中画面を揺らす
-        shakeScript.Shake(shakePow,shooting);
+        cameraScript.Shake(cameraShakePow,shooting);  // 画面を揺らす
+        
 
         //==================================================================================================
         // デバッグ表示
@@ -199,9 +200,7 @@ public class GunController : MonoBehaviour
 
             shooting = false;
             shootEnabled = true;
-        }
-        else
-        {
+        } else {
             yield return null;
         }
     }
@@ -219,27 +218,21 @@ public class GunController : MonoBehaviour
                 MaxAmmo = MaxAmmo - (OneMagazine - Ammo);
                 Ammo = OneMagazine;
                 reloading = false;
-            }
-            else 
-            {
+            } else {
                 int NowAmmo;
                 NowAmmo = OneMagazine - Ammo;
                 if (NowAmmo > MaxAmmo)
                 {
                     Ammo = MaxAmmo+Ammo;
                     MaxAmmo = 0;
-                }
-                else 
-                {
+                } else {
                     MaxAmmo = MaxAmmo - NowAmmo;
                     Ammo = Ammo + NowAmmo;
                 }
 
                 reloading = false;
             }
-        }
-        else
-        {
+        } else {
             yield return null;
         }
 

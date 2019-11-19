@@ -36,9 +36,7 @@ public class BulletController : MonoBehaviour
             // プライマリ武器のGunControllerを持ってくる
             GameObject anotherObject = GameObject.Find(CEScript.PrimaryWeapon.name);
             GCScript = anotherObject.GetComponent<GunController>();
-        }
-        else if(CEScript.ownGun == 2)
-        {
+        } else if(CEScript.ownGun == 2) {
             // セカンダリ武器のGunControllerを持ってくる
             GameObject anotherObject = GameObject.Find(CEScript.SecondaryWeapon.name);
             GCScript = anotherObject.GetComponent<GunController>();
@@ -56,12 +54,15 @@ public class BulletController : MonoBehaviour
 
     void HitEffect(GameObject Prefab)
     {
-        // エフェクトを生成
-        GameObject　hitEffect = Instantiate<GameObject>(Prefab,new Vector3(hitPos.x,hitPos.y,hitPos.z),rotation);
-        hitEffect.transform.localScale = hitEffectScale;
+        if(Prefab != null)
+        {
+            // エフェクトを生成
+            GameObject　hitEffect = Instantiate<GameObject>(Prefab,new Vector3(hitPos.x,hitPos.y,hitPos.z),rotation);
+            hitEffect.transform.localScale = hitEffectScale;
 
-        // エフェクト削除
-		Destroy(hitEffect, 5.0f);
+            // エフェクト削除
+		    Destroy(hitEffect, 5.0f);
+        }
     }
 
     void OnCollisionEnter(Collision collision)

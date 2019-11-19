@@ -9387,6 +9387,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   backHitEffectPrefab: {fileID: 2722678073241494824, guid: 608f5d1b858d3724996b1a569e45dcb9,
     type: 3}
-  enemyHitEffectPrefab: {fileID: 2722678073241494824, guid: 608f5d1b858d3724996b1a569e45dcb9,
+  enemyHitEffectPrefab: {fileID: 5657120087087244624, guid: d350cb83ef033eb4b9ed15b5054ff9fa,
     type: 3}
   hitEffectScale: {x: 1, y: 1, z: 1}
