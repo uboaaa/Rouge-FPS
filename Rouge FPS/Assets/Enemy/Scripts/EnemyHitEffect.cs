@@ -52,10 +52,11 @@ public class EnemyHitEffect : MonoBehaviour
         enemy = this.gameObject;
 
         // ヒットマテリアル情報取得
-        hitmaterial = Resources.Load("HitMaterial") as Material;
+        //hitmaterial = Resources.Load("HitMaterial") as Material;
 
         // ヒットマテリアル挿入
-        enemy.GetComponent<SpriteRenderer>().material = hitmaterial;
+        //enemy.GetComponent<SpriteRenderer>().material = hitmaterial;
+        hitmaterial = enemy.GetComponent<SpriteRenderer>().material;
 
         // // コピー
         // Material hm = Instantiate(hitmaterial);
