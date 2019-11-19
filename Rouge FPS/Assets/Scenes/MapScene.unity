@@ -224,9 +224,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4ae9764ab071ef44910cf054166aeac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MAP_SIZE_X: 50
-  MAP_SIZE_Y: 40
-  MAX_ROOM_NUMBER: 11
+  MAP_SIZE_X: 30
+  MAP_SIZE_Y: 30
+  MAX_ROOM_NUMBER: 6
   m_mapScale: 4
 --- !u!4 &1249066334
 Transform:
@@ -254,6 +254,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79364de309b5cc6469a444fdea9413c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_enemyList:
+  - group: 1
+    obj: {fileID: 2744920058350558036, guid: ad2933c45f2f2244dae888f40fca6734, type: 3}
+  - group: 0
+    obj: {fileID: 1779264351526620451, guid: d237077dad4c1d74a92629a5e33f991c, type: 3}
+  target: {fileID: 1278710102}
 --- !u!1 &1278710102
 GameObject:
   m_ObjectHideFlags: 0
