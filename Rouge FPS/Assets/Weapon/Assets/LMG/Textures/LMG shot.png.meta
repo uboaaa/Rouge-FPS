@@ -5,9 +5,6 @@ TextureImporter:
     21300000: LMG shot_0
     21300002: LMG shot_1
     21300004: LMG shot_2
-    21300006: LMG shot_3
-    21300008: LMG shot_4
-    21300010: LMG shot_5
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -117,16 +114,16 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 612
+        width: 787
         height: 441
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9e71406eb8d2ec74f91a686d75bdced3
+      spriteID: 692420c239953674a8f4a7d3dddbdef5
       vertices: []
       indices: 
       edges: []
@@ -135,18 +132,18 @@ TextureImporter:
       name: LMG shot_1
       rect:
         serializedVersion: 2
-        x: 612
+        x: 787
         y: 0
-        width: 612
+        width: 787
         height: 441
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a11ea9cac60fbd84e91f9af928b3858a
+      spriteID: 298de4417df8874488c279d73b021a36
       vertices: []
       indices: 
       edges: []
@@ -155,78 +152,18 @@ TextureImporter:
       name: LMG shot_2
       rect:
         serializedVersion: 2
-        x: 1224
+        x: 1574
         y: 0
-        width: 612
+        width: 787
         height: 441
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 66e8dd601cdb5cd42b5843c40fc786d9
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: LMG shot_3
-      rect:
-        serializedVersion: 2
-        x: 1836
-        y: 0
-        width: 612
-        height: 441
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 05990bdfbc43d3846b504db52885c02a
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: LMG shot_4
-      rect:
-        serializedVersion: 2
-        x: 2448
-        y: 0
-        width: 612
-        height: 441
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a0990ea6816fb5c46b753e565bd81263
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: LMG shot_5
-      rect:
-        serializedVersion: 2
-        x: 3060
-        y: 0
-        width: 612
-        height: 441
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 48c9c264dd7a561469bf7cabdeccb353
+      spriteID: 81b376dcee2b46d4d8f94ae698ed625e
       vertices: []
       indices: 
       edges: []
@@ -234,7 +171,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: aacd1c085a214c44285090f84814ead9
+    spriteID: 8b4165ff01a115c4ba55604156876bcc
     vertices: []
     indices: 
     edges: []

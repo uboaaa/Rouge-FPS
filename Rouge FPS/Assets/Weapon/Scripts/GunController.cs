@@ -8,117 +8,149 @@ using UnityEngine;
 using UnityEngine.UI;
 public class GunController : MonoBehaviour
 {
-    public enum GunType { AssaultRifle, SubMachineGun, LightMachineGun, HandGun, RocketLauncher, ShotGun, LaserGun, FlameThrower }
-    public enum GunRank { Rank1, Rank2, Rank3 }
-    [SerializeField] public enum ShootMode { AUTO, SEMIAUTO }
-    [SerializeField] public ShootMode  shootMode = ShootMode.AUTO;
-    [SerializeField] GunType    gunType     = GunType.AssaultRifle;
-    [SerializeField] GunRank    gunRank     = GunRank.Rank1;
-    public float GunEXP;
-    [SerializeField] int        skillSlot   = 1;
-    [SerializeField] int        OneMagazine = 0;
-    public int oneMagazine
-    {
-        get{return OneMagazine;}
-    }
-    [SerializeField] int        MaxAmmo = 0;
-    public int maxAmmo
-    {
-        get{return MaxAmmo;}
-    }
-    [SerializeField] int        Damage = 1;
+    // インスペクター関係============================================
+    // 種類
+    public enum GunType {
+                        AssaultRifle,           // アサルトライフル
+                        SubMachineGun,          // サブマシンガン
+                        LightMachineGun,        // ライトマシンガン
+                        HandGun,                // ハンドガン
+                        RocketLauncher,         // ロケットランチャー
+                        ShotGun,                // ショットガン
+                        LaserGun,               // レーザーガン
+                        FlameThrower            // 火炎放射器
+                        }
+    public enum GunRank { Rank1, Rank2, Rank3 }                             // ランク
+    [SerializeField] public enum ShootMode { AUTO, SEMIAUTO }               // 単発が連射か
+    [SerializeField] public ShootMode  shootMode = ShootMode.AUTO;          // 武器の発射モード
+    [SerializeField] GunType    gunType     = GunType.AssaultRifle;         // 種類情報
+    [SerializeField] GunRank    gunRank     = GunRank.Rank1;                // ランク情報
+    [SerializeField] int        skillSlot   = 1;                            // スキルスロット数
+    [SerializeField] int        OneMagazine = 0;                            // マガジン内の弾
+    [SerializeField] int        MaxAmmo = 0;                                // 残弾数
+    [SerializeField] int        Damage = 1;                                 // 火力
+    [SerializeField] float      shootInterval = 0.15f;                      // 次発射までの間の時間
+    [SerializeField] float      reloadInterval = 5.0f;                      // リロード終わりまでの時間
+	[SerializeField] float      bulletPower = 100.0f;                       // 弾を飛ばす力
+    [SerializeField] Transform  muzzle;                                     // マズル取得用
+    [SerializeField] GameObject bulletPrefab;                               // 弾のPrefab
+    [SerializeField] Vector3    bulletScale = new Vector3(1.0f,1.0f,1.0f);  // 弾の大きさ変更用
+    [SerializeField] GameObject muzzleFlashPrefab;                          // マズルフラッシュのPrefab
+    [SerializeField] Vector3    muzzleFlashScale = new Vector3(1.0f,1.0f,1.0f);     // マズルフラッシュの大きさ変更用
+    [SerializeField] float cameraShakePow;                                          // カメラ揺らし用
+    [SerializeField] float muzzleShakePow;                                          // マズル揺らし用
+    // パラメーター関係==============================================
+    public float GunEXP;                                    // 経験値
+    public Text AmmoCheck;                                  // 残弾数テキスト用
+    [HideInInspector] public bool shootEnabled = true;      // 撃てる状態か判定用
+    [HideInInspector] public bool shooting = false;         // 射撃中か判定用
+    bool        reloading = false;                          // リロード中か判定用
+    bool        equipping = false;                          // 装備切り替え中か判定用
+    int         ammo;                                       // マガジンに入っている弾の数
+    private float AmmoPlus;
+    // スクリプト関係================================================
+    ChangeEquip CEScript;                   // [ChangeEquip]用の変数
+    CameraShake cameraScript;                // [CameraShake]用の変数
+    Animator animator;                      // [Animator]用の変数
+    AnimatorStateInfo animatorInfo;         // Animatorの情報を入れる
+
+    // プロパティ====================================================
     public int damage
     {
         get{return Damage;}
     }
-    [SerializeField] float      shootInterval = 0.15f;
-	[SerializeField] float      bulletPower = 100.0f;
-    [SerializeField] Transform  muzzle;
-    // 弾情報
-    [SerializeField] GameObject bulletPrefab;
-    [SerializeField] Vector3    bulletScale = new Vector3(1.0f,1.0f,1.0f);
-    // マズル情報
-    [SerializeField] GameObject muzzleFlashPrefab;
-    [SerializeField] Vector3    muzzleFlashScale = new Vector3(1.0f,1.0f,1.0f);
-    GameObject  bullet;
-    public bool shootEnabled = true;
-    bool        shooting = false;
-    bool        reloading = false;
-    int         ammo;
     public int Ammo
     {
         get { return ammo;}
-        set { ammo = Mathf.Clamp(value, 0, OneMagazine);}
+        private set { ammo = Mathf.Clamp(value, 0, OneMagazine);}
     }
-    public Text AmmoCheck;
-    GameObject  muzzleFlash;
-    GameObject  hitEffect;
-    GunAnimation gunAnim;
-    CameraShake shakeScript;
-    [SerializeField] float shakePow;
-   
+   GameObject FPSCon;
     void Start()
     {
         InitGun();
 
-        gunAnim = GetComponent<GunAnimation>();
+        FPSCon = GameObject.Find("FPSController");
+        AmmoPlus = FPSCon.GetComponent<SkillManagement>().GetAmmoPlus();
+        CEScript = FPSCon.GetComponent<ChangeEquip>();
+
+        animator = GetComponent<Animator>();
 
         // 上の階層のオブジェクトにアタッチしているスクリプトを参照する
-        shakeScript = GetComponentInParent<CameraShake>();
+        cameraScript = GetComponentInParent<CameraShake>();
     }
+
     void Update()
     {   
         AmmoCheck.text = Ammo + "/" + MaxAmmo;
-        
-        if (Input.GetKeyDown(KeyCode.R) && !shooting  && !reloading && ammo != OneMagazine)
+
+        animatorInfo = animator.GetCurrentAnimatorStateInfo(0);
+
+        // アニメーションが”Get”状態の時、フラグを受け取る
+        if(animatorInfo.shortNameHash == Animator.StringToHash("Get"))
         {
-            reloading = true;
-            Invoke("Reload",0.5f);
+            // 武器交換中
+            equipping = CEScript.activeFlg;
+        } else {
+            equipping = false;
+            CEScript.activeFlg = false;
         }
-        if (shootEnabled && ammo > 0 && GetInput(shootMode) && !reloading)
+
+        // アニメーションが終了
+        if(animatorInfo.normalizedTime > 1.0f)
+        {
+            // 単発武器の射撃
+            if(GetInput(shootMode) && Ammo > 0 && !shooting  && !reloading && shootMode == ShootMode.SEMIAUTO && !equipping)
+            {
+                StartCoroutine(ShootTimer());
+                animator.SetBool("ShootFlg",true);
+            }
+
+            // リロード
+            if(Input.GetKeyDown(KeyCode.R) && MaxAmmo > 0 && Ammo != OneMagazine && !shooting  && !reloading && !equipping)
+            {
+                reloading = true;
+                animator.SetBool("ReloadFlg",true);
+                StartCoroutine(ReloadTimer());
+            }
+        } else {
+            animator.SetBool("ShootFlg",false);
+            animator.SetBool("ReloadFlg",false);
+        }
+
+        // 連射武器の射撃
+        if(GetInput(ShootMode.AUTO) && Ammo > 0 && !shooting && !reloading && shootMode == ShootMode.AUTO && !equipping)
         {
             StartCoroutine(ShootTimer());
+            animator.SetBool("ShootFlg",true);
+        
+            // 弾が0発になったらアニメーション終了
+            if(Ammo == 0)
+            {
+                animator.SetBool("ShootFlg",false);
+            }
         }
 
-        // 射撃中画面を揺らす
-        shakeScript.Shake(shakePow,shooting);
+        if(Input.GetMouseButtonUp(0))
+        {
+            animator.SetBool("ShootFlg",false);
+        }
+
+        cameraScript.Shake(cameraShakePow,shooting);  // 画面を揺らす
+        
+
+        //==================================================================================================
+        // デバッグ表示
+        //==================================================================================================
+        // if(animatorInfo.shortNameHash ==  Animator.StringToHash("Idle")){Debug.Log("現在は：Idle");}
+        // if(animatorInfo.shortNameHash ==  Animator.StringToHash("Shot")){Debug.Log("現在は：Shot");}
+        // if(animatorInfo.shortNameHash ==  Animator.StringToHash("Reload")){Debug.Log("現在は：Reload");}
+        // if(animatorInfo.shortNameHash ==  Animator.StringToHash("Get")){Debug.Log("現在は：Get");}
     }
 
-    //初期化
+    // 初期化
     void InitGun()
     {
         Ammo = OneMagazine;
-    }
-
-    // リロード処理
-    void Reload()
-    {
-        if(shootEnabled)
-        {
-            if (MaxAmmo >= OneMagazine)
-            {
-                MaxAmmo = MaxAmmo - (OneMagazine - Ammo);
-                Ammo = OneMagazine;
-                reloading = false;
-            }
-            else 
-            {
-                int NowAmmo;
-                NowAmmo = OneMagazine - Ammo;
-                if (NowAmmo > MaxAmmo)
-                {
-                    Ammo = MaxAmmo+Ammo;
-                    MaxAmmo = 0;
-                }
-                else 
-                {
-                    MaxAmmo = MaxAmmo - NowAmmo;
-                    Ammo = Ammo + NowAmmo;
-                }
-
-                reloading = false;
-            }
-        }
     }
 
     // セミオートかフルオートかの判定
@@ -133,6 +165,8 @@ public class GunController : MonoBehaviour
         }
         return false;
     }
+
+    // 射撃処理
     IEnumerator ShootTimer()
     {
         if (!shooting)
@@ -144,7 +178,7 @@ public class GunController : MonoBehaviour
             if (muzzleFlashPrefab != null)
             {
                 // マズルフラッシュの生成
-                muzzleFlash = Instantiate<GameObject>(muzzleFlashPrefab,muzzle.position,muzzle.rotation);
+                GameObject  muzzleFlash = Instantiate<GameObject>(muzzleFlashPrefab,muzzle.position,muzzle.rotation);
                 muzzleFlash.transform.localScale = muzzleFlashScale;
                 Destroy(muzzleFlash,1.0f);
             }
@@ -152,7 +186,7 @@ public class GunController : MonoBehaviour
             if (bulletPrefab != null)
             {
                 // 弾の生成
-		        bullet = Instantiate<GameObject>(bulletPrefab, muzzle.position, muzzle.rotation);
+		        GameObject bullet = Instantiate<GameObject>(bulletPrefab, muzzle.position, muzzle.rotation);
                 bullet.transform.localScale = bulletScale;
 		        bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * bulletPower);
 		        Destroy(bullet, 5.0f);
@@ -166,10 +200,41 @@ public class GunController : MonoBehaviour
 
             shooting = false;
             shootEnabled = true;
-        }
-        else
-        {
+        } else {
             yield return null;
         }
+    }
+
+    // リロード処理
+    IEnumerator ReloadTimer()
+    {
+        if(shootEnabled)
+        {
+            // 連射速度の調整
+            yield return new WaitForSeconds(reloadInterval);
+
+            if (MaxAmmo >= OneMagazine)
+            {
+                MaxAmmo = MaxAmmo - (OneMagazine - Ammo);
+                Ammo = OneMagazine;
+                reloading = false;
+            } else {
+                int NowAmmo;
+                NowAmmo = OneMagazine - Ammo;
+                if (NowAmmo > MaxAmmo)
+                {
+                    Ammo = MaxAmmo+Ammo;
+                    MaxAmmo = 0;
+                } else {
+                    MaxAmmo = MaxAmmo - NowAmmo;
+                    Ammo = Ammo + NowAmmo;
+                }
+
+                reloading = false;
+            }
+        } else {
+            yield return null;
+        }
+
     }
 }
