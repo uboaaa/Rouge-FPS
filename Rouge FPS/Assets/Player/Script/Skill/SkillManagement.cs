@@ -5,7 +5,7 @@ using UnityEngine;
 public class SkillManagement : MonoBehaviour
 {
 
-    private float[] SkillSpeed = new float[5];
+    public static float[] SkillSpeed = new float[5];
   
 
 
@@ -28,15 +28,15 @@ public class SkillManagement : MonoBehaviour
 
     }
 
-    public float GetAmmoPlus(int magnification) {
+    public static float GetAmmoPlus(int magnification) {
         return SkillSpeed[magnification];
     }
 
-    public float GetSpeedPlus(int magnification) {
+    public static float GetSpeedPlus(int magnification) {
         return SkillSpeed[magnification];
     }
 
-    public float GetHpPlus(int magnification)
+    public static float GetHpPlus(int magnification)
     {
         return SkillSpeed[magnification];}
 }

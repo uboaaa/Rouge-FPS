@@ -18,8 +18,8 @@ public class MyStatus : MonoBehaviour
 
     private void Start()
     {
-        Skill = GameObject.Find("FPSController");
-        HpPlus = Skill.GetComponent<SkillManagement>().GetHpPlus(0);
+      
+        HpPlus = SkillManagement.GetHpPlus(0);
         playerHP = playerHP + (playerHP * HpPlus);
         FirstHP = playerHP;
      

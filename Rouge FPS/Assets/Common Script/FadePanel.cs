@@ -28,19 +28,10 @@ public class FadePanel : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return) ) {
-            if (SceneManager.GetActiveScene().name == "TitleScene")
-            {
-                if (gameObject.GetComponent<TitletoGame>().GetModeSelect() == "Start" )
-                {
-                    isFadeOut = true;
-                }
-                else { isFadeOut = false; }
-            }
-        }
+        
 
         
-                if (GametoTitle.GetModeSelect()=="ReturnTitle" )
+                if (GametoTitle.GetModeSelect()=="ReturnTitle" || TitletoGame.GetGame())
                 {
                     if (Input.GetKeyDown(KeyCode.Return) ) {
                     isFadeOut = true;
