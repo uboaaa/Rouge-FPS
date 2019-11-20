@@ -38,7 +38,6 @@ public class GunController : MonoBehaviour
     [SerializeField] GameObject muzzleFlashPrefab;                          // マズルフラッシュのPrefab
     [SerializeField] Vector3    muzzleFlashScale = new Vector3(1.0f,1.0f,1.0f);     // マズルフラッシュの大きさ変更用
     [SerializeField] float cameraShakePow;                                          // カメラ揺らし用
-    [SerializeField] float muzzleShakePow;                                          // マズル揺らし用
     // パラメーター関係==============================================
     public float GunEXP;                                    // 経験値
     public Text AmmoCheck;                                  // 残弾数テキスト用
@@ -70,7 +69,6 @@ public class GunController : MonoBehaviour
         InitGun();
 
         FPSCon = GameObject.Find("FPSController");
-        AmmoPlus = FPSCon.GetComponent<SkillManagement>().GetAmmoPlus();
         CEScript = FPSCon.GetComponent<ChangeEquip>();
 
         animator = GetComponent<Animator>();
@@ -90,6 +88,7 @@ public class GunController : MonoBehaviour
         {
             // 武器交換中
             equipping = CEScript.activeFlg;
+            shooting = false;
         } else {
             equipping = false;
             CEScript.activeFlg = false;
