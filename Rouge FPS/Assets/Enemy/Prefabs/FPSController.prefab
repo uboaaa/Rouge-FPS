@@ -482,9 +482,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 240b080f8fb142442932f98fbad9c712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Weapon1: {fileID: 1313344853583421872}
-  Weapon2: {fileID: 1313344855283631129}
+  PrimaryWeapon: {fileID: 0}
+  SecondaryWeapon: {fileID: 0}
   ownGun: 0
+  activeFlg: 0
 --- !u!114 &1313344853447878175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -521,7 +522,6 @@ GameObject:
   - component: {fileID: 1313344853583421878}
   - component: {fileID: 1313344853583421877}
   - component: {fileID: 1313344853583421876}
-  - component: {fileID: 1313344853583421883}
   m_Layer: 10
   m_Name: handgun
   m_TagString: Untagged
@@ -626,12 +626,12 @@ MonoBehaviour:
   shootMode: 1
   gunType: 3
   gunRank: 0
-  GunEXP: 0
   skillSlot: 1
   OneMagazine: 8
   MaxAmmo: 160
   Damage: 1
   shootInterval: 0.15
+  reloadInterval: 5
   bulletPower: 1000
   muzzle: {fileID: 1313344855161163084}
   bulletPrefab: {fileID: 8052225378428835069, guid: 6b60447f6cc998147a7a704471a5e292,
@@ -640,21 +640,11 @@ MonoBehaviour:
   muzzleFlashPrefab: {fileID: 5657120087087244624, guid: d350cb83ef033eb4b9ed15b5054ff9fa,
     type: 3}
   muzzleFlashScale: {x: 1, y: 1, z: 1}
-  shootEnabled: 1
+  cameraShakePow: 0
+  GunEXP: 0
   AmmoCheck: {fileID: 1313344853212397406}
-  shakePow: 0.02
---- !u!114 &1313344853583421883
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1313344853583421872}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1eae118f46360b439aad7cedfa9b69c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  shootEnabled: 1
+  shooting: 0
 --- !u!1 &1313344854085585261
 GameObject:
   m_ObjectHideFlags: 0
@@ -1613,6 +1603,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1313344855283631128}
   - component: {fileID: 1313344855283631135}
+  - component: {fileID: 6671869527255220024}
   - component: {fileID: 1313344855283631134}
   m_Layer: 10
   m_Name: LMG
@@ -1684,6 +1675,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &6671869527255220024
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1313344855283631129}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d4c8d3da1ffa97b49a585eae6ee1a5a2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &1313344855283631134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1699,12 +1709,12 @@ MonoBehaviour:
   shootMode: 0
   gunType: 2
   gunRank: 0
-  GunEXP: 0
   skillSlot: 1
   OneMagazine: 120
   MaxAmmo: 360
   Damage: 1
   shootInterval: 0.15
+  reloadInterval: 5
   bulletPower: 1000
   muzzle: {fileID: 1313344855175992624}
   bulletPrefab: {fileID: 8052225378428835069, guid: 6b60447f6cc998147a7a704471a5e292,
@@ -1713,6 +1723,8 @@ MonoBehaviour:
   muzzleFlashPrefab: {fileID: 5657120087087244624, guid: d350cb83ef033eb4b9ed15b5054ff9fa,
     type: 3}
   muzzleFlashScale: {x: 1, y: 1, z: 1}
-  shootEnabled: 1
+  cameraShakePow: 0
+  GunEXP: 0
   AmmoCheck: {fileID: 1313344853212397406}
-  shakePow: 0.5
+  shootEnabled: 1
+  shooting: 0

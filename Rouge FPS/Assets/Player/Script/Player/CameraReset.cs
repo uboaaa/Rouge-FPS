@@ -16,6 +16,7 @@ public class CameraReset : MonoBehaviour
 
     void Update()
     {
+        
         //カメラの方向を取得
         //camera.transform.rotation  = Quaternion.identity;
         // if (Input.GetKey(KeyCode.Return)) {

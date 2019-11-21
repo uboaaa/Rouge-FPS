@@ -5,7 +5,7 @@ using UnityEngine;
 public class SkillManagement : MonoBehaviour
 {
 
-    public static float[] SkillSpeed = new float[5];
+    private static float[] SkillSpeed = new float[5];
   
 
 
