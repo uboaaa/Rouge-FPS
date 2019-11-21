@@ -7,48 +7,23 @@ public class DamageNumEffect : MonoBehaviour
 
     GameObject enemy;
     EnemyHitEffect eh;
-
-    private bool hitflg = false;
-    public bool GetHitFlg(){ return hitflg;}
-    public void SetHitFlg(bool _a)
-    {
-        hitflg = _a;
-    }
-
-    private int BulletDamage = 0;
-    public void SetBulletDamage(int a)
-    {
-        BulletDamage = a;
-    }
+    
+    public bool hitflg = false;
+    public int BulletDamage = 0;
 
     GameObject DamageNumPrefab;
+    // private struct DamageNumParam
+    // {
+        public bool FeedOutFlg = false; 
+        public float AlphaTime;
+    //}
+    
 
-    public float positionY;
+    // DamageNumParam dnp;
+    // List<DamageNumParam> dnpList;
 
-    // public bool FeedOutFlg;
-    // public float AlphaTime;
+    // private List<float> Alpha;  
 
-    void FeedOut(GameObject _go)
-    {
-
-        // TextMesh tm = _go.GetComponent<TextMesh>();
-        // float a = tm.color.a;
-        // tm.color = new Color(1.0f, 1.0f, 1.0f, a);
-        // a -= 0.5f;
-
-        // if (a < 0)
-        // {
-        //     Destroy(_go);
-        // }
-        TextMesh tm = _go.GetComponent<TextMesh>();
-        float a = tm.color.a;
-        for(int i = 0;i < 10;i++)
-        {
-            tm.color = new Color(1.0f, 1.0f, 1.0f, a);
-            a -= 0.5f;
-        }
-        Destroy(_go,1.0f);
-    }
 
 
     // Start is called before the first frame update
@@ -61,37 +36,77 @@ public class DamageNumEffect : MonoBehaviour
 
         DamageNumPrefab = Resources.Load("DamageNum") as GameObject;
 
-        // FeedOutFlg = false;
-        // AlphaTime = 1.0f;
-
+        //DamageNumParam[] dnp = new DamageNumParam[10];
     }
 
-
+    GameObject dn;
     // Update is called once per frame
     void Update()
     {
-        if (hitflg == true)
+        if(hitflg == true)
         {
             // ダメージの値を挿入
             DamageNumPrefab.GetComponent<TextMesh>().text = "" + BulletDamage;
 
             // プレハブ生成
-            GameObject dn = Instantiate(DamageNumPrefab) as GameObject;
+            dn = Instantiate(DamageNumPrefab) as GameObject;
+            
 
             // 敵の座標へ移動
             float value = Random.Range(-1.0f, 1.0f);    // 乱数
-            dn.gameObject.transform.position = new Vector3(enemy.gameObject.transform.position.x + value, enemy.gameObject.transform.position.y + positionY, enemy.gameObject.transform.position.z + value);
+            dn.gameObject.transform.position = new Vector3(enemy.gameObject.transform.position.x + value,enemy.gameObject.transform.position.y,enemy.gameObject.transform.position.z + value);
 
             // 向き方向の取得
-            Vector3 force = new Vector3(0.0f, 3.5f, 0);
+            Vector3 force = new Vector3(0.0f,3.5f,0);
 
             // Rigidbodyに力を加えて発射
-            dn.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
+            dn.GetComponent<Rigidbody>().AddForce(force,ForceMode.Impulse);
 
+
+            Destroy(dn, 0.6f); // 2秒後に削除
+            //Alpha.Add(1.0f);
+            // dnpList.Add();
+            FeedOutFlg = true;
+
+            AlphaTime = 1.0f;
+            //TextMesh tm = dn.GetComponent<TextMesh>();
+            //tm.color = new Color(1.0f,1.0f,1.0f,1.0f);
 
             hitflg = false;
         }
 
-    }
+        
+        if(FeedOutFlg)
+        {
+            if(dn)
+            {
+                TextMesh tm = dn.GetComponent<TextMesh>();
+                tm.color = new Color(1.0f,1.0f,1.0f,AlphaTime);
+                
+                // if(tm.color.a > 0.0f)
+                // {
+                //     float AlphaTime = tm.color.a;
+                //     AlphaTime -= 0.05f;
+                //     tm.color = new Color(1.0f,1.0f,1.0f,tm.color.a);
+                // }
+                // else
+                // {
+                //     AlphaTime = 1.0f;
+                //     FeedOutFlg = false;
+                //     Destroy(dn);
+                // }
+            }
+            AlphaTime -= 0.05f;
+            
+            if(AlphaTime < 0.0f)
+            {
+                AlphaTime = 0.0f;
+                FeedOutFlg = false;
+                Destroy(dn);
+            }
+            
+        }
 
+        
+    }
 }

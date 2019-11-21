@@ -19,7 +19,6 @@ GameObject:
   - component: {fileID: 3528107588450384870}
   - component: {fileID: 3528107588450384871}
   - component: {fileID: 3528107588450384868}
-  - component: {fileID: 3630473753163925016}
   m_Layer: 11
   m_Name: Lizard
   m_TagString: Enemy
@@ -58,7 +57,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a0f6509b62aae484eb362b5774cb140e, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -180,6 +179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a289e73edcbd2d44aa401b415b91959, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitflg: 0
 --- !u!114 &3528107588450384870
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -205,7 +205,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcce13b603378504f81acde980db4b6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  positionY: 0
+  hitflg: 0
+  BulletDamage: 0
 --- !u!114 &3528107588450384868
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,42 +220,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyatkpow: 0
-  SelfFlg: 0
---- !u!108 &3630473753163925016
-Light:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3528107588450384869}
-  m_Enabled: 1
-  serializedVersion: 8
-  m_Type: 2
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
-  m_Range: 10
-  m_SpotAngle: 30
-  m_CookieSize: 10
-  m_Shadows:
-    m_Type: 0
-    m_Resolution: -1
-    m_CustomResolution: -1
-    m_Strength: 1
-    m_Bias: 0.05
-    m_NormalBias: 0.4
-    m_NearPlane: 0.2
-  m_Cookie: {fileID: 0}
-  m_DrawHalo: 0
-  m_Flare: {fileID: 0}
-  m_RenderMode: 0
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_Lightmapping: 4
-  m_LightShadowCasterMode: 0
-  m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 1
-  m_ColorTemperature: 6570
-  m_UseColorTemperature: 0
-  m_ShadowRadius: 0
-  m_ShadowAngle: 0

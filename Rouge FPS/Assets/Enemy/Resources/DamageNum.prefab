@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 311236556175824242}
   - component: {fileID: 4840827360888412318}
   - component: {fileID: 5312309351960417077}
-  - component: {fileID: 2002595262064684642}
   - component: {fileID: 384449087706377004}
   m_Layer: 0
   m_Name: DamageNum
@@ -80,7 +79,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7495487147564384630}
-  m_Text: 5
+  m_Text: 2
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -107,18 +106,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Inversion: 1
---- !u!114 &2002595262064684642
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7495487147564384630}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c703f0b598a01f14dabc80e25013e844, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!54 &384449087706377004
 Rigidbody:
   m_ObjectHideFlags: 0

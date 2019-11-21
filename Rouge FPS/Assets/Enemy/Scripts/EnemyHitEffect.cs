@@ -19,12 +19,7 @@ public class EnemyHitEffect : MonoBehaviour
     // 輝度パラメータ調整用
     private float i = 0.1f;
     // ヒットエフェクトフラグ
-    private bool hitflg = false;
-    public bool GetHitFlg(){ return hitflg;}
-    public void SetHitFlg(bool _a)
-    {
-        hitflg = _a;
-    }
+    public bool hitflg = false;
 
 
 
@@ -51,10 +46,29 @@ public class EnemyHitEffect : MonoBehaviour
         // エネミー情報取得
         enemy = this.gameObject;
 
+        // ヒットマテリアル情報取得
+        hitmaterial = Resources.Load("HitMaterial") as Material;
 
         // ヒットマテリアル挿入
-        hitmaterial = enemy.GetComponent<SpriteRenderer>().material;
+        enemy.GetComponent<SpriteRenderer>().material = hitmaterial;
 
+        // // コピー
+        // Material hm = Instantiate(hitmaterial);
+        
+        // //対象のシェーダー情報を取得
+        // Shader sh = enemy.GetComponent<SpriteRenderer>().material.shader;
+
+        // //取得したシェーダーを元に新しいマテリアルを作成
+        // Material mat = new Material(sh);
+
+
+        // // 新しいマテリアルを挿入
+        // enemy.GetComponent<SpriteRenderer>().material = hm;
+
+
+
+        
+        
 
         // エネミーパラメータ
         ep = GetComponent<EnemyParameter>();
@@ -68,7 +82,7 @@ public class EnemyHitEffect : MonoBehaviour
     void Update()
     {
         // ヒットエフェクト更新
-        hitmaterial.SetFloat(propID, brightness);
+            hitmaterial.SetFloat(propID, brightness);
         // ヒットフラグがONなら
         if (hitflg == true)
         {
@@ -77,7 +91,10 @@ public class EnemyHitEffect : MonoBehaviour
             
 
         }
+
         
-        //Debug.Log(brightness);
+        
+        
+        // Debug.Log(brightness);
     }
 }

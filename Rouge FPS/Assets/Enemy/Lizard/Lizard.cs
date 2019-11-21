@@ -164,8 +164,8 @@ public class Lizard : MonoBehaviour
 
 
         // デバッグ表示
-        //Debug.Log("LizardHP");
-        //Debug.Log(ep.hp);
+        // Debug.Log("LizardHP");
+        // Debug.Log(ep.hp);
 
         // 敵の体力が０になったら
         if(ep.hp == 0)
@@ -196,14 +196,12 @@ public class Lizard : MonoBehaviour
         if (collision.gameObject.tag == "Bullet")
         {
             // 弾のダメージを取得
-            dn.SetBulletDamage(collision.gameObject.GetComponent<BulletController>().Damage);
+            dn.BulletDamage = collision.gameObject.GetComponent<BulletController>().Damage;
 
-            Debug.Log(collision.gameObject.GetComponent<BulletController>().Damage);
-
-            eh.SetHitFlg(true);
-            dn.SetHitFlg(true);
+            eh.hitflg = true;
+            dn.hitflg = true;
             foundflg = true;
-            ep.hp -= collision.gameObject.GetComponent<BulletController>().Damage;
+            ep.hp -= dn.BulletDamage;
             if(ep.hp < 0){ep.hp = 0;}
              //intパラメーターの値を設定する.
             animator.SetInteger("trans", trans);

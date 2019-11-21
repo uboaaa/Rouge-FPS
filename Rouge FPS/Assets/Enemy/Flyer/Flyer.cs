@@ -20,7 +20,7 @@ public class Flyer : MonoBehaviour
     // エネミーパラメータ
     private EnemyParameter ep;
     // ヒットエフェクト
-    private EnemyHitEffect eh;
+    //private EnemyHitEffect eh;
     // ダメージナンバーエフェクト
     private DamageNumEffect dn = null;
     // デッドエフェクト
@@ -35,15 +35,7 @@ public class Flyer : MonoBehaviour
     // アニメ関数
     int trans;
 
-    // 発射フラグ
-    public bool fireflg = false;
-    // 発射管理
-    private int ftime = 0;
-
-    // 移動フラグ
-    private bool moveflg = false;
-    private int mtime = 0;
-    float mvalue;
+    
 
 
     // 弾丸の速度
@@ -79,7 +71,7 @@ public class Flyer : MonoBehaviour
         // エネミーパラメータ
         ep = GetComponent<EnemyParameter>();
         // // エネミーヒットエフェクト
-        eh = GetComponent<EnemyHitEffect>();
+        // eh = GetComponent<EnemyHitEffect>();
         // ダメージナンバーエフェクト
         dn = GetComponent<DamageNumEffect>();
     }
@@ -174,8 +166,8 @@ public class Flyer : MonoBehaviour
 
 
         // デバッグ表示
-        //Debug.Log("FlyerHP");
-        //Debug.Log(ep.hp);
+        // Debug.Log("FlyerHP");
+        // Debug.Log(ep.hp);
 
 
         // 敵の体力が０になったら
@@ -199,69 +191,26 @@ public class Flyer : MonoBehaviour
         // z キーが押された時
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            if(fireflg == true)
-            {
-                fireflg = false;
-            }
-            else
-            {
-                fireflg = true;
-                ftime = 0;
-            }
-        }
 
-        
-        // 発射フラグがONなら
-        if(fireflg == true)
-        {
-            if (ftime == 0)
-            {
-                // 弾丸の複製
-                GameObject bullets = Instantiate(bullet) as GameObject;
+            // 弾丸の複製
+            GameObject bullets = Instantiate(bullet) as GameObject;
 
-                // 向き方向の取得
-                Vector3 aim = player.gameObject.transform.position - this.transform.position;
+            // 向き方向の取得
+            Vector3 aim = player.gameObject.transform.position - this.transform.position;
 
-                // // 向き
-                // Vector3 force;
+            // // 向き
+            // Vector3 force;
 
-                // force = aim * speed;
+            // force = aim * speed;
 
-                // Rigidbodyに力を加えて発射
-                bullets.GetComponent<Rigidbody>().AddForce(aim, ForceMode.Impulse);
+            // Rigidbodyに力を加えて発射
+            bullets.GetComponent<Rigidbody>().AddForce(aim,ForceMode.Impulse);
 
-                // 弾丸の位置を調整
-                bullets.transform.position = this.gameObject.transform.position;
+            // 弾丸の位置を調整
+            bullets.transform.position = this.gameObject.transform.position;
 
 
-                Destroy(bullets, 3.0f); // 三秒後に削除
-            }
-            ftime++;
-            if(ftime > 60){ ftime = 0;}
-
-        }
-
-        
-        if (moveflg == true)
-        {
-            if (mtime == 0)
-            {
-                // 乱数
-                mvalue = Random.Range(-0.1f, 0.1f);
-            }
-
-            this.gameObject.transform.position = new Vector3(
-                this.gameObject.transform.position.x + mvalue,
-                this.gameObject.transform.position.y + mvalue,
-                this.gameObject.transform.position.z + mvalue
-                );
-
-            mtime++;
-            if (mtime > 15)
-            {
-                mtime = 0;
-                moveflg = false;
-            }
+            Destroy(bullets, 3.0f); // 三秒後に削除
 
         }
     }
@@ -274,12 +223,12 @@ public class Flyer : MonoBehaviour
         if (collision.gameObject.tag == "Bullet")
         {
             // 弾のダメージを取得
-            dn.SetBulletDamage(collision.gameObject.GetComponent<BulletController>().Damage);
+            dn.BulletDamage = collision.gameObject.GetComponent<BulletController>().Damage;
             
-            eh.SetHitFlg(true);
-            dn.SetHitFlg(true);
-            if(moveflg == false) { moveflg = true; }
-            ep.hp -= collision.gameObject.GetComponent<BulletController>().Damage;
+            //eh.hitflg = true;
+            dn.hitflg = true;
+            foundflg = true;
+            ep.hp -= 10;
             if(ep.hp < 0){ep.hp = 0;}
              //intパラメーターの値を設定する.
             animator.SetInteger("trans", trans);

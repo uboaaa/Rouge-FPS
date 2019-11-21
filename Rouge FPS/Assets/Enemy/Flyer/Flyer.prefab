@@ -15,8 +15,7 @@ GameObject:
   - component: {fileID: 5262508087837231451}
   - component: {fileID: 1625668510554113494}
   - component: {fileID: 1451534847837710716}
-  - component: {fileID: 4338024972419839555}
-  - component: {fileID: 7057983754991012639}
+  - component: {fileID: 5016441053883166873}
   m_Layer: 0
   m_Name: Flyer
   m_TagString: Untagged
@@ -55,7 +54,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: dbac9c10bd914e348a902db687b71f40, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -149,7 +148,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 0}
   deadeffect: {fileID: 0}
-  fireflg: 0
   bspeed: 1000
 --- !u!114 &1451534847837710716
 MonoBehaviour:
@@ -163,7 +161,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a289e73edcbd2d44aa401b415b91959, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4338024972419839555
+  hitflg: 0
+--- !u!114 &5016441053883166873
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -172,45 +171,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 1625668510554113490}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bcf25f19673000b44b5fddb183368fec, type: 3}
+  m_Script: {fileID: 11500000, guid: 8206a5d658efa0f4d8a3ebb2268c3be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Inversion: 0
---- !u!108 &7057983754991012639
-Light:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1625668510554113490}
-  m_Enabled: 1
-  serializedVersion: 8
-  m_Type: 2
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
-  m_Range: 10
-  m_SpotAngle: 30
-  m_CookieSize: 10
-  m_Shadows:
-    m_Type: 0
-    m_Resolution: -1
-    m_CustomResolution: -1
-    m_Strength: 1
-    m_Bias: 0.05
-    m_NormalBias: 0.4
-    m_NearPlane: 0.2
-  m_Cookie: {fileID: 0}
-  m_DrawHalo: 0
-  m_Flare: {fileID: 0}
-  m_RenderMode: 0
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_Lightmapping: 4
-  m_LightShadowCasterMode: 0
-  m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 1
-  m_ColorTemperature: 6570
-  m_UseColorTemperature: 0
-  m_ShadowRadius: 0
-  m_ShadowAngle: 0

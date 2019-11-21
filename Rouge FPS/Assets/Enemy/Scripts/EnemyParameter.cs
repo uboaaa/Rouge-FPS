@@ -5,9 +5,6 @@ using UnityEngine;
 public class EnemyParameter : MonoBehaviour
 {
 
-    // エネミー
-    private GameObject enemy = null;
-
 
     // HP
     public int hp = 0;
@@ -23,6 +20,7 @@ public class EnemyParameter : MonoBehaviour
 
     // 初期角度
     public float startrot = 0;
+
 
 
 }
