@@ -11,13 +11,13 @@ public class HpText : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-     LookHP= GameObject.Find("FPSController").GetComponent<MyStatus>().GetHp();
+     LookHP= MyStatus.GetHp();
     }
 
     // Update is called once per frame
     void Update()
     {
-        LookHP = GameObject.Find("FPSController").GetComponent<MyStatus>().GetHp();
+        LookHP = MyStatus.GetHp();
         if (LookHP > 0) { text.text = LookHP + ""; }
         else { text.text = "0"; }
     }

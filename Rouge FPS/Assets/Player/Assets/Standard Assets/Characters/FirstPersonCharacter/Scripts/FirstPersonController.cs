@@ -58,6 +58,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_Jumping = false;
             m_AudioSource = GetComponent<AudioSource>();
 			m_MouseLook.Init(transform , m_Camera.transform);
+            
    
         }
 
@@ -66,11 +67,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private void Update()
         {
      
-            //���Z�b�g�������̂P(���̂Q��PlayerXYZ.cs)
+        
             if (Input.GetKey(KeyCode.Return))
             { m_MouseLook.Init(transform, m_Camera.transform);
                 //m_Camera.transform.rotation = Quaternion.identity;
             }
+            if(!PauseScript.pause()){
  
                 RotateView();
             
@@ -93,6 +95,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
  
             m_PreviouslyGrounded = m_CharacterController.isGrounded;
+            }
         }
 
 
@@ -229,7 +232,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             // set the desired speed to be walking or running
          
             //�ړ����x�̐ݒ�
-            float AccelSpeed= GetComponent<SkillManagement>().GetSpeedPlus(0);
+            float AccelSpeed= SkillManagement.GetSpeedPlus(0);
          speed = m_IsWalking ? m_WalkSpeed+(m_WalkSpeed*AccelSpeed) 
                              : m_RunSpeed+(m_RunSpeed * AccelSpeed); 
          

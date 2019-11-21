@@ -8,6 +8,8 @@ public class TitletoGame : MonoBehaviour
     private GameObject gameObject;
     private bool GoGame=false;
     private string ModeSelect;
+
+    public static bool GameCheck;
     private GameObject[] Mode = new GameObject[3];
     // Start is called before the first frame update
     void Start()
@@ -17,6 +19,7 @@ public class TitletoGame : MonoBehaviour
         Mode[1] = GameObject.Find("Exit");
         Mode[2] = GameObject.Find("Setting");
         ModeSelect = "Start";
+        GameCheck=false;
     }
     void Quit()
     {
@@ -32,24 +35,26 @@ public class TitletoGame : MonoBehaviour
     {
        GoGame=gameObject.GetComponent<FadePanel>().GetAllBlack();
         if (Input.GetKeyDown(KeyCode.Escape)) { Quit(); }
-        Debug.Log(Mode[0]);
         
         switch (ModeSelect)
         {
             case "Start":
+                GameCheck=true;
                 if (Input.GetKeyDown(KeyCode.RightArrow)) { ModeSelect = "Setting"; }
                 if (Input.GetKeyDown(KeyCode.LeftArrow)) { ModeSelect = "Exit"; }
-                if (GoGame) { EnterGame(); }
+                  if (FadePanel.AlphaGet()>1.0f) {SceneManager.LoadScene("GameScene");}
                 Mode[0].GetComponent<TextColorChange>().ColorChange(ModeSelect);
                 break;
 
             case "Setting":
+                 GameCheck=false;
                 if (Input.GetKeyDown(KeyCode.RightArrow)) { ModeSelect = "Exit"; }
                 if (Input.GetKeyDown(KeyCode.LeftArrow)) { ModeSelect = "Start"; }
                 Mode[2].GetComponent<TextColorChange>().ColorChange(ModeSelect);
                 break;
 
             case "Exit":
+                GameCheck=false;
                 if (Input.GetKeyDown(KeyCode.RightArrow)) { ModeSelect = "Start"; }
                 if (Input.GetKeyDown(KeyCode.LeftArrow)) { ModeSelect = "Setting"; }
                 Mode[1].GetComponent<TextColorChange>().ColorChange(ModeSelect);
@@ -61,7 +66,5 @@ public class TitletoGame : MonoBehaviour
     }
     public bool GetEnterGame() {return GoGame;}
     public string GetModeSelect() { return ModeSelect; }
-    void EnterGame() {
-        SceneManager.LoadScene("GameScene");
-    }
+    public static bool GetGame(){return GameCheck;}
 }

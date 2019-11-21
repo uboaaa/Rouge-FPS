@@ -16,13 +16,14 @@ public class CameraReset : MonoBehaviour
 
     void Update()
     {
+        
         //カメラの方向を取得
         //camera.transform.rotation  = Quaternion.identity;
-        if (Input.GetKey(KeyCode.Return)) {
-            abc.x = MapInitializer.GetSpawnData("rx");
-            abc.y = MapInitializer.GetSpawnData("ry");
-            abc.z = MapInitializer.GetSpawnData("rz");
-            this.transform.rotation = Quaternion.Euler(abc);
-        }
+        // if (Input.GetKey(KeyCode.Return)) {
+        //     abc.x = MapInitializer.GetSpawnData("rx");
+        //     abc.y = MapInitializer.GetSpawnData("ry");
+        //     abc.z = MapInitializer.GetSpawnData("rz");
+        //     this.transform.rotation = Quaternion.Euler(abc);
+        // }
     }
 }

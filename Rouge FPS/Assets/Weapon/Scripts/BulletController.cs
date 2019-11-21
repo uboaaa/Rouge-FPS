@@ -5,22 +5,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-// Rigidbodyコンポーネントを必須にする
-[RequireComponent(typeof(Rigidbody))]
 public class BulletController : MonoBehaviour
 {
+    // インスペクター関係============================================
+    // ヒット時のエフェクト用Prefab
     [SerializeField] GameObject backHitEffectPrefab;
     [SerializeField] GameObject enemyHitEffectPrefab;
+
+    // ヒットエフェクトのサイズ変更用
     [SerializeField] Vector3 hitEffectScale = new Vector3(1.0f,1.0f,1.0f);
-    GameObject hitEffect;
-    Vector3 hitPos;
-    Quaternion rotation;
-    GunController GCScript;
-    GunController PrimaryScript;
-    GunController SecondaryScript;
-    ChangeEquip CEScript;
-    public int Damage;
+    
+
+    // パラメーター関係==============================================
+    Vector3 hitPos;                 // ヒット場所の座標
+    Quaternion rotation;            // ヒット場所の角度
+
+    public int Damage{get;private set;}     // 銃にあるダメージを受け取る用
+
+    // スクリプト関係================================================
+    GunController   GCScript;       // [GunController]用の変数
+    ChangeEquip     CEScript;       // [ChangeEquip]用の変数
 
     void Start()
     {
@@ -30,13 +34,11 @@ public class BulletController : MonoBehaviour
         if(CEScript.ownGun == 1)
         {
             // プライマリ武器のGunControllerを持ってくる
-            GameObject anotherObject = GameObject.Find(CEScript.Weapon1.name);
+            GameObject anotherObject = GameObject.Find(CEScript.PrimaryWeapon.name);
             GCScript = anotherObject.GetComponent<GunController>();
-        }
-        else if(CEScript.ownGun == 2)
-        {
+        } else if(CEScript.ownGun == 2) {
             // セカンダリ武器のGunControllerを持ってくる
-            GameObject anotherObject = GameObject.Find(CEScript.Weapon2.name);
+            GameObject anotherObject = GameObject.Find(CEScript.SecondaryWeapon.name);
             GCScript = anotherObject.GetComponent<GunController>();
         }
 
@@ -54,12 +56,15 @@ public class BulletController : MonoBehaviour
 
     void HitEffect(GameObject Prefab)
     {
-        // エフェクトを生成
-        hitEffect = Instantiate<GameObject>(Prefab,new Vector3(hitPos.x,hitPos.y,hitPos.z),rotation);
-        hitEffect.transform.localScale = hitEffectScale;
+        if(Prefab != null)
+        {
+            // エフェクトを生成
+            GameObject　hitEffect = Instantiate<GameObject>(Prefab,new Vector3(hitPos.x,hitPos.y,hitPos.z),rotation);
+            hitEffect.transform.localScale = hitEffectScale;
 
-        // エフェクト削除
-		Destroy(hitEffect, 5.0f);
+            // エフェクト削除
+		    Destroy(hitEffect, 5.0f);
+        }
     }
 
     void OnCollisionEnter(Collision collision)
