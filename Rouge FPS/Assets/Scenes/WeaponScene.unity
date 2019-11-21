@@ -1120,9 +1120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c039a42de677cd49a8459c895b9fde7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onMode: 0
-  offonMode: 0
-  secondMode: 1
+  mode: 2
   seconds: 2
   LightFlg: 0
 --- !u!135 &602466272
@@ -1878,7 +1876,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.5
+  m_Radius: 3
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &750914595
 MonoBehaviour:
@@ -2567,10 +2565,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c039a42de677cd49a8459c895b9fde7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onMode: 0
-  offonMode: 0
-  secondMode: 1
-  seconds: 2
+  mode: 2
+  seconds: 3
   LightFlg: 0
 --- !u!135 &1090968768
 SphereCollider:
@@ -2950,10 +2946,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c039a42de677cd49a8459c895b9fde7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onMode: 0
-  offonMode: 0
-  secondMode: 1
-  seconds: 2
+  mode: 2
+  seconds: 4
   LightFlg: 0
 --- !u!135 &1159172239
 SphereCollider:
@@ -3140,10 +3134,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c039a42de677cd49a8459c895b9fde7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onMode: 0
-  offonMode: 0
-  secondMode: 1
-  seconds: 2
+  mode: 2
+  seconds: 4
   LightFlg: 0
 --- !u!135 &1216741746
 SphereCollider:
@@ -3490,10 +3482,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c039a42de677cd49a8459c895b9fde7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onMode: 0
-  offonMode: 0
-  secondMode: 1
-  seconds: 2
+  mode: 2
+  seconds: 5
   LightFlg: 0
 --- !u!135 &1288814928
 SphereCollider:
@@ -3859,9 +3849,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c039a42de677cd49a8459c895b9fde7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onMode: 0
-  offonMode: 0
-  secondMode: 1
+  mode: 2
   seconds: 2
   LightFlg: 0
 --- !u!135 &1356298040
@@ -3960,10 +3948,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c039a42de677cd49a8459c895b9fde7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onMode: 0
-  offonMode: 0
-  secondMode: 1
-  seconds: 2
+  mode: 2
+  seconds: 5
   LightFlg: 0
 --- !u!135 &1410176059
 SphereCollider:
@@ -4401,10 +4387,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c039a42de677cd49a8459c895b9fde7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onMode: 0
-  offonMode: 0
-  secondMode: 1
-  seconds: 2
+  mode: 2
+  seconds: 3
   LightFlg: 0
 --- !u!135 &1589535039
 SphereCollider:

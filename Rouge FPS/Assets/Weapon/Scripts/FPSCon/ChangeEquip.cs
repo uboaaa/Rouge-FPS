@@ -28,7 +28,6 @@ public class ChangeEquip : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(activeFlg);
         if (Input.GetKeyDown(KeyCode.E) && !activeFlg)
         {
             GCPrimaryScript.shooting = false;
