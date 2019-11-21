@@ -10,7 +10,7 @@ public class ChangeEquip : MonoBehaviour
 
     // パラメーター関係==============================================
     [HideInInspector] public int ownGun;      // 0:持ってない 1:プライマリ 2:セカンダリ
-    [HideInInspector] public bool activeFlg;  // 武器切り替え中か  
+    [HideInInspector] public bool activeFlg;  // 行動中か  
 
      // スクリプト関係================================================
     GunController GCPrimaryScript;                   // [GunController]用の変数
@@ -28,6 +28,7 @@ public class ChangeEquip : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(activeFlg);
         if (Input.GetKeyDown(KeyCode.E) && !activeFlg)
         {
             GCPrimaryScript.shooting = false;

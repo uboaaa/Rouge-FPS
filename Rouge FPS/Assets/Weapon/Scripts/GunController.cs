@@ -89,10 +89,20 @@ public class GunController : MonoBehaviour
         if(animatorInfo.shortNameHash == Animator.StringToHash("Get"))
         {
             // 武器交換中
-            equipping = CEScript.activeFlg;
+            equipping = true;
+            CEScript.activeFlg = equipping;
+            shooting = false;
+        } else if(animatorInfo.shortNameHash == Animator.StringToHash("Reload")) 
+        {
+            equipping = true;
+            CEScript.activeFlg = equipping;
+        } else if(animatorInfo.shortNameHash == Animator.StringToHash("Shot")) 
+        {
+            equipping = true;
+            CEScript.activeFlg = equipping;
         } else {
+            CEScript.activeFlg = equipping;
             equipping = false;
-            CEScript.activeFlg = false;
         }
 
         // アニメーションが終了
