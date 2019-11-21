@@ -44,6 +44,8 @@ public class BulletController : MonoBehaviour
 
         // ダメージを取得
         Damage = GCScript.damage;
+
+        Debug.Log(GCScript.damage);
     }
 
     void Update()
