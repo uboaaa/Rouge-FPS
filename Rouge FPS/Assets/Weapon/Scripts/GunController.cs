@@ -70,7 +70,7 @@ public class GunController : MonoBehaviour
         InitGun();
 
         FPSCon = GameObject.Find("FPSController");
-        AmmoPlus = FPSCon.GetComponent<SkillManagement>().GetAmmoPlus();
+        AmmoPlus = SkillManagement.GetAmmoPlus(0);
         CEScript = FPSCon.GetComponent<ChangeEquip>();
 
         animator = GetComponent<Animator>();
