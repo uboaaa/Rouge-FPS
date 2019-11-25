@@ -55,8 +55,8 @@ public class FirstPersonGunController : MonoBehaviour
    
     void Start()
     {
-        
-        AmmoPlus=SkillManagement.GetAmmoPlus(0);
+        SkillManagement.SetAmmoMagnification(0);
+        AmmoPlus=SkillManagement.GetAmmoPlus();
         OneMagazine = OneMagazine + (OneMagazine * AmmoPlus);
         InitGun();
         MaxAmmo = MaxAmmo + (MaxAmmo * AmmoPlus);

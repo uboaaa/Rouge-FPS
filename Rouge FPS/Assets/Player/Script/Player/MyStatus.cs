@@ -18,8 +18,8 @@ public class MyStatus : MonoBehaviour
 
     private void Start()
     {
-      
-        HpPlus = SkillManagement.GetHpPlus(0);
+        SkillManagement.SetHPMagnification(0);
+        HpPlus = SkillManagement.GetHpPlus();
         playerHP = playerHP + (playerHP * HpPlus);
         FirstHP = playerHP;
      

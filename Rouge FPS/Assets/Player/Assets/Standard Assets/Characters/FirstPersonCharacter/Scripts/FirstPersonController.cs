@@ -232,7 +232,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
             // set the desired speed to be walking or running
          
             //�ړ����x�̐ݒ�
-            float AccelSpeed= SkillManagement.GetSpeedPlus(0);
+            SkillManagement.SetSpeedMagnification(0);
+            float AccelSpeed= SkillManagement.GetSpeedPlus();
          speed = m_IsWalking ? m_WalkSpeed+(m_WalkSpeed*AccelSpeed) 
                              : m_RunSpeed+(m_RunSpeed * AccelSpeed); 
          
