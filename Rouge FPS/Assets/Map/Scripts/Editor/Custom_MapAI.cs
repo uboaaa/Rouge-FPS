@@ -15,6 +15,8 @@ public class Custom_MapAI : Editor
     ReorderableList _reorderableList;
     //仮
     SerializedProperty target;
+    //ミニマップ
+    SerializedProperty minimap;
 
     private void OnEnable()
     {
@@ -33,6 +35,8 @@ public class Custom_MapAI : Editor
 
         //仮
         target = serializedObject.FindProperty("target");
+        //ミニマップ
+        minimap = serializedObject.FindProperty("miniMap");
     }
 
     public override void OnInspectorGUI()
@@ -40,6 +44,7 @@ public class Custom_MapAI : Editor
         //仮
         serializedObject.Update();
         EditorGUILayout.PropertyField(target);
+        EditorGUILayout.PropertyField(minimap);
 
         _reorderableList.DoLayoutList();
         serializedObject.ApplyModifiedProperties();
