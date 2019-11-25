@@ -22,16 +22,18 @@ public class MapAI : MonoBehaviour
     //仮プレイヤー
     public GameObject target = null;
 
+    //ミニマップ用オブジェクト
+    public GameObject miniMap = null;
+
+    //マップ初期化クラス
     private MapInitializer initializer = null;
 
     private int[,] m_nowMap;                    //マップチップ情報
     private int m_mapScale;                     //マップスケール
     private int m_roomId = -1;                  //現在の部屋ID(-1のときは通路のとき)
 
-    //private GameObject m_spawner_Lizard;        //リザード
-
-    private Dictionary<int, Room> m_roomList = null;        //ID・部屋リスト
-    private List<GameObject> m_spawnList = null; //ID・スポナーのリスト
+    private Dictionary<int, Room> m_roomList = new Dictionary<int, Room>();         //ID・部屋リスト
+    private List<GameObject> m_spawnList = new List<GameObject>();                  //ID・スポナーのリスト
 
     //
     void Start()
@@ -58,34 +60,48 @@ public class MapAI : MonoBehaviour
     private void FixedUpdate()
     {
         //仮プレイヤー座標取得
-        var x = target.transform.position.x / 4.0f;
-        var y = target.transform.position.z / 4.0f;
-
-        //IDリセット
-        m_roomId = -1;
+        var x = (target.transform.position.x) / 4.0f;
+        var y = (target.transform.position.z) / 4.0f;
 
         //リスト内の部屋のどれかに入ったら
+        int nowId = -1;
         foreach (KeyValuePair<int,Room> room in m_roomList)
         {
             //部屋の範囲内に対象がいるとき
-            if(room.Value.Start.X < x && room.Value.End.X > x)
+            //※条件で座標誤差分を足し引きしている
+            if(room.Value.Start.X - 1.0f < x && room.Value.End.X + 1.0f > x )
             {
-                if(room.Value.Start.Y < y && room.Value.End.Y > y)
+                if(room.Value.Start.Y - 1.0f < y && room.Value.End.Y + 1.0f > y )
                 {
-                    m_roomId = room.Key;
+                    nowId = room.Key;
                     break;
                 }
             }
         }
 
-        if (m_roomId != -1)
+        //部屋IDが違う場合のみ更新
+        if (nowId != m_roomId)
         {
+            m_roomId = nowId;
+
+            // 部屋閉じる
+
+            // 敵スポーン起動
+            if (m_roomId != -1)
+            {
+                PopEnemy(m_enemyList[0].obj);
+            }
+
             Debug.Log(m_roomId);
         }
 
-        //部屋閉じる
+    }
 
-        //敵スポーン起動
+    private void LateUpdate()
+    {
+        //ミニマップ生成
+        //画像34*34のマップチップで作成？
+        //マップサイズに応じて変更？
 
     }
 
@@ -102,8 +118,7 @@ public class MapAI : MonoBehaviour
         } while (m_nowMap[position.X, position.Y] != 1);
 
         //リストに追加
-        GameObject newEnemy = Instantiate(_enemy, new Vector3(position.X * m_mapScale, 1, position.Y * m_mapScale), new Quaternion());
-        m_spawnList.Add(newEnemy);
+        m_spawnList.Add(Instantiate(_enemy, new Vector3(position.X * m_mapScale, 1, position.Y * m_mapScale), new Quaternion()));
     }
 
     // 敵スポナーの設置関数
