@@ -8,7 +8,7 @@ public class MergeScenes : MonoBehaviour
 
     void Start()
     {
-        
+         Screen.SetResolution(1280, 720, false, 60);
         SceneManager.LoadScene("MapScene", LoadSceneMode.Additive);
         SceneManager.LoadScene("PlayerScene", LoadSceneMode.Additive);
 

@@ -261,6 +261,21 @@ PrefabInstance:
       propertyPath: Weapon2
       value: 
       objectReference: {fileID: 1140388047}
+    - target: {fileID: 5033198360798120098, guid: 8ef12ba36b85ca3458c3db7b8150f89d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5033198360798120098, guid: 8ef12ba36b85ca3458c3db7b8150f89d,
+        type: 3}
+      propertyPath: SecondaryWeapon
+      value: 
+      objectReference: {fileID: 1140388047}
+    - target: {fileID: 5033198360798120098, guid: 8ef12ba36b85ca3458c3db7b8150f89d,
+        type: 3}
+      propertyPath: PrimaryWeapon
+      value: 
+      objectReference: {fileID: 227558923}
     - target: {fileID: 2458891898662177953, guid: 8ef12ba36b85ca3458c3db7b8150f89d,
         type: 3}
       propertyPath: m_LocalRotation.x
@@ -294,24 +309,45 @@ PrefabInstance:
     - target: {fileID: 8770911169299430850, guid: 8ef12ba36b85ca3458c3db7b8150f89d,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8831957992100212308, guid: 8ef12ba36b85ca3458c3db7b8150f89d,
         type: 3}
       propertyPath: AmmoCheck
       value: 
       objectReference: {fileID: 1382097556}
+    - target: {fileID: 8831957992100212308, guid: 8ef12ba36b85ca3458c3db7b8150f89d,
+        type: 3}
+      propertyPath: reloadInterval
+      value: 0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 3180197163835860335, guid: 8ef12ba36b85ca3458c3db7b8150f89d,
         type: 3}
       propertyPath: AmmoCheck
       value: 
       objectReference: {fileID: 1382097556}
+    - target: {fileID: 3180197163835860335, guid: 8ef12ba36b85ca3458c3db7b8150f89d,
+        type: 3}
+      propertyPath: reloadInterval
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1788104618767305099, guid: 8ef12ba36b85ca3458c3db7b8150f89d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6090882663305387059, guid: 8ef12ba36b85ca3458c3db7b8150f89d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5033198358735204533, guid: 8ef12ba36b85ca3458c3db7b8150f89d, type: 3}
     - {fileID: 5033198358735204534, guid: 8ef12ba36b85ca3458c3db7b8150f89d, type: 3}
     - {fileID: 5033198358735204535, guid: 8ef12ba36b85ca3458c3db7b8150f89d, type: 3}
     - {fileID: 5033198358735204536, guid: 8ef12ba36b85ca3458c3db7b8150f89d, type: 3}
     - {fileID: 5033198358735204537, guid: 8ef12ba36b85ca3458c3db7b8150f89d, type: 3}
+    - {fileID: 3383312654238255258, guid: 8ef12ba36b85ca3458c3db7b8150f89d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8ef12ba36b85ca3458c3db7b8150f89d, type: 3}
 --- !u!1 &16836033 stripped
 GameObject:
@@ -339,7 +375,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 16836033}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5
   m_Height: 1
@@ -525,7 +561,7 @@ RectTransform:
   m_LocalScale: {x: 5, y: 5, z: 1}
   m_Children: []
   m_Father: {fileID: 1986818893}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -595,7 +631,7 @@ GameObject:
   - component: {fileID: 319594961}
   - component: {fileID: 319594960}
   - component: {fileID: 319594959}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -674,12 +710,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &341609150 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5252231880351189071, guid: 92171657f8202ff46b944b0ca9ab486a,
-    type: 3}
-  m_PrefabInstance: {fileID: 5252231880145371889}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &453886671
 GameObject:
   m_ObjectHideFlags: 0
@@ -1496,6 +1526,25 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 16836032}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &1140388051
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1140388047}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d4c8d3da1ffa97b49a585eae6ee1a5a2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1357626411
 GameObject:
   m_ObjectHideFlags: 0
@@ -1532,7 +1581,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -506, y: -207}
+  m_AnchoredPosition: {x: -506, y: -312}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1357626413
@@ -1627,7 +1676,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0.21568628, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1635,8 +1684,8 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: ba458c1184541476091009c1abe64a66, type: 3}
-    m_FontSize: 28
+    m_Font: {fileID: 12800000, guid: 32ae23594eb385c458f5d5c01162ce8a, type: 3}
+    m_FontSize: 40
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 0
@@ -1644,8 +1693,8 @@ MonoBehaviour:
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: Ammo
 --- !u!222 &1382097557
@@ -1672,7 +1721,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 599, y: -216}
+  m_AnchoredPosition: {x: 521, y: -268}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1524665627
@@ -1749,137 +1798,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1524665627}
   m_CullTransparentMesh: 0
---- !u!1 &1701124614
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1701124615}
-  - component: {fileID: 1701124617}
-  - component: {fileID: 1701124616}
-  m_Layer: 5
-  m_Name: lightMachineGun
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1701124615
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1701124614}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 4}
-  m_Children:
-  - {fileID: 1971709046}
-  m_Father: {fileID: 1986818893}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 233.4, y: -107}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1701124616
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1701124614}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: c71d198c12225b441b7d8e8598aedeb4, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
---- !u!222 &1701124617
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1701124614}
-  m_CullTransparentMesh: 0
---- !u!1 &1971709045
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1971709046}
-  - component: {fileID: 1971709047}
-  m_Layer: 0
-  m_Name: GunController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1971709046
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1971709045}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -112.9, y: 69.8, z: 0.4105}
-  m_LocalScale: {x: 0, y: 0, z: 0}
-  m_Children: []
-  m_Father: {fileID: 1701124615}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1971709047
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1971709045}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5aaa6e644fb157f43adf5cfb4aa435da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AmmoCheck: {fileID: 1382097556}
-  shootEnabled: 1
-  gunType: 0
-  shootMode: 0
-  OneMagazine: 100
-  MaxAmmo: 300
-  damage: 1
-  shootInterval: 0.15
-  shootRange: 50
-  muzzleFlashScale: {x: 0, y: 0, z: 0}
-  muzzleFlashPrefab: {fileID: 0}
-  hitEffectPrefab: {fileID: 100002, guid: 56bfc2f4b4a0c534c8ef3d0fd1124c44, type: 3}
-  gameObject: {fileID: 341609150}
 --- !u!1 &1986818892
 GameObject:
   m_ObjectHideFlags: 0
@@ -1918,7 +1836,6 @@ RectTransform:
   - {fileID: 1357626412}
   - {fileID: 915041095}
   - {fileID: 648180531}
-  - {fileID: 1701124615}
   - {fileID: 9004702364328685810}
   - {fileID: 267126804}
   m_Father: {fileID: 0}
@@ -2301,7 +2218,7 @@ RectTransform:
   - {fileID: 941281272}
   - {fileID: 1113745438}
   m_Father: {fileID: 1986818893}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}

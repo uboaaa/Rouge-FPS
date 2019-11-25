@@ -48,7 +48,7 @@ private float aaaaa;
             UpdatePlayerXYZ(abc.x, 15, abc.z);
         }
 
-        //ノックバック処理
+        // //ノックバック処理
         // if (Input.GetKeyDown(KeyCode.C))
         // {
         //     abc = this.transform.position;
@@ -65,6 +65,17 @@ private float aaaaa;
         // if (abc.z -transform.position.z>10.0f) { moveFlg = false; }
     }
 
+
+//   void OnTriggerEnter (Collider other)
+//     {
+//         string layerName = LayerMask.LayerToName(other.gameObject.layer);
+         
+//         if( layerName == "Back")
+//         {
+//             Debug.Log("AAA");
+//            moveFlg = false;
+//         }
+//     }
         void FixedUpdate()
         {
        
