@@ -3,25 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraReset : MonoBehaviour
-
 {
-    Vector3 cameraAngle;　//カメラの角度を代入する変数
-    public new GameObject camera; //カメラオブジェクトを格納
-
-    //オブジェクトを動かすために必要
-    public float thrust;　//勢いの強さ
-    Rigidbody rb;        //リジットボディー
+    Vector3 abc = new Vector3(0.0f, 0.0f,0.0f);
 
     void Start()
     {
-        rb = this.GetComponent<Rigidbody>(); //リジッドボディー参照
-        thrust = 100f;　　　　　　　　　　　　　　//勢いの初期化
+        abc.x= MapInitializer.GetSpawnData("rx");
+        abc.y= MapInitializer.GetSpawnData("ry");
+        abc.z= MapInitializer.GetSpawnData("rz");
     }
 
 
-    void FixedUpdate()
+    void Update()
     {
         //カメラの方向を取得
-     camera.transform.rotation  = Quaternion.identity;
+        //camera.transform.rotation  = Quaternion.identity;
+        if (Input.GetKey(KeyCode.Return)) {
+            abc.x = MapInitializer.GetSpawnData("rx");
+            abc.y = MapInitializer.GetSpawnData("ry");
+            abc.z = MapInitializer.GetSpawnData("rz");
+            this.transform.rotation = Quaternion.Euler(abc);
+        }
     }
 }

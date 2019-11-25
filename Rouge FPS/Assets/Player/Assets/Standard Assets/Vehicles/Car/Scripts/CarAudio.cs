@@ -37,7 +37,7 @@ namespace UnityStandardAssets.Vehicles.Car
         public float pitchMultiplier = 1f;                                          // Used for altering the pitch of audio clips
         public float lowPitchMin = 1f;                                              // The lowest possible pitch for the low sounds
         public float lowPitchMax = 6f;                                              // The highest possible pitch for the low sounds
-        public float highPitchMultiplier = 0.25f;                                   // Used for altering the pitch of high sounds
+        public float higGetSpeedPlusitchMultiplier = 0.25f;                                   // Used for altering the pitch of high sounds
         public float maxRolloffDistance = 500;                                      // The maximum distance where rollof starts to take place
         public float dopplerLevel = 1;                                              // The mount of doppler effect used in the audio
         public bool useDoppler = true;                                              // Toggle for using doppler
@@ -112,7 +112,7 @@ namespace UnityStandardAssets.Vehicles.Car
                 if (engineSoundStyle == EngineAudioOptions.Simple)
                 {
                     // for 1 channel engine sound, it's oh so simple:
-                    m_HighAccel.pitch = pitch*pitchMultiplier*highPitchMultiplier;
+                    m_HighAccel.pitch = pitch*pitchMultiplier*higGetSpeedPlusitchMultiplier;
                     m_HighAccel.dopplerLevel = useDoppler ? dopplerLevel : 0;
                     m_HighAccel.volume = 1;
                 }
@@ -123,8 +123,8 @@ namespace UnityStandardAssets.Vehicles.Car
                     // adjust the pitches based on the multipliers
                     m_LowAccel.pitch = pitch*pitchMultiplier;
                     m_LowDecel.pitch = pitch*pitchMultiplier;
-                    m_HighAccel.pitch = pitch*highPitchMultiplier*pitchMultiplier;
-                    m_HighDecel.pitch = pitch*highPitchMultiplier*pitchMultiplier;
+                    m_HighAccel.pitch = pitch*higGetSpeedPlusitchMultiplier*pitchMultiplier;
+                    m_HighDecel.pitch = pitch*higGetSpeedPlusitchMultiplier*pitchMultiplier;
 
                     // get values for fading the sounds based on the acceleration
                     float accFade = Mathf.Abs(m_CarController.AccelInput);

@@ -6,27 +6,51 @@ using UnityEngine;
 public class MyStatus : MonoBehaviour
 {
 
-   public int hp=100;
-    private int Attack;
-    private int Deffend;
+    private float playerHP = 100;
+    private int playerATK;
+    private float playerDEF = 1;
+    private float HpPlus;
+    private float FirstHP;
     private GameObject equip;
+    private GameObject Skill;
+    private bool InfinityHealth = false;
+    float seconds;
 
-    public void SetHp(int hp)
+    private void Start()
     {
-        this.hp = hp;
+        Skill = GameObject.Find("FPSController");
+        HpPlus = Skill.GetComponent<SkillManagement>().GetHpPlus(0);
+        playerHP = playerHP + (playerHP * HpPlus);
+        FirstHP = playerHP;
+     
     }
-
-    public int GetHp()
+    public void SetHp(float hp)
     {
-
-
-        return hp;
+        this.playerHP = hp;
     }
 
-    public int downHp() {
-        hp=hp-9;
-        return hp;
+    public float GetHp()
+    {
+        return playerHP;
     }
+
+    public float downHp() {
+      
+
+            playerHP = playerHP - 300f;
+     
+
+        
+        return playerHP;
+    }
+
+    public void CureHp() {
+  
+            playerHP += (int)1;
+        
+    }
+
+    
     public void SetEquip(GameObject weapon)
     {
         equip = weapon;

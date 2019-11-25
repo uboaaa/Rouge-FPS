@@ -4,20 +4,19 @@ public class MergeScenes : MonoBehaviour
 {
     private static bool CameraSeter = false;
 
- 
+    private static bool isMerge = false;       //シーン統合フラグ
 
     void Start()
     {
-        SceneManager.LoadScene("PlayerScene", LoadSceneMode.Additive);
+        
         SceneManager.LoadScene("MapScene", LoadSceneMode.Additive);
+        SceneManager.LoadScene("PlayerScene", LoadSceneMode.Additive);
 
+        //SceneManager.LoadScene("EnemyScene", LoadSceneMode.Additive);
+        //SceneManager.LoadScene("SkillScene", LoadSceneMode.Additive);
+        //SceneManager.LoadScene("WeaponScene", LoadSceneMode.Additive);
 
-
-        SceneManager.LoadScene("EnemyScene", LoadSceneMode.Additive);
-
-
-        SceneManager.LoadScene("SkillScene", LoadSceneMode.Additive);
-        SceneManager.LoadScene("WeaponScene", LoadSceneMode.Additive);
+        isMerge = true;
 
         //現在読み込まれているシーン数だけループ
         for (int i = 0; i < UnityEngine.SceneManagement.SceneManager.sceneCount; i++)
@@ -29,13 +28,23 @@ public class MergeScenes : MonoBehaviour
             {
                 CameraSeter = true;
                 break;
-            }
-            
+            }  
         }
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Q)) { SceneManager.LoadScene("TitleScene"); }
     }
     public static bool CameraSet
     {
         get { return CameraSeter; }  //取得用
 
+    }
+
+    //シーン統合フラグ取得
+    public static bool IsMerge()
+    {
+        return isMerge;
     }
 }
