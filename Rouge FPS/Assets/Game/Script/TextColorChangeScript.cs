@@ -7,7 +7,8 @@ public class TextColorChangeScript : MonoBehaviour
 {
     // Start is called before the first frame update
     Text text;
-
+    [SerializeField]
+    private GameObject pauseUI;
     void Start()
     {
 
@@ -19,15 +20,17 @@ public class TextColorChangeScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-
+         if(!pauseUI.activeSelf){
+ text.color = new Color(0.0f, 0.0f, 0.0f, 1.0f);
+         }
     }
 
     public void ColorChange(string Search)
     {
         text.color = new Color(0.0f, 0.0f, 0.0f, 1.0f);
+       
         switch (Search)
-        {
+        { 
             case "ReturnGame":
                 if (text.text == "Return Game") { text.color = new Color(1.0f, 0.0f, 0.0f, 1.0f); }
                 break;
@@ -39,6 +42,6 @@ public class TextColorChangeScript : MonoBehaviour
                 break;
 
         }
-
     }
-}
+    }
+
