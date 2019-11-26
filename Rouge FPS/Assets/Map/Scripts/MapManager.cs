@@ -64,9 +64,19 @@ public class MapManager : MonoBehaviour
     //
     private void FixedUpdate()
     {
-        //仮プレイヤー座標取得
-        var x = (target.transform.position.x) / 4.0f;
-        var y = (target.transform.position.z) / 4.0f;
+        float x, y;
+        if (MergeScenes.IsMerge())
+        {
+            //プレイヤー座標取得
+            x = PlayerXYZ.GetPlayerPosition("px") / 4.0f;
+            y = PlayerXYZ.GetPlayerPosition("pz") / 4.0f;
+        }
+        else
+        {
+            //仮プレイヤー座標取得
+            x = (target.transform.position.x) / 4.0f;
+            y = (target.transform.position.z) / 4.0f;
+        }
 
         //リスト内の部屋のどれかに入ったら
         int nowId = -1;

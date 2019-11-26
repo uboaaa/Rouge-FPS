@@ -24,6 +24,11 @@ public class MiniMapManager : MonoBehaviour
         
     }
 
+    private void LateUpdate()
+    {
+        
+    }
+
     //マップチップ生成
     public void CreateMapTip(int[,] mapdata)
     {
