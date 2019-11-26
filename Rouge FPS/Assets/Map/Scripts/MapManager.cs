@@ -65,11 +65,13 @@ public class MapManager : MonoBehaviour
     private void FixedUpdate()
     {
         float x, y;
+        float rot;
         if (MergeScenes.IsMerge())
         {
             //プレイヤー座標取得
             x = PlayerXYZ.GetPlayerPosition("px") / 4.0f;
             y = PlayerXYZ.GetPlayerPosition("pz") / 4.0f;
+
         }
         else
         {
