@@ -14,19 +14,18 @@ public class ObjectGroup
     public GameObject obj = null;
 }
 
-//マップ管理AIクラス
-public class MapAI : MonoBehaviour
+//マップ管理クラス
+public class MapManager : MonoBehaviour
 {
     public ObjectGroup[] m_enemyList;
 
     //仮プレイヤー
     public GameObject target = null;
 
-    //ミニマップ用オブジェクト
-    public GameObject miniMap = null;
-
     //マップ初期化クラス
     private MapInitializer initializer = null;
+    //ミニマップクラス
+    private MiniMapManager miniMapManager = null;
 
     private int[,] m_nowMap;                    //マップチップ情報
     private int m_mapScale;                     //マップスケール
@@ -38,8 +37,10 @@ public class MapAI : MonoBehaviour
     //
     void Start()
     {
-        //マップ
-        initializer = this.GetComponent<MapInitializer>();
+        //マップ初期化クラス
+        initializer = this.gameObject.GetComponent<MapInitializer>();
+        //ミニマップ管理クラス
+        miniMapManager = this.gameObject.GetComponent<MiniMapManager>();
 
         //マップチップ情報を取得
         m_nowMap = initializer.GetMap();
@@ -47,6 +48,10 @@ public class MapAI : MonoBehaviour
         m_mapScale = initializer.GetScale();
         //ID・部屋リストを取得
         initializer.GetRoomList(out m_roomList);
+
+        //ミニマップ生成
+        miniMapManager.CreateMapTip(m_nowMap);
+
     }
 
     //
