@@ -34,7 +34,6 @@ public class PauseScript : MonoBehaviour
             //　ポーズUIが表示されてる時は停止
             if (pauseUI.activeSelf)
             {
-                GametoTitle.SetModeSelect("ReturnGame");
                 Time.timeScale = 0f;
                 //　ポーズUIが表示されてなければ通常通り進行
             }

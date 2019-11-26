@@ -1817,6 +1817,7 @@ GameObject:
   - component: {fileID: 1986818894}
   - component: {fileID: 1986818897}
   - component: {fileID: 1986818898}
+  - component: {fileID: 1986818899}
   m_Layer: 5
   m_Name: MainCanvas
   m_TagString: Untagged
@@ -1939,6 +1940,23 @@ MonoBehaviour:
   RGame: {fileID: 604941954}
   RTitle: {fileID: 1113745437}
   Settings: {fileID: 941281271}
+  pauseUI: {fileID: 9004702364328685811}
+--- !u!114 &1986818899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1986818892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da0da2498fe3e344db9d550039b259f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RGame: {fileID: 604941954}
+  RTitle: {fileID: 1113745437}
+  Settings: {fileID: 941281271}
+  pauseUI: {fileID: 9004702364328685811}
 --- !u!1 &2086451457
 GameObject:
   m_ObjectHideFlags: 0
