@@ -19,16 +19,23 @@ public class ChangeEquip : MonoBehaviour
     void Start()
     {
         ownGun = 1;
-        PrimaryWeapon.SetActive(true);
-        SecondaryWeapon.SetActive(false);
+        if(PrimaryWeapon != null)
+        {
+            PrimaryWeapon.SetActive(true);
+            GCPrimaryScript = PrimaryWeapon.GetComponent<GunController>();
+        }
 
-        GCPrimaryScript = SecondaryWeapon.GetComponent<GunController>();
-        GCSecondaryScript = SecondaryWeapon.GetComponent<GunController>();
+        if(SecondaryWeapon != null)
+        {
+            SecondaryWeapon.SetActive(false);
+            GCSecondaryScript = SecondaryWeapon.GetComponent<GunController>();
+        }
+
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && !activeFlg)
+        if (Input.GetKeyDown(KeyCode.E) && !activeFlg && SecondaryWeapon != null)
         {
             GCPrimaryScript.shooting = false;
             GCSecondaryScript.shooting = false;
@@ -52,6 +59,53 @@ public class ChangeEquip : MonoBehaviour
             SecondaryWeapon.SetActive(true);
         }
 
+    }
+
+    // 落ちている武器を拾う
+    public GameObject GetItem(GameObject dropItem)
+    {
+        GameObject aiueo;   // 情報保持用
+        // プライマリ武器しか持っていないとき
+        if(ownGun == 1 && SecondaryWeapon == null)
+        {
+            SecondaryWeapon = dropItem;
+
+            PrimaryWeapon.SetActive(false);
+            SecondaryWeapon.SetActive(true);
+
+            GCSecondaryScript = SecondaryWeapon.GetComponent<GunController>();
+            
+            return null;
+        }
+        // プライマリ武器と交換する
+        else if(ownGun == 1)
+        {
+            PrimaryWeapon.SetActive(false);
+
+            aiueo = PrimaryWeapon;
+            PrimaryWeapon = dropItem;
+            dropItem = aiueo;
+
+            PrimaryWeapon.SetActive(true);
+
+            return dropItem;
+        }
+
+        // セカンダリ武器と交換する
+        if(ownGun == 2)
+        {
+            SecondaryWeapon.SetActive(false);
+            
+            aiueo = SecondaryWeapon;
+            SecondaryWeapon = dropItem;
+            dropItem = aiueo;
+
+            SecondaryWeapon.SetActive(true);
+
+            return dropItem;
+        }
+        
+        return null;
     }
 }
   

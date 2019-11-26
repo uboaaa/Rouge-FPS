@@ -23,8 +23,8 @@ public class GunController : MonoBehaviour
     public enum GunRank { Rank1, Rank2, Rank3 }                             // ランク
     [SerializeField] public enum ShootMode { AUTO, SEMIAUTO }               // 単発が連射か
     [SerializeField] public ShootMode  shootMode = ShootMode.AUTO;          // 武器の発射モード
-    [SerializeField] GunType    gunType     = GunType.AssaultRifle;         // 種類情報
-    [SerializeField] GunRank    gunRank     = GunRank.Rank1;                // ランク情報
+    [SerializeField] public GunType    gunType     = GunType.AssaultRifle;  // 種類情報
+    [SerializeField] public GunRank    gunRank     = GunRank.Rank1;         // ランク情報
     [SerializeField] int        skillSlot   = 1;                            // スキルスロット数
     [SerializeField] int        OneMagazine = 0;                            // マガジン内の弾
     [SerializeField] int        MaxAmmo = 0;                                // 残弾数
@@ -47,12 +47,13 @@ public class GunController : MonoBehaviour
     bool        reloading = false;                          // リロード中か判定用
     bool        equipping = false;                          // 装備切り替え中か判定用
     int         ammo;                                       // マガジンに入っている弾の数
-    private float AmmoPlus;
     // スクリプト関係================================================
     ChangeEquip CEScript;                   // [ChangeEquip]用の変数
-    CameraShake cameraScript;                // [CameraShake]用の変数
+    CameraShake cameraScript;               // [CameraShake]用の変数
     Animator animator;                      // [Animator]用の変数
+    GunInfo GIScript;                       // [GunInfo]用の変数
     AnimatorStateInfo animatorInfo;         // Animatorの情報を入れる
+    GameObject FPSCon;
 
     // プロパティ====================================================
     public int damage
@@ -64,13 +65,13 @@ public class GunController : MonoBehaviour
         get { return ammo;}
         private set { ammo = Mathf.Clamp(value, 0, OneMagazine);}
     }
-   GameObject FPSCon;
+
+    
     void Start()
     {
         InitGun();
 
         FPSCon = GameObject.Find("FPSController");
-        AmmoPlus = FPSCon.GetComponent<SkillManagement>().GetAmmoPlus();
         CEScript = FPSCon.GetComponent<ChangeEquip>();
 
         animator = GetComponent<Animator>();
@@ -161,6 +162,10 @@ public class GunController : MonoBehaviour
     void InitGun()
     {
         Ammo = OneMagazine;
+
+        GIScript = GetComponent<GunInfo>();
+
+        // GunController = GunInfoを書いていく~~
     }
 
     // セミオートかフルオートかの判定
