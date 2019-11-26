@@ -303,6 +303,7 @@ GameObject:
   - component: {fileID: 1249066334}
   - component: {fileID: 1249066333}
   - component: {fileID: 1249066335}
+  - component: {fileID: 1249066336}
   m_Layer: 0
   m_Name: MapController
   m_TagString: Untagged
@@ -358,6 +359,20 @@ MonoBehaviour:
   - group: 0
     obj: {fileID: 1779264351526620451, guid: d237077dad4c1d74a92629a5e33f991c, type: 3}
   target: {fileID: 1278710102}
+--- !u!114 &1249066336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1249066332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cadffa43052373f4d8b65c8a8842685e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tipPrefab: {fileID: 8212387772764369077, guid: cc37b09dbf838e945a86d7bc54201aa2,
+    type: 3}
   miniMap: {fileID: 405515997}
 --- !u!1 &1278710102
 GameObject:
