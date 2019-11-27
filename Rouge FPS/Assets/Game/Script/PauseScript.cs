@@ -6,7 +6,7 @@ public class PauseScript : MonoBehaviour
     //　ポーズした時に表示するUI
     [SerializeField]
     private GameObject pauseUI;
-    public static bool abc;
+    private static bool abc;
     private void Start()
     {
         pauseUI.SetActive(false);   
@@ -28,8 +28,9 @@ public class PauseScript : MonoBehaviour
         abc=pauseUI.activeSelf;
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            if(!GametoTitle.GetNoMove()){
             //　ポーズUIのアクティブ、非アクティブを切り替え
-            pauseUI.SetActive(!pauseUI.activeSelf);
+            pauseUI.SetActive(!pauseUI.activeSelf);}
 
             //　ポーズUIが表示されてる時は停止
             if (pauseUI.activeSelf)
