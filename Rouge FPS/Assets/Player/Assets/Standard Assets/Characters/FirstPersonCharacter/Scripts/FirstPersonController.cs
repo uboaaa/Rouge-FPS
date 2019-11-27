@@ -44,7 +44,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private GameObject Pause;
         private bool aaa;
 
-         bool unko=true;
+         bool unko=false;
 
         // Use this for initialization
         private void Start()
@@ -121,15 +121,26 @@ namespace UnityStandardAssets.Characters.FirstPerson
             Physics.SphereCast(transform.position, m_CharacterController.radius, Vector3.down, out hitInfo,
                                m_CharacterController.height/2f, Physics.AllLayers, QueryTriggerInteraction.Ignore);
             desiredMove = Vector3.ProjectOnPlane(desiredMove, hitInfo.normal).normalized;
-
+            
+            
            if(Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow) ||Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow)){
+              if(!unko){ 
             m_MoveDir.x = 0;
             m_MoveDir.z =0;
-            unko=false;
+            unko=false;}
+            else{
+            m_MoveDir.x = 0;
+            m_MoveDir.z =0;}
             }
-            if(Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) ||Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D)){
+
+            if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) ||Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)){unko=true;}          
+            else{
             unko=true;
-            }          
+            m_MoveDir.x = 0;
+            m_MoveDir.z =0;
+            unko=false;}
+ 
+
         if(unko){m_MoveDir.x = desiredMove.x*speed;
             m_MoveDir.z = desiredMove.z*speed;}
             
