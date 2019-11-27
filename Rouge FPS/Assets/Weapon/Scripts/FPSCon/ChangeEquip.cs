@@ -75,6 +75,8 @@ public class ChangeEquip : MonoBehaviour
 
             GCSecondaryScript = SecondaryWeapon.GetComponent<GunController>();
             
+            ownGun = 2;
+            
             return null;
         }
         // プライマリ武器と交換する

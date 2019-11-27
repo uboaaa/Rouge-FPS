@@ -194,6 +194,7 @@ public class GunController : MonoBehaviour
             {
                 // マズルフラッシュの生成
                 GameObject  muzzleFlash = Instantiate<GameObject>(muzzleFlashPrefab,muzzle.position,muzzle.rotation);
+                muzzleFlash.transform.parent = this.transform;
                 muzzleFlash.transform.localScale = muzzleFlashScale;
                 Destroy(muzzleFlash,1.0f);
             }
@@ -202,6 +203,7 @@ public class GunController : MonoBehaviour
             {
                 // 弾の生成
 		        GameObject bullet = Instantiate<GameObject>(bulletPrefab, muzzle.position, muzzle.rotation);
+                bullet.transform.parent = this.transform;
                 bullet.transform.localScale = bulletScale;
 		        bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * bulletPower);
 		        Destroy(bullet, 5.0f);

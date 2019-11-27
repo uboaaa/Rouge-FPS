@@ -1,4 +1,8 @@
-ï»¿using System.Collections;
+//=======================================================================
+// ’²‚×‚½‚èAE‚¤‚È‚Ç‚Ì“®ì—pƒXƒNƒŠƒvƒg
+// FPSController‚É•t‚¯‚é
+//=======================================================================
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,15 +10,13 @@ public class Action : MonoBehaviour
 {
     private GameObject dropPrefab;      
     DropItem DIScript;
-    ChangeEquip CEScript;                   // [ChangeEquip]ç”¨ã®å¤‰æ•°
+    ChangeEquip CEScript;                   // [ChangeEquip]—p‚Ì•Ï”
     bool actionFlg;
     GameObject ObjectInfo;
+    GameObject tmp;
     void Start()
     {
         CEScript = GetComponent<ChangeEquip>();
-
-        // ãƒ©ãƒ³ãƒ€ãƒ ã§å–ã£ã¦ãã‚‹
-        
     }
 
     void Update()
@@ -27,36 +29,58 @@ public class Action : MonoBehaviour
 
             actionFlg = false;
         }
-        Debug.Log(dropPrefab);
-        Debug.Log(actionFlg);
     }
 
     void BoxAction(GameObject Object)
     {
-        // å®ç®±ã‚’å‰Šé™¤
+        // •ó” ‚ğíœ
         Destroy(Object.gameObject);
 
-        // DropItemã‚’ç”Ÿæˆ
+        // DropItem‚ğ¶¬
         
     }
 
     void WeaponAction(GameObject Object)
     {
-        GameObject dropWeapon;
-        // DropItemComponentã‚’å–å¾—
+        // DropItemComponent‚ğæ“¾
         DIScript = Object.GetComponent<DropItem>();
 
-        // è½ã¡ã¦ã„ã‚‹æ­¦å™¨ã‚’è£…å‚™ã™ã‚‹
+        // —‚¿‚Ä‚¢‚é•Ší‚ğ‘•”õ‚·‚é
+        // ¦dropPrefab‚É‚Í—‚Æ‚·•Ší‚ª“ü‚é
         dropPrefab = CEScript.GetItem(DIScript.WeaponInfo);
 
-        // äº¤æ›ã—ãŸæ­¦å™¨ã‚’ç”Ÿæˆã™ã‚‹
+        // ŒğŠ·‚µ‚½•Ší‚ğ¶¬‚·‚é
         if(dropPrefab != null)
         {
-            dropWeapon = Instantiate<GameObject>(Object,Object.transform.position,Quaternion.identity);
-            // GunInfo  ã®ä¸­ã«æƒ…å ±ã‚’å…¥ã‚ŒãªãŠã™
-            // DropItemã®WeaponInfoã«dropPrefabã‚’å…¥ã‚Œã‚‹
+            GameObject hadWeapon;      // ‚Á‚Ä‚¢‚½•Ší
+
+		    hadWeapon = Instantiate<GameObject>(Object,Object.transform.position,Quaternion.identity);
+            hadWeapon.name = DIScript.WeaponInfo.name;
+
+            // GunInfo‚Ì’†‚É‚Á‚Ä‚¢‚½•Ší‚Ìî•ñ‚ğ“ü‚ê‚é
+            GameObject childObject = transform.Find("FirstPersonCharacter/" + dropPrefab.name).gameObject;
+            GunController GCScript = childObject.GetComponent<GunController>();
+
+            GunInfo GIScript = hadWeapon.GetComponent<GunInfo>();
+
+            Debug.Log(GIScript);
+
+            GIScript.gunRank = GunInfo.GunRank.Rank1;
+            GIScript.gunType = GunInfo.GunType.HandGun;
+            // GIScript.skillSlot = ;
+            // GIScript.OneMagazine = ;
+            // GIScript.MaxAmmo = ;
+            // GIScript.Damage = ;
+            // GIScript.shootInterval = ;
+            // GIScript.reloadInterval = ;
+            // GIScript.bulletPower = ;
+            // GIScript.GunEXP = ;
+
+            // —‚¿‚Ä‚é•Ší‚É‚Á‚Ä‚¢‚½•Ší‚ğ“ü‚ê‚é
+            DIScript.WeaponInfo = hadWeapon;
         }
 
+        // —‚¿‚Ä‚¢‚é•Ší‚ğíœ
         Destroy(Object.gameObject);
     }
 

@@ -25,6 +25,7 @@ public class BulletController : MonoBehaviour
     // スクリプト関係================================================
     GunController   GCScript;       // [GunController]用の変数
     ChangeEquip     CEScript;       // [ChangeEquip]用の変数
+    GameObject anotherObject;
 
     void Start()
     {
@@ -34,11 +35,11 @@ public class BulletController : MonoBehaviour
         if(CEScript.ownGun == 1)
         {
             // プライマリ武器のGunControllerを持ってくる
-            GameObject anotherObject = GameObject.Find(CEScript.PrimaryWeapon.name);
+            anotherObject = GameObject.Find(CEScript.PrimaryWeapon.name);
             GCScript = anotherObject.GetComponent<GunController>();
         } else if(CEScript.ownGun == 2) {
             // セカンダリ武器のGunControllerを持ってくる
-            GameObject anotherObject = GameObject.Find(CEScript.SecondaryWeapon.name);
+            anotherObject = GameObject.Find(CEScript.SecondaryWeapon.name);
             GCScript = anotherObject.GetComponent<GunController>();
         }
 

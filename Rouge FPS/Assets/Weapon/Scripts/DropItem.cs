@@ -31,6 +31,9 @@ public class DropItem : MonoBehaviour
 
         gunSprite = GetComponent<SpriteRenderer>();
 
+        // 名前を変更する
+        this.name = "Drop" + WeaponInfo.name;
+
         // 銃の種類を判別する
         switch(GIScript.gunType)
         {
