@@ -165,6 +165,16 @@ public class MapInitializer : MonoBehaviour
         return m_mapScale;
     }
 
+    public int GetSizeX()
+    {
+        return MAP_SIZE_X;
+    }
+
+    public int GetSizeY()
+    {
+        return MAP_SIZE_Y;
+    }
+
     public void GetRoomList(out Dictionary<int,Room> _roomList)
     {
         _roomList = new Dictionary<int, Room>();

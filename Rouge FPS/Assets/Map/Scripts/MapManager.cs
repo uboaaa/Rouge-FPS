@@ -29,6 +29,7 @@ public class MapManager : MonoBehaviour
 
     private int[,] m_nowMap;                    //マップチップ情報
     private int m_mapScale;                     //マップスケール
+    private int m_mapSizeX, m_mapSizeY;         //マップサイズX,Y
     private int m_roomId = -1;                  //現在の部屋ID(-1のときは通路のとき)
 
     private Dictionary<int, Room> m_roomList = new Dictionary<int, Room>();         //ID・部屋リスト
@@ -46,11 +47,14 @@ public class MapManager : MonoBehaviour
         m_nowMap = initializer.GetMap();
         //マップスケールを取得
         m_mapScale = initializer.GetScale();
+        //マップサイズを取得
+        m_mapSizeX = initializer.GetSizeX();
+        m_mapSizeY = initializer.GetSizeY();
         //ID・部屋リストを取得
         initializer.GetRoomList(out m_roomList);
 
         //ミニマップ生成
-        miniMapManager.CreateMapTip(m_nowMap);
+        miniMapManager.CreateMapTip(m_nowMap, m_mapSizeX, m_mapSizeY);
 
     }
 
