@@ -27,10 +27,11 @@ public class MapManager : MonoBehaviour
     //ミニマップクラス
     private MiniMapManager miniMapManager = null;
 
-    private int[,] m_nowMap;                    //マップチップ情報
+    private int[,] m_nowMap;                    //マップ配置データ
     private int m_mapScale;                     //マップスケール
     private int m_mapSizeX, m_mapSizeY;         //マップサイズX,Y
     private int m_roomId = -1;                  //現在の部屋ID(-1のときは通路のとき)
+    private int m_startId = -1;                 //スタート部屋ID
 
     private Dictionary<int, Room> m_roomList = new Dictionary<int, Room>();         //ID・部屋リスト
     private List<GameObject> m_spawnList = new List<GameObject>();                  //ID・スポナーのリスト
@@ -50,11 +51,14 @@ public class MapManager : MonoBehaviour
         //マップサイズを取得
         m_mapSizeX = initializer.GetSizeX();
         m_mapSizeY = initializer.GetSizeY();
+        //スタート部屋IDを取得
+        m_startId = initializer.StartID();
         //ID・部屋リストを取得
-        initializer.GetRoomList(out m_roomList);
+        initializer.GetRoomList(out m_roomList); 
+
 
         //ミニマップ生成
-        miniMapManager.CreateMapTip(m_nowMap, m_mapSizeX, m_mapSizeY);
+        miniMapManager.CreateMapTip(m_nowMap, m_mapSizeX, m_mapSizeY,m_mapScale);
 
     }
 
@@ -73,15 +77,15 @@ public class MapManager : MonoBehaviour
         if (MergeScenes.IsMerge())
         {
             //プレイヤー座標取得
-            x = PlayerXYZ.GetPlayerPosition("px") / 4.0f;
-            y = PlayerXYZ.GetPlayerPosition("pz") / 4.0f;
+            x = PlayerXYZ.GetPlayerPosition("px") / m_mapScale;
+            y = PlayerXYZ.GetPlayerPosition("pz") / m_mapScale;
 
         }
         else
         {
             //仮プレイヤー座標取得
-            x = (target.transform.position.x) / 4.0f;
-            y = (target.transform.position.z) / 4.0f;
+            x = (target.transform.position.x) / m_mapScale;
+            y = (target.transform.position.z) / m_mapScale;
         }
 
         //リスト内の部屋のどれかに入ったら
@@ -100,6 +104,9 @@ public class MapManager : MonoBehaviour
             }
         }
 
+        //スタート部屋の場合は敵はでない
+        if (nowId == m_startId) return;
+
         //部屋IDが違う場合のみ更新
         if (nowId != m_roomId)
         {
@@ -110,7 +117,13 @@ public class MapManager : MonoBehaviour
             // 敵スポーン起動
             if (m_roomId != -1)
             {
-                PopEnemy(m_enemyList[0].obj);
+                //面積10の数に応じて敵を生成
+                int calc = m_roomList[m_roomId].calcArea();
+                int num = calc / 10;
+                for (int i = 0; i < num; i++)
+                {
+                    PopEnemy(m_enemyList[0].obj);
+                }
             }
 
             Debug.Log(m_roomId);
@@ -157,6 +170,12 @@ public class MapManager : MonoBehaviour
         //リストに追加
         GameObject newSpawner = Instantiate(_enemy, new Vector3(position.X * m_mapScale, 1, position.Y * m_mapScale), new Quaternion());
         m_spawnList.Add(newSpawner);
+    }
+
+    //閉じ込め処理
+    private void CloseRoom()
+    {
+
     }
     
 }

@@ -18,7 +18,7 @@ public class MiniMapManager : MonoBehaviour
     private RectTransform m_markRect = null;
 
     //マップサイズ
-    private int m_mapSizeX, m_mapSizeY;
+    private int m_mapSizeX, m_mapSizeY, m_mapScale;
 
     // Start is called before the first frame update
     void Start()
@@ -36,8 +36,8 @@ public class MiniMapManager : MonoBehaviour
     {
         //プレイヤーの配置データを取得
         //右上がアンカーなのでマップサイズ分を引いて補正
-        var x = PlayerXYZ.GetPlayerPosition("px") / 4.0f - m_mapSizeX;
-        var y = PlayerXYZ.GetPlayerPosition("pz") / 4.0f - m_mapSizeY;
+        var x = PlayerXYZ.GetPlayerPosition("px") / m_mapScale - m_mapSizeX;
+        var y = PlayerXYZ.GetPlayerPosition("pz") / m_mapScale - m_mapSizeY;
         //マーカーのサイズ分を乗算
         x *= m_markRect.sizeDelta.x;
         y *= m_markRect.sizeDelta.y;
@@ -46,7 +46,7 @@ public class MiniMapManager : MonoBehaviour
     }
 
     //マップチップ生成
-    public void CreateMapTip(int[,] mapdata,int sizeX,int sizeY)
+    public void CreateMapTip(int[,] mapdata,int sizeX,int sizeY,int scale)
     {
         m_mapSizeX = sizeX;
         m_mapSizeY = sizeY;

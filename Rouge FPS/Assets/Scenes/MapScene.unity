@@ -401,7 +401,7 @@ MonoBehaviour:
   MAP_SIZE_X: 30
   MAP_SIZE_Y: 30
   MAX_ROOM_NUMBER: 6
-  m_mapScale: 4
+  m_mapScale: 3
 --- !u!4 &1249066334
 Transform:
   m_ObjectHideFlags: 0
