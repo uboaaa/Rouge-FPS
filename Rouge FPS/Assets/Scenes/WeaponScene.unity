@@ -571,13 +571,6 @@ MonoBehaviour:
   shootMode: 1
   gunType: 3
   gunRank: 2
-  skillSlot: 1
-  OneMagazine: 40
-  MaxAmmo: 120
-  Damage: 1
-  shootInterval: 0.15
-  reloadInterval: 5
-  bulletPower: 100
   GunEXP: 0
 --- !u!1 &229199683
 GameObject:
@@ -1207,13 +1200,13 @@ MonoBehaviour:
   shootMode: 0
   gunType: 1
   gunRank: 0
-  skillSlot: 1
-  OneMagazine: 120
-  MaxAmmo: 360
-  Damage: 1
-  shootInterval: 0.15
+  skillSlot: 0
+  OneMagazine: 0
+  MaxAmmo: 0
+  Damage: 0
+  shootInterval: 0
   reloadInterval: 0
-  bulletPower: 1000
+  bulletPower: 0
   muzzle: {fileID: 0}
   bulletPrefab: {fileID: 0}
   bulletScale: {x: 1, y: 1, z: 1}
@@ -2154,13 +2147,6 @@ MonoBehaviour:
   shootMode: 1
   gunType: 4
   gunRank: 0
-  skillSlot: 1
-  OneMagazine: 3
-  MaxAmmo: 12
-  Damage: 1
-  shootInterval: 0.15
-  reloadInterval: 5
-  bulletPower: 100
   GunEXP: 0
 --- !u!1 &706482970
 GameObject:
@@ -2408,13 +2394,6 @@ MonoBehaviour:
   shootMode: 0
   gunType: 2
   gunRank: 1
-  skillSlot: 1
-  OneMagazine: 40
-  MaxAmmo: 120
-  Damage: 1
-  shootInterval: 0.15
-  reloadInterval: 5
-  bulletPower: 100
   GunEXP: 0
 --- !u!114 &752803058
 MonoBehaviour:
@@ -2572,10 +2551,10 @@ MonoBehaviour:
   gunRank: 0
   skillSlot: 1
   OneMagazine: 8
-  MaxAmmo: 160
-  Damage: 8
-  shootInterval: 0.15
-  reloadInterval: 0.5
+  MaxAmmo: 40
+  Damage: 1
+  shootInterval: 0.2
+  reloadInterval: 0.7
   bulletPower: 1000
   muzzle: {fileID: 1091589135}
   bulletPrefab: {fileID: 7749700451724911344, guid: 6b60447f6cc998147a7a704471a5e292,
@@ -2810,13 +2789,6 @@ MonoBehaviour:
   shootMode: 0
   gunType: 2
   gunRank: 1
-  skillSlot: 1
-  OneMagazine: 40
-  MaxAmmo: 120
-  Damage: 1
-  shootInterval: 0.15
-  reloadInterval: 5
-  bulletPower: 100
   GunEXP: 0
 --- !u!1 &830063271
 GameObject:
@@ -3842,10 +3814,10 @@ MonoBehaviour:
   skillSlot: 1
   OneMagazine: 120
   MaxAmmo: 360
-  Damage: 5
-  shootInterval: 0.15
-  reloadInterval: 1.5
-  bulletPower: 4000
+  Damage: 3
+  shootInterval: 0.05
+  reloadInterval: 1.2
+  bulletPower: 2000
   muzzle: {fileID: 1312656499}
   bulletPrefab: {fileID: 7906399819038171674, guid: 38a4b56b79cd5614bae2f306c0be2631,
     type: 3}
@@ -3926,13 +3898,13 @@ MonoBehaviour:
   shootMode: 0
   gunType: 5
   gunRank: 0
-  skillSlot: 1
-  OneMagazine: 120
-  MaxAmmo: 360
-  Damage: 1
-  shootInterval: 0.15
+  skillSlot: 0
+  OneMagazine: 0
+  MaxAmmo: 0
+  Damage: 0
+  shootInterval: 0
   reloadInterval: 0
-  bulletPower: 1000
+  bulletPower: 0
   muzzle: {fileID: 0}
   bulletPrefab: {fileID: 0}
   bulletScale: {x: 1, y: 1, z: 1}
@@ -5126,13 +5098,13 @@ MonoBehaviour:
   shootMode: 0
   gunType: 4
   gunRank: 0
-  skillSlot: 1
-  OneMagazine: 3
-  MaxAmmo: 8
+  skillSlot: 2
+  OneMagazine: 1
+  MaxAmmo: 1
   Damage: 1
-  shootInterval: 0.15
-  reloadInterval: 0
-  bulletPower: 1000
+  shootInterval: 1
+  reloadInterval: 1
+  bulletPower: 1
   muzzle: {fileID: 1501147414}
   bulletPrefab: {fileID: 7749700451724911344, guid: 6b60447f6cc998147a7a704471a5e292,
     type: 3}
@@ -6118,13 +6090,13 @@ MonoBehaviour:
   shootMode: 0
   gunType: 0
   gunRank: 0
-  skillSlot: 1
-  OneMagazine: 120
-  MaxAmmo: 360
-  Damage: 1
-  shootInterval: 0.15
+  skillSlot: 0
+  OneMagazine: 0
+  MaxAmmo: 0
+  Damage: 0
+  shootInterval: 0
   reloadInterval: 0
-  bulletPower: 1000
+  bulletPower: 0
   muzzle: {fileID: 437889524}
   bulletPrefab: {fileID: 7749700451724911344, guid: 6b60447f6cc998147a7a704471a5e292,
     type: 3}
@@ -6362,13 +6334,13 @@ MonoBehaviour:
   shootMode: 0
   gunType: 7
   gunRank: 0
-  skillSlot: 1
-  OneMagazine: 120
-  MaxAmmo: 360
-  Damage: 1
-  shootInterval: 0.15
+  skillSlot: 0
+  OneMagazine: 0
+  MaxAmmo: 0
+  Damage: 0
+  shootInterval: 0
   reloadInterval: 0
-  bulletPower: 1000
+  bulletPower: 0
   muzzle: {fileID: 0}
   bulletPrefab: {fileID: 0}
   bulletScale: {x: 1, y: 1, z: 1}
@@ -6747,6 +6719,41 @@ PrefabInstance:
       propertyPath: AmmoCheck
       value: 
       objectReference: {fileID: 891840029}
+    - target: {fileID: 4081224506986546380, guid: 60c43cf85728415418c4d3cb6b12a6b2,
+        type: 3}
+      propertyPath: skillSlot
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4081224506986546380, guid: 60c43cf85728415418c4d3cb6b12a6b2,
+        type: 3}
+      propertyPath: OneMagazine
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 4081224506986546380, guid: 60c43cf85728415418c4d3cb6b12a6b2,
+        type: 3}
+      propertyPath: MaxAmmo
+      value: 360
+      objectReference: {fileID: 0}
+    - target: {fileID: 4081224506986546380, guid: 60c43cf85728415418c4d3cb6b12a6b2,
+        type: 3}
+      propertyPath: Damage
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4081224506986546380, guid: 60c43cf85728415418c4d3cb6b12a6b2,
+        type: 3}
+      propertyPath: shootInterval
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 4081224506986546380, guid: 60c43cf85728415418c4d3cb6b12a6b2,
+        type: 3}
+      propertyPath: reloadInterval
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4081224506986546380, guid: 60c43cf85728415418c4d3cb6b12a6b2,
+        type: 3}
+      propertyPath: bulletPower
+      value: 2000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 60c43cf85728415418c4d3cb6b12a6b2, type: 3}
 --- !u!1001 &6877647978245509591
@@ -6821,5 +6828,40 @@ PrefabInstance:
       propertyPath: AmmoCheck
       value: 
       objectReference: {fileID: 891840029}
+    - target: {fileID: 6877647978732661026, guid: 600a01c02f686fc4196dfe2156b7935d,
+        type: 3}
+      propertyPath: skillSlot
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877647978732661026, guid: 600a01c02f686fc4196dfe2156b7935d,
+        type: 3}
+      propertyPath: OneMagazine
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877647978732661026, guid: 600a01c02f686fc4196dfe2156b7935d,
+        type: 3}
+      propertyPath: MaxAmmo
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877647978732661026, guid: 600a01c02f686fc4196dfe2156b7935d,
+        type: 3}
+      propertyPath: Damage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877647978732661026, guid: 600a01c02f686fc4196dfe2156b7935d,
+        type: 3}
+      propertyPath: shootInterval
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877647978732661026, guid: 600a01c02f686fc4196dfe2156b7935d,
+        type: 3}
+      propertyPath: reloadInterval
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877647978732661026, guid: 600a01c02f686fc4196dfe2156b7935d,
+        type: 3}
+      propertyPath: bulletPower
+      value: 1000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 600a01c02f686fc4196dfe2156b7935d, type: 3}

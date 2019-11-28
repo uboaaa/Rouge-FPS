@@ -62,7 +62,7 @@ public class ChangeEquip : MonoBehaviour
     }
 
     // 落ちている武器を拾う
-    public GameObject GetItem(GameObject dropItem)
+    public GameObject GetWeapon(GameObject dropItem)
     {
         GameObject aiueo;   // 情報保持用
         // プライマリ武器しか持っていないとき

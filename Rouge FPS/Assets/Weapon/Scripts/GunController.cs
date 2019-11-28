@@ -10,35 +10,25 @@ public class GunController : MonoBehaviour
 {
     // インスペクター関係============================================
     // 種類
-    public enum GunType {
-                        AssaultRifle,           // アサルトライフル
-                        SubMachineGun,          // サブマシンガン
-                        LightMachineGun,        // ライトマシンガン
-                        HandGun,                // ハンドガン
-                        RocketLauncher,         // ロケットランチャー
-                        ShotGun,                // ショットガン
-                        LaserGun,               // レーザーガン
-                        FlameThrower            // 火炎放射器
-                        }
-    public enum GunRank { Rank1, Rank2, Rank3 }                             // ランク
-    [SerializeField] public enum ShootMode { AUTO, SEMIAUTO }               // 単発が連射か
-    [SerializeField] public ShootMode  shootMode = ShootMode.AUTO;          // 武器の発射モード
-    [SerializeField] public GunType    gunType     = GunType.AssaultRifle;  // 種類情報
-    [SerializeField] public GunRank    gunRank     = GunRank.Rank1;         // ランク情報
-    [SerializeField] int        skillSlot   = 1;                            // スキルスロット数
-    [SerializeField] int        OneMagazine = 0;                            // マガジン内の弾
-    [SerializeField] int        MaxAmmo = 0;                                // 残弾数
-    [SerializeField] int        Damage = 1;                                 // 火力
-    [SerializeField] float      shootInterval = 0.15f;                      // 次発射までの間の時間
-    [SerializeField] float      reloadInterval = 5.0f;                      // リロード終わりまでの時間
-	[SerializeField] float      bulletPower = 100.0f;                       // 弾を飛ばす力
-    [SerializeField] Transform  muzzle;                                     // マズル取得用
-    [SerializeField] GameObject bulletPrefab;                               // 弾のPrefab
-    [SerializeField] Vector3    bulletScale = new Vector3(1.0f,1.0f,1.0f);  // 弾の大きさ変更用
-    [SerializeField] GameObject muzzleFlashPrefab;                          // マズルフラッシュのPrefab
+    [SerializeField] public enum ShootMode { AUTO, SEMIAUTO }                       // 単発が連射か
+    [SerializeField] public ShootMode  shootMode = ShootMode.AUTO;                  // 武器の発射モード
+    [SerializeField] public GunInfo.GunType    gunType     = GunInfo.GunType.AssaultRifle;  // 種類情報
+    [SerializeField] public GunInfo.GunRank    gunRank     = GunInfo.GunRank.Rank1;         // ランク情報
+    [SerializeField] public int        skillSlot;                              // スキルスロット数
+    [SerializeField] public int        OneMagazine;                            // マガジン内の弾
+    [SerializeField] public int        MaxAmmo;                                // 残弾数
+    [SerializeField] public int        Damage;                                 // 火力
+    [SerializeField] public float      shootInterval;                          // 次発射までの間の時間
+    [SerializeField] public float      reloadInterval;                         // リロード終わりまでの時間
+	[SerializeField] public float      bulletPower;                            // 弾を飛ばす力
+    [SerializeField] Transform  muzzle;                                             // マズル取得用
+    [SerializeField] GameObject bulletPrefab;                                       // 弾のPrefab
+    [SerializeField] Vector3    bulletScale = new Vector3(1.0f,1.0f,1.0f);          // 弾の大きさ変更用
+    [SerializeField] GameObject muzzleFlashPrefab;                                  // マズルフラッシュのPrefab
     [SerializeField] Vector3    muzzleFlashScale = new Vector3(1.0f,1.0f,1.0f);     // マズルフラッシュの大きさ変更用
     [SerializeField] float cameraShakePow;                                          // カメラ揺らし用
     [SerializeField] float muzzleShakePow;                                          // マズル揺らし用
+
     // パラメーター関係==============================================
     public float GunEXP;                                    // 経験値
     public Text AmmoCheck;                                  // 残弾数テキスト用
@@ -47,6 +37,13 @@ public class GunController : MonoBehaviour
     bool        reloading = false;                          // リロード中か判定用
     bool        equipping = false;                          // 装備切り替え中か判定用
     int         ammo;                                       // マガジンに入っている弾の数
+
+    public int Ammo
+    {
+        get { return ammo;}
+        private set { ammo = Mathf.Clamp(value, 0, OneMagazine);}
+    }
+
     // スクリプト関係================================================
     ChangeEquip CEScript;                   // [ChangeEquip]用の変数
     CameraShake cameraScript;               // [CameraShake]用の変数
@@ -55,16 +52,7 @@ public class GunController : MonoBehaviour
     AnimatorStateInfo animatorInfo;         // Animatorの情報を入れる
     GameObject FPSCon;
 
-    // プロパティ====================================================
-    public int damage
-    {
-        get{return Damage;}
-    }
-    public int Ammo
-    {
-        get { return ammo;}
-        private set { ammo = Mathf.Clamp(value, 0, OneMagazine);}
-    }
+    
 
     
     void Start()
@@ -203,7 +191,6 @@ public class GunController : MonoBehaviour
             {
                 // 弾の生成
 		        GameObject bullet = Instantiate<GameObject>(bulletPrefab, muzzle.position, muzzle.rotation);
-                bullet.transform.parent = this.transform;
                 bullet.transform.localScale = bulletScale;
 		        bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * bulletPower);
 		        Destroy(bullet, 5.0f);

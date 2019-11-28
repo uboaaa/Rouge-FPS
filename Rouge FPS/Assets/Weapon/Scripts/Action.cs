@@ -47,7 +47,7 @@ public class Action : MonoBehaviour
 
         // —‚¿‚Ä‚¢‚é•Ší‚ğ‘•”õ‚·‚é
         // ¦dropPrefab‚É‚Í—‚Æ‚·•Ší‚ª“ü‚é
-        dropPrefab = CEScript.GetItem(DIScript.WeaponInfo);
+        dropPrefab = CEScript.GetWeapon(DIScript.WeaponInfo);
 
         // ŒğŠ·‚µ‚½•Ší‚ğ¶¬‚·‚é
         if(dropPrefab != null)
@@ -60,21 +60,27 @@ public class Action : MonoBehaviour
             // GunInfo‚Ì’†‚É‚Á‚Ä‚¢‚½•Ší‚Ìî•ñ‚ğ“ü‚ê‚é
             GameObject childObject = transform.Find("FirstPersonCharacter/" + dropPrefab.name).gameObject;
             GunController GCScript = childObject.GetComponent<GunController>();
-
             GunInfo GIScript = hadWeapon.GetComponent<GunInfo>();
 
-            Debug.Log(GIScript);
+            GIScript.gunRank = GCScript.gunRank;
 
-            GIScript.gunRank = GunInfo.GunRank.Rank1;
-            GIScript.gunType = GunInfo.GunType.HandGun;
-            // GIScript.skillSlot = ;
-            // GIScript.OneMagazine = ;
-            // GIScript.MaxAmmo = ;
-            // GIScript.Damage = ;
-            // GIScript.shootInterval = ;
-            // GIScript.reloadInterval = ;
-            // GIScript.bulletPower = ;
-            // GIScript.GunEXP = ;
+            GIScript.gunType = GCScript.gunType;
+
+            GIScript.skillSlot = GCScript.skillSlot;
+
+            GIScript.OneMagazine = GCScript.OneMagazine;
+
+            GIScript.MaxAmmo = GCScript.MaxAmmo;
+
+            GIScript.Damage = GCScript.Damage;
+
+            GIScript.shootInterval = GCScript.shootInterval;
+
+            GIScript.reloadInterval = GCScript.reloadInterval;
+
+            GIScript.bulletPower = GCScript.bulletPower;
+
+            GIScript.GunEXP = GCScript.GunEXP;
 
             // —‚¿‚Ä‚é•Ší‚É‚Á‚Ä‚¢‚½•Ší‚ğ“ü‚ê‚é
             DIScript.WeaponInfo = hadWeapon;
