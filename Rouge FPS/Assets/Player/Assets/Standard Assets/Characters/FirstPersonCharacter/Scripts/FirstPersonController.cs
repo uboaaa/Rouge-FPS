@@ -44,6 +44,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private GameObject Pause;
         private bool aaa;
 
+         bool unko=false;
+
         // Use this for initialization
         private void Start()
         {
@@ -66,12 +68,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
         // Update is called once per frame
         private void Update()
         {
-     
-        
-            if (Input.GetKey(KeyCode.Return))
-            { m_MouseLook.Init(transform, m_Camera.transform);
-                //m_Camera.transform.rotation = Quaternion.identity;
-            }
+             
+            // if (Input.GetKey(KeyCode.Return))
+            // { m_MouseLook.Init(transform, m_Camera.transform);
+            //     //m_Camera.transform.rotation = Quaternion.identity;
+            // }
             if(!PauseScript.pause()){
  
                 RotateView();
@@ -109,6 +110,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void FixedUpdate()
         {
+        
+        if(m_IsWalking && Input.GetKeyDown(KeyCode.LeftShift)){m_IsWalking=false;}
+        else if(!m_IsWalking && Input.GetKeyDown(KeyCode.LeftShift)){m_IsWalking=true;}
             float speed;
             GetInput(out speed);
             // always move along the camera forward as it is the direction that it being aimed at
@@ -119,11 +123,29 @@ namespace UnityStandardAssets.Characters.FirstPerson
             Physics.SphereCast(transform.position, m_CharacterController.radius, Vector3.down, out hitInfo,
                                m_CharacterController.height/2f, Physics.AllLayers, QueryTriggerInteraction.Ignore);
             desiredMove = Vector3.ProjectOnPlane(desiredMove, hitInfo.normal).normalized;
+            
+            
+           if(Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow) ||Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow)){
+              if(!unko){ 
+            m_MoveDir.x = 0;
+            m_MoveDir.z =0;
+            unko=false;}
+            else{
+            m_MoveDir.x = 0;
+            m_MoveDir.z =0;}
+            }
 
-            m_MoveDir.x = desiredMove.x*speed;
-            m_MoveDir.z = desiredMove.z*speed;
+            if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) ||Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)){unko=true;}          
+            else{
+            unko=true;
+            m_MoveDir.x = 0;
+            m_MoveDir.z =0;
+            unko=false;}
+ 
 
-
+        if(unko){m_MoveDir.x = desiredMove.x*speed;
+            m_MoveDir.z = desiredMove.z*speed;}
+            
             if (m_CharacterController.isGrounded)
             {
                 m_MoveDir.y = -m_StickToGroundForce;
@@ -148,13 +170,15 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_MouseLook.UpdateCursorLock();
         }
 
+     
 
         private void PlayJumpSound()
         {
             m_AudioSource.clip = m_JumpSound;
             m_AudioSource.Play();
         }
-
+       
+       private void Activeflg(){unko=true;}
 
         private void ProgressStepCycle(float speed)
         {
@@ -227,7 +251,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 #if !MOBILE_INPUT
             // On standalone builds, walk/run speed is modified by a key press.
             // keep track of whether or not the character is walking or running
-            m_IsWalking = !Input.GetKey(KeyCode.LeftShift);
+            // m_IsWalking = !Input.GetKey(KeyCode.LeftShift);
 #endif
             // set the desired speed to be walking or running
          

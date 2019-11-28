@@ -6,7 +6,7 @@ using UnityEngine;
 public class MyStatus : MonoBehaviour
 {
 
-    public static float playerHP = 100;
+    private static float playerHP = 100;
     private int playerATK;
     private float playerDEF = 1;
     private float HpPlus;
@@ -18,10 +18,11 @@ public class MyStatus : MonoBehaviour
 
     private void Start()
     {
-        SkillManagement.SetHPMagnification(0);
+        SkillManagement.SetHPMagnification(1);
         HpPlus = SkillManagement.GetHpPlus();
         playerHP = playerHP + (playerHP * HpPlus);
         FirstHP = playerHP;
+        Debug.Log(playerHP);
      
     }
     public void SetHp(float hp)

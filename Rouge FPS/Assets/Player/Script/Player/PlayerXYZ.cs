@@ -15,6 +15,10 @@ public class PlayerXYZ : MonoBehaviour
     private static float py;
     private static float pz;
 
+    private static float rx;
+    private static float ry;
+    private static float rz;
+
 private float aaaaa;
     private void Awake()
     {
@@ -37,6 +41,9 @@ private float aaaaa;
         px=this.transform.position.x;
         py=this.transform.position.y;
         pz=this.transform.position.z;
+        rx=this.transform.rotation.x;
+        ry=this.transform.rotation.y;
+        rz=this.transform.rotation.z;
        
         //リセット処理その２(その１はFirstPersonController.cs)
         // if (Input.GetKey(KeyCode.Return)) {
@@ -101,10 +108,22 @@ private float aaaaa;
             result=pz;
             break;
 
+            case "rx":
+            result=rx;
+            break;
+
+            case "ry":
+            result=ry;
+            break;
+
+            case "rz":
+            result=rz;
+            break;
+
             default:
             break;
         }
-        Debug.Log(result);
+        
         return result;
         
     }
