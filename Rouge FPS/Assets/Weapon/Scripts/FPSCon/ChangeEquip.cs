@@ -11,6 +11,7 @@ public class ChangeEquip : MonoBehaviour
     // パラメーター関係==============================================
     [HideInInspector] public int ownGun;      // 0:持ってない 1:プライマリ 2:セカンダリ
     [HideInInspector] public bool activeFlg;  // 行動中か  
+    GameObject child;
 
      // スクリプト関係================================================
     GunController GCPrimaryScript;                   // [GunController]用の変数
@@ -18,7 +19,10 @@ public class ChangeEquip : MonoBehaviour
 
     void Start()
     {
-        ownGun = 1;
+        // 子オブジェクトを取得（FirstPersonCharacter）
+        child = transform.FindChild("FirstPersonCharacter").gameObject;
+
+        ownGun = 0;
         if(PrimaryWeapon != null)
         {
             PrimaryWeapon.SetActive(true);
@@ -35,6 +39,7 @@ public class ChangeEquip : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(ownGun);
         if (Input.GetKeyDown(KeyCode.E) && !activeFlg && SecondaryWeapon != null)
         {
             GCPrimaryScript.shooting = false;
@@ -64,11 +69,34 @@ public class ChangeEquip : MonoBehaviour
     // 落ちている武器を拾う
     public GameObject GetWeapon(GameObject dropItem)
     {
-        GameObject aiueo;   // 情報保持用
+        GameObject dropInfo;   // 情報保持用
+
+        // 何も持っていないとき
+        if(ownGun == 0)
+        {
+            PrimaryWeapon = dropItem;
+            GameObject tmp = Instantiate(PrimaryWeapon,PrimaryWeapon.transform.position,PrimaryWeapon.transform.rotation);
+            tmp.transform.parent = child.transform;
+            
+            PrimaryWeapon = tmp;
+
+            PrimaryWeapon.SetActive(true);
+
+            GCPrimaryScript = PrimaryWeapon.GetComponent<GunController>();
+
+            ownGun = 1;
+
+            return null;
+        }
+
         // プライマリ武器しか持っていないとき
         if(ownGun == 1 && SecondaryWeapon == null)
         {
             SecondaryWeapon = dropItem;
+            GameObject tmp = Instantiate(SecondaryWeapon,SecondaryWeapon.transform.position,SecondaryWeapon.transform.rotation);
+            tmp.transform.parent = child.transform;
+
+            SecondaryWeapon = tmp;
 
             PrimaryWeapon.SetActive(false);
             SecondaryWeapon.SetActive(true);
@@ -82,11 +110,24 @@ public class ChangeEquip : MonoBehaviour
         // プライマリ武器と交換する
         else if(ownGun == 1)
         {
+            // 拾う武器種をすでに持っている場合
+            // if(PrimaryWeapon.name != dropItem.name + "(clone)" && SecondaryWeapon.name == dropItem.name + "(clone)")
+            // {
+            // }
+
             PrimaryWeapon.SetActive(false);
 
-            aiueo = PrimaryWeapon;
+            dropInfo = PrimaryWeapon;
+
+            Destroy(PrimaryWeapon);
+
             PrimaryWeapon = dropItem;
-            dropItem = aiueo;
+            GameObject tmp = Instantiate(PrimaryWeapon,SecondaryWeapon.transform.position,SecondaryWeapon.transform.rotation);
+            tmp.transform.parent = child.transform;
+
+            PrimaryWeapon = tmp;
+
+            dropItem = dropInfo;
 
             PrimaryWeapon.SetActive(true);
 
@@ -96,17 +137,28 @@ public class ChangeEquip : MonoBehaviour
         // セカンダリ武器と交換する
         if(ownGun == 2)
         {
+            // 拾う武器種をすでに持っている場合
+            // if(PrimaryWeapon.name == dropItem.name + "(clone)" && SecondaryWeapon.name != dropItem.name + "(clone)")
+            // {
+            // }
+
             SecondaryWeapon.SetActive(false);
             
-            aiueo = SecondaryWeapon;
+            dropInfo = SecondaryWeapon;
+
+            Destroy(SecondaryWeapon);
             SecondaryWeapon = dropItem;
-            dropItem = aiueo;
+            GameObject tmp = Instantiate(SecondaryWeapon,SecondaryWeapon.transform.position,SecondaryWeapon.transform.rotation);
+            tmp.transform.parent = child.transform;
+
+            SecondaryWeapon = tmp;
+            
+            dropItem = dropInfo;
 
             SecondaryWeapon.SetActive(true);
 
             return dropItem;
         }
-        
         return null;
     }
 }

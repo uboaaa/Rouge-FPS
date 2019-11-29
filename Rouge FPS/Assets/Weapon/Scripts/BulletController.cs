@@ -35,16 +35,19 @@ public class BulletController : MonoBehaviour
         if(CEScript.ownGun == 1)
         {
             // プライマリ武器のGunControllerを持ってくる
-            anotherObject = GameObject.Find(CEScript.PrimaryWeapon.name);
+            anotherObject = GameObject.Find(CEScript.PrimaryWeapon.name + "(Clone)");
             GCScript = anotherObject.GetComponent<GunController>();
+            // ダメージを取得
+            Damage = GCScript.Damage;
+
         } else if(CEScript.ownGun == 2) {
             // セカンダリ武器のGunControllerを持ってくる
-            anotherObject = GameObject.Find(CEScript.SecondaryWeapon.name);
+            anotherObject = GameObject.Find(CEScript.SecondaryWeapon.name + "(Clone)");
             GCScript = anotherObject.GetComponent<GunController>();
-        }
+            // ダメージを取得
+            Damage = GCScript.Damage;
 
-        // ダメージを取得
-        Damage = GCScript.Damage;
+        }
     }
 
     void Update()

@@ -8,6 +8,14 @@ using UnityEngine;
 
 public class Action : MonoBehaviour
 {
+    [SerializeField] GameObject handgun;
+    [SerializeField] GameObject LightMachineGun;
+    [SerializeField] GameObject AssaultRifle;
+    [SerializeField] GameObject SubMachineGun;
+    [SerializeField] GameObject RocketLauncher;
+    [SerializeField] GameObject ShotGun;
+    [SerializeField] GameObject FlameThrower;
+
     private GameObject dropPrefab;      
     DropItem DIScript;
     ChangeEquip CEScript;                   // [ChangeEquip]ópÇÃïœêî
