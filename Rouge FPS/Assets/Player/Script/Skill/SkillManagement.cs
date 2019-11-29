@@ -9,7 +9,10 @@ public class SkillManagement : MonoBehaviour
     private static int AmmoMagnification;
     private static int HPMagnification;
     private static int SpeedMagnification;
-
+    
+    private static bool BulletScaleUp;
+    
+     private void Awake() {SetBulletScaleUp(true);}
     // Start is called before the first frame update
     void Start()
     {
@@ -32,27 +35,18 @@ public class SkillManagement : MonoBehaviour
 
     }
 
-    public static float GetAmmoPlus() {
-        return SkillSpeed[AmmoMagnification];
-    }
+    public static float GetAmmoPlus() {return SkillSpeed[AmmoMagnification];}
 
-    public static float GetSpeedPlus() {
-        return SkillSpeed[SpeedMagnification];
-    }
+    public static float GetSpeedPlus() {return SkillSpeed[SpeedMagnification];}
 
-    public static float GetHpPlus()
-    {
-        return SkillSpeed[HPMagnification];}
+    public static float GetHpPlus(){return SkillSpeed[HPMagnification];}
+
+     public static bool GetBulletScaleUp(){return BulletScaleUp;}
 
 
-    public static void SetAmmoMagnification(int SetNumber){
-       AmmoMagnification=SetNumber;
-    }    
-
-    public static void SetHPMagnification(int SetNumber){
-       HPMagnification=SetNumber;
-    }    
-    public static void SetSpeedMagnification(int SetNumber){
-       SpeedMagnification=SetNumber;
-    }    
+    public static void SetAmmoMagnification(int SetNumber){AmmoMagnification=SetNumber;}    
+    
+     public static void SetBulletScaleUp(bool SetBool){BulletScaleUp=SetBool;}  
+    public static void SetHPMagnification(int SetNumber){HPMagnification=SetNumber;}    
+    public static void SetSpeedMagnification(int SetNumber){SpeedMagnification=SetNumber;}    
 }
