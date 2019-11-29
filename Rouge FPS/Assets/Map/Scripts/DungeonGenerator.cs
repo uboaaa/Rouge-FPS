@@ -338,6 +338,7 @@ public class DungeonGenerator
                 isStraight = rangeB.IsStraight(rangeA, out newPass);
             }
 
+            //更に失敗した時、
             if (!isStraight)
             {
                 //角ありの通路の始点、中継点を求める
