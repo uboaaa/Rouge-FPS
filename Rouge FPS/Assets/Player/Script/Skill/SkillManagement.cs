@@ -16,7 +16,12 @@ public class SkillManagement : MonoBehaviour
     
 
     private static bool The_World;
+
+    private float SkillCool;
     
+    private float CoolCount;
+
+    private float Gg;
      private void Awake() {SetBulletScaleUp(true);}
     // Start is called before the first frame update
     void Start()
@@ -29,16 +34,21 @@ public class SkillManagement : MonoBehaviour
         AmmoMagnification=0;
         HPMagnification=0;
         SpeedMagnification=0;
+        SkillCool=0.0f;
+        CoolCount=0.0f;
+        Gg=0.0f;
     }
 
     // Update is called once per frame
     void Update()
     {
-    if(Input.GetMouseButtonDown(1) && !The_World){The_World=true;}
-    if(The_World){Invoke("SetTimeStop",5);Debug.Log("test");}
+    if(Input.GetMouseButtonDown(1) && !The_World &&Gg<0.0f ){The_World=true;}
+    if(The_World){Invoke("SetTimeStop",5.0f);}
+    else{Gg=(SkillCool+CoolCount)-Time.time;}
+    if(Gg<0.0f){Debug.Log("Ready!");}
     }
 
-    private  void SetTimeStop(){The_World=false;}
+    private  void SetTimeStop(){The_World=false;SkillCool=5.0f;CoolCount=Time.time;}
     public static float GetAmmoPlus() {return SkillSpeed[AmmoMagnification];}
 
     public static float GetSpeedPlus() {return SkillSpeed[SpeedMagnification];}
