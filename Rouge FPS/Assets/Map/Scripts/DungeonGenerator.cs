@@ -82,6 +82,18 @@ public class DungeonGenerator
             }
         }
 
+        //扉
+        for(int y = 0; y < m_mapSizeY; y++)
+        {
+            for(int x = 0; x < m_mapSizeX; x++)
+            {
+                if (map[x, y] == 2)
+                {
+
+                }
+            }
+        }
+
         return map;
     }
 
@@ -326,6 +338,7 @@ public class DungeonGenerator
                 isStraight = rangeB.IsStraight(rangeA, out newPass);
             }
 
+            //更に失敗した時、
             if (!isStraight)
             {
                 //角ありの通路の始点、中継点を求める
@@ -363,7 +376,7 @@ public class DungeonGenerator
         return _list;
     }
 
-    public Room SmallistRoom()
+    public int SmallistRoom(out Room _room)
     {
         //最小面積の部屋のIDを取得
         int smallist = 0;
@@ -378,9 +391,8 @@ public class DungeonGenerator
             }
         }
 
-        //取得したIDの情報を返す
-
-        Room room = m_rangeList[id].m_Room;
-        return room;
+        //取得したIDとその情報を返す
+        _room = m_rangeList[id].m_Room;
+        return id;
     }
 }

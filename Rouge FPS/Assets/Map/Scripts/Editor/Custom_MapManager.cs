@@ -8,9 +8,9 @@ using UnityEditorInternal;
 
 //拡張エディターで敵をセットしやすくする
 
-[CustomEditor(typeof(MapAI))]
+[CustomEditor(typeof(MapManager))]
 [CanEditMultipleObjects]
-public class Custom_MapAI : Editor
+public class Custom_MapManager : Editor
 {
     ReorderableList _reorderableList;
     //仮
@@ -33,6 +33,7 @@ public class Custom_MapAI : Editor
 
         //仮
         target = serializedObject.FindProperty("target");
+        
     }
 
     public override void OnInspectorGUI()

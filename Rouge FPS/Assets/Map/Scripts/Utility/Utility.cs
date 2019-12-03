@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Utility
+public static class Utility
 {
     //指定範囲内からランダムで整数値を返す
     public static int GetRandomInt(int min,int max)
@@ -14,5 +14,16 @@ public class Utility
     public static bool RandomJudge(float rate)
     {
         return Random.value < rate;
+    }
+
+    //リストからランダムに値を返す
+    public static T GetAtRandom<T>(this List<T> list)
+    {
+        if (list.Count == 0)
+        {
+            Debug.Log("リストが空です");
+        }
+
+        return list[Random.Range(0, list.Count)];
     }
 }

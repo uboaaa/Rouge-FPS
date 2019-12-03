@@ -28,7 +28,8 @@ public class MapInitializer : MonoBehaviour
     private GameObject m_celingPrefab;    //天井のオブジェクト
 
     private DungeonGenerator DG = null;
-    private int[,] m_map;                   //マップ情報用の2次配列
+    private int[,] m_map;                   //マップ配置データの2次配列
+    private int m_startId = -1;             //スタート地点の部屋ID
 
     private void Awake()
     {
@@ -71,9 +72,9 @@ public class MapInitializer : MonoBehaviour
         Debug.Log(data);
 
         //床と壁のモデル読み込み
-        m_wallPrefab = Resources.Load("Prefab/Wall") as GameObject;
-        m_floorPrefab = Resources.Load("Prefab/Floor") as GameObject;
-        m_celingPrefab = Resources.Load("Prefab/Celing") as GameObject;
+        m_wallPrefab = Resources.Load("Prefab/DungeonParts/Wall") as GameObject;
+        m_floorPrefab = Resources.Load("Prefab/DungeonParts/Floor") as GameObject;
+        m_celingPrefab = Resources.Load("Prefab/DungeonParts/Celing") as GameObject;
 
         //データからオブジェクトを配置
         for(int y = 0; y < MAP_SIZE_Y; y++)
@@ -82,13 +83,16 @@ public class MapInitializer : MonoBehaviour
             {
                 if (m_map[x, y] >= 1)
                 {
+                    //床
                     Instantiate(m_floorPrefab, new Vector3(x * m_mapScale, 0, y * m_mapScale), new Quaternion());
                 }
                 else
                 {
+                    //壁
                     Instantiate(m_wallPrefab, new Vector3(x * m_mapScale, 5, y * m_mapScale), new Quaternion());
                 }
 
+                //天井
                 //Instantiate(m_celingPrefab, new Vector3(x * m_mapScale, 6, y * m_mapScale), new Quaternion());
             }
         }
@@ -102,7 +106,10 @@ public class MapInitializer : MonoBehaviour
     {
 
         Position position;
-        Room small = DG.SmallistRoom();
+        //最小部屋とそのIDを取得
+        Room small = null;
+        m_startId = DG.SmallistRoom(out small);
+
         do
         {
             var x = Utility.GetRandomInt(small.Start.X, small.End.X - 1);
@@ -163,6 +170,21 @@ public class MapInitializer : MonoBehaviour
     public int GetScale()
     {
         return m_mapScale;
+    }
+
+    public int GetSizeX()
+    {
+        return MAP_SIZE_X;
+    }
+
+    public int GetSizeY()
+    {
+        return MAP_SIZE_Y;
+    }
+
+    public int StartID()
+    {
+        return m_startId;
     }
 
     public void GetRoomList(out Dictionary<int,Room> _roomList)
