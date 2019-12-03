@@ -1,40 +1,116 @@
-ï»¿using System.Collections;
+//=======================================================================
+// ’²‚×‚½‚èAE‚¤‚È‚Ç‚Ì“®ì—pƒXƒNƒŠƒvƒg
+// FPSController‚É•t‚¯‚é
+//=======================================================================
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Action : MonoBehaviour
 {
-    private bool ActionFlg;
+    [SerializeField] GameObject handgun;
+    [SerializeField] GameObject LightMachineGun;
+    [SerializeField] GameObject AssaultRifle;
+    [SerializeField] GameObject SubMachineGun;
+    [SerializeField] GameObject RocketLauncher;
+    [SerializeField] GameObject ShotGun;
+    [SerializeField] GameObject FlameThrower;
 
-    private GameObject dropPrefab;
+    private GameObject dropPrefab;      
+    DropItem DIScript;
+    ChangeEquip CEScript;                   // [ChangeEquip]—p‚Ì•Ï”
+    bool actionFlg;
+    GameObject ObjectInfo;
+    GameObject tmp;
     void Start()
     {
-        // ä¸­èº«ã‚’å–ã£ã¦ãã‚‹
-        dropPrefab = GameObject.Find("DropItem");
+        CEScript = GetComponent<ChangeEquip>();
     }
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Q) && ActionFlg)
+        if(Input.GetKeyDown(KeyCode.Q) && actionFlg)
         {
-            Destroy(this.gameObject);
+            if(ObjectInfo.tag == "DropBox"){BoxAction(ObjectInfo);}
+            
+            if(ObjectInfo.tag == "DropGun"){WeaponAction(ObjectInfo);}
 
-            // DropItemã‚’ç”Ÿæˆ
-            GameObject dropItem = Instantiate<GameObject>(dropPrefab, this.transform.position, this.transform.rotation);
+            actionFlg = false;
         }
+    }
+
+    void BoxAction(GameObject Object)
+    {
+        // •ó” ‚ğíœ
+        Destroy(Object.gameObject);
+
+        // DropItem‚ğ¶¬
+        
+    }
+
+    void WeaponAction(GameObject Object)
+    {
+        // DropItemComponent‚ğæ“¾
+        DIScript = Object.GetComponent<DropItem>();
+
+        // —‚¿‚Ä‚¢‚é•Ší‚ğ‘•”õ‚·‚é
+        // ¦dropPrefab‚É‚Í—‚Æ‚·•Ší‚ª“ü‚é
+        dropPrefab = CEScript.GetWeapon(DIScript.WeaponInfo);
+
+        // ŒğŠ·‚µ‚½•Ší‚ğ¶¬‚·‚é
+        if(dropPrefab != null)
+        {
+            GameObject hadWeapon;      // ‚Á‚Ä‚¢‚½•Ší
+
+		    hadWeapon = Instantiate<GameObject>(Object,Object.transform.position,Quaternion.identity);
+            hadWeapon.name = DIScript.WeaponInfo.name;
+
+            // GunInfo‚Ì’†‚É‚Á‚Ä‚¢‚½•Ší‚Ìî•ñ‚ğ“ü‚ê‚é
+            GameObject childObject = transform.Find("FirstPersonCharacter/" + dropPrefab.name).gameObject;
+            GunController GCScript = childObject.GetComponent<GunController>();
+            GunInfo GIScript = hadWeapon.GetComponent<GunInfo>();
+
+            GIScript.gunRank = GCScript.gunRank;
+
+            GIScript.gunType = GCScript.gunType;
+
+            GIScript.skillSlot = GCScript.skillSlot;
+
+            GIScript.OneMagazine = GCScript.OneMagazine;
+
+            GIScript.MaxAmmo = GCScript.MaxAmmo;
+
+            GIScript.Damage = GCScript.Damage;
+
+            GIScript.shootInterval = GCScript.shootInterval;
+
+            GIScript.reloadInterval = GCScript.reloadInterval;
+
+            GIScript.bulletPower = GCScript.bulletPower;
+
+            GIScript.GunEXP = GCScript.GunEXP;
+
+            // —‚¿‚Ä‚é•Ší‚É‚Á‚Ä‚¢‚½•Ší‚ğ“ü‚ê‚é
+            DIScript.WeaponInfo = hadWeapon;
+        }
+
+        // —‚¿‚Ä‚¢‚é•Ší‚ğíœ
+        Destroy(Object.gameObject);
     }
 
     
     void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Player")
+        if( other.gameObject.tag == "DropBox" ||
+            other.gameObject.tag == "DropGun")
         {
-            ActionFlg = true;
+            ObjectInfo = other.gameObject;
+            actionFlg = true;
         }
     }
 
     void OnTriggerExit(Collider other)
     {
-        ActionFlg = false;
+        actionFlg = false;
     }
 }
