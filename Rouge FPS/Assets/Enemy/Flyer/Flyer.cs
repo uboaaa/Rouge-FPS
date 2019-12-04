@@ -86,6 +86,9 @@ public class Flyer : MonoBehaviour
 
     void Update()
     {
+            //ここ追加
+      if(!PauseScript.pause()){
+          if(!SkillManagement.GetTimeStop()){
 
         // ========
         // アニメーション 
@@ -170,6 +173,8 @@ public class Flyer : MonoBehaviour
 
             //intパラメーターの値を設定する
             animator.SetInteger("trans", trans);
+        }
+            }
         }
 
 
