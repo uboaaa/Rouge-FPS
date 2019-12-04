@@ -19,6 +19,8 @@ public class PlayerXYZ : MonoBehaviour
     private static float ry;
     private static float rz;
 
+    private static bool StageReset;
+
 private float aaaaa;
     private void Awake()
     {
@@ -27,17 +29,22 @@ private float aaaaa;
     // Start is called before the first frame update
     void Start()
     {
-        characterController = GetComponent<CharacterController>();
-            characterController.enabled = false;
-        abc.x = MapInitializer.GetSpawnData("px");
-        abc.y = MapInitializer.GetSpawnData("py") ;
-        abc.z = MapInitializer.GetSpawnData("pz");
-        UpdatePlayerXYZ(abc.x, abc.y, abc.z);
+        StageReset=true;
+
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        if(StageReset){
+        characterController = GetComponent<CharacterController>();
+        characterController.enabled = false;
+        abc.x = MapInitializer.GetSpawnData("px");
+        abc.y = MapInitializer.GetSpawnData("py") ;
+        abc.z = MapInitializer.GetSpawnData("pz");
+        UpdatePlayerXYZ(abc.x, abc.y, abc.z);}
+
         px=this.transform.position.x;
         py=this.transform.position.y;
         pz=this.transform.position.z;
@@ -92,6 +99,8 @@ private float aaaaa;
 
     public bool GetClearCheckFlg() { return ClearCheckFlg; }
 
+    public static void SetStageResetFlg(bool Judge){StageReset=Judge;}
+
     public static float GetPlayerPosition(string element){
         float result=0.0f;
         switch (element)
@@ -136,6 +145,7 @@ private float aaaaa;
         transform.Translate(XYZ);
         GetComponent<CharacterController>().enabled = true;
         ClearCheckFlg = false;
+        StageReset=false;
         //GetComponent<Rigidbody>().position = XYZ;
     }
 
