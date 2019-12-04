@@ -74,8 +74,6 @@ public class EnemyHitEffect : MonoBehaviour
         {
             // ヒットエフェクト
             HitEffect();
-            
-
         }
         
         //Debug.Log(brightness);

@@ -8,6 +8,8 @@ public class Lizard : MonoBehaviour
     private GameObject player = null;
     // アニメータ
     private Animator animator = null;
+    // マテリアル
+    private Material material = null;
     // エネミーパラメータ
     private EnemyParameter ep = null;
     // ヒットエフェクト
@@ -17,6 +19,20 @@ public class Lizard : MonoBehaviour
     // デッドエフェクト
     public GameObject deadeffect = null;
 
+    // AIレベル
+    private int AILevel = 0;
+    // シェーダパラメータ管理用
+    // Hue
+    private int propID_h = 0;
+    // Saturation
+    private int propID_s = 0;
+    // Contrast
+    private int propID_c = 0;
+
+    // ライト
+    private Light plight = null;
+
+
     // 角度計算用
     private float rot = 0;
 
@@ -25,10 +41,6 @@ public class Lizard : MonoBehaviour
     
     // アニメ関数
     int trans = 0;
-
-    
-
-    
 
 
 
@@ -52,17 +64,76 @@ public class Lizard : MonoBehaviour
         // プレイヤー情報取得
         player = GameObject.Find("FPSController");
 
-
         //GetComponentを用いてコンポーネントを取り出す.
         // アニメータ
-        animator = GetComponent<Animator>();
+        animator = this.gameObject.GetComponent<Animator>();
+        // マテリアル
+        material = this.gameObject.GetComponent<SpriteRenderer>().material;
         // エネミーパラメータ
-        ep = GetComponent<EnemyParameter>();
+        ep = this.gameObject.GetComponent<EnemyParameter>();
         // エネミーヒットエフェクト
-        eh = GetComponent<EnemyHitEffect>();
+        eh = this.gameObject.GetComponent<EnemyHitEffect>();
         // ダメージナンバーエフェクト
-        dn = GetComponent<DamageNumEffect>();
+        dn = this.gameObject.GetComponent<DamageNumEffect>();
+        // ライト
+        plight = this.gameObject.GetComponent<Light>();
 
+        // レベル情報取得
+        AILevel = ep.GetLevel();
+
+
+        // レベル処理
+        propID_h = Shader.PropertyToID("_Hue");
+        propID_s = Shader.PropertyToID("_Saturation");
+        propID_c = Shader.PropertyToID("_Contrast");
+
+        if(AILevel == 1)
+        {
+            // マテリアル
+            material.SetFloat(propID_h, 0.0f);
+            material.SetFloat(propID_s, 0.5f);
+            material.SetFloat(propID_c, 0.5f);
+
+            // パラメータ
+            ep.hp = 50;
+            ep.atk = 10;
+            ep.def = 0;
+            ep.speed = 1.0f;
+            ep.startrot = 60;
+
+            // ポイントライト
+            plight.color = new Color(0.5f,0.5f,1.0f,1.0f);
+
+            
+        }
+        else if(AILevel == 2)
+        {
+            material.SetFloat(propID_h, 0.45f);
+            material.SetFloat(propID_s, 1.0f);
+            material.SetFloat(propID_c, 0.7f);
+
+            ep.hp = 70;
+            ep.atk = 20;
+            ep.def = 10;
+            ep.speed = 1.3f;
+            ep.startrot = 60;
+
+            plight.color = new Color(1.0f,0.5f,0.5f,1.0f);
+        }
+        else if(AILevel == 3)
+        {
+            material.SetFloat(propID_h, 0.3f);
+            material.SetFloat(propID_s, 0.4f);
+            material.SetFloat(propID_c, 1.0f);
+
+            ep.hp = 100;
+            ep.atk = 30;
+            ep.def = 20;
+            ep.speed = 1.5f;
+            ep.startrot = 60;
+
+            plight.color = new Color(1.0f,0.5f,1.0f,1.0f);
+        }
 
         
         
@@ -71,10 +142,6 @@ public class Lizard : MonoBehaviour
 
     void Update()
     {
-
-
-        
-
 
         // ========
         // アニメーション 
@@ -198,14 +265,13 @@ public class Lizard : MonoBehaviour
             // 弾のダメージを取得
             dn.SetBulletDamage(collision.gameObject.GetComponent<BulletController>().Damage);
 
-            Debug.Log(collision.gameObject.GetComponent<BulletController>().Damage);
 
             eh.SetHitFlg(true);
             dn.SetHitFlg(true);
             foundflg = true;
             ep.hp -= collision.gameObject.GetComponent<BulletController>().Damage;
             if(ep.hp < 0){ep.hp = 0;}
-             //intパラメーターの値を設定する.
+            //intパラメーターの値を設定する.
             animator.SetInteger("trans", trans);
         }
 
