@@ -2,25 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(RoomGenerator))]
+
 //マップ生成クラス
 //シーン開始時のみ処理を行う
 public class MapInitializer : MonoBehaviour
 {
-    //各種マップパラメータ
-    [SerializeField]private int MAP_SIZE_X = 30;   //X軸のマップ最大サイズ
-    [SerializeField]private int MAP_SIZE_Y = 20;   //Y軸のマップ最大サイズ
+    //static設定用の変数
+    [SerializeField] private int INS_MAP_SIZE_X = 30;   //X軸のマップ最大サイズ
+    [SerializeField] private int INS_MAP_SIZE_Y = 20;   //Y軸のマップ最大サイズ
+    [SerializeField] private int INS_MAP_SCALE = 1;     //
 
-    [SerializeField]private int MAX_ROOM_NUMBER = 6;   //最大部屋数（これ以下の場合もある）
-    [SerializeField]private int m_mapScale = 1;              //
+    //各種マップパラメータ
+    [SerializeField] private int MAX_ROOM_NUMBER = 6;   //最大部屋数（これ以下の場合もある）
+    [SerializeField] private int MAX_MAP_NUMBER = 3;    //最大マップ数
+
+    public static int MAP_SIZE_X = 30;
+    public static int MAP_SIZE_Y = 20;
+    public static int MAP_SCALE = 1;
 
     //初期座標
     //***初期座標をグローバルで返すようにする
-    private static float g_spawn_posX;
-    private static float g_spawn_posY;
-    private static float g_spawn_posZ;
-    private static float g_spawn_rotX;
-    private static float g_spawn_rotY;
-    private static float g_spawn_rotZ;
+    private static float g_spawn_posX = 0;
+    private static float g_spawn_posY = 0;
+    private static float g_spawn_posZ = 0;
+    private static float g_spawn_rotX = 0;
+    private static float g_spawn_rotY = 0;
+    private static float g_spawn_rotZ = 0;
 
     //prefab
     private GameObject m_floorPrefab;     //床のオブジェクト
@@ -28,18 +36,47 @@ public class MapInitializer : MonoBehaviour
     private GameObject m_celingPrefab;    //天井のオブジェクト
 
     private DungeonGenerator DG = null;
+    private RoomGenerator RG = null;
     private int[,] m_map;                   //マップ配置データの2次配列
     private int m_startId = -1;             //スタート地点の部屋ID
+    private Selectable<int> m_mapID = new Selectable<int>();
+
 
     private void Awake()
     {
-        GenerateDungeon();
+        //static変数を設定
+        MAP_SIZE_X = INS_MAP_SIZE_X;
+        MAP_SIZE_Y = INS_MAP_SIZE_Y;
+        MAP_SCALE = INS_MAP_SCALE;
     }
 
     // 初期化
     void Start()
     {
-        
+        //ダンジョン生成クラス取得
+        DG = new DungeonGenerator();
+        //部屋生成コンポーネント取得
+        RG = this.GetComponent<RoomGenerator>();
+
+        //マップ切り替え時の処理を設定
+        m_mapID.mChanged += value =>
+        {
+            //マップ基盤生成
+            GenerateBaseMap();
+            //部屋生成
+            GenerateRooms();
+            //通路生成
+            //GeneratePass();
+            //オブジェクト配置
+            GenerateObject();
+            //書き込み？
+            //SaveMap(value);
+        };
+
+        m_mapID.Value = 1;
+
+        //***初期スタート部屋IDが他コンポーネント内スタートで取得しているので、Update内で行う
+        //***ステージ切替時のみ関数使用するようにする
     }
 
     //更新
@@ -48,22 +85,76 @@ public class MapInitializer : MonoBehaviour
         
     }
 
-    // ダンジョンマップ生成
-    private void GenerateDungeon()
+    private void FixedUpdate()
+    {
+        //マップ切り替え時生成？
+        
+    }
+
+    //ダンジョンマップ生成
+    private void GenerateBaseMap()
     {
         //階層数分あらかじめ生成後、テキストorCSVに出力
 
         //ダンジョンジェネレータークラスを取得
         DG = new DungeonGenerator();
 
-        //ジェネレーターから生成したデータを取得
-        m_map = DG.GenerateMap(MAP_SIZE_X, MAP_SIZE_Y, MAX_ROOM_NUMBER);
+        //ベースマップ（部屋のみのマップ）を取得
+        m_map = DG.GenerateBaseMap(MAP_SIZE_X, MAP_SIZE_Y, MAX_ROOM_NUMBER);
+
+        
+    }
+
+    //部屋生成
+    private void GenerateRooms()
+    {
+        //ID・部屋のリストを取得
+        var dic = DG.GetRooms();
+        //配列にコピー
+        int[] rooms_Key = new int[dic.Keys.Count];
+        Room[] rooms_Value = new Room[dic.Values.Count];
+        dic.Keys.CopyTo(rooms_Key, 0);
+        dic.Values.CopyTo(rooms_Value, 0);
+
+        //用意された部屋を決定
+        for (int i=0;i<rooms_Value.Length; i++)
+        {
+            RG.GenerateRoom(ref rooms_Value[i], ref m_map);
+        }
+
+        //
+        Dictionary<int, Room> result = new Dictionary<int, Room>(rooms_Key.Length);
+        for(int i=0;i<rooms_Key.Length;i++)
+        {
+            result[rooms_Key[i]] = rooms_Value[i];
+        }
+
+        //
+        DG.SetRooms(result);
+
+        //確認用
+        string data = "";
+        for (int i = 0; i < MAP_SIZE_X; i++)
+        {
+            for (int j = 0; j < MAP_SIZE_Y; j++)
+            {
+                data += m_map[i, j] == 0 ? "0" : m_map[i, j].ToString();
+            }
+            data += "\n";
+        }
+        Debug.Log(data);
+    }
+
+    //通路生成
+    private void GeneratePass()
+    {
+        m_map = DG.CompPassMap(m_map);
 
         //改行を入れてデータを整理
         string data = "";
-        for(int y = 0; y < MAP_SIZE_Y; y++)
+        for (int y = 0; y < MAP_SIZE_Y; y++)
         {
-            for(int x = 0; x < MAP_SIZE_X; x++)
+            for (int x = 0; x < MAP_SIZE_X; x++)
             {
                 data += m_map[x, y] == 0 ? "0" : m_map[x, y].ToString();
             }
@@ -71,29 +162,34 @@ public class MapInitializer : MonoBehaviour
         }
         Debug.Log(data);
 
+    }
+
+    // オブジェクト配置
+    private void GenerateObject()
+    {
         //床と壁のモデル読み込み
         m_wallPrefab = Resources.Load("Prefab/DungeonParts/Wall") as GameObject;
         m_floorPrefab = Resources.Load("Prefab/DungeonParts/Floor") as GameObject;
         m_celingPrefab = Resources.Load("Prefab/DungeonParts/Celing") as GameObject;
 
         //データからオブジェクトを配置
-        for(int y = 0; y < MAP_SIZE_Y; y++)
+        for (int y = 0; y < MAP_SIZE_Y; y++)
         {
-            for(int x = 0; x < MAP_SIZE_X; x++)
+            for (int x = 0; x < MAP_SIZE_X; x++)
             {
                 if (m_map[x, y] >= 1)
                 {
                     //床
-                    Instantiate(m_floorPrefab, new Vector3(x * m_mapScale, 0, y * m_mapScale), new Quaternion());
+                    //Instantiate(m_floorPrefab, new Vector3(x * MAP_SCALE, 0, y * MAP_SCALE), new Quaternion());
                 }
                 else
                 {
                     //壁
-                    Instantiate(m_wallPrefab, new Vector3(x * m_mapScale, 5, y * m_mapScale), new Quaternion());
+                    Instantiate(m_wallPrefab, new Vector3(x * MAP_SCALE, 5, y * MAP_SCALE), new Quaternion());
                 }
 
                 //天井
-                //Instantiate(m_celingPrefab, new Vector3(x * m_mapScale, 6, y * m_mapScale), new Quaternion());
+                //Instantiate(m_celingPrefab, new Vector3(x * MAP_SCALE, 6, y * MAP_SCALE), new Quaternion());
             }
         }
 
@@ -110,6 +206,8 @@ public class MapInitializer : MonoBehaviour
         Room small = null;
         m_startId = DG.SmallistRoom(out small);
 
+
+
         do
         {
             var x = Utility.GetRandomInt(small.Start.X, small.End.X - 1);
@@ -119,15 +217,20 @@ public class MapInitializer : MonoBehaviour
 
 
         //初期座標をグローバル変数に設定
-        g_spawn_posX = position.X * m_mapScale;
+        g_spawn_posX = position.X * MAP_SCALE;
         g_spawn_posY = 1;
-        g_spawn_posZ = position.Y * m_mapScale;
+        g_spawn_posZ = position.Y * MAP_SCALE;
         g_spawn_rotX = 0;
         g_spawn_rotY = 0;
         g_spawn_rotZ = 0;
     }
 
-    
+    //マップ保存関数
+    //***使うかわからない
+    private void SaveMap(int _id)
+    {
+
+    }
 
     //初期地点取得関数
     //座標…"p"or回転…"r" + 各軸(x,y,z)を引数で指定
@@ -169,7 +272,7 @@ public class MapInitializer : MonoBehaviour
 
     public int GetScale()
     {
-        return m_mapScale;
+        return MAP_SCALE;
     }
 
     public int GetSizeX()
@@ -187,10 +290,15 @@ public class MapInitializer : MonoBehaviour
         return m_startId;
     }
 
-    public void GetRoomList(out Dictionary<int,Room> _roomList)
+    public void GetRooms(out Dictionary<int,Room> _roomList)
     {
         _roomList = new Dictionary<int, Room>();
-        _roomList.AddRange(DG.GetRoomList());
+        _roomList.AddRange(DG.GetRooms());
+    }
+
+    public void MoveNextMap()
+    {
+        m_mapID.Value += 1;
     }
 
 }

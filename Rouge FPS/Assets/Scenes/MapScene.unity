@@ -361,7 +361,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 817326291}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1278710103}
@@ -399,10 +399,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4ae9764ab071ef44910cf054166aeac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MAP_SIZE_X: 30
-  MAP_SIZE_Y: 30
-  MAX_ROOM_NUMBER: 6
-  m_mapScale: 3
+  INS_MAP_SIZE_X: 30
+  INS_MAP_SIZE_Y: 30
+  INS_MAP_SCALE: 3
+  MAX_ROOM_NUMBER: 8
+  MAX_MAP_NUMBER: 3
 --- !u!4 &1249066334
 Transform:
   m_ObjectHideFlags: 0
@@ -464,7 +465,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_roomTypeList:
-  - {fileID: 5195720614700128445, guid: d7a43e713798e46469ef9a827382bff0, type: 3}
+  - rtype: 0
+    roomObj: {fileID: 7416397544909224398, guid: 34dabc7ed30a0be4c91dced509eda7a3,
+      type: 3}
 --- !u!1 &1278710102
 GameObject:
   m_ObjectHideFlags: 0

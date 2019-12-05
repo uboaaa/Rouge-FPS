@@ -9,7 +9,7 @@ public enum Direction { LEFT, RIGHT, UP, DOWN };    //方向判定用のキー
 
 public class DungeonGenerator
 {
-    private const int MINIMUM_RANGE_WIDTH = 6;  //区画の最小幅
+    private const int MINIMUM_RANGE_WIDTH = 8;  //区画の最小幅
 
     private int m_mapSizeX;     //ダンジョンの最大X軸
     private int m_mapSizeY;     //ダンジョンの最大Y軸
@@ -21,9 +21,13 @@ public class DungeonGenerator
     private List<Pass> m_passList = new List<Pass>();       //通路リスト
     private List<int[]> m_rangeIdComb = new List<int[]>();  //区画組み合わせリスト 
 
-    //ダンジョン生成関数
+    //================================================//
+    //ダンジョン生成関数群
+    //================================================//
+    //ベースマップ生成
+    //※部屋のみ生成
     //※生成後、二次配列を返す
-    public int[,] GenerateMap(int _mapSizeX, int _mapSizeY, int _maxRoom)
+    public int[,] GenerateBaseMap(int _mapSizeX, int _mapSizeY, int _maxRoom)
     {
         this.m_mapSizeX = _mapSizeX;
         this.m_mapSizeY = _mapSizeY;
@@ -35,29 +39,40 @@ public class DungeonGenerator
         //区画を生成
         CreateRange(m_maxRoom);
 
+        
         //部屋を生成
         CreateRoom();
-        
+
+        // ここまでの結果を配列に反映する
+
+        //部屋
+        //foreach (KeyValuePair<int, Range> range in m_rangeList)
+        //{
+        //    if (range.Value.m_Room == null) continue;
+        //    for (int x = range.Value.m_Room.Start.X; x <= range.Value.m_Room.End.X; x++)
+        //    {
+        //        for (int y = range.Value.m_Room.Start.Y; y <= range.Value.m_Room.End.Y; y++)
+        //        {
+        //            map[x, y] = 1;
+        //        }
+        //    }
+        //}
+
+        return map;
+    }
+
+    //通路生成
+    //※部屋データを組み込んだマップに通路を配置
+    public int[,] CompPassMap(int[,] _map)
+    {
+        int[,] map = new int[m_mapSizeX, m_mapSizeY];
+
         //通路を生成
         CreatePass();
 
         //余分な通路を削除
         DeletePass();
 
-        // ここまでの結果を配列に反映する
-
-        //部屋
-        foreach (KeyValuePair<int, Range> range in m_rangeList)
-        {
-            if (range.Value.m_Room == null) continue;
-            for (int x = range.Value.m_Room.Start.X; x <= range.Value.m_Room.End.X; x++)
-            {
-                for (int y = range.Value.m_Room.Start.Y; y <= range.Value.m_Room.End.Y; y++)
-                {
-                    map[x, y] = 1;
-                }
-            }
-        }
 
         //通路
         //***マップのログ出力データを16進数にして、各IDがわかるようにしたい
@@ -78,18 +93,6 @@ public class DungeonGenerator
                 for (int y = start.Y; y <= end.Y; y++)
                 {
                     map[x, y] = 2;
-                }
-            }
-        }
-
-        //扉
-        for(int y = 0; y < m_mapSizeY; y++)
-        {
-            for(int x = 0; x < m_mapSizeX; x++)
-            {
-                if (map[x, y] == 2)
-                {
-
                 }
             }
         }
@@ -184,8 +187,8 @@ public class DungeonGenerator
 
             //長さから最小の区画サイズ２つ分を引き、残りからランダムで分割位置を決める
             int length = _isVertical ? range.Value.width_Y() : range.Value.width_X();
-            int margin = length - MINIMUM_RANGE_WIDTH * 2;                                              //区分け可能の余分幅
-            int baseIndex = _isVertical ? range.Value.Start.Y : range.Value.Start.X;                     //最小基準の位置
+            int margin = length - MINIMUM_RANGE_WIDTH * 2 ;                                             //区分け可能の余分幅
+            int baseIndex = _isVertical ? range.Value.Start.Y : range.Value.Start.X;                    //最小基準の位置
             int devideIndex = baseIndex + MINIMUM_RANGE_WIDTH + Utility.GetRandomInt(1, margin) - 1;    //分割位置
 
             //分割された区画の大きさを変更し、新しい区画を追加リストに追加
@@ -272,39 +275,29 @@ public class DungeonGenerator
     //=======================================================================//
     private void CreateRoom()
     {
-        Debug.Log(m_rangeList.Count);
+        //Debug.Log(m_rangeList.Count);
 
         //１区画あたり１部屋を作成
         foreach (KeyValuePair<int, Range> range in m_rangeList)
         {
             System.Threading.Thread.Sleep(1);
 
-            ////猶予を計算
+            //Debug.Log(range.Value.width_X());
+            //Debug.Log(range.Value.width_Y());
+
+            //猶予を計算
             int marginX = range.Value.width_X() - MINIMUM_RANGE_WIDTH + 1;
             int marginY = range.Value.width_Y() - MINIMUM_RANGE_WIDTH + 1;
 
-            //部屋のサイズを決定
-            //***インスペクタで比率をいじれるようにする
-            int room_size_X = (int)(marginX * 0.9);
-            int room_size_Y = (int)(marginY * 0.9);
-
-
             //部屋の各座標を計算
+            
+
             int startX = range.Value.Start.X + 1;
-            int endX = startX + marginX;
+            int endX = range.Value.End.X;
             int startY = range.Value.Start.Y + 1;
-            int endY = startY + marginY;
-
-            //if (marginX < 3) continue;
-            //if (marginY < 3) continue;
-
-            //開始位置を決定
-            //int randomX = range.Value.Start.X + Utility.GetRandomInt(1, marginX - 3);
-            //int randomY = range.Value.Start.Y + Utility.GetRandomInt(1, marginY - 3);
+            int endY = range.Value.End.Y;
 
             //この区画の部屋をセット
-            //***部屋のバリエーション増やす、区画をもっといじれるようにする
-            //Room room = new Room(randomX, randomY);
             Room room = new Room(startX, startY, endX, endY);
             range.Value.m_Room = room;
         }
@@ -365,15 +358,23 @@ public class DungeonGenerator
     //========================================
     //取得用関数群
     //========================================
-    public Dictionary<int,Room> GetRoomList()
+    public Dictionary<int,Room> GetRooms()
     {
         Dictionary<int, Room> _list = new Dictionary<int, Room>();
-        foreach(KeyValuePair<int,Range> range in m_rangeList)
+        foreach(KeyValuePair<int,Range> _range in m_rangeList)
         {
-            _list.Add(range.Key, range.Value.m_Room);
+            _list.Add(_range.Key, _range.Value.m_Room);
         }
 
         return _list;
+    }
+
+    public void SetRooms(Dictionary<int,Room> _list)
+    {
+        foreach(KeyValuePair<int,Room> _room in _list)
+        {
+            m_rangeList[_room.Key].m_Room = _room.Value;
+        }
     }
 
     public int SmallistRoom(out Room _room)
@@ -381,13 +382,13 @@ public class DungeonGenerator
         //最小面積の部屋のIDを取得
         int smallist = 0;
         int id = -1;
-        foreach(KeyValuePair<int,Range> pair in m_rangeList)
+        foreach(KeyValuePair<int,Range> _pair in m_rangeList)
         {
-            int tmp = pair.Value.m_Room.calcArea();
+            int tmp = _pair.Value.m_Room.calcArea();
             if(smallist==0 || tmp <= smallist)
             {
                 smallist = tmp;
-                id = pair.Key;
+                id = _pair.Key;
             }
         }
 

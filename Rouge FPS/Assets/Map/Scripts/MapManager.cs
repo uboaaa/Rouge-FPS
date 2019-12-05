@@ -27,6 +27,7 @@ public class MapManager : MonoBehaviour
     //ミニマップクラス
     private MiniMapManager miniMapManager = null;
 
+    private Selectable<int> m_nowMapID = new Selectable<int>(); //マップID
     private int[,] m_nowMap;                    //マップ配置データ
     private int m_mapScale;                     //マップスケール
     private int m_mapSizeX, m_mapSizeY;         //マップサイズX,Y
@@ -54,7 +55,13 @@ public class MapManager : MonoBehaviour
         //スタート部屋IDを取得
         m_startId = initializer.StartID();
         //ID・部屋リストを取得
-        initializer.GetRoomList(out m_roomList); 
+        initializer.GetRooms(out m_roomList);
+
+        //マップ切り替え時の処理を設定
+        m_nowMapID.mChanged += value =>
+        {
+            //マップチップ情報を新たに取得（valueでマップID指定して読み込み）
+        };
 
 
         //ミニマップ生成
@@ -73,7 +80,9 @@ public class MapManager : MonoBehaviour
     private void FixedUpdate()
     {
         float x, y;
-        float rot;
+        //float rot;
+
+        //マップ選択、切替時に動くようにする
         if (MergeScenes.IsMerge())
         {
             //プレイヤー座標取得

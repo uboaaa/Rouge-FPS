@@ -255,7 +255,8 @@ public class Range
         //
         switch (direction)
         {
-
+            default:
+                break;
         }
 
         pass = new Pass();

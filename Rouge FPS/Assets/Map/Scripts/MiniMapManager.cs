@@ -36,8 +36,8 @@ public class MiniMapManager : MonoBehaviour
     {
         //プレイヤーの配置データを取得
         //右上がアンカーなのでマップサイズ分を引いて補正
-        var x = PlayerXYZ.GetPlayerPosition("px") / m_mapScale - m_mapSizeX;
-        var y = PlayerXYZ.GetPlayerPosition("pz") / m_mapScale - m_mapSizeY;
+        var x = PlayerXYZ.GetPlayerPosition("px") / MapInitializer.MAP_SCALE - m_mapSizeX;
+        var y = PlayerXYZ.GetPlayerPosition("pz") / MapInitializer.MAP_SCALE - m_mapSizeY;
         //マーカーのサイズ分を乗算
         x *= m_markRect.sizeDelta.x;
         y *= m_markRect.sizeDelta.y;
@@ -61,7 +61,7 @@ public class MiniMapManager : MonoBehaviour
                     GameObject mapTip = Instantiate(m_tipPrefab) as GameObject;
 
                     //親にミニマップ用オブジェクトを設定
-                    mapTip.transform.parent = m_miniMap.transform;
+                    mapTip.transform.SetParent(m_miniMap.transform);
 
                     //マップチップの配置情報を初期化
                     MapTip tipComp = mapTip.GetComponent<MapTip>();
