@@ -430,6 +430,7 @@ GameObject:
   - component: {fileID: 197365161}
   - component: {fileID: 197365165}
   - component: {fileID: 197365159}
+  - component: {fileID: 197365158}
   m_Layer: 11
   m_Name: DropItem
   m_TagString: DropGun
@@ -437,6 +438,27 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &197365158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 197365157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c44ee2925ffbeb4580f9e651409038e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HandGun: {fileID: 6450164897633310034, guid: 3582477c0b353c745b9552b2dad03171, type: 3}
+  LightMachineGun: {fileID: 4051110895912933288, guid: a04d227ce5414ce49a99adea56b198c6,
+    type: 3}
+  AssaultRifle: {fileID: 0}
+  SubMachineGun: {fileID: 0}
+  RocketLauncher: {fileID: 279571132417835189, guid: f54d036500a989d42bc9515ba6ad750d,
+    type: 3}
+  ShotGun: {fileID: 0}
+  FlameThrower: {fileID: 0}
 --- !u!135 &197365159
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -489,8 +511,6 @@ MonoBehaviour:
     type: 3}
   FlameThrowerSprite: {fileID: 0}
   LaserGunSprite: {fileID: 0}
-  WeaponInfo: {fileID: 6450164897633310034, guid: 3582477c0b353c745b9552b2dad03171,
-    type: 3}
 --- !u!212 &197365163
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -568,7 +588,14 @@ MonoBehaviour:
   shootMode: 1
   gunType: 3
   gunRank: 2
-  GunEXP: 0
+  skillSlot: 3
+  OneMagazine: 3
+  MaxAmmo: 3
+  Damage: 3
+  shootInterval: 3
+  reloadInterval: 3
+  bulletPower: 3
+  GunEXP: 3
 --- !u!1 &229199683
 GameObject:
   m_ObjectHideFlags: 0
@@ -1278,6 +1305,7 @@ GameObject:
   - component: {fileID: 658423650}
   - component: {fileID: 658423653}
   - component: {fileID: 658423654}
+  - component: {fileID: 658423655}
   m_Layer: 0
   m_Name: FPSController
   m_TagString: Player
@@ -1657,7 +1685,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c792cd6d41395f14aa9d3d11bce46237, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  handgun: {fileID: 6450164897633310034, guid: 3582477c0b353c745b9552b2dad03171, type: 3}
+--- !u!114 &658423655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 658423643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c44ee2925ffbeb4580f9e651409038e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HandGun: {fileID: 6450164897633310034, guid: 3582477c0b353c745b9552b2dad03171, type: 3}
   LightMachineGun: {fileID: 4051110895912933288, guid: a04d227ce5414ce49a99adea56b198c6,
     type: 3}
   AssaultRifle: {fileID: 0}
@@ -1815,6 +1855,7 @@ GameObject:
   - component: {fileID: 693627545}
   - component: {fileID: 693627549}
   - component: {fileID: 693627543}
+  - component: {fileID: 693627542}
   m_Layer: 11
   m_Name: DropItem
   m_TagString: DropGun
@@ -1822,6 +1863,27 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &693627542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 693627541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c44ee2925ffbeb4580f9e651409038e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HandGun: {fileID: 6450164897633310034, guid: 3582477c0b353c745b9552b2dad03171, type: 3}
+  LightMachineGun: {fileID: 4051110895912933288, guid: a04d227ce5414ce49a99adea56b198c6,
+    type: 3}
+  AssaultRifle: {fileID: 0}
+  SubMachineGun: {fileID: 0}
+  RocketLauncher: {fileID: 279571132417835189, guid: f54d036500a989d42bc9515ba6ad750d,
+    type: 3}
+  ShotGun: {fileID: 0}
+  FlameThrower: {fileID: 0}
 --- !u!135 &693627543
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1874,8 +1936,6 @@ MonoBehaviour:
     type: 3}
   FlameThrowerSprite: {fileID: 0}
   LaserGunSprite: {fileID: 0}
-  WeaponInfo: {fileID: 279571132417835189, guid: f54d036500a989d42bc9515ba6ad750d,
-    type: 3}
 --- !u!212 &693627547
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1952,8 +2012,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootMode: 1
   gunType: 4
-  gunRank: 0
-  GunEXP: 0
+  gunRank: 1
+  skillSlot: 2
+  OneMagazine: 2
+  MaxAmmo: 2
+  Damage: 2
+  shootInterval: 2
+  reloadInterval: 2
+  bulletPower: 2
+  GunEXP: 2
 --- !u!1 &706482970
 GameObject:
   m_ObjectHideFlags: 0
@@ -2165,6 +2232,7 @@ GameObject:
   - component: {fileID: 752803058}
   - component: {fileID: 752803057}
   - component: {fileID: 752803056}
+  - component: {fileID: 752803062}
   m_Layer: 11
   m_Name: DropItem
   m_TagString: DropGun
@@ -2199,8 +2267,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootMode: 0
   gunType: 2
-  gunRank: 1
-  GunEXP: 0
+  gunRank: 2
+  skillSlot: 4
+  OneMagazine: 4
+  MaxAmmo: 4
+  Damage: 4
+  shootInterval: 4
+  reloadInterval: 4
+  bulletPower: 4
+  GunEXP: 4
 --- !u!114 &752803058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2240,8 +2315,6 @@ MonoBehaviour:
     type: 3}
   FlameThrowerSprite: {fileID: 0}
   LaserGunSprite: {fileID: 0}
-  WeaponInfo: {fileID: 4051110895912933288, guid: a04d227ce5414ce49a99adea56b198c6,
-    type: 3}
 --- !u!212 &752803060
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2304,6 +2377,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &752803062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 752803055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c44ee2925ffbeb4580f9e651409038e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HandGun: {fileID: 6450164897633310034, guid: 3582477c0b353c745b9552b2dad03171, type: 3}
+  LightMachineGun: {fileID: 4051110895912933288, guid: a04d227ce5414ce49a99adea56b198c6,
+    type: 3}
+  AssaultRifle: {fileID: 0}
+  SubMachineGun: {fileID: 0}
+  RocketLauncher: {fileID: 279571132417835189, guid: f54d036500a989d42bc9515ba6ad750d,
+    type: 3}
+  ShotGun: {fileID: 0}
+  FlameThrower: {fileID: 0}
 --- !u!1 &812664112
 GameObject:
   m_ObjectHideFlags: 0
@@ -2318,6 +2412,7 @@ GameObject:
   - component: {fileID: 812664116}
   - component: {fileID: 812664120}
   - component: {fileID: 812664118}
+  - component: {fileID: 812664117}
   m_Layer: 11
   m_Name: DropItem
   m_TagString: DropGun
@@ -2352,8 +2447,6 @@ MonoBehaviour:
     type: 3}
   FlameThrowerSprite: {fileID: 0}
   LaserGunSprite: {fileID: 0}
-  WeaponInfo: {fileID: 4051110895912933288, guid: a04d227ce5414ce49a99adea56b198c6,
-    type: 3}
 --- !u!212 &812664114
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2428,6 +2521,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8206a5d658efa0f4d8a3ebb2268c3be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &812664117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 812664112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c44ee2925ffbeb4580f9e651409038e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HandGun: {fileID: 6450164897633310034, guid: 3582477c0b353c745b9552b2dad03171, type: 3}
+  LightMachineGun: {fileID: 4051110895912933288, guid: a04d227ce5414ce49a99adea56b198c6,
+    type: 3}
+  AssaultRifle: {fileID: 0}
+  SubMachineGun: {fileID: 0}
+  RocketLauncher: {fileID: 279571132417835189, guid: f54d036500a989d42bc9515ba6ad750d,
+    type: 3}
+  ShotGun: {fileID: 0}
+  FlameThrower: {fileID: 0}
 --- !u!135 &812664118
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2456,7 +2570,14 @@ MonoBehaviour:
   shootMode: 0
   gunType: 2
   gunRank: 1
-  GunEXP: 0
+  skillSlot: 1
+  OneMagazine: 1
+  MaxAmmo: 1
+  Damage: 1
+  shootInterval: 1
+  reloadInterval: 1
+  bulletPower: 1
+  GunEXP: 1
 --- !u!1 &830063271
 GameObject:
   m_ObjectHideFlags: 0
@@ -2562,7 +2683,7 @@ GameObject:
   - component: {fileID: 845165025}
   - component: {fileID: 845165024}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -150,10 +150,6 @@ public class GunController : MonoBehaviour
     void InitGun()
     {
         Ammo = OneMagazine;
-
-        GIScript = GetComponent<GunInfo>();
-
-        // GunController = GunInfoを書いていく~~
     }
 
     // セミオートかフルオートかの判定

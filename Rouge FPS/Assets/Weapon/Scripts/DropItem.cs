@@ -22,8 +22,9 @@ public class DropItem : MonoBehaviour
     public Sprite FlameThrowerSprite    = null;
     public Sprite LaserGunSprite        = null;
 
-    public GameObject WeaponInfo;
+    public GameObject WeaponInfo{get;private set;}
     GameObject Obj;
+    LoadGunPrefab LGPScript;
 
     void Start()
     {
@@ -31,35 +32,52 @@ public class DropItem : MonoBehaviour
 
         gunSprite = GetComponent<SpriteRenderer>();
 
-        // 名前を変更する
-        this.name = "Drop" + WeaponInfo.name;
+        LGPScript = GetComponent<LoadGunPrefab>();
 
         // 銃の種類を判別する
         switch(GIScript.gunType)
         {
             case GunInfo.GunType.AssaultRifle:
+                // gunTypeを元にPrefabを取ってくる
+                WeaponInfo = LGPScript.LoadGun("AssaultRifle(Clone)");
+                // spriteをセット
                 gunSprite.sprite = AssaultRifleSprite;
                 break;
             case GunInfo.GunType.HandGun:
+                // gunTypeを元にPrefabを取ってくる
+                WeaponInfo = LGPScript.LoadGun("HandGun(Clone)");
+                // spriteをセット
                 gunSprite.sprite = HandGunSprite;
                 break;
             case GunInfo.GunType.LightMachineGun:
+                // gunTypeを元にPrefabを取ってくる
+                WeaponInfo = LGPScript.LoadGun("LightMachineGun(Clone)");
+                // spriteをセット
                 gunSprite.sprite = LightMachineGunSprite;
                 break;
             case GunInfo.GunType.ShotGun:
+                // gunTypeを元にPrefabを取ってくる
+                WeaponInfo = LGPScript.LoadGun("ShotGun(Clone)");
+                // spriteをセット
                 gunSprite.sprite = ShotGunSprite;
                 break;
             case GunInfo.GunType.SubMachineGun:
+                // gunTypeを元にPrefabを取ってくる
+                WeaponInfo = LGPScript.LoadGun("SubMachineGun(Clone)");
+                // spriteをセット
                 gunSprite.sprite = SubMachineGunSprite;
                 break;
             case GunInfo.GunType.RocketLauncher:
+                // gunTypeを元にPrefabを取ってくる
+                WeaponInfo = LGPScript.LoadGun("RocketLauncher(Clone)");
+                // spriteをセット
                 gunSprite.sprite = RocketLauncherSprite;
                 break;
             case GunInfo.GunType.FlameThrower:
+                // gunTypeを元にPrefabを取ってくる
+                WeaponInfo = LGPScript.LoadGun("FlameThrower(Clone)");
+                // spriteをセット
                 gunSprite.sprite = FlameThrowerSprite;
-                break;
-            case GunInfo.GunType.LaserGun:
-                gunSprite.sprite = LaserGunSprite;
                 break;
         }
 
@@ -68,20 +86,32 @@ public class DropItem : MonoBehaviour
         {
             case GunInfo.GunRank.Rank1:
                 // エフェクトを生成
-                Obj = Instantiate<GameObject>(Runk1EffectPrefab,transform.position,Quaternion.identity);
-		        Obj.transform.parent = this.transform;
+                if(runkEffect == null)
+                {
+                    runkEffect = Instantiate<GameObject>(Runk1EffectPrefab,transform.position,Quaternion.identity);
+		            runkEffect.transform.parent = this.transform;
+                }
                 break;
             case GunInfo.GunRank.Rank2:
                 // エフェクトを生成
-                Obj = Instantiate<GameObject>(Runk2EffectPrefab,transform.position,Quaternion.identity);
-		        Obj.transform.parent = this.transform;
+                if(runkEffect == null)
+                {
+                    runkEffect = Instantiate<GameObject>(Runk2EffectPrefab,transform.position,Quaternion.identity);
+		            runkEffect.transform.parent = this.transform;
+                }
                 break;
             case GunInfo.GunRank.Rank3:
                 // エフェクトを生成
-                Obj = Instantiate<GameObject>(Runk3EffectPrefab,transform.position,Quaternion.identity);
-		        Obj.transform.parent = this.transform;
+                if(runkEffect == null)
+                {
+                    runkEffect = Instantiate<GameObject>(Runk3EffectPrefab,transform.position,Quaternion.identity);
+		            runkEffect.transform.parent = this.transform;
+                }
                 break;
         }
+
+        // 名前を変更する
+        this.name = "Drop" + WeaponInfo.name;
     }
 
     void Update()

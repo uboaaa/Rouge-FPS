@@ -18,16 +18,16 @@ public class GunInfo : MonoBehaviour
                         }
     public enum GunRank { Rank1, Rank2, Rank3 }                             // ランク
     [SerializeField] public enum ShootMode { AUTO, SEMIAUTO }               // 単発が連射か
-    [SerializeField] public ShootMode  shootMode = ShootMode.AUTO;          // 武器の発射モード
-    [SerializeField] public GunType    gunType     = GunType.AssaultRifle;  // 種類情報
-    [SerializeField] public GunRank    gunRank     = GunRank.Rank1;         // ランク情報
-    [SerializeField] public int        skillSlot{get;set;}                  // スキルスロット数
-    [SerializeField] public int        OneMagazine{get;set;}                // マガジン内の弾
-    [SerializeField] public int        MaxAmmo{get;set;}                    // 残弾数
-    [SerializeField] public int        Damage{get;set;}                     // 火力
-    [SerializeField] public float      shootInterval{get;set;}              // 次発射までの間の時間
-    [SerializeField] public float      reloadInterval{get;set;}             // リロード終わりまでの時間
-	[SerializeField] public float      bulletPower{get;set;}                // 弾を飛ばす力
+    [SerializeField] public ShootMode  shootMode;                           // 武器の発射モード
+    [SerializeField] public GunType    gunType;                             // 種類情報
+    [SerializeField] public GunRank    gunRank;                             // ランク情報
+    [SerializeField] public int        skillSlot;                           // スキルスロット数
+    [SerializeField] public int        OneMagazine;                         // マガジン内の弾
+    [SerializeField] public int        MaxAmmo;                             // 残弾数
+    [SerializeField] public int        Damage;                              // 火力
+    [SerializeField] public float      shootInterval;                       // 次発射までの間の時間
+    [SerializeField] public float      reloadInterval;                      // リロード終わりまでの時間
+	[SerializeField] public float      bulletPower;                         // 弾を飛ばす力
 
      // パラメーター関係==============================================
     public float GunEXP;                                    // 経験値
