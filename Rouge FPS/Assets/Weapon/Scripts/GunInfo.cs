@@ -30,7 +30,7 @@ public class GunInfo : MonoBehaviour
 	[SerializeField] public float      bulletPower;                         // 弾を飛ばす力
 
      // パラメーター関係==============================================
-    public float GunEXP;                                    // 経験値
+    public float GunEXP;                                                    // 経験値
 
     void Start()
     {

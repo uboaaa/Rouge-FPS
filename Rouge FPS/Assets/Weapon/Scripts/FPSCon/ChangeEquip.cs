@@ -13,8 +13,8 @@ public class ChangeEquip : MonoBehaviour
     GameObject child;
 
      // スクリプト関係================================================
-    public GunController GCPrimaryScript{get;private set;}                   // [GunController]用の変数
-    public GunController GCSecondaryScript{get;private set;}                 // [GunController]用の変数
+    public GunController GCPrimaryScript{get;set;}                   // [GunController]用の変数
+    public GunController GCSecondaryScript{get;set;}                 // [GunController]用の変数
 
     void Start()
     {
@@ -38,8 +38,7 @@ public class ChangeEquip : MonoBehaviour
 
     void Update()
     {
-        // if(PrimaryWeapon != null){Debug.Log("プライマリ座標：" + PrimaryWeapon.transform.position);}
-        // Debug.Log(ownGun);
+        //Debug.Log(ownGun);
         if (Input.GetKeyDown(KeyCode.E) && !activeFlg && SecondaryWeapon != null)
         {
             GCPrimaryScript.shooting = false;
@@ -79,11 +78,14 @@ public class ChangeEquip : MonoBehaviour
         // 何も持っていないとき
         if(ownGun == 0)
         {
+            // プライマリなので１に変更
+            ownGun = 1;
+
             // 落ちている武器を入れる
             PrimaryWeapon = DIScript;
 
             // 拾った武器をFirstPersonCharacterの直下に生成する
-            GameObject tmp = Instantiate(PrimaryWeapon);
+            GameObject tmp = Instantiate(PrimaryWeapon,transform.position,Quaternion.identity);
             tmp.transform.parent = child.transform;
             
             // 生成したものをプライマリにセットする
@@ -96,19 +98,7 @@ public class ChangeEquip : MonoBehaviour
             GCPrimaryScript = PrimaryWeapon.GetComponent<GunController>();
 
             // GunInfoから情報を入れる
-            GCPrimaryScript.gunRank        = GIScript.gunRank;
-            GCPrimaryScript.gunType        = GIScript.gunType;
-            GCPrimaryScript.skillSlot      = GIScript.skillSlot;
-            GCPrimaryScript.OneMagazine    = GIScript.OneMagazine;
-            GCPrimaryScript.MaxAmmo        = GIScript.MaxAmmo;
-            GCPrimaryScript.Damage         = GIScript.Damage;
-            GCPrimaryScript.shootInterval  = GIScript.shootInterval;
-            GCPrimaryScript.reloadInterval = GIScript.reloadInterval;
-            GCPrimaryScript.bulletPower    = GIScript.bulletPower;
-            GCPrimaryScript.GunEXP         = GIScript.GunEXP;
-
-            // プライマリなので１に変更
-            ownGun = 1;
+            ChangeGunConInfo(GCPrimaryScript,GIScript,1);
 
             return null;
         }
@@ -116,11 +106,14 @@ public class ChangeEquip : MonoBehaviour
         // プライマリ武器しか持っていないとき
         if(ownGun == 1 && SecondaryWeapon == null)
         {
+            // セカンダリなので２にする
+            ownGun = 2;
+
             // 落ちている武器を入れる
             SecondaryWeapon = DIScript;
 
             // 拾った武器をFirstPersonCharacterの直下に生成する
-            GameObject tmp = Instantiate(SecondaryWeapon);
+            GameObject tmp = Instantiate(SecondaryWeapon,transform.position,Quaternion.identity);
             tmp.transform.parent = child.transform;
 
             // 生成したものをセカンダリにセットする
@@ -134,32 +127,20 @@ public class ChangeEquip : MonoBehaviour
             GCSecondaryScript = SecondaryWeapon.GetComponent<GunController>();
 
             // GunInfoから情報を入れる
-            GCSecondaryScript.gunRank        = GIScript.gunRank;
-            GCSecondaryScript.gunType        = GIScript.gunType;
-            GCSecondaryScript.skillSlot      = GIScript.skillSlot;
-            GCSecondaryScript.OneMagazine    = GIScript.OneMagazine;
-            GCSecondaryScript.MaxAmmo        = GIScript.MaxAmmo;
-            GCSecondaryScript.Damage         = GIScript.Damage;
-            GCSecondaryScript.shootInterval  = GIScript.shootInterval;
-            GCSecondaryScript.reloadInterval = GIScript.reloadInterval;
-            GCSecondaryScript.bulletPower    = GIScript.bulletPower;
-            GCSecondaryScript.GunEXP         = GIScript.GunEXP;
-            
-            // セカンダリなので２にする
-            ownGun = 2;
+            ChangeGunConInfo(GCSecondaryScript,GIScript,1);
             
             return null;
         }
 
         // プライマリ武器と交換する
-        else if(ownGun == 1)
+        if(ownGun == 1 && PrimaryWeapon != null && SecondaryWeapon != null)
         {
             // 一旦、非表示
             PrimaryWeapon.SetActive(false);
 
             // 情報保持用変数に武器の情報を入れる
             dropInfo = PrimaryWeapon;
-
+        
             // 武器をヒエラルキーから削除
             Destroy(PrimaryWeapon);
 
@@ -167,7 +148,7 @@ public class ChangeEquip : MonoBehaviour
             PrimaryWeapon = DIScript;
 
             // 拾った武器をFirstPersonCharacterの直下に生成する
-            GameObject tmp = Instantiate(PrimaryWeapon);
+            GameObject tmp = Instantiate(PrimaryWeapon,transform.position,Quaternion.identity);
             tmp.transform.parent = child.transform;
 
             // 生成したものをプライマリにセットする
@@ -177,28 +158,16 @@ public class ChangeEquip : MonoBehaviour
             GCPrimaryScript = PrimaryWeapon.GetComponent<GunController>();
 
             // GunInfoから情報を入れる
-            GCPrimaryScript.gunRank        = GIScript.gunRank;
-            GCPrimaryScript.gunType        = GIScript.gunType;
-            GCPrimaryScript.skillSlot      = GIScript.skillSlot;
-            GCPrimaryScript.OneMagazine    = GIScript.OneMagazine;
-            GCPrimaryScript.MaxAmmo        = GIScript.MaxAmmo;
-            GCPrimaryScript.Damage         = GIScript.Damage;
-            GCPrimaryScript.shootInterval  = GIScript.shootInterval;
-            GCPrimaryScript.reloadInterval = GIScript.reloadInterval;
-            GCPrimaryScript.bulletPower    = GIScript.bulletPower;
-            GCPrimaryScript.GunEXP         = GIScript.GunEXP;
-
-            // 落としてある武器に保持した情報を入れる
-            GameObject dropPrefab = dropInfo;
+            ChangeGunConInfo(GCPrimaryScript,GIScript,1);
 
             // 表示
             PrimaryWeapon.SetActive(true);
 
-            return dropPrefab;
+            return dropInfo;
         }
 
         // セカンダリ武器と交換する
-        if(ownGun == 2)
+        else if(ownGun == 2 && PrimaryWeapon != null && SecondaryWeapon != null)
         {
             // 一旦、非表示
             SecondaryWeapon.SetActive(false);
@@ -223,28 +192,50 @@ public class ChangeEquip : MonoBehaviour
             GCSecondaryScript = PrimaryWeapon.GetComponent<GunController>();
 
             // GunInfoから情報を入れる
-            GCSecondaryScript.gunRank        = GIScript.gunRank;
-            GCSecondaryScript.gunType        = GIScript.gunType;
-            GCSecondaryScript.skillSlot      = GIScript.skillSlot;
-            GCSecondaryScript.OneMagazine    = GIScript.OneMagazine;
-            GCSecondaryScript.MaxAmmo        = GIScript.MaxAmmo;
-            GCSecondaryScript.Damage         = GIScript.Damage;
-            GCSecondaryScript.shootInterval  = GIScript.shootInterval;
-            GCSecondaryScript.reloadInterval = GIScript.reloadInterval;
-            GCSecondaryScript.bulletPower    = GIScript.bulletPower;
-            GCSecondaryScript.GunEXP         = GIScript.GunEXP;
-
-            
-            // 落としてある武器に保持した情報を入れる
-            GameObject dropPrefab = dropInfo;
+            ChangeGunConInfo(GCSecondaryScript,GIScript,1);
 
             // 表示
             SecondaryWeapon.SetActive(true);
+            
 
-            return dropPrefab;
+            return dropInfo;
         }
         
         return null;
+    }
+
+    // GunInfoから情報を入れる
+    public void ChangeGunConInfo(GunController Guncon,GunInfo Guninfo,int mode)
+    {
+        // GunContoller　←　GunInfo
+        if(mode == 1)
+        {
+            Guncon.gunRank        = Guninfo.gunRank;
+            Guncon.gunType        = Guninfo.gunType;
+            Guncon.skillSlot      = Guninfo.skillSlot;
+            Guncon.OneMagazine    = Guninfo.OneMagazine;
+            Guncon.MaxAmmo        = Guninfo.MaxAmmo;
+            Guncon.Damage         = Guninfo.Damage;
+            Guncon.shootInterval  = Guninfo.shootInterval;
+            Guncon.reloadInterval = Guninfo.reloadInterval;
+            Guncon.bulletPower    = Guninfo.bulletPower;
+            Guncon.GunEXP         = Guninfo.GunEXP;
+        }
+        
+        // GunInfo　←　GunContoller
+        if(mode == 2)
+        {
+            Guninfo.gunRank        = Guncon.gunRank;
+            Guninfo.gunType        = Guncon.gunType;
+            Guninfo.skillSlot      = Guncon.skillSlot;
+            Guninfo.OneMagazine    = Guncon.OneMagazine;
+            Guninfo.MaxAmmo        = Guncon.MaxAmmo;
+            Guninfo.Damage         = Guncon.Damage;
+            Guninfo.shootInterval  = Guncon.shootInterval;
+            Guninfo.reloadInterval = Guncon.reloadInterval;
+            Guninfo.bulletPower    = Guncon.bulletPower;
+            Guninfo.GunEXP         = Guncon.GunEXP;
+        }
     }
 }
   

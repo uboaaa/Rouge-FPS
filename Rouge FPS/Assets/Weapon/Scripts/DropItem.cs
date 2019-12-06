@@ -29,10 +29,14 @@ public class DropItem : MonoBehaviour
     void Start()
     {
         GIScript = GetComponent<GunInfo>();
-
         gunSprite = GetComponent<SpriteRenderer>();
-
         LGPScript = GetComponent<LoadGunPrefab>();
+
+        // 子オブジェクトをリセットしてからパーティクルを出す
+        foreach ( Transform n in this.transform )
+        {
+            GameObject.Destroy(n.gameObject);
+        }
 
         // 銃の種類を判別する
         switch(GIScript.gunType)
