@@ -58,6 +58,8 @@ public class MapInitializer : MonoBehaviour
         //部屋生成コンポーネント取得
         RG = this.GetComponent<RoomGenerator>();
 
+        Debug.Log("Yes!Shacs!");
+
         //マップ切り替え時の処理を設定
         m_mapID.mChanged += value =>
         {
@@ -66,7 +68,8 @@ public class MapInitializer : MonoBehaviour
             //部屋生成
             GenerateRooms();
             //通路生成
-            //GeneratePass();
+            //***循環参照になってる？
+            GeneratePass();
             //オブジェクト配置
             GenerateObject();
             //書き込み？
@@ -177,12 +180,13 @@ public class MapInitializer : MonoBehaviour
         {
             for (int x = 0; x < MAP_SIZE_X; x++)
             {
-                if (m_map[x, y] >= 1)
+                if (m_map[x, y] == 2)
                 {
-                    //床
-                    //Instantiate(m_floorPrefab, new Vector3(x * MAP_SCALE, 0, y * MAP_SCALE), new Quaternion());
+                    //通路
+                    Instantiate(m_floorPrefab, new Vector3(x * MAP_SCALE, 0, y * MAP_SCALE), new Quaternion());
                 }
-                else
+                
+                if (m_map[x, y] == 0)
                 {
                     //壁
                     Instantiate(m_wallPrefab, new Vector3(x * MAP_SCALE, 5, y * MAP_SCALE), new Quaternion());
@@ -205,8 +209,6 @@ public class MapInitializer : MonoBehaviour
         //最小部屋とそのIDを取得
         Room small = null;
         m_startId = DG.SmallistRoom(out small);
-
-
 
         do
         {

@@ -61,28 +61,50 @@ public class RoomGenerator : MonoBehaviour
         int r_height;
         TypeParam(result.rtype, out r_width, out r_height);     //取得した部屋パラメータを取得
 
+        //6x10,10x12のときは回転を考慮
+        Quaternion rotation = new Quaternion();
+        if (result.rtype==Type.R6x10 || result.rtype == Type.R10x12)
+        {
+            //横幅の方が長い時は90°回転、取得したパラメータを入れ替える
+            if (width > height)
+            {
+                rotation = Quaternion.AngleAxis(90, new Vector3(0, 1, 0));
+                int tmp = r_width;
+                r_width = r_height;
+                r_height = tmp;
+            }
+        }
+
+        string s = "start(" + _data.Start.X + "," + _data.Start.Y + "),end(" + _data.End.X + "," + _data.End.Y + ")";
+        Debug.Log(s);
+        string w = "width:" + r_width + ",height:" + r_height;
+        Debug.Log(w);
+
         //サイズをfor文で回して、マップデータに書き込む
         int r_posX = Utility.GetRandomInt(_data.Start.X, _data.End.X - r_width);
         int r_posY = Utility.GetRandomInt(_data.Start.Y, _data.End.Y - r_height);
+
+        Debug.Log(r_posX);
+        Debug.Log(r_posY);
+
         for(int x = 0; x < r_width; x++)
         {
-            for(int y=0;y<r_height;y++)
+            for(int y = 0; y < r_height; y++)
             {
                 _map[r_posX + x, r_posY + y] = 1;
             }
         }
 
-        Debug.Log(r_width);
-        Debug.Log(r_height);
-
+        
         //部屋オブジェクトをインスタンス化
         //***初期化コンポーネント内でするか、初期化内にリスト作成しそこに追加する
         //***削除しやすくするため！
         float r_centX = (float)r_posX + (float)(r_width - 1) / 2.0f;         //部屋の中心の座標を取得
         float r_centY = (float)r_posY + (float)(r_height - 1) / 2.0f;
-        Instantiate(result.roomObj, new Vector3(r_centX * MapInitializer.MAP_SCALE, 0, r_centY * MapInitializer.MAP_SCALE), new Quaternion());
-        
-        //
+        Instantiate(result.roomObj, new Vector3(r_centX * MapInitializer.MAP_SCALE, 0, r_centY * MapInitializer.MAP_SCALE), rotation);
+
+        //部屋データを書き換える
+        _data = new Room(r_posX, r_posY, r_posX + r_width - 1, r_posY + r_height - 1);
 
         //***曲がり角ありの通路生成
 

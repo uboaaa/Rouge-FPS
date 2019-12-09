@@ -186,7 +186,7 @@ public class Range
         }
         else if (connect_Start && !connect_End)         //指定先の部屋の始点～指定元の部屋の終点
         {
-            pass = CreateStraightPass(other_start, self_end, range.m_Room, direction);
+            pass = CreateStraightPass(other_start, self_end , range.m_Room, direction);
 
         }
         else if (!connect_Start && connect_End)         //指定元の部屋の始点～指定先の部屋の終点
@@ -222,6 +222,7 @@ public class Range
         Pass pass = new Pass();
 
         //方向毎に通路を生成し返す
+        //***部屋にはみ出している通路部分を削る！
         switch (direction)
         {
             case Direction.LEFT:
