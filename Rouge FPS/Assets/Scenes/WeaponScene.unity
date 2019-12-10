@@ -567,7 +567,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 197365157}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.48, y: -1.22, z: 5.64}
+  m_LocalPosition: {x: 3.48, y: -1.22, z: 25.94}
   m_LocalScale: {x: 0.6905066, y: 0.7770685, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -588,13 +588,13 @@ MonoBehaviour:
   shootMode: 1
   gunType: 3
   gunRank: 2
-  skillSlot: 3
-  OneMagazine: 3
-  MaxAmmo: 3
-  Damage: 3
-  shootInterval: 3
-  reloadInterval: 3
-  bulletPower: 3
+  skillSlot: 1
+  OneMagazine: 10
+  MaxAmmo: 80
+  Damage: 7
+  shootInterval: 0.5
+  reloadInterval: 0.7
+  bulletPower: 1000
   GunEXP: 3
 --- !u!1 &229199683
 GameObject:
@@ -1992,7 +1992,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 693627541}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.93, y: -1.22, z: 11.13}
+  m_LocalPosition: {x: -0.93, y: -1.22, z: 31.43}
   m_LocalScale: {x: 0.6905066, y: 0.7770685, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2013,13 +2013,13 @@ MonoBehaviour:
   shootMode: 1
   gunType: 4
   gunRank: 1
-  skillSlot: 2
-  OneMagazine: 2
-  MaxAmmo: 2
-  Damage: 2
-  shootInterval: 2
-  reloadInterval: 2
-  bulletPower: 2
+  skillSlot: 3
+  OneMagazine: 1
+  MaxAmmo: 6
+  Damage: 1200
+  shootInterval: 4
+  reloadInterval: 3
+  bulletPower: 50
   GunEXP: 2
 --- !u!1 &706482970
 GameObject:
@@ -2268,13 +2268,13 @@ MonoBehaviour:
   shootMode: 0
   gunType: 2
   gunRank: 2
-  skillSlot: 4
-  OneMagazine: 4
-  MaxAmmo: 4
-  Damage: 4
-  shootInterval: 4
-  reloadInterval: 4
-  bulletPower: 4
+  skillSlot: 1000
+  OneMagazine: 1000
+  MaxAmmo: 1000
+  Damage: 1000
+  shootInterval: 0
+  reloadInterval: 0
+  bulletPower: 1000
   GunEXP: 4
 --- !u!114 &752803058
 MonoBehaviour:
@@ -2371,7 +2371,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 752803055}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.75, y: -1.22, z: 12.81}
+  m_LocalPosition: {x: -6.75, y: -1.22, z: 33.11}
   m_LocalScale: {x: 0.6905066, y: 0.7770685, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2503,7 +2503,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 812664112}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.1, y: -1.22, z: 3.8}
+  m_LocalPosition: {x: 0.1, y: -1.22, z: 24.1}
   m_LocalScale: {x: 0.6905066, y: 0.7770685, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2570,13 +2570,13 @@ MonoBehaviour:
   shootMode: 0
   gunType: 2
   gunRank: 1
-  skillSlot: 1
-  OneMagazine: 1
-  MaxAmmo: 1
-  Damage: 1
-  shootInterval: 1
-  reloadInterval: 1
-  bulletPower: 1
+  skillSlot: 2
+  OneMagazine: 120
+  MaxAmmo: 360
+  Damage: 4
+  shootInterval: 0.3
+  reloadInterval: 1.1
+  bulletPower: 1000
   GunEXP: 1
 --- !u!1 &830063271
 GameObject:
@@ -3666,7 +3666,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: aa59c23e384c6f44c9aacd55e55dc2fc, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

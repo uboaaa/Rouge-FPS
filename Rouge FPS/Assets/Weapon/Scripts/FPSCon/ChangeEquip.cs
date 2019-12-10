@@ -11,6 +11,9 @@ public class ChangeEquip : MonoBehaviour
     [HideInInspector] public int ownGun;      // 0:持ってない 1:プライマリ 2:セカンダリ
     [HideInInspector] public bool activeFlg;  // 行動中か  
     GameObject child;
+    Quaternion q;
+    Quaternion qq;
+    Vector3 playerLook;
 
      // スクリプト関係================================================
     public GunController GCPrimaryScript{get;set;}                   // [GunController]用の変数
@@ -23,13 +26,27 @@ public class ChangeEquip : MonoBehaviour
 
         ownGun = 0;
         if(PrimaryWeapon != null)
-        {
+        { 
+            // 拾った武器をFirstPersonCharacterの直下に生成する
+            GameObject tmp = Instantiate(PrimaryWeapon,transform.position,q);
+            tmp.transform.parent = child.transform;
+            
+            // 生成したものをプライマリにセットする
+            PrimaryWeapon = tmp;
+
             PrimaryWeapon.SetActive(true);
             GCPrimaryScript = PrimaryWeapon.GetComponent<GunController>();
         }
 
         if(SecondaryWeapon != null)
         {
+            // 拾った武器をFirstPersonCharacterの直下に生成する
+            GameObject tmp = Instantiate(SecondaryWeapon,transform.position,q);
+            tmp.transform.parent = child.transform;
+            
+            // 生成したものをプライマリにセットする
+            PrimaryWeapon = tmp;
+
             SecondaryWeapon.SetActive(false);
             GCSecondaryScript = SecondaryWeapon.GetComponent<GunController>();
         }
@@ -38,6 +55,17 @@ public class ChangeEquip : MonoBehaviour
 
     void Update()
     {
+        playerLook = new Vector3(child.transform.localEulerAngles.x,this.transform.localEulerAngles.y,0);
+        
+        if(playerLook.x > 180.0f)
+        {
+            playerLook.x = (playerLook.x - 360.0f);
+        }
+        if(playerLook.y > 180.0f)
+        {
+            playerLook.y = (playerLook.y - 360.0f);
+        }
+
         //Debug.Log(ownGun);
         if (Input.GetKeyDown(KeyCode.E) && !activeFlg && SecondaryWeapon != null)
         {
@@ -85,11 +113,13 @@ public class ChangeEquip : MonoBehaviour
             PrimaryWeapon = DIScript;
 
             // 拾った武器をFirstPersonCharacterの直下に生成する
-            GameObject tmp = Instantiate(PrimaryWeapon,transform.position,Quaternion.identity);
+            GameObject tmp = Instantiate(PrimaryWeapon,child.transform,false);
             tmp.transform.parent = child.transform;
             
             // 生成したものをプライマリにセットする
             PrimaryWeapon = tmp;
+
+            PrimaryWeapon.transform.rotation = Quaternion.Euler(playerLook);
 
             // 表示
             PrimaryWeapon.SetActive(true);
@@ -113,7 +143,7 @@ public class ChangeEquip : MonoBehaviour
             SecondaryWeapon = DIScript;
 
             // 拾った武器をFirstPersonCharacterの直下に生成する
-            GameObject tmp = Instantiate(SecondaryWeapon,transform.position,Quaternion.identity);
+            GameObject tmp = Instantiate(SecondaryWeapon,child.transform,false);
             tmp.transform.parent = child.transform;
 
             // 生成したものをセカンダリにセットする
@@ -148,7 +178,7 @@ public class ChangeEquip : MonoBehaviour
             PrimaryWeapon = DIScript;
 
             // 拾った武器をFirstPersonCharacterの直下に生成する
-            GameObject tmp = Instantiate(PrimaryWeapon,transform.position,Quaternion.identity);
+            GameObject tmp = Instantiate(PrimaryWeapon,child.transform,false);
             tmp.transform.parent = child.transform;
 
             // 生成したものをプライマリにセットする
@@ -182,7 +212,7 @@ public class ChangeEquip : MonoBehaviour
             SecondaryWeapon = DIScript;
 
             // 拾った武器をFirstPersonCharacterの直下に生成する
-            GameObject tmp = Instantiate(SecondaryWeapon);
+            GameObject tmp = Instantiate(SecondaryWeapon,child.transform,false);
             tmp.transform.parent = child.transform;
             
             // 生成したものをセカンダリにセットする
