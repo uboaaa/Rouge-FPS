@@ -207,8 +207,6 @@ public class Range
     //引数：ランダムの最小値、最大値、接続先の部屋クラス、接続する方向
     private Pass CreateStraightPass(int min, int max, Room other_room, Direction direction)
     {
-
-
         int rand;
         if (max - min <= 1)
         {
@@ -226,20 +224,20 @@ public class Range
         switch (direction)
         {
             case Direction.LEFT:
-                pass.Start = new Position(m_Room.Start.X, rand);
-                pass.End = new Position(other_room.End.X, rand);
+                pass.Start = new Position(m_Room.Start.X - 1, rand);
+                pass.End = new Position(other_room.End.X + 1, rand);
                 break;
             case Direction.RIGHT:
-                pass.Start = new Position(m_Room.End.X, rand);
-                pass.End = new Position(other_room.Start.X, rand);
+                pass.Start = new Position(m_Room.End.X + 1, rand);
+                pass.End = new Position(other_room.Start.X - 1, rand);
                 break;
             case Direction.UP:
-                pass.Start = new Position(rand, m_Room.Start.Y);
-                pass.End = new Position(rand, other_room.End.Y);
+                pass.Start = new Position(rand, m_Room.Start.Y - 1);
+                pass.End = new Position(rand, other_room.End.Y + 1);
                 break;
             case Direction.DOWN:
-                pass.Start = new Position(rand, m_Room.End.Y);
-                pass.End = new Position(rand, other_room.Start.Y);
+                pass.Start = new Position(rand, m_Room.End.Y + 1);
+                pass.End = new Position(rand, other_room.Start.Y - 1);
                 break;
         }
 
@@ -250,19 +248,29 @@ public class Range
 
     public bool IsCurve(Range range, out Pass pass)
     {
+        Room other_room = range.m_Room;
+
         //指定した先の区画への向きを取得
         Direction direction = m_connectIdList[range.Id];
 
-        //
-        switch (direction)
-        {
-            default:
-                break;
-        }
-
         pass = new Pass();
 
+        pass = CreateCurvePass(other_room, direction);
+        
+
+        
+
         return true;
+    }
+
+    private Pass CreateCurvePass(Room other_room, Direction direction)
+    {
+        //中間地点を求める
+        
+
+        Pass pass = new Pass();
+
+        return pass;
     }
 
 

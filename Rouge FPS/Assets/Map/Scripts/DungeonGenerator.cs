@@ -9,7 +9,7 @@ public enum Direction { LEFT, RIGHT, UP, DOWN };    //方向判定用のキー
 
 public class DungeonGenerator
 {
-    private const int MINIMUM_RANGE_WIDTH = 8;  //区画の最小幅
+    private const int MINIMUM_RANGE_WIDTH = 10;  //区画の最小幅
 
     private int m_mapSizeX;     //ダンジョンの最大X軸
     private int m_mapSizeY;     //ダンジョンの最大Y軸
@@ -162,9 +162,9 @@ public class DungeonGenerator
             }
             System.Threading.Thread.Sleep(1);
 
-            //40%の確率で分割
+            //20%の確率で分割
             //区画数が１つなら必ず分割
-            if (m_rangeList.Count > 1 && Utility.RandomJudge(0.4f))
+            if (m_rangeList.Count > 1 && Utility.RandomJudge(0.2f))
             {
                 continue;
             }
@@ -269,9 +269,9 @@ public class DungeonGenerator
             //部屋の各座標を計算
            
             int startX = range.Value.Start.X + 2;
-            int endX = range.Value.End.X - 1;
+            int endX = range.Value.End.X - 2;
             int startY = range.Value.Start.Y + 2;
-            int endY = range.Value.End.Y - 1;
+            int endY = range.Value.End.Y - 2;
 
             //この区画の部屋をセット
             Room room = new Room(startX, startY, endX, endY);

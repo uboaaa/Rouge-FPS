@@ -33,7 +33,19 @@ public class MiniMapManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            if (m_miniMap.activeSelf)
+            {
+                m_miniMap.SetActive(false);
+                m_playerMarker.SetActive(false);
+            }
+            else
+            {
+                m_miniMap.SetActive(true);
+                m_playerMarker.SetActive(true);
+            }
+        }
     }
 
     private void LateUpdate()
@@ -76,7 +88,7 @@ public class MiniMapManager : MonoBehaviour
         {
             for(int x = 0; x < m_mapSizeX; x++)
             {
-                if (mapdata[x, y] >= 1)
+                if (mapdata[x, y] == 0)
                 {
                     //マップチップのオブジェクト生成
                     GameObject mapTip = Instantiate(m_tipPrefab) as GameObject;

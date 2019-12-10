@@ -175,15 +175,38 @@ public class MapInitializer : MonoBehaviour
         m_floorPrefab = Resources.Load("Prefab/DungeonParts/Floor") as GameObject;
         m_celingPrefab = Resources.Load("Prefab/DungeonParts/Celing") as GameObject;
 
+        //余分な壁データを削除
+        for(int y = 1;y<MAP_SIZE_Y - 1; y++)
+        {
+            for (int x = 1; x < MAP_SIZE_X - 1; x++)
+            {
+                if(m_map[x-1,y] <= 0 && m_map[x+1,y] <= 0 && m_map[x,y-1] <= 0 && m_map[x, y + 1] <= 0)
+                {
+                    m_map[x, y] = -1;
+                }
+            }
+        }
+
         //データからオブジェクトを配置
         for (int y = 0; y < MAP_SIZE_Y; y++)
         {
             for (int x = 0; x < MAP_SIZE_X; x++)
             {
+                //囲い部分の壁を削除
+                if (x == 0 || y == 0) m_map[x, y] = -1;
+                if (x == MAP_SIZE_X - 1 || y == MAP_SIZE_Y - 1) m_map[x, y] = -1;
+
+                //オブジェクト生成
                 if (m_map[x, y] == 2)
                 {
                     //通路
                     Instantiate(m_floorPrefab, new Vector3(x * MAP_SCALE, 0, y * MAP_SCALE), new Quaternion());
+                }
+
+                if (m_map[x, y] >= 1)
+                {
+                    //天井
+                    Instantiate(m_celingPrefab, new Vector3(x * MAP_SCALE, 6, y * MAP_SCALE), new Quaternion());
                 }
                 
                 if (m_map[x, y] == 0)
@@ -192,8 +215,7 @@ public class MapInitializer : MonoBehaviour
                     Instantiate(m_wallPrefab, new Vector3(x * MAP_SCALE, 5, y * MAP_SCALE), new Quaternion());
                 }
 
-                //天井
-                //Instantiate(m_celingPrefab, new Vector3(x * MAP_SCALE, 6, y * MAP_SCALE), new Quaternion());
+                
             }
         }
 
