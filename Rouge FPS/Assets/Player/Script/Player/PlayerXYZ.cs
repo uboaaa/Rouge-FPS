@@ -21,6 +21,8 @@ public class PlayerXYZ : MonoBehaviour
 
     private static bool StageReset;
 
+    private static Quaternion rotation;
+
 private float aaaaa;
     private void Awake()
     {
@@ -36,6 +38,8 @@ private float aaaaa;
     // Update is called once per frame
     void Update()
     {
+        rotation = this.transform.localRotation;
+        Debug.Log(GetPlayerRotation());
 
         if(StageReset){
         characterController = GetComponent<CharacterController>();
@@ -62,34 +66,11 @@ private float aaaaa;
             UpdatePlayerXYZ(abc.x, 15, abc.z);
         }
 
-        // //ノックバック処理
-        // if (Input.GetKeyDown(KeyCode.C))
-        // {
-        //     abc = this.transform.position;
-        //     for (int i = 0; i < 5; i++)
-        //     {
-        //         moveDirection.z -= 1.0f;
-        //         moveFlg = true;
-        //     }
-        // }
-        // if (moveFlg)
-        // {
-        //     characterController.Move(moveDirection * Time.deltaTime);
-        // }
-        // if (abc.z -transform.position.z>10.0f) { moveFlg = false; }
+        
     }
 
 
-//   void OnTriggerEnter (Collider other)
-//     {
-//         string layerName = LayerMask.LayerToName(other.gameObject.layer);
-         
-//         if( layerName == "Back")
-//         {
-//             Debug.Log("AAA");
-//            moveFlg = false;
-//         }
-//     }
+
         void FixedUpdate()
         {
        
@@ -117,24 +98,18 @@ private float aaaaa;
             result=pz;
             break;
 
-            case "rx":
-            result=rx;
-            break;
-
-            case "ry":
-            result=ry;
-            break;
-
-            case "rz":
-            result=rz;
-            break;
-
             default:
             break;
         }
         
         return result;
         
+    }
+
+    public static Vector3 GetPlayerRotation(){
+     // クォータニオン → オイラー角への変換
+    Vector3 rotationAngles = rotation.eulerAngles;
+    return rotationAngles;
     }
 
     public void UpdatePlayerXYZ(float x, float y ,float z){
