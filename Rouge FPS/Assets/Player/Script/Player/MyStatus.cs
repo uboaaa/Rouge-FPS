@@ -38,7 +38,7 @@ public class MyStatus : MonoBehaviour
       
 
             playerHP = playerHP - damage;
-     Debug.Log(playerHP);
+            Debug.Log(playerHP);
 
     }
 

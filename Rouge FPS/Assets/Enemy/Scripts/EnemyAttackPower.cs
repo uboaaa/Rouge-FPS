@@ -28,14 +28,18 @@ public class EnemyAttackPower : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log(enemyatkpow);
+        Debug.Log(MyStatus.GetHp());
     }
     void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Player"){
-        MyStatus.downHp((float)enemyatkpow);
-        DamageFlg=true;
-        Destroy(this);}
+        if(other.gameObject.tag == "Player")
+        {
+            
+            MyStatus.downHp((float)enemyatkpow);
+            DamageFlg = true;
+            
+            Destroy(this);
+        }
 
     }
    public static bool GetEnemyBHitGet(){return DamageFlg;}
