@@ -31,7 +31,6 @@ public class GunController : MonoBehaviour
 
     // パラメーター関係==============================================
     public float GunEXP;                                    // 経験値
-    public Text AmmoCheck;                                  // 残弾数テキスト用
     [HideInInspector] public bool shootEnabled = true;      // 撃てる状態か判定用
     [HideInInspector] public bool shooting = false;         // 射撃中か判定用
     bool        reloading = false;                          // リロード中か判定用
@@ -70,8 +69,6 @@ public class GunController : MonoBehaviour
 
     void Update()
     {   
-        AmmoCheck.text = Ammo + "/" + MaxAmmo;
-
         animatorInfo = animator.GetCurrentAnimatorStateInfo(0);
 
         // アニメーションが”Get”状態の時、フラグを受け取る

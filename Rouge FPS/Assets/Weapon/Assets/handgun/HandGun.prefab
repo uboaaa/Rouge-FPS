@@ -210,7 +210,6 @@ MonoBehaviour:
   cameraShakePow: 0.1
   muzzleShakePow: 0.1
   GunEXP: 0
-  AmmoCheck: {fileID: 7454088189279422815, guid: 01985a60c849259439699e21ad2e1c13,
-    type: 3}
+  AmmoCheck: {fileID: 0}
   shootEnabled: 1
   shooting: 0
