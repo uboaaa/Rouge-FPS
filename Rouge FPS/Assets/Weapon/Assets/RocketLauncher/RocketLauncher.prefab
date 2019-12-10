@@ -25,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 279571132375796913}
-  m_LocalRotation: {x: -0.008646686, y: -0.016437005, z: -0.0013332674, w: 0.9998266}
-  m_LocalPosition: {x: -3.6100001, y: 1.5, z: -5.6}
+  m_LocalRotation: {x: -0.017429259, y: -0.021826692, z: -0.0012529823, w: 0.999609}
+  m_LocalPosition: {x: -3.25, y: 1.5, z: -5.59}
   m_LocalScale: {x: 0.13448, y: 0.13448006, z: 0.67443997}
   m_Children: []
   m_Father: {fileID: 279571132417835190}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -0.99300003, y: -1.8830001, z: -0.136}
+  m_LocalEulerAnglesHint: {x: -2, y: -2.5, z: -0.1}
 --- !u!33 &279571132375796924
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -104,7 +104,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 279571132417835189}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.91, y: -1.73, z: 6.678725}
+  m_LocalPosition: {x: 3.9, y: -2, z: 7.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 279571132375796914}
@@ -190,7 +190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db098e803908a7b4f84fcfac06757a44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootMode: 0
+  shootMode: 1
   gunType: 4
   gunRank: 0
   skillSlot: 2
@@ -199,7 +199,7 @@ MonoBehaviour:
   Damage: 80
   shootInterval: 1
   reloadInterval: 1
-  bulletPower: 1
+  bulletPower: 500
   muzzle: {fileID: 279571132375796914}
   bulletPrefab: {fileID: 7749700451724911344, guid: 6b60447f6cc998147a7a704471a5e292,
     type: 3}

@@ -8,31 +8,27 @@ using UnityEngine;
 
 public class Action : MonoBehaviour
 {
-    [SerializeField] GameObject handgun;
-    [SerializeField] GameObject LightMachineGun;
-    [SerializeField] GameObject AssaultRifle;
-    [SerializeField] GameObject SubMachineGun;
-    [SerializeField] GameObject RocketLauncher;
-    [SerializeField] GameObject ShotGun;
-    [SerializeField] GameObject FlameThrower;
-
-    private GameObject dropPrefab;      
+    private GameObject DropWeapon;      
     DropItem DIScript;
     ChangeEquip CEScript;                   // [ChangeEquip]—p‚Ì•Ï”
+    LoadGunPrefab LGPScript;
     bool actionFlg;
     GameObject ObjectInfo;
     GameObject tmp;
     void Start()
     {
         CEScript = GetComponent<ChangeEquip>();
+        LGPScript = GetComponent<LoadGunPrefab>();
     }
 
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Q) && actionFlg)
         {
+            // •ó” ˆ—
             if(ObjectInfo.tag == "DropBox"){BoxAction(ObjectInfo);}
             
+            // —‚¿‚Ä‚ée‚Ìˆ—
             if(ObjectInfo.tag == "DropGun"){WeaponAction(ObjectInfo);}
 
             actionFlg = false;
@@ -50,52 +46,82 @@ public class Action : MonoBehaviour
 
     void WeaponAction(GameObject Object)
     {
-        // DropItemComponent‚ğæ“¾
-        DIScript = Object.GetComponent<DropItem>();
+        // DropItem‚ğæ“¾
+        var DIScript = Object.GetComponent<DropItem>();
 
         // —‚¿‚Ä‚¢‚é•Ší‚ğ‘•”õ‚·‚é
-        // ¦dropPrefab‚É‚Í—‚Æ‚·•Ší‚ª“ü‚é
-        dropPrefab = CEScript.GetWeapon(DIScript.WeaponInfo);
+        // ¦DropWeapon‚É‚Í‚Á‚Ä‚½•Ší
+        DropWeapon = CEScript.GetWeapon(Object);
 
-        // ŒğŠ·‚µ‚½•Ší‚ğ¶¬‚·‚é
-        if(dropPrefab != null)
+        // •ŠíŒğŠ·‚Ìê‡A¶¬‚·‚é
+        if(DropWeapon != null)
         {
-            GameObject hadWeapon;      // ‚Á‚Ä‚¢‚½•Ší
+            // ¦getWeapon‚É‚Íè‚É“ü‚ê‚é•Ší
+		    GameObject getWeapon = Instantiate<GameObject>(Object);
+            getWeapon.name = DIScript.WeaponInfo.name;
 
-		    hadWeapon = Instantiate<GameObject>(Object,Object.transform.position,Quaternion.identity);
-            hadWeapon.name = DIScript.WeaponInfo.name;
+            // •Šíî•ñ‚ÌŒğŠ·
+            GunInfo getGIScript = getWeapon.GetComponent<GunInfo>();
+            GunController dropGCScript = DropWeapon.GetComponent<GunController>();
 
-            // GunInfo‚Ì’†‚É‚Á‚Ä‚¢‚½•Ší‚Ìî•ñ‚ğ“ü‚ê‚é
-            GameObject childObject = transform.Find("FirstPersonCharacter/" + dropPrefab.name).gameObject;
-            GunController GCScript = childObject.GetComponent<GunController>();
-            GunInfo GIScript = hadWeapon.GetComponent<GunInfo>();
+            // —‚¿‚Ä‚¢‚é•Ší‚ğíœ
+            Destroy(Object.gameObject);
 
-            GIScript.gunRank = GCScript.gunRank;
+            // —‚¿‚Ä‚½•Ší‚Ìî•ñ‚ğ•Û
+            var RankInfo            = getGIScript.gunRank;
+            var TypeInfo            = getGIScript.gunType;
+            var SlotInfo            = getGIScript.skillSlot;
+            var MagazineInfo        = getGIScript.OneMagazine;
+            var AmmoInfo            = getGIScript.MaxAmmo;
+            var DamageInfo          = getGIScript.Damage;
+            var shootIntervalInfo   = getGIScript.shootInterval;
+            var reloadIntervalInfo  = getGIScript.reloadInterval;
+            var PowerInfo           = getGIScript.bulletPower;
+            var EXPInfo             = getGIScript.GunEXP;
 
-            GIScript.gunType = GCScript.gunType;
+            // —‚Æ‚·•Ší‚Ìî•ñ‚ğ“ü‚ê‚é
+            getGIScript.gunRank        = dropGCScript.gunRank;
+            getGIScript.gunType        = dropGCScript.gunType;
+            getGIScript.skillSlot      = dropGCScript.skillSlot;
+            getGIScript.OneMagazine    = dropGCScript.OneMagazine;
+            getGIScript.MaxAmmo        = dropGCScript.MaxAmmo;
+            getGIScript.Damage         = dropGCScript.Damage;
+            getGIScript.shootInterval  = dropGCScript.shootInterval;
+            getGIScript.reloadInterval = dropGCScript.reloadInterval;
+            getGIScript.bulletPower    = dropGCScript.bulletPower;
+            getGIScript.GunEXP         = dropGCScript.GunEXP;
 
-            GIScript.skillSlot = GCScript.skillSlot;
-
-            GIScript.OneMagazine = GCScript.OneMagazine;
-
-            GIScript.MaxAmmo = GCScript.MaxAmmo;
-
-            GIScript.Damage = GCScript.Damage;
-
-            GIScript.shootInterval = GCScript.shootInterval;
-
-            GIScript.reloadInterval = GCScript.reloadInterval;
-
-            GIScript.bulletPower = GCScript.bulletPower;
-
-            GIScript.GunEXP = GCScript.GunEXP;
-
-            // —‚¿‚Ä‚é•Ší‚É‚Á‚Ä‚¢‚½•Ší‚ğ“ü‚ê‚é
-            DIScript.WeaponInfo = hadWeapon;
-        }
-
-        // —‚¿‚Ä‚¢‚é•Ší‚ğíœ
-        Destroy(Object.gameObject);
+            // ‚Á‚Ä‚é•Ší‚ÌGunContoller‚Éî•ñ‚ğ“ü‚ê‚é
+            if(CEScript.ownGun == 1)
+            {
+                CEScript.GCPrimaryScript.gunRank        = RankInfo;
+                CEScript.GCPrimaryScript.gunType        = TypeInfo;
+                CEScript.GCPrimaryScript.skillSlot      = SlotInfo;
+                CEScript.GCPrimaryScript.OneMagazine    = MagazineInfo;
+                CEScript.GCPrimaryScript.MaxAmmo        = AmmoInfo;
+                CEScript.GCPrimaryScript.Damage         = DamageInfo;
+                CEScript.GCPrimaryScript.shootInterval  = shootIntervalInfo;
+                CEScript.GCPrimaryScript.reloadInterval = reloadIntervalInfo;
+                CEScript.GCPrimaryScript.bulletPower    = PowerInfo;
+                CEScript.GCPrimaryScript.GunEXP         = EXPInfo;
+            }
+            else if(CEScript.ownGun == 2)
+            {
+                CEScript.GCSecondaryScript.gunRank        = RankInfo;
+                CEScript.GCSecondaryScript.gunType        = TypeInfo;
+                CEScript.GCSecondaryScript.skillSlot      = SlotInfo;
+                CEScript.GCSecondaryScript.OneMagazine    = MagazineInfo;
+                CEScript.GCSecondaryScript.MaxAmmo        = AmmoInfo;
+                CEScript.GCSecondaryScript.Damage         = DamageInfo;
+                CEScript.GCSecondaryScript.shootInterval  = shootIntervalInfo;
+                CEScript.GCSecondaryScript.reloadInterval = reloadIntervalInfo;
+                CEScript.GCSecondaryScript.bulletPower    = PowerInfo;
+                CEScript.GCSecondaryScript.GunEXP         = EXPInfo;
+            }
+        } else {
+            // —‚¿‚Ä‚¢‚é•Ší‚ğíœ
+            Destroy(Object.gameObject);
+        }     
     }
 
     

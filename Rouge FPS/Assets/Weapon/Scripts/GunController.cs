@@ -31,11 +31,10 @@ public class GunController : MonoBehaviour
 
     // パラメーター関係==============================================
     public float GunEXP;                                    // 経験値
-    public Text AmmoCheck;                                  // 残弾数テキスト用
     [HideInInspector] public bool shootEnabled = true;      // 撃てる状態か判定用
     [HideInInspector] public bool shooting = false;         // 射撃中か判定用
     bool        reloading = false;                          // リロード中か判定用
-    bool        equipping = false;                          // 装備切り替え中か判定用
+    public bool        equipping{get;private set;}          // 装備切り替え中か判定用
     int         ammo;                                       // マガジンに入っている弾の数
 
     public int Ammo
@@ -70,8 +69,6 @@ public class GunController : MonoBehaviour
 
     void Update()
     {   
-        AmmoCheck.text = Ammo + "/" + MaxAmmo;
-
         animatorInfo = animator.GetCurrentAnimatorStateInfo(0);
 
         // アニメーションが”Get”状態の時、フラグを受け取る
@@ -150,10 +147,6 @@ public class GunController : MonoBehaviour
     void InitGun()
     {
         Ammo = OneMagazine;
-
-        GIScript = GetComponent<GunInfo>();
-
-        // GunController = GunInfoを書いていく~~
     }
 
     // セミオートかフルオートかの判定
