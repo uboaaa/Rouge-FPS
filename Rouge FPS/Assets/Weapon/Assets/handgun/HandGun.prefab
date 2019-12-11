@@ -95,7 +95,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6450164897633310037
 Transform:
   m_ObjectHideFlags: 0
@@ -192,12 +192,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootMode: 1
   gunType: 3
-  gunRank: 0
+  gunRank: 2
   skillSlot: 1
-  OneMagazine: 8
-  MaxAmmo: 40
-  Damage: 1
-  shootInterval: 0.2
+  MagazineSize: 10
+  remAmmo: 60
+  Damage: 7
+  shootInterval: 0.5
   reloadInterval: 0.7
   bulletPower: 1000
   muzzle: {fileID: 6450164896997456302}
@@ -209,7 +209,6 @@ MonoBehaviour:
   muzzleFlashScale: {x: 1, y: 1, z: 1}
   cameraShakePow: 0.1
   muzzleShakePow: 0.1
-  GunEXP: 0
-  AmmoCheck: {fileID: 0}
+  GunEXP: 3
   shootEnabled: 1
   shooting: 0

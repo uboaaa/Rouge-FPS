@@ -22,13 +22,13 @@ public class GunInfo : MonoBehaviour
     [SerializeField] public GunType    gunType;                             // 種類情報
     [SerializeField] public GunRank    gunRank;                             // ランク情報
     [SerializeField] public int        skillSlot;                           // スキルスロット数
-    [SerializeField] public int        OneMagazine;                         // マガジン内の弾
-    [SerializeField] public int        MaxAmmo;                             // 残弾数
+    [SerializeField] public int        MagazineSize;                        // マガジンサイズ
+    [SerializeField] public int        remAmmo;                             // 残弾数
+    [HideInInspector] public int       remMagazine;                         // マガジン内の残弾数
     [SerializeField] public int        Damage;                              // 火力
     [SerializeField] public float      shootInterval;                       // 次発射までの間の時間
     [SerializeField] public float      reloadInterval;                      // リロード終わりまでの時間
 	[SerializeField] public float      bulletPower;                         // 弾を飛ばす力
-
      // パラメーター関係==============================================
     public float GunEXP;                                                    // 経験値
 
