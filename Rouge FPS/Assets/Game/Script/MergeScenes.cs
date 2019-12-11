@@ -10,7 +10,7 @@ public class MergeScenes : MonoBehaviour
     {
          Screen.SetResolution(1280, 720, false, 60);
          Application.targetFrameRate=60;
-        SceneManager.LoadScene("MapScene", LoadSceneMode.Additive);
+        //SceneManager.LoadScene("MapScene", LoadSceneMode.Additive);
         SceneManager.LoadScene("PlayerScene", LoadSceneMode.Additive);
 
 
@@ -18,7 +18,7 @@ public class MergeScenes : MonoBehaviour
         // SceneManager.LoadScene("EnemyScene", LoadSceneMode.Additive);
 
         //SceneManager.LoadScene("SkillScene", LoadSceneMode.Additive);
-        //SceneManager.LoadScene("WeaponScene", LoadSceneMode.Additive);
+        SceneManager.LoadScene("WeaponScene", LoadSceneMode.Additive);
 
         isMerge = true;
 
