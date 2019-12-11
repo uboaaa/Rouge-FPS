@@ -172,7 +172,7 @@ PrefabInstance:
     - target: {fileID: 5033198360798120092, guid: 8ef12ba36b85ca3458c3db7b8150f89d,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5033198360798120092, guid: 8ef12ba36b85ca3458c3db7b8150f89d,
         type: 3}
@@ -429,6 +429,12 @@ MonoBehaviour:
     type: 3}
   ShotGun: {fileID: 0}
   FlameThrower: {fileID: 0}
+--- !u!4 &16836047 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5033198360798120092, guid: 8ef12ba36b85ca3458c3db7b8150f89d,
+    type: 3}
+  m_PrefabInstance: {fileID: 16836032}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &69072747
 GameObject:
   m_ObjectHideFlags: 0
@@ -752,7 +758,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &319594963
 MonoBehaviour:
@@ -1248,7 +1254,7 @@ RectTransform:
   m_Children:
   - {fileID: 1524665628}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1699,6 +1705,7 @@ GameObject:
   - component: {fileID: 1382097558}
   - component: {fileID: 1382097557}
   - component: {fileID: 1382097556}
+  - component: {fileID: 1382097559}
   m_Layer: 5
   m_Name: AmmoCheck
   m_TagString: Untagged
@@ -1767,6 +1774,18 @@ RectTransform:
   m_AnchoredPosition: {x: 521, y: -268}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1382097559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1382097555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6ae5e84e4e422447a9d08aa4a65114b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1524665627
 GameObject:
   m_ObjectHideFlags: 0
@@ -1857,7 +1876,7 @@ GameObject:
   - component: {fileID: 1986818898}
   - component: {fileID: 1986818899}
   m_Layer: 5
-  m_Name: MainCanvas
+  m_Name: UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1882,7 +1901,7 @@ RectTransform:
   - {fileID: 648180531}
   - {fileID: 9004702364328685810}
   - {fileID: 267126804}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 16836047}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
