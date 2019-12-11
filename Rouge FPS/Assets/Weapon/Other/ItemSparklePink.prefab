@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6835583412659759129}
   - component: {fileID: 6835583412674930397}
   - component: {fileID: 6835583412675552627}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ItemSparklePink
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4674,7 +4674,7 @@ GameObject:
   - component: {fileID: 6835583412659763767}
   - component: {fileID: 6835583412674928785}
   - component: {fileID: 6835583412675552419}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: MagicDust
   m_TagString: Untagged
   m_Icon: {fileID: 0}

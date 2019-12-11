@@ -41,7 +41,8 @@ public class Action : MonoBehaviour
         Destroy(Object.gameObject);
 
         // DropItemÇê∂ê¨
-        
+        var IBScript = Object.GetComponent<ItemBox>();
+        IBScript.Open();
     }
 
     void WeaponAction(GameObject Object)
