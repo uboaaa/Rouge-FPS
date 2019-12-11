@@ -26,7 +26,6 @@ public class ChangeEquip : MonoBehaviour
         { 
             // 拾った武器をFirstPersonCharacterの直下に生成する
             GameObject tmp = Instantiate(PrimaryWeapon,child.transform,false);
-            tmp.transform.parent = child.transform;
             
             // 生成したものをプライマリにセットする
             PrimaryWeapon = tmp;
@@ -39,7 +38,6 @@ public class ChangeEquip : MonoBehaviour
         {
             // 拾った武器をFirstPersonCharacterの直下に生成する
             GameObject tmp = Instantiate(SecondaryWeapon,child.transform,false);
-            tmp.transform.parent = child.transform;
             
             // 生成したものをプライマリにセットする
             PrimaryWeapon = tmp;
@@ -99,11 +97,7 @@ public class ChangeEquip : MonoBehaviour
             PrimaryWeapon = DIScript;
 
             // 拾った武器をFirstPersonCharacterの直下に生成する
-            GameObject tmp = Instantiate(PrimaryWeapon,child.transform,false);
-            tmp.transform.parent = child.transform;
-            
-            // 生成したものをプライマリにセットする
-            PrimaryWeapon = tmp;
+            PrimaryWeapon = Instantiate(PrimaryWeapon,child.transform,false);
 
             // 表示
             PrimaryWeapon.SetActive(true);
@@ -118,7 +112,7 @@ public class ChangeEquip : MonoBehaviour
         }
 
         // プライマリ武器しか持っていないとき
-        if(ownGun == 1 && SecondaryWeapon == null)
+        else if(ownGun == 1 && SecondaryWeapon == null)
         {
             // セカンダリなので２にする
             ownGun = 2;
@@ -127,11 +121,7 @@ public class ChangeEquip : MonoBehaviour
             SecondaryWeapon = DIScript;
 
             // 拾った武器をFirstPersonCharacterの直下に生成する
-            GameObject tmp = Instantiate(SecondaryWeapon,child.transform,false);
-            tmp.transform.parent = child.transform;
-
-            // 生成したものをセカンダリにセットする
-            SecondaryWeapon = tmp;
+            SecondaryWeapon = Instantiate(SecondaryWeapon,child.transform,false);
 
             // セカンダリを表示
             PrimaryWeapon.SetActive(false);
@@ -147,7 +137,7 @@ public class ChangeEquip : MonoBehaviour
         }
 
         // プライマリ武器と交換する
-        if(ownGun == 1 && PrimaryWeapon != null && SecondaryWeapon != null)
+        else if(ownGun == 1 && PrimaryWeapon != null && SecondaryWeapon != null)
         {
             // 一旦、非表示
             PrimaryWeapon.SetActive(false);
@@ -162,11 +152,7 @@ public class ChangeEquip : MonoBehaviour
             PrimaryWeapon = DIScript;
 
             // 拾った武器をFirstPersonCharacterの直下に生成する
-            GameObject tmp = Instantiate(PrimaryWeapon,child.transform,false);
-            tmp.transform.parent = child.transform;
-
-            // 生成したものをプライマリにセットする
-            PrimaryWeapon = tmp;
+            PrimaryWeapon = Instantiate(PrimaryWeapon,child.transform,false);
 
             // GunContollerを読み込む
             GCPrimaryScript = PrimaryWeapon.GetComponent<GunController>();
@@ -196,14 +182,10 @@ public class ChangeEquip : MonoBehaviour
             SecondaryWeapon = DIScript;
 
             // 拾った武器をFirstPersonCharacterの直下に生成する
-            GameObject tmp = Instantiate(SecondaryWeapon,child.transform,false);
-            tmp.transform.parent = child.transform;
-            
-            // 生成したものをセカンダリにセットする
-            SecondaryWeapon = tmp;
+            SecondaryWeapon = Instantiate(SecondaryWeapon,child.transform,false);
 
             // GunContollerを読み込む
-            GCSecondaryScript = PrimaryWeapon.GetComponent<GunController>();
+            GCSecondaryScript = SecondaryWeapon.GetComponent<GunController>();
 
             // GunInfoから情報を入れる
             ChangeGunConInfo(GCSecondaryScript,GIScript,1);
@@ -227,8 +209,9 @@ public class ChangeEquip : MonoBehaviour
             Guncon.gunRank        = Guninfo.gunRank;
             Guncon.gunType        = Guninfo.gunType;
             Guncon.skillSlot      = Guninfo.skillSlot;
-            Guncon.OneMagazine    = Guninfo.OneMagazine;
-            Guncon.MaxAmmo        = Guninfo.MaxAmmo;
+            Guncon.MagazineSize   = Guninfo.MagazineSize;
+            Guncon.Ammo           = Guninfo.remMagazine;
+            Guncon.remAmmo        = Guninfo.remAmmo;
             Guncon.Damage         = Guninfo.Damage;
             Guncon.shootInterval  = Guninfo.shootInterval;
             Guncon.reloadInterval = Guninfo.reloadInterval;
@@ -242,8 +225,9 @@ public class ChangeEquip : MonoBehaviour
             Guninfo.gunRank        = Guncon.gunRank;
             Guninfo.gunType        = Guncon.gunType;
             Guninfo.skillSlot      = Guncon.skillSlot;
-            Guninfo.OneMagazine    = Guncon.OneMagazine;
-            Guninfo.MaxAmmo        = Guncon.MaxAmmo;
+            Guninfo.MagazineSize   = Guncon.MagazineSize;
+            Guninfo.remMagazine    = Guncon.Ammo;
+            Guninfo.remAmmo        = Guncon.remAmmo;
             Guninfo.Damage         = Guncon.Damage;
             Guninfo.shootInterval  = Guncon.shootInterval;
             Guninfo.reloadInterval = Guncon.reloadInterval;

@@ -27,11 +27,11 @@ public class AmmoCheck : MonoBehaviour
                 break;
             case 1:             // プライマリ武器を持っている時
                 GCScript = CEScript.PrimaryWeapon.GetComponent<GunController>();
-                myText.text = GCScript.Ammo + "/" + GCScript.MaxAmmo;
+                myText.text = GCScript.Ammo + "/" + GCScript.remAmmo;
                 break;
             case 2:             // セカンダリ武器を持っている時
                 GCScript = CEScript.SecondaryWeapon.GetComponent<GunController>();
-                myText.text = GCScript.Ammo + "/" + GCScript.MaxAmmo;
+                myText.text = GCScript.Ammo + "/" + GCScript.remAmmo;
                 break;
             default:
                 break;

@@ -589,8 +589,9 @@ MonoBehaviour:
   gunType: 3
   gunRank: 2
   skillSlot: 1
-  OneMagazine: 10
-  MaxAmmo: 80
+  MagazineSize: 10
+  remAmmo: 60
+  remMagazine: 10
   Damage: 7
   shootInterval: 0.5
   reloadInterval: 0.7
@@ -2014,8 +2015,9 @@ MonoBehaviour:
   gunType: 4
   gunRank: 1
   skillSlot: 3
-  OneMagazine: 1
-  MaxAmmo: 6
+  MagazineSize: 1
+  remAmmo: 3
+  remMagazine: 1
   Damage: 1200
   shootInterval: 4
   reloadInterval: 3
@@ -2269,8 +2271,9 @@ MonoBehaviour:
   gunType: 2
   gunRank: 2
   skillSlot: 1000
-  OneMagazine: 1000
-  MaxAmmo: 1000
+  MagazineSize: 500
+  remAmmo: 1000
+  remMagazine: 500
   Damage: 1000
   shootInterval: 0
   reloadInterval: 0
@@ -2571,8 +2574,9 @@ MonoBehaviour:
   gunType: 2
   gunRank: 1
   skillSlot: 2
-  OneMagazine: 120
-  MaxAmmo: 360
+  MagazineSize: 120
+  remAmmo: 240
+  remMagazine: 1
   Damage: 4
   shootInterval: 0.3
   reloadInterval: 1.1

@@ -115,14 +115,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootMode: 0
   gunType: 2
-  gunRank: 0
-  skillSlot: 1
-  OneMagazine: 120
-  MaxAmmo: 360
-  Damage: 3
-  shootInterval: 0.05
-  reloadInterval: 1.2
-  bulletPower: 2000
+  gunRank: 1
+  skillSlot: 2
+  MagazineSize: 120
+  remAmmo: 240
+  Damage: 4
+  shootInterval: 0.3
+  reloadInterval: 1.1
+  bulletPower: 1000
   muzzle: {fileID: 4051110896003729025}
   bulletPrefab: {fileID: 7906399819038171674, guid: 38a4b56b79cd5614bae2f306c0be2631,
     type: 3}
@@ -132,9 +132,7 @@ MonoBehaviour:
   muzzleFlashScale: {x: 1, y: 1, z: 1}
   cameraShakePow: 0.3
   muzzleShakePow: 0.2
-  GunEXP: 0
-  AmmoCheck: {fileID: 7454088189279422815, guid: 01985a60c849259439699e21ad2e1c13,
-    type: 3}
+  GunEXP: 1
   shootEnabled: 1
   shooting: 0
 --- !u!1 &4051110896003729024

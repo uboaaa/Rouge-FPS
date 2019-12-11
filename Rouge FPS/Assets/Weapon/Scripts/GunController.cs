@@ -15,8 +15,8 @@ public class GunController : MonoBehaviour
     [SerializeField] public GunInfo.GunType    gunType     = GunInfo.GunType.AssaultRifle;  // 種類情報
     [SerializeField] public GunInfo.GunRank    gunRank     = GunInfo.GunRank.Rank1;         // ランク情報
     [SerializeField] public int        skillSlot;                              // スキルスロット数
-    [SerializeField] public int        OneMagazine;                            // マガジン内の弾
-    [SerializeField] public int        MaxAmmo;                                // 残弾数
+    [SerializeField] public int        MagazineSize;                           // マガジンサイズ
+    [SerializeField] public int        remAmmo;                                // 残弾数
     [SerializeField] public int        Damage;                                 // 火力
     [SerializeField] public float      shootInterval;                          // 次発射までの間の時間
     [SerializeField] public float      reloadInterval;                         // リロード終わりまでの時間
@@ -40,7 +40,7 @@ public class GunController : MonoBehaviour
     public int Ammo
     {
         get { return ammo;}
-        private set { ammo = Mathf.Clamp(value, 0, OneMagazine);}
+        set { ammo = Mathf.Clamp(value, 0, MagazineSize);}
     }
 
     // スクリプト関係================================================
@@ -68,7 +68,7 @@ public class GunController : MonoBehaviour
     }
 
     void Update()
-    {   
+    {
         animatorInfo = animator.GetCurrentAnimatorStateInfo(0);
 
         // アニメーションが”Get”状態の時、フラグを受け取る
@@ -102,7 +102,7 @@ public class GunController : MonoBehaviour
             }
 
             // リロード
-            if(Input.GetKeyDown(KeyCode.R) && MaxAmmo > 0 && Ammo != OneMagazine && !shooting  && !reloading && !equipping)
+            if(Input.GetKeyDown(KeyCode.R) && remAmmo > 0 && Ammo != MagazineSize && !shooting  && !reloading && !equipping)
             {
                 reloading = true;
                 animator.SetBool("ReloadFlg",true);
@@ -146,7 +146,7 @@ public class GunController : MonoBehaviour
     // 初期化
     void InitGun()
     {
-        Ammo = OneMagazine;
+        //Ammo = MagazineSize;
     }
 
     // セミオートかフルオートかの判定
@@ -209,21 +209,21 @@ public class GunController : MonoBehaviour
         {
             // 連射速度の調整
             yield return new WaitForSeconds(reloadInterval);
-
-            if (MaxAmmo >= OneMagazine)
+            // リロードできる弾の数なら
+            if (remAmmo >= MagazineSize)
             {
-                MaxAmmo = MaxAmmo - (OneMagazine - Ammo);
-                Ammo = OneMagazine;
+                remAmmo = remAmmo - (MagazineSize - Ammo);
+                Ammo = MagazineSize;
                 reloading = false;
             } else {
-                int NowAmmo;
-                NowAmmo = OneMagazine - Ammo;
-                if (NowAmmo > MaxAmmo)
+                // 
+                int NowAmmo = MagazineSize - Ammo;
+                if (NowAmmo > remAmmo)
                 {
-                    Ammo = MaxAmmo+Ammo;
-                    MaxAmmo = 0;
+                    Ammo = remAmmo+Ammo;
+                    remAmmo = 0;
                 } else {
-                    MaxAmmo = MaxAmmo - NowAmmo;
+                    remAmmo = remAmmo - NowAmmo;
                     Ammo = Ammo + NowAmmo;
                 }
 

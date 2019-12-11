@@ -67,57 +67,34 @@ public class Action : MonoBehaviour
             // 落ちている武器を削除
             Destroy(Object.gameObject);
 
-            // 落ちてた武器の情報を保持
-            var RankInfo            = getGIScript.gunRank;
-            var TypeInfo            = getGIScript.gunType;
-            var SlotInfo            = getGIScript.skillSlot;
-            var MagazineInfo        = getGIScript.OneMagazine;
-            var AmmoInfo            = getGIScript.MaxAmmo;
-            var DamageInfo          = getGIScript.Damage;
-            var shootIntervalInfo   = getGIScript.shootInterval;
-            var reloadIntervalInfo  = getGIScript.reloadInterval;
-            var PowerInfo           = getGIScript.bulletPower;
-            var EXPInfo             = getGIScript.GunEXP;
+            // 持ってた武器の情報を保持
+            var RankInfo            = dropGCScript.gunRank;          // 武器ランク
+            var TypeInfo            = dropGCScript.gunType;          // 武器種類
+            var SlotInfo            = dropGCScript.skillSlot;        // スキルスロット数
+            var MaxMagazineInfo     = dropGCScript.MagazineSize;     // １マガジンのサイズ
+            var remMagazineInfo     = dropGCScript.Ammo;             // マガジン内の残弾数
+            var AmmoInfo            = dropGCScript.remAmmo;          // マガジン外の残弾数
+            var DamageInfo          = dropGCScript.Damage;           // 火力
+            var shootIntervalInfo   = dropGCScript.shootInterval;    // 射撃間隔
+            var reloadIntervalInfo  = dropGCScript.reloadInterval;   // リロードスピード
+            var PowerInfo           = dropGCScript.bulletPower;      // 弾の飛ばす力
+            var EXPInfo             = dropGCScript.GunEXP;           // 銃の経験値
 
-            // 落とす武器の情報を入れる
-            getGIScript.gunRank        = dropGCScript.gunRank;
-            getGIScript.gunType        = dropGCScript.gunType;
-            getGIScript.skillSlot      = dropGCScript.skillSlot;
-            getGIScript.OneMagazine    = dropGCScript.OneMagazine;
-            getGIScript.MaxAmmo        = dropGCScript.MaxAmmo;
-            getGIScript.Damage         = dropGCScript.Damage;
-            getGIScript.shootInterval  = dropGCScript.shootInterval;
-            getGIScript.reloadInterval = dropGCScript.reloadInterval;
-            getGIScript.bulletPower    = dropGCScript.bulletPower;
-            getGIScript.GunEXP         = dropGCScript.GunEXP;
+            // 落とす武器に情報を入れる(dropGCScript <= getGIScript)
+            CEScript.ChangeGunConInfo(dropGCScript,getGIScript,1);
 
-            // 持ってる武器のGunContollerに情報を入れる
-            if(CEScript.ownGun == 1)
-            {
-                CEScript.GCPrimaryScript.gunRank        = RankInfo;
-                CEScript.GCPrimaryScript.gunType        = TypeInfo;
-                CEScript.GCPrimaryScript.skillSlot      = SlotInfo;
-                CEScript.GCPrimaryScript.OneMagazine    = MagazineInfo;
-                CEScript.GCPrimaryScript.MaxAmmo        = AmmoInfo;
-                CEScript.GCPrimaryScript.Damage         = DamageInfo;
-                CEScript.GCPrimaryScript.shootInterval  = shootIntervalInfo;
-                CEScript.GCPrimaryScript.reloadInterval = reloadIntervalInfo;
-                CEScript.GCPrimaryScript.bulletPower    = PowerInfo;
-                CEScript.GCPrimaryScript.GunEXP         = EXPInfo;
-            }
-            else if(CEScript.ownGun == 2)
-            {
-                CEScript.GCSecondaryScript.gunRank        = RankInfo;
-                CEScript.GCSecondaryScript.gunType        = TypeInfo;
-                CEScript.GCSecondaryScript.skillSlot      = SlotInfo;
-                CEScript.GCSecondaryScript.OneMagazine    = MagazineInfo;
-                CEScript.GCSecondaryScript.MaxAmmo        = AmmoInfo;
-                CEScript.GCSecondaryScript.Damage         = DamageInfo;
-                CEScript.GCSecondaryScript.shootInterval  = shootIntervalInfo;
-                CEScript.GCSecondaryScript.reloadInterval = reloadIntervalInfo;
-                CEScript.GCSecondaryScript.bulletPower    = PowerInfo;
-                CEScript.GCSecondaryScript.GunEXP         = EXPInfo;
-            }
+            // 拾う武器に情報を入れる
+            getGIScript.gunRank        = RankInfo;
+            getGIScript.gunType        = TypeInfo;
+            getGIScript.skillSlot      = SlotInfo;
+            getGIScript.MagazineSize   = MaxMagazineInfo;
+            getGIScript.remMagazine    = remMagazineInfo;
+            getGIScript.remAmmo        = AmmoInfo;
+            getGIScript.Damage         = DamageInfo;
+            getGIScript.shootInterval  = shootIntervalInfo;
+            getGIScript.reloadInterval = reloadIntervalInfo;
+            getGIScript.bulletPower    = PowerInfo;
+            getGIScript.GunEXP         = EXPInfo;
         } else {
             // 落ちている武器を削除
             Destroy(Object.gameObject);
