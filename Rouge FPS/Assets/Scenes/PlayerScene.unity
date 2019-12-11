@@ -255,12 +255,12 @@ PrefabInstance:
         type: 3}
       propertyPath: Weapon1
       value: 
-      objectReference: {fileID: 227558923}
+      objectReference: {fileID: 0}
     - target: {fileID: 5033198360798120098, guid: 8ef12ba36b85ca3458c3db7b8150f89d,
         type: 3}
       propertyPath: Weapon2
       value: 
-      objectReference: {fileID: 1140388047}
+      objectReference: {fileID: 0}
     - target: {fileID: 5033198360798120098, guid: 8ef12ba36b85ca3458c3db7b8150f89d,
         type: 3}
       propertyPath: m_Enabled
@@ -270,12 +270,12 @@ PrefabInstance:
         type: 3}
       propertyPath: SecondaryWeapon
       value: 
-      objectReference: {fileID: 1140388047}
+      objectReference: {fileID: 0}
     - target: {fileID: 5033198360798120098, guid: 8ef12ba36b85ca3458c3db7b8150f89d,
         type: 3}
       propertyPath: PrimaryWeapon
       value: 
-      objectReference: {fileID: 227558923}
+      objectReference: {fileID: 0}
     - target: {fileID: 2458891898662177953, guid: 8ef12ba36b85ca3458c3db7b8150f89d,
         type: 3}
       propertyPath: m_LocalRotation.x
@@ -396,6 +396,39 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &16836036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 16836033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c792cd6d41395f14aa9d3d11bce46237, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &16836037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 16836033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c44ee2925ffbeb4580f9e651409038e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HandGun: {fileID: 6450164897633310034, guid: 3582477c0b353c745b9552b2dad03171, type: 3}
+  LightMachineGun: {fileID: 4051110895912933288, guid: a04d227ce5414ce49a99adea56b198c6,
+    type: 3}
+  AssaultRifle: {fileID: 0}
+  SubMachineGun: {fileID: 0}
+  RocketLauncher: {fileID: 279571132417835189, guid: f54d036500a989d42bc9515ba6ad750d,
+    type: 3}
+  ShotGun: {fileID: 0}
+  FlameThrower: {fileID: 0}
 --- !u!1 &69072747
 GameObject:
   m_ObjectHideFlags: 0
@@ -539,12 +572,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!1 &227558923 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1788104618767305099, guid: 8ef12ba36b85ca3458c3db7b8150f89d,
-    type: 3}
-  m_PrefabInstance: {fileID: 16836032}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &267126803
 GameObject:
   m_ObjectHideFlags: 0
@@ -1561,31 +1588,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7a0f5aa6a5b6cd40b6e2bcc53ba4805, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1140388047 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6090882663305387059, guid: 8ef12ba36b85ca3458c3db7b8150f89d,
-    type: 3}
-  m_PrefabInstance: {fileID: 16836032}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &1140388051
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1140388047}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d4c8d3da1ffa97b49a585eae6ee1a5a2, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1357626411
 GameObject:
   m_ObjectHideFlags: 0
