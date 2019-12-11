@@ -351,6 +351,11 @@ PrefabInstance:
       propertyPath: m_IsWalking
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5033198360798120091, guid: 8ef12ba36b85ca3458c3db7b8150f89d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5033198358735204533, guid: 8ef12ba36b85ca3458c3db7b8150f89d, type: 3}
     - {fileID: 5033198358735204534, guid: 8ef12ba36b85ca3458c3db7b8150f89d, type: 3}
@@ -641,6 +646,8 @@ GameObject:
   - component: {fileID: 319594961}
   - component: {fileID: 319594960}
   - component: {fileID: 319594959}
+  - component: {fileID: 319594963}
+  - component: {fileID: 319594964}
   m_Layer: 9
   m_Name: Cube
   m_TagString: Untagged
@@ -720,6 +727,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &319594963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 319594958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca5e3eef08fd3564aabc9cd0d1423a57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &319594964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 319594958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fb3d1386a474a342929b7e0bfb539fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &453886671
 GameObject:
   m_ObjectHideFlags: 0
@@ -1190,7 +1221,7 @@ RectTransform:
   m_Children:
   - {fileID: 1524665628}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1850,7 +1881,7 @@ RectTransform:
   - {fileID: 9004702364328685810}
   - {fileID: 267126804}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

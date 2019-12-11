@@ -1,40 +1,142 @@
-ï»¿using System.Collections;
+//=======================================================================
+// ’²‚×‚½‚èAE‚¤‚È‚Ç‚Ì“®ì—pƒXƒNƒŠƒvƒg
+// FPSController‚É•t‚¯‚é
+//=======================================================================
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Action : MonoBehaviour
 {
-    private bool ActionFlg;
-
-    private GameObject dropPrefab;
+    private GameObject DropWeapon;      
+    DropItem DIScript;
+    ChangeEquip CEScript;                   // [ChangeEquip]—p‚Ì•Ï”
+    LoadGunPrefab LGPScript;
+    bool actionFlg;
+    GameObject ObjectInfo;
+    GameObject tmp;
     void Start()
     {
-        // ä¸­èº«ã‚’å–ã£ã¦ãã‚‹
-        dropPrefab = GameObject.Find("DropItem");
+        CEScript = GetComponent<ChangeEquip>();
+        LGPScript = GetComponent<LoadGunPrefab>();
     }
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Q) && ActionFlg)
+        if(Input.GetKeyDown(KeyCode.Q) && actionFlg)
         {
-            Destroy(this.gameObject);
+            // •ó” ˆ—
+            if(ObjectInfo.tag == "DropBox"){BoxAction(ObjectInfo);}
+            
+            // —‚¿‚Ä‚ée‚Ìˆ—
+            if(ObjectInfo.tag == "DropGun"){WeaponAction(ObjectInfo);}
 
-            // DropItemã‚’ç”Ÿæˆ
-            GameObject dropItem = Instantiate<GameObject>(dropPrefab, this.transform.position, this.transform.rotation);
+            actionFlg = false;
         }
+    }
+
+    void BoxAction(GameObject Object)
+    {
+        // •ó” ‚ğíœ
+        Destroy(Object.gameObject);
+
+        // DropItem‚ğ¶¬
+        
+    }
+
+    void WeaponAction(GameObject Object)
+    {
+        // DropItem‚ğæ“¾
+        var DIScript = Object.GetComponent<DropItem>();
+
+        // —‚¿‚Ä‚¢‚é•Ší‚ğ‘•”õ‚·‚é
+        // ¦DropWeapon‚É‚Í‚Á‚Ä‚½•Ší
+        DropWeapon = CEScript.GetWeapon(Object);
+
+        // •ŠíŒğŠ·‚Ìê‡A¶¬‚·‚é
+        if(DropWeapon != null)
+        {
+            // ¦getWeapon‚É‚Íè‚É“ü‚ê‚é•Ší
+		    GameObject getWeapon = Instantiate<GameObject>(Object);
+            getWeapon.name = DIScript.WeaponInfo.name;
+
+            // •Šíî•ñ‚ÌŒğŠ·
+            GunInfo getGIScript = getWeapon.GetComponent<GunInfo>();
+            GunController dropGCScript = DropWeapon.GetComponent<GunController>();
+
+            // —‚¿‚Ä‚¢‚é•Ší‚ğíœ
+            Destroy(Object.gameObject);
+
+            // —‚¿‚Ä‚½•Ší‚Ìî•ñ‚ğ•Û
+            var RankInfo            = getGIScript.gunRank;
+            var TypeInfo            = getGIScript.gunType;
+            var SlotInfo            = getGIScript.skillSlot;
+            var MagazineInfo        = getGIScript.OneMagazine;
+            var AmmoInfo            = getGIScript.MaxAmmo;
+            var DamageInfo          = getGIScript.Damage;
+            var shootIntervalInfo   = getGIScript.shootInterval;
+            var reloadIntervalInfo  = getGIScript.reloadInterval;
+            var PowerInfo           = getGIScript.bulletPower;
+            var EXPInfo             = getGIScript.GunEXP;
+
+            // —‚Æ‚·•Ší‚Ìî•ñ‚ğ“ü‚ê‚é
+            getGIScript.gunRank        = dropGCScript.gunRank;
+            getGIScript.gunType        = dropGCScript.gunType;
+            getGIScript.skillSlot      = dropGCScript.skillSlot;
+            getGIScript.OneMagazine    = dropGCScript.OneMagazine;
+            getGIScript.MaxAmmo        = dropGCScript.MaxAmmo;
+            getGIScript.Damage         = dropGCScript.Damage;
+            getGIScript.shootInterval  = dropGCScript.shootInterval;
+            getGIScript.reloadInterval = dropGCScript.reloadInterval;
+            getGIScript.bulletPower    = dropGCScript.bulletPower;
+            getGIScript.GunEXP         = dropGCScript.GunEXP;
+
+            // ‚Á‚Ä‚é•Ší‚ÌGunContoller‚Éî•ñ‚ğ“ü‚ê‚é
+            if(CEScript.ownGun == 1)
+            {
+                CEScript.GCPrimaryScript.gunRank        = RankInfo;
+                CEScript.GCPrimaryScript.gunType        = TypeInfo;
+                CEScript.GCPrimaryScript.skillSlot      = SlotInfo;
+                CEScript.GCPrimaryScript.OneMagazine    = MagazineInfo;
+                CEScript.GCPrimaryScript.MaxAmmo        = AmmoInfo;
+                CEScript.GCPrimaryScript.Damage         = DamageInfo;
+                CEScript.GCPrimaryScript.shootInterval  = shootIntervalInfo;
+                CEScript.GCPrimaryScript.reloadInterval = reloadIntervalInfo;
+                CEScript.GCPrimaryScript.bulletPower    = PowerInfo;
+                CEScript.GCPrimaryScript.GunEXP         = EXPInfo;
+            }
+            else if(CEScript.ownGun == 2)
+            {
+                CEScript.GCSecondaryScript.gunRank        = RankInfo;
+                CEScript.GCSecondaryScript.gunType        = TypeInfo;
+                CEScript.GCSecondaryScript.skillSlot      = SlotInfo;
+                CEScript.GCSecondaryScript.OneMagazine    = MagazineInfo;
+                CEScript.GCSecondaryScript.MaxAmmo        = AmmoInfo;
+                CEScript.GCSecondaryScript.Damage         = DamageInfo;
+                CEScript.GCSecondaryScript.shootInterval  = shootIntervalInfo;
+                CEScript.GCSecondaryScript.reloadInterval = reloadIntervalInfo;
+                CEScript.GCSecondaryScript.bulletPower    = PowerInfo;
+                CEScript.GCSecondaryScript.GunEXP         = EXPInfo;
+            }
+        } else {
+            // —‚¿‚Ä‚¢‚é•Ší‚ğíœ
+            Destroy(Object.gameObject);
+        }     
     }
 
     
     void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Player")
+        if( other.gameObject.tag == "DropBox" ||
+            other.gameObject.tag == "DropGun")
         {
-            ActionFlg = true;
+            ObjectInfo = other.gameObject;
+            actionFlg = true;
         }
     }
 
     void OnTriggerExit(Collider other)
     {
-        ActionFlg = false;
+        actionFlg = false;
     }
 }

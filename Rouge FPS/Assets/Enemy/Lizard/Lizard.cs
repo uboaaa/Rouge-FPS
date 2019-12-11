@@ -71,8 +71,9 @@ public class Lizard : MonoBehaviour
 
     void Update()
     {
-
-
+    //ここ追加
+      if(!PauseScript.pause()){
+          if(!SkillManagement.GetTimeStop()){
         
 
 
@@ -159,6 +160,8 @@ public class Lizard : MonoBehaviour
 
             //intパラメーターの値を設定する
             animator.SetInteger("trans", trans);
+        }
+          }
         }
 
 
