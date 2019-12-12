@@ -8,7 +8,12 @@ public class EnemyParameter : MonoBehaviour
     // エネミー
     private GameObject enemy = null;
 
+    // AIレベル
+    public int AILevel = 1;
+    public int GetLevel() { return AILevel;}
 
+
+    [Space(20)]
     // HP
     public int hp = 0;
 

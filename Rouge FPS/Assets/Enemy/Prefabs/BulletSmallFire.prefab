@@ -14066,8 +14066,7 @@ MonoBehaviour:
     type: 3}
   enemyHitEffectPrefab: {fileID: 2722678073241494824, guid: 608f5d1b858d3724996b1a569e45dcb9,
     type: 3}
-  hitEffectScale: {x: 0.3, y: 0.3, z: 0.3}
-  Damage: 0
+  hitEffectScale: {x: 1, y: 1, z: 1}
 --- !u!1 &4462241966911067349
 GameObject:
   m_ObjectHideFlags: 0

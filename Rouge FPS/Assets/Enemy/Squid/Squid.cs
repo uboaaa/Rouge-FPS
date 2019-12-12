@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Squid : MonoBehaviour
 {
-    public GameObject player;
+    private GameObject player;
 
     private Vector3 vec;
     private float rot = 0.0f;
@@ -30,6 +30,10 @@ public class Squid : MonoBehaviour
 
     void Start()
     {
+
+        // プレイヤー情報取得
+        player = GameObject.Find("FPSController");
+
         //GetComponentを用いてAnimatorコンポーネントを取り出す.
         animator = GetComponent<Animator>();
 

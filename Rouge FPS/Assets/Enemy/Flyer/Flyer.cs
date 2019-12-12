@@ -4,23 +4,20 @@ using UnityEngine;
 
 public class Flyer : MonoBehaviour
 {
-    // private GameObject player;
-    public GameObject bullet;
 
-    // public float speed = 0.0f;//移動スピード
-    // private Vector3 vec;
-    // private float rot = 0.0f;
-
-    // private Animator animator;
+    // 弾
+    public GameObject bullet = null;
 
     // プレイヤー
-    private GameObject player;
+    private GameObject player = null;
     // アニメータ
-    private Animator animator;
+    private Animator animator = null;
+    // マテリアル
+    private Material material = null;
     // エネミーパラメータ
-    private EnemyParameter ep;
+    private EnemyParameter ep = null;
     // ヒットエフェクト
-    private EnemyHitEffect eh;
+    private EnemyHitEffect eh = null;
     // ダメージナンバーエフェクト
     private DamageNumEffect dn = null;
     // デッドエフェクト
@@ -35,10 +32,14 @@ public class Flyer : MonoBehaviour
     // アニメ関数
     int trans;
 
+
+    // 攻撃力スクリプト
+    private EnemyAttackPower eap;
     // 発射フラグ
     public bool fireflg = false;
     // 発射管理
     private int ftime = 0;
+
 
     // 移動フラグ
     private bool moveflg = false;
@@ -48,6 +49,21 @@ public class Flyer : MonoBehaviour
 
     // 弾丸の速度
     public float bspeed = 1000;
+
+
+    // AIレベル
+    private int AILevel = 0;
+    // シェーダパラメータ管理用
+    // Hue
+    private int propID_h = 0;
+    // Saturation
+    private int propID_s = 0;
+    // Contrast
+    private int propID_c = 0;
+
+    // ライト
+    private Light plight = null;
+
 
     
 
@@ -75,13 +91,77 @@ public class Flyer : MonoBehaviour
 
         //GetComponentを用いてコンポーネントを取り出す.
         // アニメータ
-        animator = GetComponent<Animator>();
+        animator = this.gameObject.GetComponent<Animator>();
+        // マテリアル
+        material = this.gameObject.GetComponent<SpriteRenderer>().material;
         // エネミーパラメータ
-        ep = GetComponent<EnemyParameter>();
-        // // エネミーヒットエフェクト
-        eh = GetComponent<EnemyHitEffect>();
+        ep = this.gameObject.GetComponent<EnemyParameter>();
+        // エネミーヒットエフェクト
+        eh = this.gameObject.GetComponent<EnemyHitEffect>();
         // ダメージナンバーエフェクト
-        dn = GetComponent<DamageNumEffect>();
+        dn = this.gameObject.GetComponent<DamageNumEffect>();
+        // ライト
+        plight = this.gameObject.GetComponent<Light>();
+
+
+
+        // レベル情報取得
+        AILevel = ep.GetLevel();
+
+
+        // レベル処理
+        propID_h = Shader.PropertyToID("_Hue");
+        propID_s = Shader.PropertyToID("_Saturation");
+        propID_c = Shader.PropertyToID("_Contrast");
+
+        if(AILevel == 1)
+        {
+            // マテリアル
+            material.SetFloat(propID_h, 0.0f);
+            material.SetFloat(propID_s, 0.5f);
+            material.SetFloat(propID_c, 0.5f);
+
+            // パラメータ
+            ep.hp = 20;
+            ep.atk = 10;
+            ep.def = 0;
+            ep.speed = 0;
+            ep.startrot = 60;
+
+            // ポイントライト
+            plight.color = new Color(0.5f,0.5f,1.0f,1.0f);
+            
+        }
+        else if(AILevel == 2)
+        {
+            
+            material.SetFloat(propID_h, 0.45f);
+            material.SetFloat(propID_s, 1.0f);
+            material.SetFloat(propID_c, 0.7f);
+
+            ep.hp = 30;
+            ep.atk = 15;
+            ep.def = 10;
+            ep.speed = 0;
+            ep.startrot = 60;
+
+            plight.color = new Color(1.0f,0.5f,0.5f,1.0f);
+        }
+        else if(AILevel == 3)
+        {
+
+            material.SetFloat(propID_h, 0.3f);
+            material.SetFloat(propID_s, 0.4f);
+            material.SetFloat(propID_c, 1.0f);
+
+            ep.hp = 40;
+            ep.atk = 25;
+            ep.def = 20;
+            ep.speed = 0;
+            ep.startrot = 60;
+
+            plight.color = new Color(1.0f,0.5f,1.0f,1.0f);
+        }
     }
 
     void Update()
@@ -104,7 +184,7 @@ public class Flyer : MonoBehaviour
             if ((transform.position - player.gameObject.transform.position).magnitude < 15 && trans == 0)
             {
                 foundflg = true;
-
+                fireflg = true;
                 trans = 0;
                 //intパラメーターの値を設定する.
                 animator.SetInteger("trans", trans);
@@ -114,7 +194,7 @@ public class Flyer : MonoBehaviour
             if ((transform.position - player.gameObject.transform.position).magnitude < 5)
             {
                 foundflg = true;
-
+                fireflg = true;
                 trans = 0;
                 //intパラメーターの値を設定する.
                 animator.SetInteger("trans", trans);
@@ -200,20 +280,20 @@ public class Flyer : MonoBehaviour
 
         
 
-        // 弾発射
-        // z キーが押された時
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            if(fireflg == true)
-            {
-                fireflg = false;
-            }
-            else
-            {
-                fireflg = true;
-                ftime = 0;
-            }
-        }
+        // // 弾発射
+        // // z キーが押された時
+        // if (Input.GetKeyDown(KeyCode.Z))
+        // {
+        //     if(fireflg == true)
+        //     {
+        //         fireflg = false;
+        //     }
+        //     else
+        //     {
+        //         fireflg = true;
+        //         ftime = 0;
+        //     }
+        // }
 
         
         // 発射フラグがONなら
@@ -224,13 +304,34 @@ public class Flyer : MonoBehaviour
                 // 弾丸の複製
                 GameObject bullets = Instantiate(bullet) as GameObject;
 
+                // マテリアル
+                Material b_material = bullets.GetComponent<SpriteRenderer>().material;
+                
+                if(AILevel == 1)
+                {
+                    b_material.SetFloat(propID_h, 0.0f);
+                    b_material.SetFloat(propID_s, 0.5f);
+                    b_material.SetFloat(propID_c, 0.5f);
+                }
+                else if(AILevel == 2)
+                {
+                    b_material.SetFloat(propID_h, 0.45f);
+                    b_material.SetFloat(propID_s, 1.0f);
+                    b_material.SetFloat(propID_c, 0.7f);
+                }
+                else if(AILevel == 3)
+                {
+                    b_material.SetFloat(propID_h, 0.3f);
+                    b_material.SetFloat(propID_s, 0.5f);
+                    b_material.SetFloat(propID_c, 1.0f);
+                }
+
+                // 攻撃力の挿入
+                eap = bullets.GetComponent<EnemyAttackPower>();
+                eap.SetAtkPower(ep.atk);
+
                 // 向き方向の取得
                 Vector3 aim = player.gameObject.transform.position - this.transform.position;
-
-                // // 向き
-                // Vector3 force;
-
-                // force = aim * speed;
 
                 // Rigidbodyに力を加えて発射
                 bullets.GetComponent<Rigidbody>().AddForce(aim, ForceMode.Impulse);
@@ -238,11 +339,23 @@ public class Flyer : MonoBehaviour
                 // 弾丸の位置を調整
                 bullets.transform.position = this.gameObject.transform.position;
 
-
-                Destroy(bullets, 3.0f); // 三秒後に削除
+                // 三秒後に削除
+                Destroy(bullets, 3.0f);
             }
+
             ftime++;
-            if(ftime > 60){ ftime = 0;}
+            if(AILevel == 1)
+            {
+                if(ftime > 60){ ftime = 0;}
+            }
+            else if(AILevel == 2)
+            {
+                if(ftime > 50){ ftime = 0;}
+            }
+            else if(AILevel == 3)
+            {
+                if(ftime > 40){ ftime = 0;}
+            }
 
         }
 
@@ -259,7 +372,7 @@ public class Flyer : MonoBehaviour
                 this.gameObject.transform.position.x + mvalue,
                 this.gameObject.transform.position.y + mvalue,
                 this.gameObject.transform.position.z + mvalue
-                );
+            );
 
             mtime++;
             if (mtime > 15)
@@ -283,6 +396,9 @@ public class Flyer : MonoBehaviour
             
             eh.SetHitFlg(true);
             dn.SetHitFlg(true);
+            foundflg = true;
+            fireflg = true;
+
             if(moveflg == false) { moveflg = true; }
             ep.hp -= collision.gameObject.GetComponent<BulletController>().Damage;
             if(ep.hp < 0){ep.hp = 0;}
