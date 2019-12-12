@@ -7,6 +7,9 @@ public class MiniMapManager : MonoBehaviour
     //マップチップ
     [SerializeField]
     private GameObject m_tipPrefab = null;
+    //マップチップのリスト
+    [SerializeField]
+    private MapTip[,] m_tipArray;
 
     //ミニマップ用オブジェクト
     [SerializeField]
@@ -17,8 +20,12 @@ public class MiniMapManager : MonoBehaviour
     private GameObject m_playerMarker = null;
     private RectTransform m_markRect = null;
 
-    //マップサイズ
-    private int m_mapSizeX, m_mapSizeY, m_mapScale;
+    //確認用プレイヤーオブジェクト
+    [SerializeField]
+    private GameObject m_target = null;
+
+    //マップ
+    private int[,] mapdata;
 
     // Start is called before the first frame update
     void Start()
@@ -29,31 +36,69 @@ public class MiniMapManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            if (m_miniMap.activeSelf)
+            {
+                m_miniMap.SetActive(false);
+                m_playerMarker.SetActive(false);
+            }
+            else
+            {
+                m_miniMap.SetActive(true);
+                m_playerMarker.SetActive(true);
+            }
+        } 
     }
 
     private void LateUpdate()
     {
         //プレイヤーの配置データを取得
         //右上がアンカーなのでマップサイズ分を引いて補正
-        var x = PlayerXYZ.GetPlayerPosition("px") / m_mapScale - m_mapSizeX;
-        var y = PlayerXYZ.GetPlayerPosition("pz") / m_mapScale - m_mapSizeY;
+        float x = 0, y = 0;
+        Vector3 euler = new Vector3();
+        if (MergeScenes.IsMerge())
+        {
+            x = PlayerXYZ.GetPlayerPosition("px") / MapInitializer.MAP_SCALE ;
+            y = PlayerXYZ.GetPlayerPosition("pz") / MapInitializer.MAP_SCALE ;
+            euler = PlayerXYZ.GetPlayerRotation();
+        }
+        else
+        {
+            x = (m_target.transform.position.x) / MapInitializer.MAP_SCALE ;
+            y = (m_target.transform.position.z) / MapInitializer.MAP_SCALE ;
+            euler = m_target.transform.localEulerAngles;
+        }
+
+        //プレイヤーの周囲のチップをONにする
+        int tipx = (int)x;
+        int tipy = (int)y;
+        //if (m_tipArray[tipx, tipy] != null)
+        //{
+        //    m_tipArray[tipx, tipy].m_tipEnable.Value = true;
+        //}
+
         //マーカーのサイズ分を乗算
-        x *= m_markRect.sizeDelta.x;
-        y *= m_markRect.sizeDelta.y;
-        //アンカーを基準に座標を設定
-        m_markRect.anchoredPosition = new Vector3(x, y);
+        float posX = (x - MapInitializer.MAP_SIZE_X / 2 + 1) * 5;   //
+        float posY = (y - MapInitializer.MAP_SIZE_Y / 2 + 1) * 5;
+
+        //アンカーを基準に座標、回転を設定
+        m_markRect.anchoredPosition = new Vector3(posX - m_markRect.sizeDelta.x / 2.0f, posY - m_markRect.sizeDelta.y / 2.0f);          //m_markRect.sizeDeleta.x/2.0fはズレ補正分
+        m_markRect.rotation = Quaternion.Euler(0, 0, -euler.y);
     }
 
     //マップチップ生成
-    public void CreateMapTip(int[,] mapdata,int sizeX,int sizeY,int scale)
+    public void CreateMapTip(int[,] map)
     {
-        m_mapSizeX = sizeX;
-        m_mapSizeY = sizeY;
+        //マップをセット
+        mapdata = map;
 
-        for(int y = 0; y < m_mapSizeY; y++)
+        //チップ配列を初期化
+        m_tipArray = new MapTip[MapInitializer.MAP_SIZE_X, MapInitializer.MAP_SIZE_Y];
+
+        for(int y = 0; y < MapInitializer.MAP_SIZE_Y; y++)
         {
-            for(int x = 0; x < m_mapSizeX; x++)
+            for(int x = 0; x < MapInitializer.MAP_SIZE_X; x++)
             {
                 if (mapdata[x, y] == 0)
                 {
@@ -61,11 +106,11 @@ public class MiniMapManager : MonoBehaviour
                     GameObject mapTip = Instantiate(m_tipPrefab) as GameObject;
 
                     //親にミニマップ用オブジェクトを設定
-                    mapTip.transform.parent = m_miniMap.transform;
+                    mapTip.transform.SetParent(m_miniMap.transform);
 
-                    //マップチップの配置情報を初期化
-                    MapTip tipComp = mapTip.GetComponent<MapTip>();
-                    tipComp.Initialize(x, y, m_mapSizeX, m_mapSizeY);
+                    //マップチップの配置情報を初期化、登録
+                    m_tipArray[x, y] = mapTip.GetComponent<MapTip>();
+                    m_tipArray[x, y].Initialize(x, y, MapInitializer.MAP_SIZE_X / 2, MapInitializer.MAP_SIZE_Y / 2);
                 }
             }
         }

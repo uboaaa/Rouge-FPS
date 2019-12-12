@@ -16,6 +16,7 @@ public static class Utility
         return Random.value < rate;
     }
 
+
     //リストからランダムに値を返す
     public static T GetAtRandom<T>(this List<T> list)
     {

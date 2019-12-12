@@ -8,18 +8,16 @@ using UnityEditorInternal;
 
 //拡張エディターで敵をセットしやすくする
 
-[CustomEditor(typeof(MapManager))]
+[CustomEditor(typeof(RoomGenerator))]
 [CanEditMultipleObjects]
-public class Custom_MapManager : Editor
+public class Custom_RoomGenerator : Editor
 {
     ReorderableList _reorderableList;
-    //仮
-    SerializedProperty _target;
-
+    
     private void OnEnable()
     {
         //表示用リスト
-        _reorderableList = new ReorderableList(serializedObject, serializedObject.FindProperty("m_enemyList"));
+        _reorderableList = new ReorderableList(serializedObject, serializedObject.FindProperty("m_roomTypeList"));
         _reorderableList.drawElementCallback += (Rect rect, int index, bool selected, bool focused) =>
         {
             SerializedProperty property = _reorderableList.serializedProperty.GetArrayElementAtIndex(index);
@@ -28,20 +26,15 @@ public class Custom_MapManager : Editor
         };
         _reorderableList.drawHeaderCallback += rect =>
         {
-            EditorGUI.LabelField(rect, "  Group  |  Object  ");
+            EditorGUI.LabelField(rect, "  RoomType  |  RoomObject  ");
         };
 
-        //仮
-        _target = serializedObject.FindProperty("target");
         
     }
 
     public override void OnInspectorGUI()
     {
-        //仮
         serializedObject.Update();
-        EditorGUILayout.PropertyField(_target);
-
         _reorderableList.DoLayoutList();
         serializedObject.ApplyModifiedProperties();
     }
