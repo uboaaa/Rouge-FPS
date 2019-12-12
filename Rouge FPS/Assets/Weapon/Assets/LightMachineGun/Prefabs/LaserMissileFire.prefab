@@ -4643,7 +4643,7 @@ GameObject:
   - component: {fileID: 3089896823833444605}
   m_Layer: 11
   m_Name: LaserMissileFire
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
