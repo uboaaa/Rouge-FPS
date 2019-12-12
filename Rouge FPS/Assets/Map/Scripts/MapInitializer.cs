@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(RoomGenerator))]
+[RequireComponent(typeof(MapManager))]
 
 //マップ生成クラス
 //シーン開始時のみ処理を行う
@@ -37,6 +38,7 @@ public class MapInitializer : MonoBehaviour
 
     private DungeonGenerator DG = null;
     private RoomGenerator RG = null;
+    private MapManager MM = null;
     private int[,] m_map;                   //マップ配置データの2次配列
     private int m_startId = -1;             //スタート地点の部屋ID
     private Selectable<int> m_mapID = new Selectable<int>();
@@ -56,9 +58,7 @@ public class MapInitializer : MonoBehaviour
         //ダンジョン生成クラス取得
         DG = new DungeonGenerator();
         //部屋生成コンポーネント取得
-        RG = this.GetComponent<RoomGenerator>();
-
-        Debug.Log("Yes!Shacs!");
+        RG = this.gameObject.GetComponent<RoomGenerator>();
 
         //マップ切り替え時の処理を設定
         m_mapID.mChanged += value =>
@@ -72,6 +72,7 @@ public class MapInitializer : MonoBehaviour
             GeneratePass();
             //オブジェクト配置
             GenerateObject();
+
             //書き込み？
             //SaveMap(value);
         };

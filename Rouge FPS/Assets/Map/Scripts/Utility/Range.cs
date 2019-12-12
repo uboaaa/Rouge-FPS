@@ -13,6 +13,7 @@ public class Range
 
     public Dictionary<int, Direction> m_connectIdList = new Dictionary<int, Direction>();   //接している区画リスト（区画ID,接している辺の方向）
     private Dictionary<Direction, Line> m_lineList = new Dictionary<Direction, Line>();     //辺リスト（辺の方向,辺）
+    public Dictionary<Direction, List<Position>> m_PassPositionDic { get; } = new Dictionary<Direction, List<Position>>();  //通路生成地点リスト（通路のある方向、座標）
 
 
     //==================================
@@ -243,6 +244,13 @@ public class Range
 
         Debug.Log("直線生成(" + pass.Start.X + "," + pass.Start.Y + "/" + pass.End.X + "," + pass.End.Y + ")");
 
+        //生成した通路の始点を保存
+        if (!m_PassPositionDic.ContainsKey(direction))
+        {
+            m_PassPositionDic.Add(direction, new List<Position>());
+        }
+        m_PassPositionDic[direction].Add(pass.Start);
+
         return pass;
     }
 
@@ -252,6 +260,21 @@ public class Range
 
         //指定した先の区画への向きを取得
         Direction direction = m_connectIdList[range.Id];
+
+        //中間地点１，２を求める
+        Position via1 = new Position();
+
+        
+
+        switch (direction)
+        {
+            case Direction.LEFT:
+
+                break;
+            case Direction.RIGHT:
+
+                break;
+        }
 
         pass = new Pass();
 
@@ -265,7 +288,6 @@ public class Range
 
     private Pass CreateCurvePass(Room other_room, Direction direction)
     {
-        //中間地点を求める
         
 
         Pass pass = new Pass();

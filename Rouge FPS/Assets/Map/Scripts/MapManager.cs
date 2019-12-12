@@ -29,8 +29,6 @@ public class MapManager : MonoBehaviour
 
     private Selectable<int> m_nowMapID = new Selectable<int>(); //マップID
     private int[,] m_nowMap;                    //マップ配置データ
-    private int m_mapScale;                     //マップスケール
-    private int m_mapSizeX, m_mapSizeY;         //マップサイズX,Y
     private int m_roomId = -1;                  //現在の部屋ID(-1のときは通路のとき)
     private int m_startId = -1;                 //スタート部屋ID
 
@@ -43,69 +41,56 @@ public class MapManager : MonoBehaviour
         //マップ初期化クラス
         initializer = this.gameObject.GetComponent<MapInitializer>();
         //ミニマップ管理クラス
-        miniMapManager = this.gameObject.GetComponent<MiniMapManager>();
-
-        //マップチップ情報を取得
-        m_nowMap = initializer.GetMap();
-        //マップスケールを取得
-        m_mapScale = initializer.GetScale();
-        //マップサイズを取得
-        m_mapSizeX = initializer.GetSizeX();
-        m_mapSizeY = initializer.GetSizeY();
-        //スタート部屋IDを取得
-        m_startId = initializer.StartID();
-        //ID・部屋リストを取得
-        initializer.GetRooms(out m_roomList);
+        miniMapManager = this.gameObject.GetComponent<MiniMapManager>();   
 
         //マップ切り替え時の処理を設定
         m_nowMapID.mChanged += value =>
         {
             //マップチップ情報を新たに取得（valueでマップID指定して読み込み）
+
+            //マップチップ情報を取得
+            m_nowMap = initializer.GetMap();
+            //スタート部屋IDを取得
+            m_startId = initializer.StartID();
+            //ID・部屋リストを取得
+            initializer.GetRooms(out m_roomList);
+            //ミニマップ生成
+            miniMapManager.CreateMapTip(m_nowMap);
         };
 
-
-        //ミニマップ生成
-        miniMapManager.CreateMapTip(m_nowMap, m_mapSizeX, m_mapSizeY,m_mapScale);
-
+        TransNextMap();
     }
 
     //
     void Update()
     {
-        
-        //
-    }
 
-    //
-    private void FixedUpdate()
-    {
         float x, y;
-        //float rot;
 
         //マップ選択、切替時に動くようにする
         if (MergeScenes.IsMerge())
         {
             //プレイヤー座標取得
-            x = PlayerXYZ.GetPlayerPosition("px") / m_mapScale;
-            y = PlayerXYZ.GetPlayerPosition("pz") / m_mapScale;
+            x = PlayerXYZ.GetPlayerPosition("px") / MapInitializer.MAP_SCALE;
+            y = PlayerXYZ.GetPlayerPosition("pz") / MapInitializer.MAP_SCALE;
 
         }
         else
         {
             //仮プレイヤー座標取得
-            x = (target.transform.position.x) / m_mapScale;
-            y = (target.transform.position.z) / m_mapScale;
+            x = (target.transform.position.x) / MapInitializer.MAP_SCALE;
+            y = (target.transform.position.z) / MapInitializer.MAP_SCALE;
         }
 
         //リスト内の部屋のどれかに入ったら
         int nowId = -1;
-        foreach (KeyValuePair<int,Room> room in m_roomList)
+        foreach (KeyValuePair<int, Room> room in m_roomList)
         {
             //部屋の範囲内に対象がいるとき
             //※条件で座標誤差分を足し引きしている
-            if(room.Value.Start.X - 1.0f < x && room.Value.End.X + 1.0f > x )
+            if (room.Value.Start.X - 1.0f < x && room.Value.End.X + 1.0f > x)
             {
-                if(room.Value.Start.Y - 1.0f < y && room.Value.End.Y + 1.0f > y )
+                if (room.Value.Start.Y - 1.0f < y && room.Value.End.Y + 1.0f > y)
                 {
                     nowId = room.Key;
                     break;
@@ -137,15 +122,6 @@ public class MapManager : MonoBehaviour
 
             Debug.Log(m_roomId);
         }
-
-    }
-
-    private void LateUpdate()
-    {
-        //ミニマップ生成
-        //画像34*34のマップチップで作成？
-        //マップサイズに応じて変更？
-
     }
 
     //敵ランダムポップ関数
@@ -161,7 +137,7 @@ public class MapManager : MonoBehaviour
         } while (m_nowMap[position.X, position.Y] != 1);
 
         //リストに追加
-        m_spawnList.Add(Instantiate(_enemy, new Vector3(position.X * m_mapScale, 1, position.Y * m_mapScale), new Quaternion()));
+        m_spawnList.Add(Instantiate(_enemy, new Vector3(position.X * MapInitializer.MAP_SCALE, 1, position.Y * MapInitializer.MAP_SCALE), new Quaternion()));
     }
 
     // 敵スポナーの設置関数
@@ -177,14 +153,12 @@ public class MapManager : MonoBehaviour
         } while (m_nowMap[position.X, position.Y] != 1);
 
         //リストに追加
-        GameObject newSpawner = Instantiate(_enemy, new Vector3(position.X * m_mapScale, 1, position.Y * m_mapScale), new Quaternion());
+        GameObject newSpawner = Instantiate(_enemy, new Vector3(position.X * MapInitializer.MAP_SCALE, 1, position.Y * MapInitializer.MAP_SCALE), new Quaternion());
         m_spawnList.Add(newSpawner);
     }
 
-    //閉じ込め処理
-    private void CloseRoom()
+    public void TransNextMap()
     {
-
+        m_nowMapID.Value += 1;
     }
-    
 }
