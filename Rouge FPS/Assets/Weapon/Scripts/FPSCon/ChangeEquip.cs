@@ -235,5 +235,21 @@ public class ChangeEquip : MonoBehaviour
             Guninfo.GunEXP         = Guncon.GunEXP;
         }
     }
+
+    // 持っている武器を返す関数
+    public GameObject nowWeapon()
+    {
+        if(ownGun == 1)
+        {
+            return PrimaryWeapon;
+        }
+        else if(ownGun == 2)
+        {
+            return SecondaryWeapon;
+        }
+
+        Debug.Log("何も持っていない");
+        return null;
+    }
 }
   
