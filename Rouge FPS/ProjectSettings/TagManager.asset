@@ -7,6 +7,9 @@ TagManager:
   - Enemy
   - DropBox
   - DropGun
+  - Bullet
+  - DropLife
+  - DropBullet
   layers:
   - Default
   - TransparentFX

@@ -4,7 +4,6 @@ using UnityEngine.UI;
 public class FlushController : MonoBehaviour
 {
   private MyStatus test;
-  private FirstPersonGunController controller;
   private float FirstHP;
   private   float NowHP;
   GameObject game;

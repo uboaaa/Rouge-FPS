@@ -9,7 +9,7 @@ using UnityEngine;
 public class Action : MonoBehaviour
 {
     private GameObject DropWeapon;      
-    DropItem DIScript;
+    DropGun DGScript;
     ChangeEquip CEScript;                   // [ChangeEquip]—p‚Ì•Ï”
     LoadGunPrefab LGPScript;
     bool actionFlg;
@@ -48,7 +48,7 @@ public class Action : MonoBehaviour
     void WeaponAction(GameObject Object)
     {
         // DropItem‚ğæ“¾
-        var DIScript = Object.GetComponent<DropItem>();
+        var DIScript = Object.GetComponent<DropGun>();
 
         // —‚¿‚Ä‚¢‚é•Ší‚ğ‘•”õ‚·‚é
         // ¦DropWeapon‚É‚Í‚Á‚Ä‚½•Ší

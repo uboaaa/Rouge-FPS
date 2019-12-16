@@ -5,7 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DropItem : MonoBehaviour
+public class DropGun : MonoBehaviour
 {
     [SerializeField] GameObject Runk1EffectPrefab;      // Rank1用のエフェクト
     [SerializeField] GameObject Runk2EffectPrefab;      // Rank2用のエフェクト
