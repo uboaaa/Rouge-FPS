@@ -34,7 +34,10 @@ public class DropBullet : MonoBehaviour
             // 今持っている武器を取ってくる
             Weapon = CEScript.nowWeapon();
 
-            hitFlg = true;
+            if(Weapon.GetComponent<GunController>().Ammo < Weapon.GetComponent<GunController>().MagazineSize)
+            {
+                hitFlg = true;
+            }
         }
     }
 }

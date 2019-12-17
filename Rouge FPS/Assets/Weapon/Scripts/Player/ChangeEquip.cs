@@ -83,7 +83,7 @@ public class ChangeEquip : MonoBehaviour
         GameObject dropInfo;   // 情報保持用
 
         // DropItemを取得
-        var DIScript = Object.GetComponent<DropItem>().WeaponInfo;
+        var DIScript = Object.GetComponent<DropGun>().WeaponInfo;
         // GunInfoを取得
         var GIScript = Object.GetComponent<GunInfo>();
 

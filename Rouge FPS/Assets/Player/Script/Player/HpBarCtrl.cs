@@ -28,7 +28,7 @@ public class HpBarCtrl : MonoBehaviour
         if (hp > firsthp)
         {
             // 最大を超えたら0に戻す
-            hp = 0;
+            //hp = 0;
         }
 
         // HPゲージに値を設定
