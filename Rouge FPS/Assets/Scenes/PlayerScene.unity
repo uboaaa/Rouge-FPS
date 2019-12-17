@@ -429,6 +429,24 @@ MonoBehaviour:
     type: 3}
   ShotGun: {fileID: 0}
   FlameThrower: {fileID: 0}
+--- !u!1 &16836038 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7636981972709443904, guid: 8ef12ba36b85ca3458c3db7b8150f89d,
+    type: 3}
+  m_PrefabInstance: {fileID: 16836032}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &16836039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 16836038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c4fe6d87721e0947a47ed49696508d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &16836047 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5033198360798120092, guid: 8ef12ba36b85ca3458c3db7b8150f89d,
