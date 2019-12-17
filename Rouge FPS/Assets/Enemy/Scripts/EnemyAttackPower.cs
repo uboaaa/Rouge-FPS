@@ -11,8 +11,12 @@ public class EnemyAttackPower : MonoBehaviour
     public bool BulletFlg = false;
 
     public static bool DamageFlg;
+
+    private GameObject FPSCon;
     void Start()
     {
+
+        FPSCon = GameObject.Find("FPSController");
         DamageFlg=false;
 
         // 弾じゃなかったらそのまま攻撃力を取得
@@ -28,14 +32,14 @@ public class EnemyAttackPower : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(MyStatus.GetHp());
+       
     }
     void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.tag == "Player")
         {
             
-            MyStatus.downHp((float)enemyatkpow);
+          FPSCon.GetComponent<MyStatus>().downHp((float)enemyatkpow);
             DamageFlg = true;
             
             Destroy(this);

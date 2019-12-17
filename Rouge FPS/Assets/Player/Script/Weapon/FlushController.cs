@@ -6,12 +6,13 @@ public class FlushController : MonoBehaviour
   private MyStatus test;
   private float FirstHP;
   private   float NowHP;
-  GameObject game;
+  GameObject FPSCon;
   private  Image img;
   private bool once = false;
     void Start()
     {
-        game = GameObject.Find("FPSController");
+        
+     FPSCon = GameObject.Find("FPSController");
         img = GetComponent<Image>();
         img.color = Color.clear;
         test = GetComponent<MyStatus>();
@@ -24,8 +25,8 @@ public class FlushController : MonoBehaviour
         // Debug.Log(NowHP);
 
         if (!once) {
-            FirstHP = MyStatus.GetHp();
-            NowHP = MyStatus.GetHp();
+            FirstHP = FPSCon.GetComponent<MyStatus>().GetHp();
+            NowHP = FPSCon.GetComponent<MyStatus>().GetHp();
             once = true;
         }
      //HPを持ってくる
@@ -33,7 +34,7 @@ public class FlushController : MonoBehaviour
         {
             // Debug.Log("FirstHp" + FirstHP);
           
-            NowHP = MyStatus.GetHp();
+            NowHP = FPSCon.GetComponent<MyStatus>().GetHp();
             // Debug.Log("NowHp" + NowHP);
 
         }
