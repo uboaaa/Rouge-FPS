@@ -35,21 +35,19 @@ public class MapManager : MonoBehaviour
     private Dictionary<int, Room> m_roomList = new Dictionary<int, Room>();         //ID・部屋リスト
     private List<GameObject> m_spawnList = new List<GameObject>();                  //ID・スポナーのリスト
 
-    //
-    void Start()
+    //初期化
+    void Awake()
     {
         //マップ初期化クラス
         initializer = this.gameObject.GetComponent<MapInitializer>();
         //ミニマップ管理クラス
-        miniMapManager = this.gameObject.GetComponent<MiniMapManager>();   
+        miniMapManager = this.gameObject.GetComponent<MiniMapManager>();
 
         //マップ切り替え時の処理を設定
         m_nowMapID.mChanged += value =>
         {
-            //マップチップ情報を新たに取得（valueでマップID指定して読み込み）
-
             //マップチップ情報を取得
-            m_nowMap = initializer.GetMap();
+            m_nowMap = MapInitializer.MAP_DATA;
             //スタート部屋IDを取得
             m_startId = initializer.StartID();
             //ID・部屋リストを取得
@@ -57,11 +55,14 @@ public class MapManager : MonoBehaviour
             //ミニマップ生成
             miniMapManager.CreateMapTip(m_nowMap);
         };
-
-        TransNextMap();
     }
 
-    //
+    void Start()
+    {
+        
+    }
+
+    //更新
     void Update()
     {
 
@@ -119,7 +120,6 @@ public class MapManager : MonoBehaviour
                     PopEnemy(m_enemyList[0].obj);
                 }
             }
-
             Debug.Log(m_roomId);
         }
     }

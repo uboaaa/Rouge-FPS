@@ -21,6 +21,7 @@ public class MapInitializer : MonoBehaviour
     public static int MAP_SIZE_X = 30;
     public static int MAP_SIZE_Y = 20;
     public static int MAP_SCALE = 1;
+    public static int[,] MAP_DATA;
 
     //初期座標
     //***初期座標をグローバルで返すようにする
@@ -36,9 +37,11 @@ public class MapInitializer : MonoBehaviour
     private GameObject m_wallPrefab;      //壁のオブジェクト
     private GameObject m_celingPrefab;    //天井のオブジェクト
 
+    //component/class
     private DungeonGenerator DG = null;
     private RoomGenerator RG = null;
     private MapManager MM = null;
+
     private int[,] m_map;                   //マップ配置データの2次配列
     private int m_startId = -1;             //スタート地点の部屋ID
     private Selectable<int> m_mapID = new Selectable<int>();
@@ -50,15 +53,13 @@ public class MapInitializer : MonoBehaviour
         MAP_SIZE_X = INS_MAP_SIZE_X;
         MAP_SIZE_Y = INS_MAP_SIZE_Y;
         MAP_SCALE = INS_MAP_SCALE;
-    }
+        MAP_DATA = new int[MAP_SIZE_X, MAP_SIZE_Y];
 
-    // 初期化
-    void Start()
-    {
         //ダンジョン生成クラス取得
         DG = new DungeonGenerator();
         //部屋生成コンポーネント取得
         RG = this.gameObject.GetComponent<RoomGenerator>();
+        MM = this.gameObject.GetComponent<MapManager>();
 
         //マップ切り替え時の処理を設定
         m_mapID.mChanged += value =>
@@ -68,15 +69,18 @@ public class MapInitializer : MonoBehaviour
             //部屋生成
             GenerateRooms();
             //通路生成
-            //***循環参照になってる？
             GeneratePass();
             //オブジェクト配置
             GenerateObject();
-
-            //書き込み？
-            //SaveMap(value);
+            //マネージャー設定
+            ReloadManager();
         };
+    }
 
+    // 初期化
+    void Start()
+    {
+        //マップ1生成
         m_mapID.Value = 1;
 
         //***初期スタート部屋IDが他コンポーネント内スタートで取得しているので、Update内で行う
@@ -91,7 +95,6 @@ public class MapInitializer : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //マップ切り替え時生成？
         
     }
 
@@ -105,7 +108,6 @@ public class MapInitializer : MonoBehaviour
 
         //ベースマップ（部屋のみのマップ）を取得
         m_map = DG.GenerateBaseMap(MAP_SIZE_X, MAP_SIZE_Y, MAX_ROOM_NUMBER);
-
         
     }
 
@@ -216,13 +218,16 @@ public class MapInitializer : MonoBehaviour
                     Instantiate(m_wallPrefab, new Vector3(x * MAP_SCALE, 5, y * MAP_SCALE), new Quaternion());
                 }
 
-                
+                //グローバルのマップデータを更新
+                MAP_DATA[x, y] = m_map[x, y];
             }
         }
 
         //プレイヤー出現座標を設定
         SpawnPlayer();
     }
+
+    
 
     // プレイヤーの出現座標を設定
     private void SpawnPlayer()
@@ -250,13 +255,14 @@ public class MapInitializer : MonoBehaviour
         g_spawn_rotZ = 0;
     }
 
-    //マップ保存関数
-    //***使うかわからない
-    private void SaveMap(int _id)
+    //マネージャーを更新
+    private void ReloadManager()
     {
 
+        MM.TransNextMap();
     }
 
+    
     //初期地点取得関数
     //座標…"p"or回転…"r" + 各軸(x,y,z)を引数で指定
     //（例）x座標：px

@@ -71,15 +71,24 @@ public class MiniMapManager : MonoBehaviour
         }
 
         //プレイヤーの周囲のチップをONにする
-        int tipx = (int)x;
-        int tipy = (int)y;
-        //if (m_tipArray[tipx, tipy] != null)
-        //{
-        //    m_tipArray[tipx, tipy].m_tipEnable.Value = true;
-        //}
-
+        int tipx = (int)x + 1;
+        int tipy = (int)y + 1;
+        for(int i = -2; i < 3; i++)
+        {
+            for(int j = -2; j < 3; j++)
+            {
+                //範囲外の要素数は飛ばす
+                if (tipx + i < 0 || tipx + i >= MapInitializer.MAP_SIZE_X || tipy < 0 || tipy >= MapInitializer.MAP_SIZE_Y) continue;
+                //コンポーネントがある時、Enableをtrueにする
+                if (m_tipArray[tipx + i, tipy + j] != null)
+                {   
+                    m_tipArray[tipx + i, tipy + j].m_tipEnable.Value = true;
+                }
+            }
+        }
+        
         //マーカーのサイズ分を乗算
-        float posX = (x - MapInitializer.MAP_SIZE_X / 2 + 1) * 5;   //
+        float posX = (x - MapInitializer.MAP_SIZE_X / 2 + 1) * 5;
         float posY = (y - MapInitializer.MAP_SIZE_Y / 2 + 1) * 5;
 
         //アンカーを基準に座標、回転を設定

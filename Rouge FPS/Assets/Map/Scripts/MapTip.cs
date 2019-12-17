@@ -25,7 +25,7 @@ public class MapTip : MonoBehaviour
         //チップOn/Off切替時に呼び出す関数を設定
         m_tipEnable.mChanged += value => m_tipImage.enabled = value;
         //チップのImageコンポーネントをOffにする
-        m_tipEnable.Value = true;
+        m_tipEnable.Value = false;
 
         //配置データを座標に変換し、設定する
         float posX = (tipPos.X - correctX) * m_tipRect.sizeDelta.x;
