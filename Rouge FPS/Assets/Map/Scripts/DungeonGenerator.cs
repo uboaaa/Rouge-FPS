@@ -311,16 +311,20 @@ public class DungeonGenerator
             //更に失敗した時、
             if (!isStraight)
             {
+                //continue;
+
                 //角ありの通路の始点、中継点を求める
+                Pass viaPass1, viaPass2;
+                rangeA.IsCurve(rangeB, out newPass, out viaPass1, out viaPass2);
 
+                //各部屋と中間地点の通路をリストに追加
+                m_passList.Add(viaPass1);
+                m_passList.Add(viaPass2);
 
-                continue; //とりあえず直線のみ
+                //continue;
             }
 
-            //生成された通路データに区画の組み合わせを保存
-            //newPass.m_idComb[0] = rangeId[0];
-            //newPass.m_idComb[1] = rangeId[1];
-
+            
             //始点or中継点から終点までの通路をリストに追加
             m_passList.Add(newPass);
 

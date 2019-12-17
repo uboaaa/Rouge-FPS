@@ -34,8 +34,7 @@ public class RoomGenerator : MonoBehaviour
 
     public void GenerateRoom(ref Room _data, ref int[,] _map)
     {
-        if (MapInitializer.MAP_SCALE == -1) Debug.Log("No Instance Initializer");
-       
+        
         //ベース部屋の幅・高さを取得
         int width = _data.End.X - _data.Start.X + 1;
         int height = _data.End.Y - _data.Start.Y + 1;
