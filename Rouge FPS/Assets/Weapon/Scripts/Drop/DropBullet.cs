@@ -9,10 +9,26 @@ public class DropBullet : MonoBehaviour
 
     ChangeEquip CEScript;               // [ChangeEquip]用の変数
     GameObject Weapon;                  // 今持っている武器
-    void Start(){}
+    float maxDis = 30.0f;
+    Rigidbody rd;
 
     void Update()
     {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit,maxDis))
+        {
+            if(hit.collider.tag == "Back")
+            {
+                maxDis -= 0.7f;
+            }
+        }
+
+        if(maxDis <= 0.0f)
+        {
+            rd = this.GetComponent<Rigidbody>();
+            rd.useGravity = false;
+        }
+
         // 当たった時の処理 && 武器を持っていた場合
         if(hitFlg && Weapon)
         {
