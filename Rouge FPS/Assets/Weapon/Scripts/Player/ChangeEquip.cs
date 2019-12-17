@@ -247,8 +247,6 @@ public class ChangeEquip : MonoBehaviour
         {
             return SecondaryWeapon;
         }
-
-        Debug.Log("何も持っていない");
         return null;
     }
 }
