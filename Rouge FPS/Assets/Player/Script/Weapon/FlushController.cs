@@ -40,7 +40,7 @@ public class FlushController : MonoBehaviour
         }
 
         //ここのif文に当たった処理を！
-        if (FirstHP>NowHP)
+        if (EnemyAttackPower.GetEnemyBHitGet())
         {
             this.img.color = new Color(0.5f, 0f, 0f, 0.5f);
   
