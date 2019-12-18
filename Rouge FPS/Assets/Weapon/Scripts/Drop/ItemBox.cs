@@ -17,7 +17,7 @@ public class ItemBox : MonoBehaviour
     public void Open()
     {
         // 中身を表示
-        Instantiate(ItemPrefab,boxTrans.position,Quaternion.identity);
+        Instantiate(ItemPrefab,new Vector3(boxTrans.position.x,boxTrans.position.y + 0.3f,boxTrans.position.z),Quaternion.identity);
 
         //表示するときの演出
         if (openEffectPrefab != null)

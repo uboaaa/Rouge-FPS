@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4051110895912933294}
   - component: {fileID: 4051110895912933292}
   - component: {fileID: 4051110895912933295}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: LightMachineGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
