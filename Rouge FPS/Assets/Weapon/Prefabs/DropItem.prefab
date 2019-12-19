@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2478045015136013122}
   - component: {fileID: 2478045015136013123}
+  - component: {fileID: 2478045015136013126}
   - component: {fileID: 5620273193576001034}
   - component: {fileID: 2478045015136013120}
   - component: {fileID: 2478045015136013121}
-  - component: {fileID: 2478045015136013126}
   - component: {fileID: 2478045015136013127}
   - component: {fileID: 2478045015136013124}
   m_Layer: 11
@@ -85,6 +85,30 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2478045015136013126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2478045015136013125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e05a26cd201320e49808831c88fa31e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shootMode: 0
+  gunType: 2
+  gunRank: 2
+  skillSlot: 1
+  MagazineSize: 45
+  remAmmo: 150
+  remMagazine: 500
+  Damage: 10
+  shootInterval: 0.2
+  reloadInterval: 0.8
+  bulletPower: 1000
+  GunEXP: 0
 --- !u!114 &5620273193576001034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,30 +163,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Inversion: 1
---- !u!114 &2478045015136013126
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2478045015136013125}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e05a26cd201320e49808831c88fa31e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shootMode: 0
-  gunType: 2
-  gunRank: 2
-  skillSlot: 1
-  MagazineSize: 45
-  remAmmo: 150
-  remMagazine: 500
-  Damage: 10
-  shootInterval: 0.2
-  reloadInterval: 0.8
-  bulletPower: 1000
-  GunEXP: 0
 --- !u!135 &2478045015136013127
 SphereCollider:
   m_ObjectHideFlags: 0

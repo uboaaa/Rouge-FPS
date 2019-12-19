@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System;
+using System.Linq;
 using UnityEngine;
 
 
@@ -37,15 +38,35 @@ public class GunInfo : MonoBehaviour
     void Start()
     {
         // 能力値を選出する
+        // ※※※※※※※※※※※※※
+        // 後から変更しないといけない
+        // ※※※※※※※※※※※※※
+        int random =　UnityEngine.Random.Range(0, 2);
+        if(random == 0)
+        {
+            gunType = GunInfo.GunType.HandGun;
+        }
+        else if(random == 1)
+        {
+            gunType = GunInfo.GunType.LightMachineGun;
+        }
+
+        random =　UnityEngine.Random.Range(0, 3);
+        if(random == 0)
+        {
+            gunRank = GunInfo.GunRank.Rank1;
+        }
+        else if(random == 1)
+        {
+            gunRank = GunInfo.GunRank.Rank2;
+        }
+        else if(random == 2)
+        {
+            gunRank = GunInfo.GunRank.Rank3;
+        }
+
         skillSlot = UnityEngine.Random.Range(1, 4);     // 1~3個
 
-        int TypeNum = GetTypeNum<GunType>();
-
-    }
-    
-    // 項目数を取得
-    private static int GetTypeNum<T>() where T : struct
-    {
-        return Enum.GetValues (typeof(T)).Length;
+        //Damage
     }
 }
