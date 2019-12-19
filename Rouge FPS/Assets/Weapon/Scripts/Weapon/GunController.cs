@@ -16,6 +16,7 @@ public class GunController : MonoBehaviour
     [SerializeField] public GunInfo.GunRank    gunRank     = GunInfo.GunRank.Rank1;         // ランク情報
     [SerializeField] public int        skillSlot;                              // スキルスロット数
     [SerializeField] public int        MagazineSize;                           // マガジンサイズ
+    [HideInInspector]public int        AmmoSize;                               // 予備弾数MAX
     [SerializeField] public int        remAmmo;                                // 残弾数
     [SerializeField] public int        Damage;                                 // 火力
     [SerializeField] public float      shootInterval;                          // 次発射までの間の時間
@@ -56,8 +57,6 @@ public class GunController : MonoBehaviour
     
     void Start()
     {
-        InitGun();
-
         FPSCon = GameObject.Find("FPSController");
         CEScript = FPSCon.GetComponent<ChangeEquip>();
 
@@ -69,6 +68,11 @@ public class GunController : MonoBehaviour
 
     void Update()
     {
+        if(remAmmo > AmmoSize)
+        {
+            remAmmo = AmmoSize;
+        }
+
         animatorInfo = animator.GetCurrentAnimatorStateInfo(0);
 
         // アニメーションが”Get”状態の時、フラグを受け取る
@@ -141,12 +145,6 @@ public class GunController : MonoBehaviour
         // if(animatorInfo.shortNameHash ==  Animator.StringToHash("Shot")){Debug.Log("現在は：Shot");}
         // if(animatorInfo.shortNameHash ==  Animator.StringToHash("Reload")){Debug.Log("現在は：Reload");}
         // if(animatorInfo.shortNameHash ==  Animator.StringToHash("Get")){Debug.Log("現在は：Get");}
-    }
-
-    // 初期化
-    void InitGun()
-    {
-        //Ammo = MagazineSize;
     }
 
     // セミオートかフルオートかの判定

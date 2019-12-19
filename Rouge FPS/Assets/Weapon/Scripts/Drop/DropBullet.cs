@@ -41,7 +41,8 @@ public class DropBullet : MonoBehaviour
         if(hitFlg && Weapon)
         {
             // 弾を追加する
-            Weapon.GetComponent<GunController>().Ammo += bulletNum;
+            Weapon.GetComponent<GunController>().remAmmo += bulletNum;
+            //Weapon.GetComponent<GunController>().Ammo += bulletNum;
 
             // 自分を削除
             Destroy(this.gameObject);
@@ -62,7 +63,7 @@ public class DropBullet : MonoBehaviour
                 return;
             }
 
-            if(Weapon.GetComponent<GunController>().Ammo < Weapon.GetComponent<GunController>().MagazineSize)
+            if(Weapon.GetComponent<GunController>().remAmmo < Weapon.GetComponent<GunController>().AmmoSize)
             {
                 hitFlg = true;
             }

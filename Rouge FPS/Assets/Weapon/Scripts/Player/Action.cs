@@ -74,7 +74,8 @@ public class Action : MonoBehaviour
             var SlotInfo            = dropGCScript.skillSlot;        // スキルスロット数
             var MaxMagazineInfo     = dropGCScript.MagazineSize;     // １マガジンのサイズ
             var remMagazineInfo     = dropGCScript.Ammo;             // マガジン内の残弾数
-            var AmmoInfo            = dropGCScript.remAmmo;          // マガジン外の残弾数
+            var MaxAmmoInfo         = dropGCScript.AmmoSize;         // 予備弾数サイズ
+            var remAmmoInfo         = dropGCScript.remAmmo;          // 予備弾数
             var DamageInfo          = dropGCScript.Damage;           // 火力
             var shootIntervalInfo   = dropGCScript.shootInterval;    // 射撃間隔
             var reloadIntervalInfo  = dropGCScript.reloadInterval;   // リロードスピード
@@ -90,7 +91,8 @@ public class Action : MonoBehaviour
             getGIScript.skillSlot      = SlotInfo;
             getGIScript.MagazineSize   = MaxMagazineInfo;
             getGIScript.remMagazine    = remMagazineInfo;
-            getGIScript.remAmmo        = AmmoInfo;
+            getGIScript.ammoMax        = MaxAmmoInfo;
+            getGIScript.remAmmo        = remAmmoInfo;
             getGIScript.Damage         = DamageInfo;
             getGIScript.shootInterval  = shootIntervalInfo;
             getGIScript.reloadInterval = reloadIntervalInfo;

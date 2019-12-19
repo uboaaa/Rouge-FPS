@@ -26,7 +26,8 @@ public class GunInfo : MonoBehaviour
     [SerializeField] public GunRank    gunRank;                             // ランク情報(ランダム)
     [SerializeField] public int        skillSlot;                           // スキルスロット数(ランダム)
     [SerializeField] public int        MagazineSize;                        // マガジンサイズ(武器依存)
-    [SerializeField] public int        remAmmo;                             // 残弾数(武器依存)
+    [HideInInspector] public int       remAmmo;                             // 残弾数(武器依存)
+    [SerializeField] public int        ammoMax;                             // 予備弾数MAX(武器依存)
     [HideInInspector] public int       remMagazine;                         // マガジン内の残弾数(武器依存)
     [SerializeField] public int        Damage;                              // 火力(武器依存　+-ランダム)
     [SerializeField] public float      shootInterval;                       // 次発射までの間の時間(武器依存)
@@ -37,6 +38,8 @@ public class GunInfo : MonoBehaviour
 
     void Start()
     {
+
+
         // 能力値を選出する
         // ※※※※※※※※※※※※※
         // 後から変更しないといけない

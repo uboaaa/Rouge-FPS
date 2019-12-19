@@ -103,6 +103,7 @@ MonoBehaviour:
   skillSlot: 1
   MagazineSize: 45
   remAmmo: 150
+  ammoMax: 150
   remMagazine: 500
   Damage: 10
   shootInterval: 0.2

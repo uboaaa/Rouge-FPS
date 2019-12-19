@@ -212,6 +212,7 @@ public class ChangeEquip : MonoBehaviour
             Guncon.MagazineSize   = Guninfo.MagazineSize;
             Guncon.Ammo           = Guninfo.remMagazine;
             Guncon.remAmmo        = Guninfo.remAmmo;
+            Guncon.AmmoSize       = Guninfo.ammoMax;
             Guncon.Damage         = Guninfo.Damage;
             Guncon.shootInterval  = Guninfo.shootInterval;
             Guncon.reloadInterval = Guninfo.reloadInterval;
@@ -227,6 +228,7 @@ public class ChangeEquip : MonoBehaviour
             Guninfo.skillSlot      = Guncon.skillSlot;
             Guninfo.MagazineSize   = Guncon.MagazineSize;
             Guninfo.remMagazine    = Guncon.Ammo;
+            Guninfo.ammoMax        = Guncon.AmmoSize;
             Guninfo.remAmmo        = Guncon.remAmmo;
             Guninfo.Damage         = Guncon.Damage;
             Guninfo.shootInterval  = Guncon.shootInterval;
