@@ -11,6 +11,7 @@ public class DropBullet : MonoBehaviour
     GameObject Weapon;                  // 今持っている武器
     float maxDis = 30.0f;
     Rigidbody rd;
+    FlyingObject FOScript;
 
     void Update()
     {
@@ -23,10 +24,17 @@ public class DropBullet : MonoBehaviour
             }
         }
 
-        if(maxDis <= 0.0f)
+        if(maxDis <= 0.5f)
         {
             rd = this.GetComponent<Rigidbody>();
             rd.useGravity = false;
+
+            if(!FOScript)
+            {
+                FOScript = gameObject.AddComponent<FlyingObject>();
+                FOScript.swingPow = 0.05f; 
+                FOScript.Range = 4;
+            }
         }
 
         // 当たった時の処理 && 武器を持っていた場合

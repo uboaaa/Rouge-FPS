@@ -10,12 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 2500672720240144818}
   - component: {fileID: 2500672720240144819}
-  - component: {fileID: 2500672720240144829}
+  - component: {fileID: 1283674735974891855}
   - component: {fileID: 4277855348381834452}
   - component: {fileID: 2500672720240144831}
   - component: {fileID: 535331463383731304}
   m_Layer: 11
-  m_Name: DropBullet
+  m_Name: Dropbullet
   m_TagString: DropBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2500672720240144829
+--- !u!114 &1283674735974891855
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -92,9 +92,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2500672720240144816}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8206a5d658efa0f4d8a3ebb2268c3be5, type: 3}
+  m_Script: {fileID: 11500000, guid: bcf25f19673000b44b5fddb183368fec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Inversion: 1
 --- !u!114 &4277855348381834452
 MonoBehaviour:
   m_ObjectHideFlags: 0
