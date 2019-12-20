@@ -52,8 +52,6 @@ public class MapManager : MonoBehaviour
             m_startId = initializer.StartID();
             //ID・部屋リストを取得
             initializer.GetRooms(out m_roomList);
-            //ミニマップ生成
-            miniMapManager.CreateMapTip(m_nowMap);
         };
     }
 

@@ -105,8 +105,6 @@ public class RoomGenerator : MonoBehaviour
         //部屋データを書き換える
         _data = new Room(r_posX, r_posY, r_posX + r_width - 1, r_posY + r_height - 1);
 
-        //***曲がり角ありの通路生成
-
     }
 
     //部屋タイプを確認する関数

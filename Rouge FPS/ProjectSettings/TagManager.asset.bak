@@ -11,6 +11,8 @@ TagManager:
   - DropLife
   - DropBullet
   - Back
+  - MiniMap
+  - Room
   layers:
   - Default
   - TransparentFX

@@ -7,10 +7,15 @@ TagManager:
   - Enemy
   - DropBox
   - DropGun
+<<<<<<< HEAD
   - Bullet
   - DropLife
   - DropBullet
   - Back
+=======
+  - MiniMap
+  - Room
+>>>>>>> origin/Stage
   layers:
   - Default
   - TransparentFX
