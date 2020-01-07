@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class FlushController : MonoBehaviour
 {
@@ -9,6 +10,12 @@ public class FlushController : MonoBehaviour
   GameObject FPSCon;
   private  Image img;
   private bool once = false;
+  private float alpha;
+   private float red;
+  float fadeSpeed = 0.01f; //透明度が変わるスピードを管理
+   Image fadeImage;        //透明度を変更するパネルのイメージ
+
+
     void Start()
     {
         
@@ -16,13 +23,15 @@ public class FlushController : MonoBehaviour
         img = GetComponent<Image>();
         img.color = Color.clear;
         test = GetComponent<MyStatus>();
+        fadeImage = GetComponent<Image>();
+  
     
         
     }
 
     void Update()
     {
-        // Debug.Log(NowHP);
+        Debug.Log(NowHP);
 
         if (!once) {
             FirstHP = FPSCon.GetComponent<MyStatus>().GetHp();
@@ -38,8 +47,11 @@ public class FlushController : MonoBehaviour
             // Debug.Log("NowHp" + NowHP);
 
         }
-
+       if(NowHP<=0){GameOverEnter();
+       if(alpha>=1){Invoke("GameOver",1.0f);}
+       }
         //ここのif文に当たった処理を！
+        if(NowHP>0){
         if (EnemyAttackPower.GetEnemyBHitGet())
         {
             this.img.color = new Color(0.5f, 0f, 0f, 0.5f);
@@ -51,6 +63,19 @@ public class FlushController : MonoBehaviour
         {
             this.img.color = Color.Lerp(this.img.color, Color.clear, Time.deltaTime);
         }
+     }
 
+    }
+   void GameOver(){ SceneManager.LoadScene("GameOverScene");}
+    void GameOverEnter(){
+            alpha += fadeSpeed; 
+            red+=fadeSpeed;
+           SetAlpha();
+
+    }
+
+    void SetAlpha()
+    {
+        fadeImage.color = new Color(red, 0.0f, 0.0f, alpha);
     }
 }

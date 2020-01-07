@@ -31,7 +31,7 @@ public class FadePanel : MonoBehaviour
         
 
         
-                if (GametoTitle.GetModeSelect()=="ReturnTitle" || TitletoGame.GetGame())
+                if (GametoTitle.GetModeSelect()=="ReturnTitle" || TitletoGame.GetGame() || SceneManager.GetActiveScene().name=="GameOverScene")
                 {
                     if (Input.GetKeyDown(KeyCode.Return) ) {
                     isFadeOut = true;
