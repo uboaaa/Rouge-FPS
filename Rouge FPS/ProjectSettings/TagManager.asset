@@ -5,12 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
-  - DropBox
-  - DropGun
   - Bullet
-  - DropLife
-  - DropBullet
-  - Back
+  - DroppableField
+  - mousePoint
+  - EnemyBullet
   layers:
   - Default
   - TransparentFX
@@ -24,7 +22,7 @@ TagManager:
   - Back
   - Gun
   - Object
-  - MiniMap
+  - Enemy
   - 
   - 
   - 
