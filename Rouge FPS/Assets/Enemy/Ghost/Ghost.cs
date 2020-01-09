@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Flyer : MonoBehaviour
+public class Ghost : MonoBehaviour
 {
-
-    // 弾
-    public GameObject bullet = null;
+     // 弾
+    private GameObject bullet = null;
 
     // プレイヤー
     private GameObject player = null;
@@ -134,6 +133,10 @@ public class Flyer : MonoBehaviour
 
             // ポイントライト
             plight.color = new Color(0.5f,0.5f,1.0f,1.0f);
+
+
+            // 弾取得
+            bullet = Resources.Load("GhostBulletRed") as GameObject;
             
         }
         else if(AILevel == 2)
@@ -150,6 +153,8 @@ public class Flyer : MonoBehaviour
             ep.startrot = 60;
 
             plight.color = new Color(1.0f,0.5f,0.5f,1.0f);
+
+            bullet = Resources.Load("GhostBulletBlue") as GameObject;
         }
         else if(AILevel == 3)
         {
@@ -165,6 +170,8 @@ public class Flyer : MonoBehaviour
             ep.startrot = 60;
 
             plight.color = new Color(1.0f,0.5f,1.0f,1.0f);
+
+            bullet = Resources.Load("GhostBulletGreen") as GameObject;
         }
     }
 
@@ -261,9 +268,8 @@ public class Flyer : MonoBehaviour
 
 
         // デバッグ表示
-        //Debug.Log("FlyerHP");
-        //Debug.Log(ep.hp);
-
+        Debug.Log("GhostFoundFlg");
+        Debug.Log(foundflg);
 
         // 敵の体力が０になったら
         if(ep.hp == 0)
@@ -306,6 +312,33 @@ public class Flyer : MonoBehaviour
         // }
 
         
+        // 敵の体力が０になったら
+        if(ep.hp == 0)
+        {
+            // 死亡時の爆発エフェクトを再生
+            GameObject de = Instantiate(deadeffect) as GameObject;
+            de.transform.position = this.gameObject.transform.position;
+            de.transform.position = new Vector3(de.transform.position.x,de.transform.position.y - 1.2f,de.transform.position.z);
+
+            // 死んだときにアイテムポップ
+            if(PopObject)
+            {
+                GameObject po = Instantiate(PopObject) as GameObject;
+                po.transform.position = this.gameObject.transform.position;
+            }
+
+            // 解放処理
+            Destroy(de,2.0f);
+            Destroy(this.gameObject);
+        }
+
+        // // Xを押したら
+        // if (Input.GetKey(KeyCode.X))
+        // {
+        //     GameObject go = Instantiate(this.gameObject) as GameObject;
+        //     go.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z + 5);
+        // }
+
         // 発射フラグがONなら
         if(fireflg == true)
         {
@@ -314,27 +347,6 @@ public class Flyer : MonoBehaviour
                 // 弾丸の複製
                 GameObject bullets = Instantiate(bullet) as GameObject;
 
-                // マテリアル
-                Material b_material = bullets.GetComponent<SpriteRenderer>().material;
-                
-                if(AILevel == 1)
-                {
-                    b_material.SetFloat(propID_h, 0.0f);
-                    b_material.SetFloat(propID_s, 0.5f);
-                    b_material.SetFloat(propID_c, 0.5f);
-                }
-                else if(AILevel == 2)
-                {
-                    b_material.SetFloat(propID_h, 0.45f);
-                    b_material.SetFloat(propID_s, 1.0f);
-                    b_material.SetFloat(propID_c, 0.7f);
-                }
-                else if(AILevel == 3)
-                {
-                    b_material.SetFloat(propID_h, 0.3f);
-                    b_material.SetFloat(propID_s, 0.5f);
-                    b_material.SetFloat(propID_c, 1.0f);
-                }
 
                 // 攻撃力の挿入
                 eap = bullets.GetComponent<EnemyAttackPower>();
@@ -356,43 +368,19 @@ public class Flyer : MonoBehaviour
             ftime++;
             if(AILevel == 1)
             {
-                if(ftime > 60){ ftime = 0;}
+                if(ftime > 80){ ftime = 0;}
             }
             else if(AILevel == 2)
             {
-                if(ftime > 50){ ftime = 0;}
+                if(ftime > 70){ ftime = 0;}
             }
             else if(AILevel == 3)
             {
-                if(ftime > 40){ ftime = 0;}
+                if(ftime > 60){ ftime = 0;}
             }
-
         }
 
-        
-        if (moveflg == true)
-        {
-            if (mtime == 0)
-            {
-                // 乱数
-                mvalue = Random.Range(-0.1f, 0.1f);
-            }
 
-            this.gameObject.transform.position = new Vector3(
-                this.gameObject.transform.position.x + mvalue,
-                this.gameObject.transform.position.y + mvalue,
-                this.gameObject.transform.position.z + mvalue
-            );
-
-            mtime++;
-            if (mtime > 15)
-            {
-                mtime = 0;
-                moveflg = false;
-            }
-
-        }
-//    }
 //}
     }
 
@@ -425,6 +413,4 @@ public class Flyer : MonoBehaviour
         //}
 
     }
-
 }
-

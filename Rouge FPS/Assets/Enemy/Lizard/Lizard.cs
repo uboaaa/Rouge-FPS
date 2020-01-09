@@ -6,6 +6,7 @@ public class Lizard : MonoBehaviour
 {
     // プレイヤー
     private GameObject player = null;
+
     // アニメータ
     private Animator animator = null;
     // マテリアル
@@ -41,6 +42,9 @@ public class Lizard : MonoBehaviour
     
     // アニメ関数
     int trans = 0;
+
+    // 死んだ時に生成されるオブジェクト
+    public GameObject PopObject = null;
 
 
 
@@ -143,6 +147,10 @@ public class Lizard : MonoBehaviour
     void Update()
     {
 
+        //if(!PauseScript.pause()){
+        //if(!SkillManagement.GetTimeStop()){
+
+
         // ========
         // アニメーション 
         // ========
@@ -241,6 +249,14 @@ public class Lizard : MonoBehaviour
             GameObject de = Instantiate(deadeffect) as GameObject;
             de.transform.position = this.gameObject.transform.position;
             de.transform.position = new Vector3(de.transform.position.x,de.transform.position.y - 1.2f,de.transform.position.z);
+
+            // 死んだときにアイテムポップ
+            if(PopObject)
+            {
+                GameObject po = Instantiate(PopObject) as GameObject;
+                po.transform.position = this.gameObject.transform.position;
+            }
+
             // 解放処理
             Destroy(de,2.0f);
             Destroy(this.gameObject);
@@ -253,13 +269,16 @@ public class Lizard : MonoBehaviour
         //     go.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z + 5);
         // }
 
-
+        //}
+        //}
     }
 
     // 弾との当たり判定
     private void OnCollisionEnter(Collision collision)
     {
 
+        //if(!PauseScript.pause()){
+        //if(!SkillManagement.GetTimeStop()){
         if (collision.gameObject.tag == "Bullet")
         {
             // 弾のダメージを取得
@@ -274,6 +293,8 @@ public class Lizard : MonoBehaviour
             //intパラメーターの値を設定する.
             animator.SetInteger("trans", trans);
         }
+        //    }
+        //}
 
     }
 }

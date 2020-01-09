@@ -51,6 +51,11 @@ public class Spider : MonoBehaviour
     // 発射管理
     private int ftime = 0;
 
+    // 死んだ時に生成されるオブジェクト
+    public GameObject PopObject = null;
+
+
+
 
 
 
@@ -108,7 +113,7 @@ public class Spider : MonoBehaviour
             ep.atk = 10;
             ep.def = 0;
             //ep.speed = 1.0f;
-            ep.speed = 0.0f;
+            ep.speed = 1.0f;
             ep.startrot = 60;
 
             // ポイントライト
@@ -125,8 +130,8 @@ public class Spider : MonoBehaviour
             ep.hp = 70;
             ep.atk = 20;
             ep.def = 10;
-            //ep.speed = 1.3f;
-            ep.speed = 0.0f;
+            ep.speed = 1.3f;
+            //ep.speed = 0.0f;
             ep.startrot = 60;
 
             plight.color = new Color(1.0f,0.5f,0.5f,1.0f);
@@ -140,8 +145,8 @@ public class Spider : MonoBehaviour
             ep.hp = 100;
             ep.atk = 30;
             ep.def = 20;
-            //ep.speed = 1.5f;
-            ep.speed = 0.0f;
+            ep.speed = 1.5f;
+            //ep.speed = 0.0f;
             ep.startrot = 60;
 
             plight.color = new Color(1.0f,0.5f,1.0f,1.0f);
@@ -154,6 +159,9 @@ public class Spider : MonoBehaviour
 
     void Update()
     {
+
+        //if(!PauseScript.pause()){
+        //if(!SkillManagement.GetTimeStop()){
 
         // ========
         // アニメーション 
@@ -254,6 +262,14 @@ public class Spider : MonoBehaviour
             GameObject de = Instantiate(deadeffect) as GameObject;
             de.transform.position = this.gameObject.transform.position;
             de.transform.position = new Vector3(de.transform.position.x,de.transform.position.y - 1.2f,de.transform.position.z);
+
+            // 死んだときにアイテムポップ
+            if(PopObject)
+            {
+                GameObject po = Instantiate(PopObject) as GameObject;
+                po.transform.position = this.gameObject.transform.position;
+            }
+
             // 解放処理
             Destroy(de,2.0f);
             Destroy(this.gameObject);
@@ -312,6 +328,11 @@ public class Spider : MonoBehaviour
         }
 
 
+
+
+        //}
+        //}
+
     }
 
     // 弾との当たり判定
@@ -336,4 +357,5 @@ public class Spider : MonoBehaviour
         }
 
     }
+
 }
