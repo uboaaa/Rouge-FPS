@@ -44,14 +44,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private GameObject Pause;
         private bool aaa;
 
-        GameObject FPSCon;
-
          bool unko=false;
 
         // Use this for initialization
         private void Start()
         {
-            FPSCon = GameObject.Find("FPSController");
             Pause = GameObject.Find("MainCanvas");
             m_CharacterController = GetComponent<CharacterController>();
             m_Camera = Camera.main;
@@ -64,7 +61,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_AudioSource = GetComponent<AudioSource>();
 			m_MouseLook.Init(transform , m_Camera.transform);
             
-   
+            AudioManager.Instance.PlayBGM("game_maoudamashii_6_dangeon18");
         }
 
 
@@ -77,7 +74,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             //     //m_Camera.transform.rotation = Quaternion.identity;
             // }
             if(!PauseScript.pause()){
-              if(FPSCon.GetComponent<MyStatus>().GetHp()>1){
+ 
                 RotateView();
             
             // the jump state needs to read here to make sure it is not missed
@@ -100,21 +97,21 @@ namespace UnityStandardAssets.Characters.FirstPerson
  
             m_PreviouslyGrounded = m_CharacterController.isGrounded;
             }
-            }
         }
 
 
         private void PlayLandingSound()
         {
-            m_AudioSource.clip = m_LandSound;
-            m_AudioSource.Play();
+            // m_AudioSource.clip = m_LandSound;
+            AudioManager.Instance.PlaySE ("Land");
+            // m_AudioSource.Play();
             m_NextStep = m_StepCycle + .5f;
         }
 
 
         private void FixedUpdate()
         {
-         if(FPSCon.GetComponent<MyStatus>().GetHp()>1){
+        
         if(m_IsWalking && Input.GetKeyDown(KeyCode.LeftShift)){m_IsWalking=false;}
         else if(!m_IsWalking && Input.GetKeyDown(KeyCode.LeftShift)){m_IsWalking=true;}
             float speed;
@@ -172,15 +169,15 @@ namespace UnityStandardAssets.Characters.FirstPerson
             UpdateCameraPosition(speed);
 
             m_MouseLook.UpdateCursorLock();
-         }
         }
 
      
 
         private void PlayJumpSound()
         {
-            m_AudioSource.clip = m_JumpSound;
-            m_AudioSource.Play();
+            // m_AudioSource.clip = m_JumpSound;
+            // m_AudioSource.Play();
+             AudioManager.Instance.PlaySE ("Jump");
         }
        
        private void Activeflg(){unko=true;}
@@ -213,8 +210,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
             // pick & play a random footstep sound from the array,
             // excluding sound at index 0
             int n = Random.Range(1, m_FootstepSounds.Length);
-            m_AudioSource.clip = m_FootstepSounds[n];
-            m_AudioSource.PlayOneShot(m_AudioSource.clip);
+            // m_AudioSource.clip = m_FootstepSounds[n];
+            // m_AudioSource.PlayOneShot(m_AudioSource.clip);
+            
+             AudioManager.Instance.PlaySE ("Footstep0"+n);
             // move picked sound to index 0 so it's not picked next time
             m_FootstepSounds[n] = m_FootstepSounds[0];
             m_FootstepSounds[0] = m_AudioSource.clip;

@@ -20,6 +20,7 @@ public class PlayerDown : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
  // ワールド座標を基準に、回転を取得
         Vector3 worldAngle = myTransform2.eulerAngles;
     if(FPSCon.GetComponent<MyStatus>().GetHp()<1){
