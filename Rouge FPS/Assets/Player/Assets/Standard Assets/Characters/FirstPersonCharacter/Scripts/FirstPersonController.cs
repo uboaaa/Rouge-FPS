@@ -61,7 +61,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_AudioSource = GetComponent<AudioSource>();
 			m_MouseLook.Init(transform , m_Camera.transform);
             
-            AudioManager.Instance.PlayBGM("game_maoudamashii_6_dangeon18");
+            
         }
 
 
