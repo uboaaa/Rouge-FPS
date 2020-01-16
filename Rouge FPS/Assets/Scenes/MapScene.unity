@@ -211,6 +211,36 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &293144133
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 293144134}
+  m_Layer: 0
+  m_Name: Rooms
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &293144134
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 293144133}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &405515997
 GameObject:
   m_ObjectHideFlags: 0
@@ -319,6 +349,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 405515997}
   m_CullTransparentMesh: 0
+--- !u!1 &537410498
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 537410499}
+  m_Layer: 0
+  m_Name: DungeonParts
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &537410499
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 537410498}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &817326291
 GameObject:
   m_ObjectHideFlags: 0
@@ -537,7 +597,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_enemyList:
-  - group: 1
+  - group: 0
     obj: {fileID: 2744920058350558036, guid: ad2933c45f2f2244dae888f40fca6734, type: 3}
   - group: 0
     obj: {fileID: 1779264351526620451, guid: d237077dad4c1d74a92629a5e33f991c, type: 3}
@@ -577,18 +637,25 @@ MonoBehaviour:
   - rtype: 0
     roomObj: {fileID: 7991591374502799742, guid: 3da739c2c9343a94881ba86540edb7f9,
       type: 3}
-  - rtype: 1
-    roomObj: {fileID: 4981343627033454670, guid: cb22735a53b7ec1429670a40002abbb5,
-      type: 3}
-  - rtype: 2
-    roomObj: {fileID: 559895850958081706, guid: 64bbb4ecaff8ef5429153896f0840a1f,
-      type: 3}
   - rtype: 3
     roomObj: {fileID: 6582688253476645942, guid: 02fc3a60692e9754ba3049f875a388fa,
+      type: 3}
+  - rtype: 1
+    roomObj: {fileID: 4981343627033454670, guid: cb22735a53b7ec1429670a40002abbb5,
       type: 3}
   - rtype: 4
     roomObj: {fileID: 3424705591942629624, guid: fa73f75e340f1df4f860594033fb0afe,
       type: 3}
+  - rtype: 2
+    roomObj: {fileID: 559895850958081706, guid: 64bbb4ecaff8ef5429153896f0840a1f,
+      type: 3}
+  - rtype: 5
+    roomObj: {fileID: 3119169724939059216, guid: e1d94919ab4a4e843a296ca8add13343,
+      type: 3}
+  - rtype: 6
+    roomObj: {fileID: 3984348400045686049, guid: 7b464cd7fc29f854aafbe9e1fb9d1733,
+      type: 3}
+  m_parentRoom: {fileID: 293144133}
 --- !u!1 &1278710102
 GameObject:
   m_ObjectHideFlags: 0

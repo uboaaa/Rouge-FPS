@@ -9,6 +9,7 @@ TagManager:
   - DropGun
   - MiniMap
   - Room
+  - Goal
   layers:
   - Default
   - TransparentFX

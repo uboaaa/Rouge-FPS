@@ -242,7 +242,7 @@ public class Range
                 break;
         }
 
-        Debug.Log("直線生成(" + pass.Start.X + "," + pass.Start.Y + "/" + pass.End.X + "," + pass.End.Y + ")");
+        //Debug.Log("直線生成(" + pass.Start.X + "," + pass.Start.Y + "/" + pass.End.X + "," + pass.End.Y + ")");
 
         //生成した通路の始点を保存
         if (!this.m_PassPositionDic.ContainsKey(direction))
@@ -352,7 +352,7 @@ public class Range
                 //下にずれている
                 //カウントが1以上の時、最もYが"大きい"データを取得
                 int y = _room1.Start.Y;
-                if (m_PassPositionDic.ContainsKey(_dir))
+                if (_range.m_PassPositionDic.ContainsKey(_dir))
                 {
                     //通路の始点をループで回す
                     foreach (Position passPos in _range.m_PassPositionDic[_dir])
@@ -380,7 +380,7 @@ public class Range
                     //通路の始点をループで回す
                     foreach (Position passPos in _range.m_PassPositionDic[_dir])
                     {
-                        //より小さいY座標を保存
+                        //より小さいX座標を保存
                         x = passPos.X < x ? passPos.X : x;
                     }
                 }
@@ -398,7 +398,7 @@ public class Range
                     //通路の始点をループで回す
                     foreach (Position passPos in _range.m_PassPositionDic[_dir])
                     {
-                        //より小さいY座標を保存
+                        //より大きいX座標を保存
                         x = passPos.X > x ? passPos.X : x;
                     }
                 }

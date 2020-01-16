@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//部屋タイプ
 public enum Type
 {
-    R6x6,R10x10,R12x12,R6x10,R10x12
+    R6x6,R10x10,R12x12,R6x10,R10x12,START,GOAL
 }
 
+//部屋タイプとオブジェクトの組み合わせ
 [System.Serializable]
 public class RoomType
 {
@@ -21,10 +23,16 @@ public class RoomGenerator : MonoBehaviour
     //***エディタ拡張で設定しやすくしておく！
     public RoomType[] m_roomTypeList;
 
-    //マップ配置データ
-    private int[,] m_map;
-    //部屋リスト
-    private Dictionary<int, Room> m_roomList = new Dictionary<int, Room>();
+    
+    //部屋の親オブジェクト
+    public GameObject m_parentRoom;
+
+    //スタート、ゴール設定フラグ
+    private bool m_setStart = false;
+    private bool m_setGoal = false;
+
+    //スタート部屋保存用オブジェクト
+    private GameObject m_StartRoom;
 
     //初期化
     void Start()
@@ -32,6 +40,30 @@ public class RoomGenerator : MonoBehaviour
         
     }
 
+    //==============================================================
+    //部屋リセット処理
+    //※前ステージがあった場合のみ削除する
+    //===============================================================
+    public void ResetRoom()
+    {
+        //子オブジェクトがあるかを確認
+        if (m_parentRoom.transform.childCount > 0)
+        {
+            //あった場合、子オブジェクトのみ削除
+            foreach(Transform childTrans in m_parentRoom.transform)
+            {
+                Destroy(childTrans.gameObject);
+            }
+        }
+
+        //スタート、ゴール部屋のフラグもリセット
+        m_setStart = false;
+        m_setGoal = false;
+    }
+
+    //=============================================================
+    //部屋生成処理
+    //==============================================================
     public void GenerateRoom(ref Room _data, ref int[,] _map)
     {
         
@@ -39,7 +71,7 @@ public class RoomGenerator : MonoBehaviour
         int width = _data.End.X - _data.Start.X + 1;
         int height = _data.End.Y - _data.Start.Y + 1;
 
-        //使える部屋タイプを確認
+        //使える部屋タイプを確認、リストにする
         List<Type> types;
         TypeCheck(width, height, out types);
 
@@ -47,13 +79,25 @@ public class RoomGenerator : MonoBehaviour
         List<RoomType> enableList = new List<RoomType>();
         foreach(Type type in types)
         {
-            foreach(RoomType roomType in m_roomTypeList)
+            //部屋タイプがスタート、ゴール時かつ既に設定されている場合は飛ばす
+            //
+            if (type == Type.START && m_setStart) continue;
+            if (type == Type.GOAL && m_setGoal) continue;
+
+            foreach (RoomType roomType in m_roomTypeList)
             {
                 if (roomType.rtype == type) enableList.Add(roomType);       //可能な部屋をリストにする
             }
         }
 
-        RoomType result = enableList.GetAtRandom();                         //リストからランダムに取得
+        RoomType result = enableList.GetAtRandom_Bias();                         //リストからランダムに取得
+
+        //部屋タイプがstart,goalのときフラグ更新
+        if (result.rtype == Type.START) {
+            m_setStart = true;
+            m_StartRoom = result.roomObj;
+        }
+        if (result.rtype == Type.GOAL) m_setGoal = true;
 
         //サイズに応じてマップに配置、反映
         int r_width;                                            //部屋の幅・高さ
@@ -74,19 +118,21 @@ public class RoomGenerator : MonoBehaviour
             }
         }
 
-        string s = "start(" + _data.Start.X + "," + _data.Start.Y + "),end(" + _data.End.X + "," + _data.End.Y + ")";
-        Debug.Log(s);
-        string w = "width:" + r_width + ",height:" + r_height;
-        Debug.Log(w);
+        //部屋の座標、幅高さの確認用
+        //string s = "start(" + _data.Start.X + "," + _data.Start.Y + "),end(" + _data.End.X + "," + _data.End.Y + ")";
+        //Debug.Log(s);
+        //string w = "width:" + r_width + ",height:" + r_height;
+        //Debug.Log(w);
 
-        //サイズをfor文で回して、マップデータに書き込む
+        //部屋の座標をランダムで設定
         int r_posX = Utility.GetRandomInt(_data.Start.X, _data.End.X - r_width);
         int r_posY = Utility.GetRandomInt(_data.Start.Y, _data.End.Y - r_height);
 
         Debug.Log(r_posX);
         Debug.Log(r_posY);
 
-        for(int x = 0; x < r_width; x++)
+        //サイズをfor文で回して、マップデータに書き込む
+        for (int x = 0; x < r_width; x++)
         {
             for(int y = 0; y < r_height; y++)
             {
@@ -100,15 +146,23 @@ public class RoomGenerator : MonoBehaviour
         //***削除しやすくするため！
         float r_centX = (float)r_posX + (float)(r_width - 1) / 2.0f;         //部屋の中心の座標を取得
         float r_centY = (float)r_posY + (float)(r_height - 1) / 2.0f;
-        Instantiate(result.roomObj, new Vector3(r_centX * MapInitializer.MAP_SCALE, 0, r_centY * MapInitializer.MAP_SCALE), rotation);
+        GameObject _newRoom = Instantiate(result.roomObj, new Vector3(r_centX * MapInitializer.MAP_SCALE, 0, r_centY * MapInitializer.MAP_SCALE), rotation);
+
+        //スタート部屋の場合は初期座標のために保存
+        if (result.rtype == Type.START) m_StartRoom = _newRoom;
+
+        //生成したオブジェクトをparentRoomの子オブジェクトにして、まとめる
+        _newRoom.transform.SetParent(m_parentRoom.transform);
 
         //部屋データを書き換える
         _data = new Room(r_posX, r_posY, r_posX + r_width - 1, r_posY + r_height - 1);
 
     }
 
+    //========================================================
     //部屋タイプを確認する関数
     //幅・高さから設定可能な部屋タイプをリストで返す
+    //========================================================
     private void TypeCheck(int _w,int _h, out List<Type> _list)
     {
         //_listをインスタンス化
@@ -128,9 +182,16 @@ public class RoomGenerator : MonoBehaviour
         //R10x12(or R12x10)
         if ((_w >= 10 && _h >= 12) || (_w >= 12 && _h >= 10)) _list.Add(Type.R10x12);
 
+        //スタート部屋
+        _list.Add(Type.START);
+        //ゴール部屋
+        _list.Add(Type.GOAL);
+
     }
 
-    //部屋タイプに応じた数値を返す
+    //===============================================
+    //部屋タイプに応じた数値を返す処理
+    //===============================================
     private void TypeParam(Type _type,out int _w,out int _h)
     {
         //仮おき
@@ -155,7 +216,24 @@ public class RoomGenerator : MonoBehaviour
             case Type.R10x12:
                 _w = 10; _h = 12;
                 break;
+            case Type.START:
+                _w = 6;  _h = 6;
+                break;
+            case Type.GOAL:
+                _w = 6;  _h = 6;
+                break;
         }
+    }
+
+    //========================================
+    //スタート地点ゲッター
+    //========================================
+    public Transform GetStartPosition()
+    {
+        //スタート地点を設定した子オブジェクトを取得
+        Transform sPos = m_StartRoom.transform.Find("StartPosition");
+
+        return sPos;
     }
 
 }

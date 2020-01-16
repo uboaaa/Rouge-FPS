@@ -243,4 +243,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f02f2a28fd958b41991bffa3bdf8d92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collider: {fileID: 1501020354235103774}
+  trans_coll: {fileID: 1501020354235103774}

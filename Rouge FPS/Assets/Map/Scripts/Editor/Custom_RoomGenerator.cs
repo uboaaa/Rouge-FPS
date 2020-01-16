@@ -12,6 +12,10 @@ using UnityEditorInternal;
 [CanEditMultipleObjects]
 public class Custom_RoomGenerator : Editor
 {
+    SerializedProperty _start;
+    SerializedProperty _goal;
+    SerializedProperty _rooms;
+
     ReorderableList _reorderableList;
     
     private void OnEnable()
@@ -30,11 +34,20 @@ public class Custom_RoomGenerator : Editor
         };
 
         
+        //部屋まとめ用
+        _rooms = serializedObject.FindProperty("m_parentRoom");
     }
 
     public override void OnInspectorGUI()
     {
+        //各シリアライズオブジェクトの内容を更新
         serializedObject.Update();
+
+        //スタート・ゴール部屋の描画を更新
+        
+        EditorGUILayout.PropertyField(_rooms);
+
+        //リストの描画を更新
         _reorderableList.DoLayoutList();
         serializedObject.ApplyModifiedProperties();
     }

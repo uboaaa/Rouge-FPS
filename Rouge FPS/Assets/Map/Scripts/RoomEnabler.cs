@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class RoomEnabler : MonoBehaviour
 {
-    public BoxCollider collider = null;
+    public BoxCollider trans_coll = null;
 
     void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
-            collider.enabled = true;
+            trans_coll.enabled = true;
         }
     }
 }

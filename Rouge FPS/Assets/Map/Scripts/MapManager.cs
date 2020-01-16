@@ -4,13 +4,13 @@ using UnityEngine;
 
 public enum Group
 {
-    easy,normal,hard
+    small,medium,large
 }
 
 [System.Serializable]
 public class ObjectGroup
 {
-    public Group group = Group.easy;
+    public Group group = Group.small;
     public GameObject obj = null;
 }
 
@@ -115,7 +115,8 @@ public class MapManager : MonoBehaviour
                 int num = calc / 10;
                 for (int i = 0; i < num; i++)
                 {
-                    PopEnemy(m_enemyList[0].obj);
+                    GameObject _enemy = SelectEnemyDifficult();
+                    PopEnemy(_enemy);
                 }
             }
             Debug.Log(m_roomId);
@@ -136,6 +137,22 @@ public class MapManager : MonoBehaviour
 
         //リストに追加
         m_spawnList.Add(Instantiate(_enemy, new Vector3(position.X * MapInitializer.MAP_SCALE, 1, position.Y * MapInitializer.MAP_SCALE), new Quaternion()));
+    }
+
+    private GameObject SelectEnemyDifficult()
+    {
+        Group g = Group.small;
+
+        List<GameObject> sameList = new List<GameObject>();
+        foreach(ObjectGroup enemys in m_enemyList)
+        {
+            if (enemys.group == g)
+            {
+                sameList.Add(enemys.obj);
+            }
+        }
+
+        return sameList.GetAtRandom();
     }
 
     // 敵スポナーの設置関数
