@@ -38,10 +38,11 @@ public class EnemyAttackPower : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
-            
+            if( FPSCon.GetComponent<MyStatus>().GetHp()>0){
           FPSCon.GetComponent<MyStatus>().downHp((float)enemyatkpow);
-            DamageFlg = true;
             
+            DamageFlg = true;
+            }
             Destroy(this);
         }
 

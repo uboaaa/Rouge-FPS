@@ -23,7 +23,7 @@ public class FadePanel : MonoBehaviour
         green = fadeImage.color.g;
         blue = fadeImage.color.b;
         alfa = fadeImage.color.a;
-        gameObject = GameObject.Find("GameObject");
+
     }
 
     void Update()

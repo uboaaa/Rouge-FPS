@@ -31,7 +31,7 @@ public class FlushController : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(NowHP);
+        Debug.Log(EnemyAttackPower.GetEnemyBHitGet());
 
         if (!once) {
             FirstHP = FPSCon.GetComponent<MyStatus>().GetHp();
