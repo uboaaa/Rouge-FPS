@@ -6,6 +6,7 @@ public class PauseScript : MonoBehaviour
     //　ポーズした時に表示するUI
     [SerializeField]
     private GameObject pauseUI;
+     public GameObject FPSCon;
     private static bool abc;
     private void Start()
     {
@@ -26,6 +27,7 @@ public class PauseScript : MonoBehaviour
             }
         }
         abc=pauseUI.activeSelf;
+        if(FPSCon.GetComponent<MyStatus>().GetHp()>0){
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if(!GametoTitle.GetNoMove()){
@@ -43,6 +45,7 @@ public class PauseScript : MonoBehaviour
                 Time.timeScale = 1f;
             }
         }
+    }
     }
      public static bool pause() {
         return abc;

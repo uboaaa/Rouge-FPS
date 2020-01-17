@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-public class FadePanel : MonoBehaviour
+public class FadePanel2 : MonoBehaviour
 {
     float fadeSpeed = 0.02f;        //透明度が変わるスピードを管理
     float red, green, blue;
@@ -31,7 +31,7 @@ public class FadePanel : MonoBehaviour
         
 
         
-                if (TitletoGame.GetGame() || SceneManager.GetActiveScene().name=="GameOverScene")
+                if (GametoTitle.GetModeSelect()=="ReturnTitle")
                 {
                     if (Input.GetKeyDown(KeyCode.Return) ) {
                     isFadeOut = true;
