@@ -12,7 +12,7 @@ public class MergeScenes : MonoBehaviour
          Screen.SetResolution(1280, 720, false, 30);
          Application.targetFrameRate=30;
         //SceneManager.LoadScene("MapScene", LoadSceneMode.Additive);
-        SceneManager.LoadScene("PlayerScene", LoadSceneMode.Additive);
+         SceneManager.LoadScene("PlayerScene", LoadSceneMode.Additive);
         
 
         SceneManager.LoadScene("EnemyScene", LoadSceneMode.Additive);
