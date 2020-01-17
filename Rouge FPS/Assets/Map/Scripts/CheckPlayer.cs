@@ -19,14 +19,19 @@ public class CheckPlayer : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        float x = MapInitializer.GetSpawnData("px");
-        float y = MapInitializer.GetSpawnData("py");
-        float z = MapInitializer.GetSpawnData("pz");
         
-        playerTransform.position = new Vector3(x, y, z);
     }
     void Update()
     {
+        //初期座標の更新
+        if (MapInitializer.GetSpawnEnable())
+        {
+            float ini_x = MapInitializer.GetSpawnData("px");
+            float ini_y = MapInitializer.GetSpawnData("py");
+            float ini_z = MapInitializer.GetSpawnData("pz");
+            playerTransform.position = new Vector3(ini_x, ini_y, ini_z);
+        }
+
         // マウスで視点移動
         float x_rotate = Input.GetAxis("Mouse X") * 3.0f;
         float y_rotate = Input.GetAxis("Mouse Y");

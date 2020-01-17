@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - DropBox
+  - DropGun
+  - MiniMap
+  - Room
+  - Goal
   - Bullet
   - DroppableField
   - mousePoint
