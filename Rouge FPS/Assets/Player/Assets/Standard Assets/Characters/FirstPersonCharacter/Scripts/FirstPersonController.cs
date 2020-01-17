@@ -43,12 +43,14 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private AudioSource m_AudioSource;
         private GameObject Pause;
         private bool aaa;
-
+        
+         GameObject FPSCon;
          bool unko=false;
 
         // Use this for initialization
         private void Start()
         {
+            FPSCon = GameObject.Find("FPSController");
             Pause = GameObject.Find("MainCanvas");
             m_CharacterController = GetComponent<CharacterController>();
             m_Camera = Camera.main;
@@ -74,7 +76,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             //     //m_Camera.transform.rotation = Quaternion.identity;
             // }
             if(!PauseScript.pause()){
- 
+           if(FPSCon.GetComponent<MyStatus>().GetHp()>1){
                 RotateView();
             
             // the jump state needs to read here to make sure it is not missed
@@ -97,6 +99,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
  
             m_PreviouslyGrounded = m_CharacterController.isGrounded;
             }
+            }
         }
 
 
@@ -111,7 +114,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void FixedUpdate()
         {
-        
+               if(FPSCon.GetComponent<MyStatus>().GetHp()>1){
         if(m_IsWalking && Input.GetKeyDown(KeyCode.LeftShift)){m_IsWalking=false;}
         else if(!m_IsWalking && Input.GetKeyDown(KeyCode.LeftShift)){m_IsWalking=true;}
             float speed;
@@ -169,6 +172,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             UpdateCameraPosition(speed);
 
             m_MouseLook.UpdateCursorLock();
+               }
         }
 
      
