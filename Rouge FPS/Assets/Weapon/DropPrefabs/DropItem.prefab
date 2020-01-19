@@ -98,17 +98,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootMode: 0
-  gunType: 2
-  gunRank: 2
-  skillSlot: 1
-  MagazineSize: 45
+  gunType: 0
+  gunRank: 0
+  skillSlot: 0
+  MagazineSize: 0
   remAmmo: 150
-  ammoMax: 150
+  ammoMax: 0
   remMagazine: 500
-  Damage: 10
-  shootInterval: 0.2
-  reloadInterval: 0.8
-  bulletPower: 1000
+  Damage: 0
+  shootInterval: 0
+  reloadInterval: 0
+  bulletPower: 0
   GunEXP: 0
 --- !u!114 &5620273193576001034
 MonoBehaviour:
@@ -141,13 +141,14 @@ MonoBehaviour:
   Runk2EffectPrefab: {fileID: 6835583412659921875, guid: 0c3c989b7a9d8bb4d9b142560baa3e01,
     type: 3}
   Runk3EffectPrefab: {fileID: 177676, guid: 460ec3e3d006c254b831a1a92d30ed3e, type: 3}
-  AssaultRifleSprite: {fileID: 0}
+  AssaultRifleSprite: {fileID: 21300000, guid: f4c9dd545f49d3046a614bbc9216c22f, type: 3}
   HandGunSprite: {fileID: 21300000, guid: e5c20cf581584a242ad0723f004bb302, type: 3}
   LightMachineGunSprite: {fileID: 21300000, guid: 7f714dcf2d147f84f99af52b726a658e,
     type: 3}
-  ShotGunSprite: {fileID: 0}
-  SubMachineGunSprite: {fileID: 0}
-  RocketLauncherSprite: {fileID: 21300000, guid: 9f01c5aa568e5344abb307a44126d3ea,
+  ShotGunSprite: {fileID: 21300000, guid: 340c8387c4fc7e349abc0183b9701a34, type: 3}
+  SubMachineGunSprite: {fileID: 21300000, guid: 960d8867bc1c0c9428cfc8f5d1e7c694,
+    type: 3}
+  RocketLauncherSprite: {fileID: 21300000, guid: 3ba64334280f0094780648ab1224d3e8,
     type: 3}
   FlameThrowerSprite: {fileID: 0}
   LaserGunSprite: {fileID: 0}
@@ -192,9 +193,11 @@ MonoBehaviour:
   HandGun: {fileID: 6450164897633310034, guid: 3582477c0b353c745b9552b2dad03171, type: 3}
   LightMachineGun: {fileID: 4051110895912933288, guid: a04d227ce5414ce49a99adea56b198c6,
     type: 3}
-  AssaultRifle: {fileID: 0}
-  SubMachineGun: {fileID: 0}
-  RocketLauncher: {fileID: 279571132417835189, guid: f54d036500a989d42bc9515ba6ad750d,
+  AssaultRifle: {fileID: 6847620235215801634, guid: b2e4e90a8db09f64094e00a170a42f42,
     type: 3}
-  ShotGun: {fileID: 0}
+  SubMachineGun: {fileID: 2486167993059112666, guid: 07fcfb285811700448ac39c69bf8c998,
+    type: 3}
+  RocketLauncher: {fileID: 8702378763311960002, guid: 370ad1451af12f34bab33206ed7a4bae,
+    type: 3}
+  ShotGun: {fileID: 2158512696167874446, guid: 76efeab63cb1f6a4488cc9b4b8134ac2, type: 3}
   FlameThrower: {fileID: 0}

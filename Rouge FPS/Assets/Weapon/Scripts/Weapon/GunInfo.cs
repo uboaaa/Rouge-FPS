@@ -36,15 +36,20 @@ public class GunInfo : MonoBehaviour
     // パラメーター関係==============================================
     public float GunEXP = 0;                                                // 経験値
 
+    
+    LoadGunPrefab LGPScript;
+    GameObject GunObj;
+
     void Start()
     {
+        LGPScript = GetComponent<LoadGunPrefab>();
 
 
+        //===================================================
         // 能力値を選出する
-        // ※※※※※※※※※※※※※
-        // 後から変更しないといけない
-        // ※※※※※※※※※※※※※
-        int random =　UnityEngine.Random.Range(0, 2);
+        //===================================================
+        // 武器種類をランダムで取得
+        int random =　UnityEngine.Random.Range(0, 6);
         if(random == 0)
         {
             gunType = GunInfo.GunType.HandGun;
@@ -53,7 +58,25 @@ public class GunInfo : MonoBehaviour
         {
             gunType = GunInfo.GunType.LightMachineGun;
         }
+        else if(random == 2)
+        {
+            gunType = GunInfo.GunType.SubMachineGun;
+        }
+        else if(random == 3)
+        {
+            gunType = GunInfo.GunType.ShotGun;
+        }
+        else if(random == 4)
+        {
+            gunType = GunInfo.GunType.AssaultRifle;
+        }
+        else if(random == 5)
+        {
+            gunType = GunInfo.GunType.RocketLauncher;
+        }
 
+
+        // 武器のランクをランダムで取得
         random =　UnityEngine.Random.Range(0, 3);
         if(random == 0)
         {
@@ -68,8 +91,43 @@ public class GunInfo : MonoBehaviour
             gunRank = GunInfo.GunRank.Rank3;
         }
 
+        // スキルスロット数をランダムで取得
         skillSlot = UnityEngine.Random.Range(1, 4);     // 1~3個
 
-        //Damage
+        switch(gunType)
+        {
+            case GunInfo.GunType.AssaultRifle:
+                GunObj = LGPScript.AssaultRifle;
+                break;
+            case GunInfo.GunType.HandGun:
+                GunObj = LGPScript.HandGun;
+                break;
+            case GunInfo.GunType.LightMachineGun:
+                GunObj = LGPScript.LightMachineGun;
+                break;
+            case GunInfo.GunType.ShotGun:
+                GunObj = LGPScript.ShotGun;
+                break;
+            case GunInfo.GunType.SubMachineGun:
+                GunObj = LGPScript.SubMachineGun;
+                break;
+            case GunInfo.GunType.RocketLauncher:
+                GunObj = LGPScript.RocketLauncher;
+                break;
+            case GunInfo.GunType.FlameThrower:
+                GunObj = LGPScript.FlameThrower;
+                break;
+        }
+
+        // ※※※※※※※※※※※※※※※※※※※※※※※※※※※※
+        // 修正した方がいいかも
+        // ※※※※※※※※※※※※※※※※※※※※※※※※※※※※
+        MagazineSize   = GunObj.GetComponent<GunController>().MagazineSize;
+        ammoMax        = GunObj.GetComponent<GunController>().remAmmo;
+        Damage         = GunObj.GetComponent<GunController>().Damage;
+        shootInterval  = GunObj.GetComponent<GunController>().shootInterval;
+        reloadInterval = GunObj.GetComponent<GunController>().reloadInterval;
+        bulletPower    = GunObj.GetComponent<GunController>().bulletPower;
+        GunEXP         = GunObj.GetComponent<GunController>().GunEXP;
     }
 }
