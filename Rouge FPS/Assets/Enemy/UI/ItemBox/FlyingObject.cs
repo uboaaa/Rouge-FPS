@@ -7,10 +7,16 @@ public class FlyingObject : MonoBehaviour
 {
     public float swingPow;
     private float position;
+    static private float basePosition = 999;
     public int  Range = 2;
 
     void Start()
     {
+        if(basePosition >= 999)
+        {
+            basePosition = transform.position.y;
+        }
+        transform.position = new Vector3(transform.position.x, basePosition,transform.position.z);  
         position = transform.position.y;
     }
     

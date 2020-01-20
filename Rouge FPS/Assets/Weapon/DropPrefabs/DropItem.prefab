@@ -148,7 +148,7 @@ MonoBehaviour:
   ShotGunSprite: {fileID: 21300000, guid: 340c8387c4fc7e349abc0183b9701a34, type: 3}
   SubMachineGunSprite: {fileID: 21300000, guid: 960d8867bc1c0c9428cfc8f5d1e7c694,
     type: 3}
-  RocketLauncherSprite: {fileID: 21300000, guid: 3ba64334280f0094780648ab1224d3e8,
+  GrenadeLauncherSprite: {fileID: 21300000, guid: 3ba64334280f0094780648ab1224d3e8,
     type: 3}
   FlameThrowerSprite: {fileID: 0}
   LaserGunSprite: {fileID: 0}
@@ -197,7 +197,7 @@ MonoBehaviour:
     type: 3}
   SubMachineGun: {fileID: 2486167993059112666, guid: 07fcfb285811700448ac39c69bf8c998,
     type: 3}
-  RocketLauncher: {fileID: 8702378763311960002, guid: 370ad1451af12f34bab33206ed7a4bae,
+  GrenadeLauncher: {fileID: 8702378763311960002, guid: 370ad1451af12f34bab33206ed7a4bae,
     type: 3}
   ShotGun: {fileID: 2158512696167874446, guid: 76efeab63cb1f6a4488cc9b4b8134ac2, type: 3}
   FlameThrower: {fileID: 0}

@@ -8,7 +8,7 @@ public class LoadGunPrefab : MonoBehaviour
     [SerializeField]public GameObject LightMachineGun;
     [SerializeField]public GameObject AssaultRifle;
     [SerializeField]public GameObject SubMachineGun;
-    [SerializeField]public GameObject RocketLauncher;
+    [SerializeField]public GameObject GrenadeLauncher;
     [SerializeField]public GameObject ShotGun;
     [SerializeField]public GameObject FlameThrower;
 
@@ -25,8 +25,8 @@ public class LoadGunPrefab : MonoBehaviour
                 return AssaultRifle;
             case "SubMachineGun(Clone)":
                 return SubMachineGun;
-            case "RocketLauncher(Clone)":
-                return RocketLauncher;
+            case "GrenadeLauncher(Clone)":
+                return GrenadeLauncher;
             case "ShotGun(Clone)":
                 return ShotGun;
             case "FlameThrower(Clone)":

@@ -123,7 +123,7 @@ MonoBehaviour:
   Damage: 40
   shootInterval: 0.2
   reloadInterval: 0.9
-  bulletPower: 600
+  bulletPower: 1500
   muzzle: {fileID: 8702378763419279083}
   bulletPrefab: {fileID: 4828025896062122035, guid: b193cccef3cd3a549b2dd8be945ffaa9,
     type: 3}
@@ -163,7 +163,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8702378763419279082}
   m_LocalRotation: {x: -0.0528116, y: -0.1258847, z: -0.006436014, w: 0.9906173}
-  m_LocalPosition: {x: -0.14, y: 0.38, z: -2.89}
+  m_LocalPosition: {x: -1.083, y: 1.154, z: -5.529}
   m_LocalScale: {x: 0.13448006, y: 0.13448, z: 0.67443997}
   m_Children: []
   m_Father: {fileID: 8702378763311960003}
@@ -184,7 +184,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8702378763419279082}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

@@ -14,7 +14,7 @@ public class GunInfo : MonoBehaviour
                         SubMachineGun,          // サブマシンガン
                         LightMachineGun,        // ライトマシンガン
                         HandGun,                // ハンドガン
-                        RocketLauncher,         // ロケットランチャー
+                        GrenadeLauncher,        // グレネードランチャー
                         ShotGun,                // ショットガン
                         LaserGun,               // レーザーガン
                         FlameThrower            // 火炎放射器
@@ -48,36 +48,8 @@ public class GunInfo : MonoBehaviour
         //===================================================
         // 能力値を選出する
         //===================================================
-        // 武器種類をランダムで取得
-        int random =　UnityEngine.Random.Range(0, 6);
-        if(random == 0)
-        {
-            gunType = GunInfo.GunType.HandGun;
-        }
-        else if(random == 1)
-        {
-            gunType = GunInfo.GunType.LightMachineGun;
-        }
-        else if(random == 2)
-        {
-            gunType = GunInfo.GunType.SubMachineGun;
-        }
-        else if(random == 3)
-        {
-            gunType = GunInfo.GunType.ShotGun;
-        }
-        else if(random == 4)
-        {
-            gunType = GunInfo.GunType.AssaultRifle;
-        }
-        else if(random == 5)
-        {
-            gunType = GunInfo.GunType.RocketLauncher;
-        }
-
-
         // 武器のランクをランダムで取得
-        random =　UnityEngine.Random.Range(0, 3);
+        int random =　UnityEngine.Random.Range(0, 3);
         if(random == 0)
         {
             gunRank = GunInfo.GunRank.Rank1;
@@ -111,8 +83,8 @@ public class GunInfo : MonoBehaviour
             case GunInfo.GunType.SubMachineGun:
                 GunObj = LGPScript.SubMachineGun;
                 break;
-            case GunInfo.GunType.RocketLauncher:
-                GunObj = LGPScript.RocketLauncher;
+            case GunInfo.GunType.GrenadeLauncher:
+                GunObj = LGPScript.GrenadeLauncher;
                 break;
             case GunInfo.GunType.FlameThrower:
                 GunObj = LGPScript.FlameThrower;
