@@ -35,6 +35,7 @@ public class MyStatus : MonoBehaviour
     }
     public void AddHp(float hp)
     {
+        AudioManager.Instance.PlaySE("heal01"); 
         this.playerHP += hp;
     }
 

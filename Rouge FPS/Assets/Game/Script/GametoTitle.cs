@@ -15,8 +15,8 @@ public class GametoTitle : MonoBehaviour
     private GameObject RGame;
     [SerializeField]
     private GameObject RTitle;
-    [SerializeField]
-    private GameObject Settings;
+    // [SerializeField]
+    // private GameObject Settings;
 
         [SerializeField]
     private GameObject pauseUI;
@@ -43,9 +43,9 @@ public class GametoTitle : MonoBehaviour
             if(pauseUI.activeSelf){
              last=false;
                 Gett=true;
-                if (Input.GetKeyDown(KeyCode.UpArrow)) { ModeSelect = "Settings"; }
+                if (Input.GetKeyDown(KeyCode.UpArrow)) {  ModeSelect = "ReturnTitle"; }
                 if (Input.GetKeyDown(KeyCode.DownArrow)) { ModeSelect = "ReturnTitle"; }
-                if (Input.GetKeyDown(KeyCode.Return)) { EnterGame();}
+                if (Input.GetKeyDown(KeyCode.Return)) {AudioManager.Instance.PlaySE("button01b"); EnterGame();}
                     RGame.GetComponent<TextColorChangeScript>().ColorChange(ModeSelect);
             }
             
@@ -58,7 +58,7 @@ public class GametoTitle : MonoBehaviour
                   if(pauseUI.activeSelf){
                   
                 if (Input.GetKeyDown(KeyCode.UpArrow)) { ModeSelect = "ReturnGame"; }
-                if (Input.GetKeyDown(KeyCode.DownArrow)) { ModeSelect = "Settings"; }
+                if (Input.GetKeyDown(KeyCode.DownArrow)) { ModeSelect = "ReturnGame"; }
                RTitle.GetComponent<TextColorChangeScript>().ColorChange(ModeSelect);
                    if (Input.GetKeyDown(KeyCode.Return)) {   last=true;NoMove=true;}
                    }
@@ -66,16 +66,16 @@ public class GametoTitle : MonoBehaviour
                    if (FadePanel2.AlphaGet()>1.0f) {SceneManager.LoadScene("TitleScene");}
                 break;
 
-            case "Settings":
-              if(pauseUI.activeSelf){
-            Gett=false;
-            last=false;
-                if (Input.GetKeyDown(KeyCode.UpArrow)) { ModeSelect = "ReturnTitle"; }
-                if (Input.GetKeyDown(KeyCode.DownArrow)) { ModeSelect = "ReturnGame"; }
-                Settings.GetComponent<TextColorChangeScript>().ColorChange(ModeSelect);
-              }
+            // case "Settings":
+            //   if(pauseUI.activeSelf){
+            // Gett=false;
+            // last=false;
+            //     if (Input.GetKeyDown(KeyCode.UpArrow)) { ModeSelect = "ReturnTitle"; }
+            //     if (Input.GetKeyDown(KeyCode.DownArrow)) { ModeSelect = "ReturnGame"; }
+            //     Settings.GetComponent<TextColorChangeScript>().ColorChange(ModeSelect);
+            //   }
               
-                break;
+            //     break;
         }
         
 

@@ -9,8 +9,7 @@ public class MergeScenes : MonoBehaviour
     void Start()
     {
        
-         Screen.SetResolution(1280, 720, false, 30);
-         Application.targetFrameRate=30;
+        FloorCount.SetReset();
         SceneManager.LoadScene("MapScene", LoadSceneMode.Additive);
          SceneManager.LoadScene("PlayerScene", LoadSceneMode.Additive);
         

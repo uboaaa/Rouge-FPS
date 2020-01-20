@@ -34,6 +34,7 @@ public class FadePanel : MonoBehaviour
                 if (TitletoGame.GetGame() || SceneManager.GetActiveScene().name=="GameOverScene")
                 {
                     if (Input.GetKeyDown(KeyCode.Return) ) {
+                     AudioManager.Instance.PlaySE("button01b"); 
                     isFadeOut = true;
                     }
                 }

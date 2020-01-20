@@ -39,16 +39,15 @@ private float aaaaa;
     void Update()
     {
         rotation = this.transform.localRotation;
-        Debug.Log(GetPlayerRotation());
+      
 
-        if(StageReset){
+        if(StageReset || MapInitializer.GetSpawnEnable()){
         characterController = GetComponent<CharacterController>();
         characterController.enabled = false;
         abc.x = MapInitializer.GetSpawnData("px");
         abc.y = MapInitializer.GetSpawnData("py") ;
         abc.z = MapInitializer.GetSpawnData("pz");
         UpdatePlayerXYZ(abc.x, abc.y, abc.z);}
-
         px=this.transform.position.x;
         py=this.transform.position.y;
         pz=this.transform.position.z;

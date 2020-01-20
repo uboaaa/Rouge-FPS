@@ -34,6 +34,7 @@ public class FadePanel2 : MonoBehaviour
                 if (GametoTitle.GetModeSelect()=="ReturnTitle")
                 {
                     if (Input.GetKeyDown(KeyCode.Return) ) {
+                    AudioManager.Instance.PlaySE("button01b"); 
                     isFadeOut = true;
                     }
                 }
