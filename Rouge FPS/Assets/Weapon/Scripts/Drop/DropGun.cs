@@ -18,7 +18,7 @@ public class DropGun : MonoBehaviour
     public Sprite LightMachineGunSprite = null;
     public Sprite ShotGunSprite         = null;
     public Sprite SubMachineGunSprite   = null;
-    public Sprite RocketLauncherSprite  = null;
+    public Sprite GrenadeLauncherSprite  = null;
     public Sprite FlameThrowerSprite    = null;
     public Sprite LaserGunSprite        = null;
 
@@ -71,11 +71,11 @@ public class DropGun : MonoBehaviour
                 // spriteをセット
                 gunSprite.sprite = SubMachineGunSprite;
                 break;
-            case GunInfo.GunType.RocketLauncher:
+            case GunInfo.GunType.GrenadeLauncher:
                 // gunTypeを元にPrefabを取ってくる
-                WeaponInfo = LGPScript.LoadGun("RocketLauncher(Clone)");
+                WeaponInfo = LGPScript.LoadGun("GrenadeLauncher(Clone)");
                 // spriteをセット
-                gunSprite.sprite = RocketLauncherSprite;
+                gunSprite.sprite = GrenadeLauncherSprite;
                 break;
             case GunInfo.GunType.FlameThrower:
                 // gunTypeを元にPrefabを取ってくる

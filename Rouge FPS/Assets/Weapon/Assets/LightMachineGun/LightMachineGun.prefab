@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4051110895912933289
 Transform:
   m_ObjectHideFlags: 0
@@ -118,6 +118,7 @@ MonoBehaviour:
   gunRank: 1
   skillSlot: 2
   MagazineSize: 120
+  AmmoSize: 0
   remAmmo: 240
   Damage: 4
   shootInterval: 0.3
@@ -162,7 +163,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4051110896003729024}
   m_LocalRotation: {x: -0.008646686, y: -0.016437005, z: -0.0013332674, w: 0.9998266}
-  m_LocalPosition: {x: -2.7, y: 1.5, z: -5.6}
+  m_LocalPosition: {x: -2.683, y: 1.5, z: -5.6}
   m_LocalScale: {x: 0.13448006, y: 0.13448, z: 0.67443997}
   m_Children: []
   m_Father: {fileID: 4051110895912933289}

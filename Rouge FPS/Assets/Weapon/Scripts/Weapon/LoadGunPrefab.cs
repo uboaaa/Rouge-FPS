@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class LoadGunPrefab : MonoBehaviour
 {
-    [SerializeField] GameObject HandGun;
-    [SerializeField] GameObject LightMachineGun;
-    [SerializeField] GameObject AssaultRifle;
-    [SerializeField] GameObject SubMachineGun;
-    [SerializeField] GameObject RocketLauncher;
-    [SerializeField] GameObject ShotGun;
-    [SerializeField] GameObject FlameThrower;
+    [SerializeField]public GameObject HandGun;
+    [SerializeField]public GameObject LightMachineGun;
+    [SerializeField]public GameObject AssaultRifle;
+    [SerializeField]public GameObject SubMachineGun;
+    [SerializeField]public GameObject GrenadeLauncher;
+    [SerializeField]public GameObject ShotGun;
+    [SerializeField]public GameObject FlameThrower;
 
     public GameObject LoadGun(string gunName)
     {
@@ -25,8 +25,8 @@ public class LoadGunPrefab : MonoBehaviour
                 return AssaultRifle;
             case "SubMachineGun(Clone)":
                 return SubMachineGun;
-            case "RocketLauncher(Clone)":
-                return RocketLauncher;
+            case "GrenadeLauncher(Clone)":
+                return GrenadeLauncher;
             case "ShotGun(Clone)":
                 return ShotGun;
             case "FlameThrower(Clone)":
