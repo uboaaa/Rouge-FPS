@@ -28,7 +28,7 @@ public class EnemyAttackPower : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(MyStatus.GetHp());
+        //Debug.Log(MyStatus.GetHp());
     }
     void OnTriggerEnter(Collider other)
     {

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 598519576163155585}
   - component: {fileID: 598519576182562075}
   - component: {fileID: 598519576181192867}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: FireGlowTrail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4641,7 +4641,8 @@ GameObject:
   - component: {fileID: 598519576160442605}
   - component: {fileID: 4851604846559610145}
   - component: {fileID: 7394632889204356012}
-  m_Layer: 0
+  - component: {fileID: 3155536969803420563}
+  m_Layer: 11
   m_Name: GhostBulletGreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9424,6 +9425,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyatkpow: 0
   BulletFlg: 1
+--- !u!135 &3155536969803420563
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 598519576163349527}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &598519576163408103
 GameObject:
   m_ObjectHideFlags: 0
@@ -9435,7 +9449,7 @@ GameObject:
   - component: {fileID: 598519576163132255}
   - component: {fileID: 598519576182580659}
   - component: {fileID: 598519576182592177}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: SparkTrail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14097,7 +14111,7 @@ GameObject:
   - component: {fileID: 598519576163245531}
   - component: {fileID: 598519576182555425}
   - component: {fileID: 598519576181080791}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: SmokeTrail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18714,7 +18728,7 @@ GameObject:
   - component: {fileID: 598519576163127545}
   - component: {fileID: 598519576182598985}
   - component: {fileID: 598519576182594753}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: FireTrail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
