@@ -27,6 +27,12 @@ public class RoomGenerator : MonoBehaviour
     //部屋の親オブジェクト
     public GameObject m_parentRoom;
 
+    //スタート部屋prefab
+    public GameObject m_startPrefab;
+
+    //ゴール部屋prefab
+    public GameObject m_goalPrefab;
+
     //スタート、ゴール設定フラグ
     private bool m_setStart = false;
     private bool m_setGoal = false;
@@ -37,7 +43,7 @@ public class RoomGenerator : MonoBehaviour
     //初期化
     void Start()
     {
-        
+        Debug.Log("部屋タイプの数：" + m_roomTypeList.Length);
     }
 
     //==============================================================
@@ -63,6 +69,7 @@ public class RoomGenerator : MonoBehaviour
 
     //=============================================================
     //部屋生成処理
+    // _data … 部屋データ参照渡し用、　_map … マップデータ参照渡し用
     //==============================================================
     public void GenerateRoom(ref Room _data, ref int[,] _map)
     {
@@ -79,25 +86,34 @@ public class RoomGenerator : MonoBehaviour
         List<RoomType> enableList = new List<RoomType>();
         foreach(Type type in types)
         {
-            //部屋タイプがスタート、ゴール時かつ既に設定されている場合は飛ばす
-            //
-            if (type == Type.START && m_setStart) continue;
-            if (type == Type.GOAL && m_setGoal) continue;
-
             foreach (RoomType roomType in m_roomTypeList)
             {
                 if (roomType.rtype == type) enableList.Add(roomType);       //可能な部屋をリストにする
             }
         }
 
-        RoomType result = enableList.GetAtRandom_Bias();                         //リストからランダムに取得
+        RoomType result = new RoomType();
 
-        //部屋タイプがstart,goalのときフラグ更新
-        if (result.rtype == Type.START) {
+        //スタート、ゴールが設定されている場合のみ
+        if (m_setStart && m_setGoal) result = enableList.GetAtRandom_Bias();      //リストからランダムに取得
+
+        //スタート、ゴール部屋を設定していない場合は優先して設定
+        if (!m_setStart)
+        {
+            //スタート部屋を設定
+            result.rtype = Type.START;
+            result.roomObj = m_startPrefab;
+            //startフラグも更新
             m_setStart = true;
-            m_StartRoom = result.roomObj;
         }
-        if (result.rtype == Type.GOAL) m_setGoal = true;
+        else if(!m_setGoal)
+        {
+            //ゴール部屋を設定
+            result.rtype = Type.GOAL;
+            result.roomObj = m_goalPrefab;
+            //goalフラグも更新
+            m_setGoal = true;
+        }
 
         //サイズに応じてマップに配置、反映
         int r_width;                                            //部屋の幅・高さ
@@ -117,12 +133,6 @@ public class RoomGenerator : MonoBehaviour
                 r_height = tmp;
             }
         }
-
-        //部屋の座標、幅高さの確認用
-        //string s = "start(" + _data.Start.X + "," + _data.Start.Y + "),end(" + _data.End.X + "," + _data.End.Y + ")";
-        //Debug.Log(s);
-        //string w = "width:" + r_width + ",height:" + r_height;
-        //Debug.Log(w);
 
         //部屋の座標をランダムで設定
         int r_posX = Utility.GetRandomInt(_data.Start.X, _data.End.X - r_width);
@@ -181,12 +191,6 @@ public class RoomGenerator : MonoBehaviour
         if ((_w >= 6 && _h >= 10) || (_w >= 10 && _h >= 6)) _list.Add(Type.R6x10);
         //R10x12(or R12x10)
         if ((_w >= 10 && _h >= 12) || (_w >= 12 && _h >= 10)) _list.Add(Type.R10x12);
-
-        //スタート部屋
-        _list.Add(Type.START);
-        //ゴール部屋
-        _list.Add(Type.GOAL);
-
     }
 
     //===============================================

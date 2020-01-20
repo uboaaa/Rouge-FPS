@@ -33,7 +33,12 @@ public class Custom_RoomGenerator : Editor
             EditorGUI.LabelField(rect, "  RoomType  |  RoomObject  ");
         };
 
-        
+        //スタート部屋
+        _start = serializedObject.FindProperty("m_startPrefab");
+
+        //ゴール部屋
+        _goal = serializedObject.FindProperty("m_goalPrefab");
+
         //部屋まとめ用
         _rooms = serializedObject.FindProperty("m_parentRoom");
     }
@@ -44,7 +49,8 @@ public class Custom_RoomGenerator : Editor
         serializedObject.Update();
 
         //スタート・ゴール部屋の描画を更新
-        
+        EditorGUILayout.PropertyField(_start);
+        EditorGUILayout.PropertyField(_goal);
         EditorGUILayout.PropertyField(_rooms);
 
         //リストの描画を更新

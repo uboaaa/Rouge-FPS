@@ -543,7 +543,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1249066334}
   - component: {fileID: 1249066333}
-  - component: {fileID: 1249066335}
   - component: {fileID: 1249066336}
   - component: {fileID: 1249066337}
   m_Layer: 0
@@ -584,24 +583,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1249066335
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1249066332}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79364de309b5cc6469a444fdea9413c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_enemyList:
-  - group: 0
-    obj: {fileID: 2744920058350558036, guid: ad2933c45f2f2244dae888f40fca6734, type: 3}
-  - group: 0
-    obj: {fileID: 1779264351526620451, guid: d237077dad4c1d74a92629a5e33f991c, type: 3}
-  target: {fileID: 1278710102}
 --- !u!114 &1249066336
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -614,8 +595,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cadffa43052373f4d8b65c8a8842685e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_tipPrefab: {fileID: 8212387772764369077, guid: cc37b09dbf838e945a86d7bc54201aa2,
-    type: 3}
   m_miniMap: {fileID: 405515997}
   m_wholeMap: {fileID: 268872631}
   m_raderCamera: {fileID: 1362448524}
@@ -649,13 +628,11 @@ MonoBehaviour:
   - rtype: 2
     roomObj: {fileID: 559895850958081706, guid: 64bbb4ecaff8ef5429153896f0840a1f,
       type: 3}
-  - rtype: 5
-    roomObj: {fileID: 3119169724939059216, guid: e1d94919ab4a4e843a296ca8add13343,
-      type: 3}
-  - rtype: 6
-    roomObj: {fileID: 3984348400045686049, guid: 7b464cd7fc29f854aafbe9e1fb9d1733,
-      type: 3}
   m_parentRoom: {fileID: 293144133}
+  m_startPrefab: {fileID: 3119169724939059216, guid: e1d94919ab4a4e843a296ca8add13343,
+    type: 3}
+  m_goalPrefab: {fileID: 3984348400045686049, guid: 7b464cd7fc29f854aafbe9e1fb9d1733,
+    type: 3}
 --- !u!1 &1278710102
 GameObject:
   m_ObjectHideFlags: 0
