@@ -4,13 +4,6 @@ using UnityEngine;
 
 public class MiniMapManager : MonoBehaviour
 {
-    //マップチップ
-    [SerializeField]
-    private GameObject m_tipPrefab = null;
-    //マップチップのリスト
-    [SerializeField]
-    private MapTip[,] m_tipArray;
-
     //ミニマップ用オブジェクト
     [SerializeField]
     private GameObject m_miniMap = null;
@@ -28,18 +21,19 @@ public class MiniMapManager : MonoBehaviour
     //マップ
     private int[,] mapdata;
 
-    // Start is called before the first frame update
+    // 初期化
     void Start()
     {
         m_wholeMap.SetActive(false);
     }
 
-    // Update is called once per frame
+    // 更新
     void Update()
     {
         //レーダ表示マップ
         float x = 0, z = 0;
         Vector3 euler = new Vector3();
+        //他のシーンとマージしている場合はPlayerシーンから座標を取得
         if (MergeScenes.IsMerge())
         {
             x = PlayerXYZ.GetPlayerPosition("px");

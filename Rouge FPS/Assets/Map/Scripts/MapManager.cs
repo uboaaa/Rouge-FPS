@@ -24,9 +24,7 @@ public class MapManager : MonoBehaviour
 
     //マップ初期化クラス
     private MapInitializer initializer = null;
-    //ミニマップクラス
-    private MiniMapManager miniMapManager = null;
-
+  
     private Selectable<int> m_nowMapID = new Selectable<int>(); //マップID
     private int[,] m_nowMap;                    //マップ配置データ
     private int m_roomId = -1;                  //現在の部屋ID(-1のときは通路のとき)
@@ -40,9 +38,7 @@ public class MapManager : MonoBehaviour
     {
         //マップ初期化クラス
         initializer = this.gameObject.GetComponent<MapInitializer>();
-        //ミニマップ管理クラス
-        miniMapManager = this.gameObject.GetComponent<MiniMapManager>();
-
+        
         //マップ切り替え時の処理を設定
         m_nowMapID.mChanged += value =>
         {

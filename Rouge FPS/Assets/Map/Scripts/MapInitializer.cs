@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(RoomGenerator))]
-[RequireComponent(typeof(MapManager))]
 
 //マップ生成クラス
 //シーン開始時のみ処理を行う
@@ -45,7 +44,6 @@ public class MapInitializer : MonoBehaviour
     //component/class
     private DungeonGenerator DG = null;
     private RoomGenerator RG = null;
-    private MapManager MM = null;
 
     private int[,] m_map;                   //マップ配置データの2次配列
     private int m_startId = -1;             //スタート地点の部屋ID
@@ -64,8 +62,7 @@ public class MapInitializer : MonoBehaviour
         DG = new DungeonGenerator();
         //部屋生成コンポーネント取得
         RG = this.gameObject.GetComponent<RoomGenerator>();
-        MM = this.gameObject.GetComponent<MapManager>();
-
+        
         //マップ切り替え時の処理を設定
         m_mapID.mChanged += value =>
         {
@@ -80,7 +77,7 @@ public class MapInitializer : MonoBehaviour
             //オブジェクト配置
             GenerateObject();
             //マネージャー設定
-            ReloadManager();
+            //ReloadManager();
         };
     }
 
@@ -97,11 +94,11 @@ public class MapInitializer : MonoBehaviour
     //更新
     void Update()
     {
-        //マップ移動
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            MoveNextMap();
-        }
+        //簡易マップ移動
+        //if (Input.GetKeyDown(KeyCode.Q))
+        //{
+        //    MoveNextMap();
+        //}
     }
 
     private void FixedUpdate()
@@ -181,11 +178,7 @@ public class MapInitializer : MonoBehaviour
 
         } while (true);
 
-        //for (int i = 0; i < rooms_Value.Length; i++)
-        //{
-        //    RG.GenerateRoom(ref rooms_Value[i], ref m_map);
-        //}
-
+        
         //２つの配列をDictionaryにまとめる
         Dictionary<int, Room> result = new Dictionary<int, Room>(rooms_Key.Length);
         for (int i = 0; i < rooms_Key.Length; i++)
@@ -360,9 +353,6 @@ public class MapInitializer : MonoBehaviour
     // プレイヤーの出現座標を設定
     private void SpawnPlayer()
     {
-
-        Position position;
-
         Transform trans = RG.GetStartPosition();
 
         Debug.Log("初期座標X：" + trans.position.x);
@@ -372,26 +362,7 @@ public class MapInitializer : MonoBehaviour
         g_spawn_rotX = 0;
         g_spawn_rotY = 0;
         g_spawn_rotZ = 0;
-        ////最小部屋とそのIDを取得
-        //Room small = null;
-        //m_startId = DG.SmallistRoom(out small);
-
-        //do
-        //{
-        //    var x = Utility.GetRandomInt(small.Start.X, small.End.X - 1);
-        //    var y = Utility.GetRandomInt(small.Start.Y, small.End.Y - 1);
-        //    position = new Position(x, y);
-        //} while (m_map[position.X, position.Y] != 1);
-
-
-        ////初期座標をグローバル変数に設定
-        //g_spawn_posX = position.X * MAP_SCALE;
-        //g_spawn_posY = 1;
-        //g_spawn_posZ = position.Y * MAP_SCALE;
-        //g_spawn_rotX = 0;
-        //g_spawn_rotY = 0;
-        //g_spawn_rotZ = 0;
-
+        
         //初期地点更新フラグ
         g_spawn_enable = true;
     }
@@ -400,7 +371,6 @@ public class MapInitializer : MonoBehaviour
     private void ReloadManager()
     {
 
-        MM.TransNextMap();
     }
 
     //初期地点の更新フラグの取得関数
