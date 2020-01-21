@@ -268,8 +268,8 @@ public class Ghost : MonoBehaviour
 
 
         // デバッグ表示
-        Debug.Log("GhostFoundFlg");
-        Debug.Log(foundflg);
+        // Debug.Log("GhostFoundFlg");
+        // Debug.Log(foundflg);
 
         // 敵の体力が０になったら
         if(ep.hp == 0)
@@ -391,6 +391,7 @@ public class Ghost : MonoBehaviour
 
         //if(!PauseScript.pause()){
         //if(!SkillManagement.GetTimeStop()){
+
 
         if (collision.gameObject.tag == "Bullet")
         {
