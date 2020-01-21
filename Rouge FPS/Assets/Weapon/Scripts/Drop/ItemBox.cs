@@ -23,6 +23,9 @@ public class ItemBox : MonoBehaviour
 
     public void Open()
     {
+        //===================================================
+        // 能力値を選出する
+        //===================================================
         // 中身を表示
         Instantiate(ItemPrefab,new Vector3(boxTrans.position.x,boxTrans.position.y + 0.3f,boxTrans.position.z),Quaternion.identity);
         switch(random)
@@ -49,6 +52,25 @@ public class ItemBox : MonoBehaviour
                 Debug.Log("抽選失敗");
                 break;
         }
+
+        // 武器のランクをランダムで取得
+        random =　UnityEngine.Random.Range(0, 3);
+        if(random == 0)
+        {
+            GIScript.gunRank = GunInfo.GunRank.Rank1;
+        }
+        else if(random == 1)
+        {
+            GIScript.gunRank = GunInfo.GunRank.Rank2;
+        }
+        else if(random == 2)
+        {
+            GIScript.gunRank = GunInfo.GunRank.Rank3;
+        }
+
+        // スキルスロット数をランダムで取得
+        GIScript.skillSlot = UnityEngine.Random.Range(1, 4);     // 1~3個
+
         //表示するときの演出
         if (openEffectPrefab != null)
         {

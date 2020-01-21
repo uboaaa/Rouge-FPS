@@ -184,7 +184,7 @@ public class GunController : MonoBehaviour
 		        GameObject bullet = Instantiate<GameObject>(bulletPrefab, muzzle.position, muzzle.rotation);
                 bullet.transform.localScale = bulletScale;
 		        bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * bulletPower);
-		        Destroy(bullet, 5.0f);
+		        Destroy(bullet, 10.0f);
             }
 
              // 弾を減らす

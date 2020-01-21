@@ -35,36 +35,12 @@ public class GunInfo : MonoBehaviour
 	[SerializeField] public float      bulletPower;                         // 弾を飛ばす力(武器依存)
     // パラメーター関係==============================================
     public float GunEXP = 0;                                                // 経験値
-
-    
     LoadGunPrefab LGPScript;
     GameObject GunObj;
 
     void Start()
     {
         LGPScript = GetComponent<LoadGunPrefab>();
-
-
-        //===================================================
-        // 能力値を選出する
-        //===================================================
-        // 武器のランクをランダムで取得
-        int random =　UnityEngine.Random.Range(0, 3);
-        if(random == 0)
-        {
-            gunRank = GunInfo.GunRank.Rank1;
-        }
-        else if(random == 1)
-        {
-            gunRank = GunInfo.GunRank.Rank2;
-        }
-        else if(random == 2)
-        {
-            gunRank = GunInfo.GunRank.Rank3;
-        }
-
-        // スキルスロット数をランダムで取得
-        skillSlot = UnityEngine.Random.Range(1, 4);     // 1~3個
 
         switch(gunType)
         {

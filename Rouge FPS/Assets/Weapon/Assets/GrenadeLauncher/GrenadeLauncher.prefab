@@ -127,7 +127,7 @@ MonoBehaviour:
   muzzle: {fileID: 8702378763419279083}
   bulletPrefab: {fileID: 4828025896062122035, guid: b193cccef3cd3a549b2dd8be945ffaa9,
     type: 3}
-  bulletScale: {x: 0.5, y: 0.5, z: 0.5}
+  bulletScale: {x: 1.5, y: 1.5, z: 1.5}
   muzzleFlashPrefab: {fileID: 5657120087087244624, guid: d350cb83ef033eb4b9ed15b5054ff9fa,
     type: 3}
   muzzleFlashScale: {x: 1, y: 1, z: 1}
@@ -163,7 +163,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8702378763419279082}
   m_LocalRotation: {x: -0.0528116, y: -0.1258847, z: -0.006436014, w: 0.9906173}
-  m_LocalPosition: {x: -1.083, y: 1.154, z: -5.529}
+  m_LocalPosition: {x: -1.083, y: 1.154, z: -4.917}
   m_LocalScale: {x: 0.13448006, y: 0.13448, z: 0.67443997}
   m_Children: []
   m_Father: {fileID: 8702378763311960003}

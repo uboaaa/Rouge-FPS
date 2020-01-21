@@ -125,9 +125,9 @@ MonoBehaviour:
   reloadInterval: 0.9
   bulletPower: 1500
   muzzle: {fileID: 2158512696211746471}
-  bulletPrefab: {fileID: 7906399819038171674, guid: 38a4b56b79cd5614bae2f306c0be2631,
+  bulletPrefab: {fileID: 8988929609841892866, guid: 3c5808b250ba2b24abcb3cc8894403fd,
     type: 3}
-  bulletScale: {x: 1, y: 1, z: 1}
+  bulletScale: {x: 0.2, y: 0.2, z: 0.2}
   muzzleFlashPrefab: {fileID: 5657120087087244624, guid: d350cb83ef033eb4b9ed15b5054ff9fa,
     type: 3}
   muzzleFlashScale: {x: 1, y: 1, z: 1}
@@ -163,7 +163,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2158512696211746470}
   m_LocalRotation: {x: -0.0528116, y: -0.1258847, z: -0.006436014, w: 0.9906173}
-  m_LocalPosition: {x: -2.2, y: 1.31, z: -5.48}
+  m_LocalPosition: {x: -2.2, y: 1.31, z: -5.01}
   m_LocalScale: {x: 0.13448006, y: 0.13448, z: 0.67443997}
   m_Children: []
   m_Father: {fileID: 2158512696167874447}
@@ -184,7 +184,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2158512696211746470}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
