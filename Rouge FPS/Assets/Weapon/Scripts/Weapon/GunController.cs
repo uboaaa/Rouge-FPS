@@ -49,6 +49,7 @@ public class GunController : MonoBehaviour
     CameraShake cameraScript;               // [CameraShake]用の変数
     Animator animator;                      // [Animator]用の変数
     GunInfo GIScript;                       // [GunInfo]用の変数
+    muzzleShot MSScript;                    // [muzzleShot]用の変数
     AnimatorStateInfo animatorInfo;         // Animatorの情報を入れる
     GameObject FPSCon;
 
@@ -185,6 +186,16 @@ public class GunController : MonoBehaviour
                 bullet.transform.localScale = bulletScale;
 		        bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * bulletPower);
 		        Destroy(bullet, 10.0f);
+
+                // ショットガンの場合
+                // 6. 子オブジェクトにアタッチしているスクリプトを参照する
+                if(GunInfo.GunType.ShotGun == gunType)
+                for(int i = 1; i < 5;i++)
+                {
+                    GameObject childObject = transform.Find("muzzle" + i).gameObject;
+                    MSScript = childObject.GetComponent<muzzleShot>();
+                    MSScript.Shot();
+                }
             }
 
              // 弾を減らす
