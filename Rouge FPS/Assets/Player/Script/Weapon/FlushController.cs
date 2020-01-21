@@ -31,7 +31,7 @@ public class FlushController : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(EnemyAttackPower.GetEnemyBHitGet());
+        // Debug.Log(EnemyAttackPower.GetEnemyBHitGet());
 
         if (!once) {
             FirstHP = FPSCon.GetComponent<MyStatus>().GetHp();
@@ -54,6 +54,7 @@ public class FlushController : MonoBehaviour
         if(NowHP>0){
         if (EnemyAttackPower.GetEnemyBHitGet())
         {
+            AudioManager.Instance.PlaySE("damage1");
             this.img.color = new Color(0.5f, 0f, 0f, 0.5f);
   
             FirstHP = NowHP;

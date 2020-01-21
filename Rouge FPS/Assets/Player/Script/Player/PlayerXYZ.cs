@@ -42,6 +42,7 @@ private float aaaaa;
       
 
         if(StageReset || MapInitializer.GetSpawnEnable()){
+        FloorCount.UpFloors();
         characterController = GetComponent<CharacterController>();
         characterController.enabled = false;
         abc.x = MapInitializer.GetSpawnData("px");
@@ -62,7 +63,7 @@ private float aaaaa;
 
         if (ClearCheckFlg) {
 
-            UpdatePlayerXYZ(abc.x, 15, abc.z);
+            // UpdatePlayerXYZ(abc.x, 15, abc.z);
         }
 
         

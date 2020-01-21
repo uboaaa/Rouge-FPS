@@ -36,7 +36,7 @@ public class GametoTitle : MonoBehaviour
     {
    
       if(!pauseUI.activeSelf){ModeSelect = "ReturnGame";} 
-    Debug.Log(ModeSelect);
+    // Debug.Log(ModeSelect);
         switch (ModeSelect)
         {
             case "ReturnGame":

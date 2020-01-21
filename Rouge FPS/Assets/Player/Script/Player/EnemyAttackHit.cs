@@ -20,6 +20,6 @@ public class EnemyAttackHit : MonoBehaviour
 
 //オブジェクトが衝突したとき
 void OnCollisionEnter(Collision collision) {
-    Debug.Log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+    // Debug.Log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 }
 }
