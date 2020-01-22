@@ -88,19 +88,25 @@ public class BulletController : MonoBehaviour
         {
             // "Back"タグに当たった場合、エフェクトを出して弾を削除する
             case "Back":
-                HitEffect(backHitEffectPrefab);
+                if(backHitEffectPrefab)
+                {
+                    HitEffect(backHitEffectPrefab);
+                }
                 Destroy(gameObject);
                 break;
 
             // "Enemy"タグに当たった場合、エフェクトを出して弾を削除する
             case "Enemy":
-                HitEffect(enemyHitEffectPrefab);
+                if(enemyHitEffectPrefab)
+                {
+                    HitEffect(enemyHitEffectPrefab);
+                }
                 Destroy(gameObject);
                 break;
             
             // タグをつけてないものに当たった場合、物理マテリアルに応じる
             case "Untagged":
-                Destroy(gameObject,5.0f);   // 今のところ弾は適当に消す
+                Destroy(gameObject);
                 break;
 
             default:

@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 2478045015136013122}
   - component: {fileID: 2478045015136013123}
   - component: {fileID: 2478045015136013126}
-  - component: {fileID: 5620273193576001034}
   - component: {fileID: 2478045015136013120}
   - component: {fileID: 2478045015136013121}
   - component: {fileID: 2478045015136013127}
@@ -110,20 +109,6 @@ MonoBehaviour:
   reloadInterval: 0
   bulletPower: 0
   GunEXP: 0
---- !u!114 &5620273193576001034
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2478045015136013125}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 127aeb0f9700c484c9b1e3495a0319c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  swingPow: 0.05
-  Range: 4
 --- !u!114 &2478045015136013120
 MonoBehaviour:
   m_ObjectHideFlags: 0
