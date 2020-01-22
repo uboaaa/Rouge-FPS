@@ -1414,7 +1414,7 @@ GameObject:
   - component: {fileID: 612938424}
   m_Layer: 9
   m_Name: Cube
-  m_TagString: Bullet
+  m_TagString: Back
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
