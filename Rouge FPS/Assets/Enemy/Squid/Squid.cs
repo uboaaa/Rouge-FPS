@@ -13,6 +13,11 @@ public class Squid : MonoBehaviour
     private Material material = null;
     // エネミーパラメータ
     private EnemyParameter ep = null;
+    public EnemyParameter GetEp()
+    {
+        return ep;
+    }
+
     // ヒットエフェクト
     private EnemyHitEffect eh = null;
     // ダメージナンバーエフェクト
@@ -69,6 +74,11 @@ public class Squid : MonoBehaviour
     float mvalue;
     // 爆発エフェクト管理用
     int decnt = 0;
+
+
+    // HpBar関連
+    public GameObject Hpbar = null;
+
 
 
 
@@ -166,7 +176,7 @@ public class Squid : MonoBehaviour
             material.SetFloat(propID_c, 0.5f);
 
             // パラメータ
-            ep.hp = 120;
+            ep.hp = 20;
             ep.atk = 10;
             ep.def = 0;
             //ep.speed = 1.0f;
@@ -245,11 +255,21 @@ public class Squid : MonoBehaviour
 
             if (!AttackFlg)
             {
+                // // 体力を元に戻す
+                // ep.hp = 120;
+
                 // 正面を向き
                 trans = 0;
                 animator.SetInteger("trans", trans);
 
+                // HPbar再生
+                if(Hpbar)
+                {
+                    Hpbar.SetActive(true);
+                }
             }
+
+        
 
             if (AILevel == 2)
             {
@@ -390,13 +410,16 @@ public class Squid : MonoBehaviour
             // 攻撃１処理
             if (fireflg)
             {
+                if(ftime == 0)
+                {
                 GameObject fe = Instantiate(FireEffect) as GameObject;
                 fe.transform.position = new Vector3(
                     this.gameObject.transform.position.x + 1,
                     this.gameObject.transform.position.y,
                     this.gameObject.transform.position.z
-                    );
+                );
                 Destroy(fe, 1.0f);
+                }
 
                 if (ftime == 60)
                 {
@@ -505,6 +528,7 @@ public class Squid : MonoBehaviour
 
                 // // 解放処理
                 Destroy(this.gameObject, 5.5f);
+                Destroy(Hpbar.gameObject,5.5f);
             }
         }
 
@@ -536,10 +560,9 @@ public class Squid : MonoBehaviour
 
 
         // デバッグ表示
-        Debug.Log("SquidHp");
-        Debug.Log(ep.hp);
-        // Debug.Log("ActionCnt");
-        // Debug.Log(ActionCnt);
+        //Debug.Log("SquidHp");
+        //Debug.Log(ep.hp);
+
 
     }
 
@@ -557,11 +580,49 @@ public class Squid : MonoBehaviour
 
             eh.SetHitFlg(true);
             dn.SetHitFlg(true);
-            foundflg = true;
             ep.hp -= collision.gameObject.GetComponent<BulletController>().Damage;
+            if(foundflg == false)
+            {
+                ep.hp = SquidHp;
+                foundflg = true;
+            }
+            
             if(AILevel == 1)
             {
-                if (ep.hp <= (SquidHp/2)) { AILevel = 2; }
+                if (ep.hp <= (SquidHp / 2)) { AILevel = 2; }
+            }
+            if (ep.hp < 0) { ep.hp = 0; }
+            //intパラメーターの値を設定する.
+            animator.SetInteger("trans", trans);
+        }
+        //    }
+        //}
+
+    }
+
+    private void OnTriggerEnter(Collider collider)
+    {
+
+        //if(!PauseScript.pause()){
+        //if(!SkillManagement.GetTimeStop()){
+        if (collider.gameObject.tag == "Bullet")
+        {
+            // 弾のダメージを取得
+            dn.SetBulletDamage(collider.gameObject.GetComponent<BulletController>().Damage);
+
+
+            eh.SetHitFlg(true);
+            dn.SetHitFlg(true);
+            ep.hp -= collider.gameObject.GetComponent<BulletController>().Damage;
+            if(foundflg == false)
+            {
+                ep.hp = SquidHp;
+                foundflg = true;
+            }
+            
+            if(AILevel == 1)
+            {
+                if (ep.hp <= (SquidHp / 2)) { AILevel = 2; }
             }
             if (ep.hp < 0) { ep.hp = 0; }
             //intパラメーターの値を設定する.

@@ -338,7 +338,8 @@ public class Spider : MonoBehaviour
     // 弾との当たり判定
     private void OnCollisionEnter(Collision collision)
     {
-
+        //if(!PauseScript.pause()){
+        //if(!SkillManagement.GetTimeStop()){
         if (collision.gameObject.tag == "Bullet")
         {
             // 弾のダメージを取得
@@ -355,7 +356,36 @@ public class Spider : MonoBehaviour
             //intパラメーターの値を設定する.
             animator.SetInteger("trans", trans);
         }
+        //    }
+        //}
 
     }
 
+    private void OnTriggerEnter(Collider collider)
+    {
+
+        //if(!PauseScript.pause()){
+        //if(!SkillManagement.GetTimeStop()){
+        if (collider.gameObject.tag == "Bullet")
+        {
+            // 弾のダメージを取得
+            dn.SetBulletDamage(collider.gameObject.GetComponent<BulletController>().Damage);
+
+
+            eh.SetHitFlg(true);
+            dn.SetHitFlg(true);
+            foundflg = true;
+            fireflg = true;
+
+            ep.hp -= collider.gameObject.GetComponent<BulletController>().Damage;
+            if(ep.hp < 0){ep.hp = 0;}
+            //intパラメーターの値を設定する.
+            animator.SetInteger("trans", trans);
+        //    }
+        //}
+
+        }
+
+
+    }
 }
