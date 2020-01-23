@@ -15,20 +15,22 @@ public class PauseScript : MonoBehaviour
     }
 
 
+    public void OffPause(){ pauseUI.SetActive(false);  }
+    public void OnPause(){ pauseUI.SetActive(true);  }
+    
     // Update is called once per frame
     void Update()
     {
+        
         if(pauseUI.activeSelf){
-            if(Input.GetKeyDown(KeyCode.Return)){ 
-                if(GametoTitle.GetAnswer()){       //　ポーズUIのアクティブ、非アクティブを切り替え
-            pauseUI.SetActive(!pauseUI.activeSelf);
-            Time.timeScale=1f;
-            }
-            }
+
+            Time.timeScale=0f;
+            
+            
         }
         abc=pauseUI.activeSelf;
         if(FPSCon.GetComponent<MyStatus>().GetHp()>0){
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !SettingScript.Settingpause())
         {
             if(!GametoTitle.GetNoMove()){
             //　ポーズUIのアクティブ、非アクティブを切り替え
@@ -50,4 +52,5 @@ public class PauseScript : MonoBehaviour
      public static bool pause() {
         return abc;
     }
+
 }

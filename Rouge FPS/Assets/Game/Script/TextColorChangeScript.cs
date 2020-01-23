@@ -34,9 +34,9 @@ public class TextColorChangeScript : MonoBehaviour
             case "ReturnTitle":
                 if (text.text == "Return Title") { text.color = new Color(1.0f, 0.0f, 0.0f, 1.0f); }
                 break;
-            // case "Settings":
-            //     if (text.text == "Settings") { text.color = new Color(1.0f, 0.0f, 0.0f, 1.0f); }
-            //     break;
+            case "Settings":
+                if (text.text == "Settings") { text.color = new Color(1.0f, 0.0f, 0.0f, 1.0f); }
+                break;
 
         }
 
