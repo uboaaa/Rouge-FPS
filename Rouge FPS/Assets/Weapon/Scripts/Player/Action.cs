@@ -23,7 +23,7 @@ public class Action : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Q) && actionFlg)
+        if(Input.GetKeyDown(KeyCode.E) && actionFlg)
         {
             // ïÛî†èàóù
             if(ObjectInfo.tag == "DropBox"){BoxAction(ObjectInfo);}

@@ -43,6 +43,11 @@ public class GunController : MonoBehaviour
         get { return ammo;}
         set { ammo = Mathf.Clamp(value, 0, MagazineSize);}
     }
+    // シェーダパラメータ管理用
+    int propID_h = 0;   // Hue
+    int propID_s = 0;   // Saturation
+    int propID_b = 0;   // Brightness
+    int propID_c = 0;   // Contrast
 
     // スクリプト関係================================================
     ChangeEquip CEScript;                   // [ChangeEquip]用の変数
@@ -52,6 +57,7 @@ public class GunController : MonoBehaviour
     muzzleShot MSScript;                    // [muzzleShot]用の変数
     AnimatorStateInfo animatorInfo;         // Animatorの情報を入れる
     GameObject FPSCon;
+    Material material;                      // マテリアル
 
     
 
@@ -65,10 +71,48 @@ public class GunController : MonoBehaviour
 
         // 上の階層のオブジェクトにアタッチしているスクリプトを参照する
         cameraScript = GetComponentInParent<CameraShake>();
+
+        // マテリアル
+        material = this.gameObject.GetComponent<SpriteRenderer>().material;
+
+        // マテリアルシェーダの設定
+        propID_h = Shader.PropertyToID("_Hue");
+        propID_s = Shader.PropertyToID("_Saturation");
+        propID_b = Shader.PropertyToID("_Brightness");
+        propID_c = Shader.PropertyToID("_Contrast");
     }
 
     void Update()
     {
+        // 武器レベルに応じてのカラーにする
+        switch(gunRank)
+        {
+            case GunInfo.GunRank.Rank1:
+                material.SetFloat(propID_h, 0.0f);
+                material.SetFloat(propID_s, 0.5f);
+                material.SetFloat(propID_b, 0.5f);
+                material.SetFloat(propID_c, 0.5f);
+                break;
+
+            case GunInfo.GunRank.Rank2:
+                material.SetFloat(propID_h, 0.1f);
+                material.SetFloat(propID_s, 0.0f);
+                material.SetFloat(propID_b, 0.7f);
+                material.SetFloat(propID_c, 0.9f);
+                break;
+
+            case GunInfo.GunRank.Rank3:
+                material.SetFloat(propID_h, 0.078f);
+                material.SetFloat(propID_s, 1.0f);
+                material.SetFloat(propID_b, 0.8f);
+                material.SetFloat(propID_c, 1.0f);
+                break;
+
+            default:
+                Debug.Log("マテリアルが付いていない");
+                break;
+        }
+
         if(remAmmo > AmmoSize)
         {
             remAmmo = AmmoSize;
