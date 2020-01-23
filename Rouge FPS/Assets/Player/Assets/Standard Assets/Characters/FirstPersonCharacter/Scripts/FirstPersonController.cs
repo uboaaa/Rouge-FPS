@@ -41,13 +41,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private float m_NextStep;
         private bool m_Jumping;
         private AudioSource m_AudioSource;
-        private GameObject Pause;
-        private bool aaa;
 
         // Use this for initialization
         private void Start()
         {
-            Pause = GameObject.Find("MainCanvas");
             m_CharacterController = GetComponent<CharacterController>();
             m_Camera = Camera.main;
             m_OriginalCameraPosition = m_Camera.transform.localPosition;
@@ -58,22 +55,13 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_Jumping = false;
             m_AudioSource = GetComponent<AudioSource>();
 			m_MouseLook.Init(transform , m_Camera.transform);
-   
         }
 
 
         // Update is called once per frame
         private void Update()
         {
-            aaa = true;
-            //リセット処理その１(その２はPlayerXYZ.cs)
-            if (Input.GetKey(KeyCode.Return))
-            { m_MouseLook.Init(transform, m_Camera.transform);
-                //m_Camera.transform.rotation = Quaternion.identity;
-            }
-
-                RotateView();
-            
+            RotateView();
             // the jump state needs to read here to make sure it is not missed
             if (!m_Jump)
             {
@@ -91,7 +79,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 m_MoveDir.y = 0f;
             }
- 
+
             m_PreviouslyGrounded = m_CharacterController.isGrounded;
         }
 
@@ -227,12 +215,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_IsWalking = !Input.GetKey(KeyCode.LeftShift);
 #endif
             // set the desired speed to be walking or running
-         
-            //移動速度の設定
-            float AccelSpeed= GetComponent<SkillManagement>().GetSpeedPlus(0);
-         speed = m_IsWalking ? m_WalkSpeed+(m_WalkSpeed*AccelSpeed) 
-                             : m_RunSpeed+(m_RunSpeed * AccelSpeed); 
-         
+            speed = m_IsWalking ? m_WalkSpeed : m_RunSpeed;
             m_Input = new Vector2(horizontal, vertical);
 
             // normalize input if it exceeds 1 in combined length:
@@ -253,7 +236,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void RotateView()
         {
-
             m_MouseLook.LookRotation (transform, m_Camera.transform);
         }
 
