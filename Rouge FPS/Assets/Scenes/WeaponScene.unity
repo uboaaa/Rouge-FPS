@@ -5483,6 +5483,16 @@ PrefabInstance:
       propertyPath: FlyPow
       value: 0.02
       objectReference: {fileID: 0}
+    - target: {fileID: 8991567632558726352, guid: ab516d3b60580b04ab23db217c0354cb,
+        type: 3}
+      propertyPath: interval
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8991567632558726352, guid: ab516d3b60580b04ab23db217c0354cb,
+        type: 3}
+      propertyPath: startTime
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab516d3b60580b04ab23db217c0354cb, type: 3}
 --- !u!1 &7454088187974994005
