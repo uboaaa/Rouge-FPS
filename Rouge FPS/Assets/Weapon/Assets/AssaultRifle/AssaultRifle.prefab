@@ -215,7 +215,7 @@ MonoBehaviour:
   reloadInterval: 0.9
   bulletPower: 1200
   muzzle: {fileID: 6847620235173698571}
-  bulletPrefab: {fileID: 7906399819038171674, guid: 38a4b56b79cd5614bae2f306c0be2631,
+  bulletPrefab: {fileID: 1713645307709442939, guid: ac909c278bf6664408afe7577d5f376c,
     type: 3}
   bulletScale: {x: 0.5, y: 0.5, z: 0.5}
   muzzleFlashPrefab: {fileID: 5657120087087244624, guid: d350cb83ef033eb4b9ed15b5054ff9fa,
