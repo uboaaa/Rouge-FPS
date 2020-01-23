@@ -23324,7 +23324,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!135 &8052225379692998853
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -23355,4 +23355,3 @@ MonoBehaviour:
   enemyHitEffectPrefab: {fileID: 2722678073241494824, guid: 608f5d1b858d3724996b1a569e45dcb9,
     type: 3}
   hitEffectScale: {x: 0.3, y: 0.3, z: 0.3}
-  Damage: 0
