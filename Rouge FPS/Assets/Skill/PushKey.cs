@@ -103,7 +103,7 @@ public class PushKey : MonoBehaviour
         // くっついているスキル表示
         for (var i = 0; i < 3; i++)
         {
-            skillSlot[i].GetComponent<Text>().text = ssText[i];
+           // skillSlot[i].GetComponent<Text>().text = ssText[i];
         }
     }
 }

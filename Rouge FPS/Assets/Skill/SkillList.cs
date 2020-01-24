@@ -20,9 +20,7 @@ public class SkillList : MonoBehaviour
         public int lowAppear;
         // 最高出現階層
         public int highAppear;
-
-        // コンストラクタ
-        public Skill() { }
+        
 
         // 初期化
         public void Init(string _name, float _param, int _ratio, int _low, int _high)
@@ -35,17 +33,12 @@ public class SkillList : MonoBehaviour
         }
     };
 
-
-
-    // すべてのスキルのリスト
-   // private Dictionary<string, Skill> skillList;
     // 現在の階層で出現するスキルのリスト
     private List<Skill> nowFloorSkill = null;
     // 総重み
     private float totalRatio;
     // スキルのグレード
     private int[] skillGrade;
-
     public int[] GetSkillGrade()
     {
         return skillGrade;
