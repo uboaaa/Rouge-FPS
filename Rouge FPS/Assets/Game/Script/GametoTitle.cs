@@ -15,10 +15,10 @@ public class GametoTitle : MonoBehaviour
     private GameObject RGame;
     [SerializeField]
     private GameObject RTitle;
-    // [SerializeField]
-    // private GameObject Settings;
+    [SerializeField]
+    private GameObject Settings;
 
-        [SerializeField]
+    [SerializeField]
     private GameObject pauseUI;
 
     private static bool NoMove=false;
@@ -34,8 +34,9 @@ public class GametoTitle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-   
+ 
       if(!pauseUI.activeSelf){ModeSelect = "ReturnGame";} 
+    
     // Debug.Log(ModeSelect);
         switch (ModeSelect)
         {
@@ -44,8 +45,12 @@ public class GametoTitle : MonoBehaviour
              last=false;
                 Gett=true;
                 if (Input.GetKeyDown(KeyCode.UpArrow)) {  ModeSelect = "ReturnTitle"; }
-                if (Input.GetKeyDown(KeyCode.DownArrow)) { ModeSelect = "ReturnTitle"; }
-                if (Input.GetKeyDown(KeyCode.Return)) {AudioManager.Instance.PlaySE("button01b"); EnterGame();}
+                if (Input.GetKeyDown(KeyCode.DownArrow)) { ModeSelect = "Settings"; }
+                if (Input.GetKeyDown(KeyCode.Return)) {
+                    AudioManager.Instance.PlaySE("button01b"); 
+                    pauseUI.SetActive(false);
+                    Cursor.visible = false;
+                     Time.timeScale=1f;}
                     RGame.GetComponent<TextColorChangeScript>().ColorChange(ModeSelect);
             }
             
@@ -57,25 +62,27 @@ public class GametoTitle : MonoBehaviour
                   last=true;
                   if(pauseUI.activeSelf){
                   
-                if (Input.GetKeyDown(KeyCode.UpArrow)) { ModeSelect = "ReturnGame"; }
+                if (Input.GetKeyDown(KeyCode.UpArrow)) { ModeSelect = "Settings"; }
                 if (Input.GetKeyDown(KeyCode.DownArrow)) { ModeSelect = "ReturnGame"; }
                RTitle.GetComponent<TextColorChangeScript>().ColorChange(ModeSelect);
-                   if (Input.GetKeyDown(KeyCode.Return)) {   last=true;NoMove=true;}
+                   if (Input.GetKeyDown(KeyCode.Return)) { last=true;NoMove=true;Cursor.visible = false;}
                    }
                   }
                    if (FadePanel2.AlphaGet()>1.0f) {SceneManager.LoadScene("TitleScene");}
                 break;
 
-            // case "Settings":
-            //   if(pauseUI.activeSelf){
-            // Gett=false;
-            // last=false;
-            //     if (Input.GetKeyDown(KeyCode.UpArrow)) { ModeSelect = "ReturnTitle"; }
-            //     if (Input.GetKeyDown(KeyCode.DownArrow)) { ModeSelect = "ReturnGame"; }
-            //     Settings.GetComponent<TextColorChangeScript>().ColorChange(ModeSelect);
-            //   }
+            case "Settings":
+              if(pauseUI.activeSelf){
+            Gett=false;
+            last=false;
+                if (Input.GetKeyDown(KeyCode.UpArrow)) { ModeSelect = "ReturnGame"; }
+                if (Input.GetKeyDown(KeyCode.DownArrow)) { ModeSelect = "ReturnTitle"; }
+                if (Input.GetKeyDown(KeyCode.Return)) {GetComponent<PauseScript>().OffPause();
+                                                      GetComponent<SettingScript>().OnPause();}
+                Settings.GetComponent<TextColorChangeScript>().ColorChange(ModeSelect);
+              }
               
-            //     break;
+                break;
         }
         
 

@@ -16,7 +16,8 @@ public class TextColorAllBlack : MonoBehaviour
     private GameObject RGame;
     [SerializeField]
     private GameObject RTitle;
-
+    [SerializeField]
+    private GameObject Settings;
 
     [SerializeField]
     private GameObject pauseUI;
@@ -24,9 +25,9 @@ public class TextColorAllBlack : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-         TitleText=RTitle.GetComponent<Text>();
+        TitleText=RTitle.GetComponent<Text>();
         GameText=RGame.GetComponent<Text>();
-      
+        SettingsText=Settings.GetComponent<Text>();
     }
 
     // Update is called once per frame
@@ -36,7 +37,7 @@ public class TextColorAllBlack : MonoBehaviour
         if(!pauseUI.activeSelf){
             TitleText.color=Color.black;
             GameText.color=Color.black;
- 
+            SettingsText.color=Color.black;
         }
         
     }
