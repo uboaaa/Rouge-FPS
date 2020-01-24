@@ -22,6 +22,7 @@ public class PauseScript : MonoBehaviour
     void Update()
     {
         
+        
         if(pauseUI.activeSelf){
 
             Time.timeScale=0f;

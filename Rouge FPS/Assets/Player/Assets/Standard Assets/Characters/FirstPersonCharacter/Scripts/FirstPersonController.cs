@@ -39,6 +39,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private Vector3 m_OriginalCameraPosition;
         private float m_StepCycle;
         private float m_NextStep;
+
         private bool m_Jumping;
         private AudioSource m_AudioSource;
         private GameObject Pause;
@@ -62,20 +63,19 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_Jumping = false;
             m_AudioSource = GetComponent<AudioSource>();
 			m_MouseLook.Init(transform , m_Camera.transform);
-            
-            
+    
         }
 
-
+     
         // Update is called once per frame
         private void Update()
         {
-             
+         
             // if (Input.GetKey(KeyCode.Return))
             // { m_MouseLook.Init(transform, m_Camera.transform);
             //     //m_Camera.transform.rotation = Quaternion.identity;
             // }
-            if(!PauseScript.pause()){
+            if(!PauseScript.pause() && !SettingScript.Settingpause()){
            if(FPSCon.GetComponent<MyStatus>().GetHp()>1){
                 RotateView();
             

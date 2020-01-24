@@ -16,6 +16,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public float smoothTime = 5f;
         public bool lockCursor = true;
 
+        private float PlusX;
+        
+        private float PlusY;
+        
+      
 
         private Quaternion m_CharacterTargetRot;
         private Quaternion m_CameraTargetRot;
@@ -27,11 +32,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_CameraTargetRot = camera.localRotation;
         }
 
-
         public void LookRotation(Transform character, Transform camera)
         {
-            float yRot = CrossPlatformInputManager.GetAxis("Mouse X") * XSensitivity*3;
-            float xRot = CrossPlatformInputManager.GetAxis("Mouse Y") * YSensitivity*3;
+           
+            float yRot = CrossPlatformInputManager.GetAxis("Mouse X") * XSensitivity*Sensitivity.PlusX();
+            float xRot = CrossPlatformInputManager.GetAxis("Mouse Y") * YSensitivity+PlusY;
 
             m_CharacterTargetRot *= Quaternion.Euler (0f, yRot, 0f);
             m_CameraTargetRot *= Quaternion.Euler (-xRot, 0f, 0f);
