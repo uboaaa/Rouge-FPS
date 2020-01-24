@@ -51,7 +51,7 @@ public class ChangeEquip : MonoBehaviour
     void Update()
     {
         //Debug.Log(ownGun);
-        if (Input.GetKeyDown(KeyCode.E) && !activeFlg && SecondaryWeapon != null)
+        if (Input.GetKeyDown(KeyCode.Q) && !activeFlg && SecondaryWeapon != null)
         {
             GCPrimaryScript.shooting = false;
             GCSecondaryScript.shooting = false;

@@ -7,7 +7,7 @@ public class CameraRay : MonoBehaviour
     public RaycastHit hit;
     void Update()
     {
-        // Back Gun Object
+        // Back Gun
         int layerMask = 9 << 11;
 
         layerMask = ~layerMask;
