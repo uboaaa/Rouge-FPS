@@ -63,7 +63,7 @@ public class Lottery : MonoBehaviour
         csv.Read(ref list, s);
         // 行数取得、ランダム抽選
         var len = list.Count();
-        var rnd = Random.Range(1, len + 1);
+        var rnd = Random.Range(0, len);
         return list[rnd];
     }
     // 上の関数二つをまとめたもの

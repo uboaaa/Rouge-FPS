@@ -1,68 +1,66 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
 
+// =========================
+// パラメータクラス
+//　
+// ここの数値を変化させる
+// 
+// =========================
 public class Parameter : MonoBehaviour
 {
-    // 仮パラメーター
-    public class Param
-    {
-        public int HP;
-        public int ATK;
-        public bool isATK;
-        public int DEF;
-        public bool isDEF;
-        public int SPD;
-        public bool isSPD;
-        public int Magazine;
-        public int Ammo;
-        public bool isPrimary;
-    }
-    // CSVDATAの順番
-    public enum CSVValue
-    {
-        NAME = 0,
-        VALUE = 1,
-        ACTIVE = 2,
-        SLOTNUMBER = 3
+    // スキルステータス
+    public class Status
+    { 
+        public int HP { get; set; } = 0;
+        public int ATK { get; set; } = 0;
+        public bool IsATK { get; set; } = false;
+        public int DEF { get; set; } = 0;
+        public bool IsDEF { get; set; } = false;
+        public int SPD { get; set; } = 0;
+        public bool IsSPD { get; set; } = false;
+        public int Magazine { get; set; } = 0;
+        public int Ammo { get; set; } = 0;
+        public bool IsPrimary { get; set; } = false;
     };
-
+    public Status status = new Status();
+    // スキルスロットの内容
     public class SkillSlot
     {
-        // スキルスロット枠が使えるかどうか(1:ON 0:OFF)
-        public int active;
         // スプライトの名前
-        public string name;
+        public string name = "";
         // 効果
-        public int value;
+        public int value = 0;
+        // スキルスロット枠が使えるかどうか(1:ON 0:OFF)
+        public int active = 0;
     }
-
-    // パラメーター実体
-    private Param param;
-
-
-
     // スキルスロット最大値
     public const int SLOTMAX = 3;
     // スキルスロット実体
-    private SkillSlot[] skillSlot = new SkillSlot[SLOTMAX];
-    public SkillSlot[] GetSkillSlot()
+    private SkillSlot[] nowSlot = new SkillSlot[SLOTMAX];
+    public SkillSlot[] GetNowSlot()
     {
-        return skillSlot;
+        return nowSlot;
     }
-
-
+    // 抽選されたスキル
+    private SkillSlot[] newSlot = new SkillSlot[SLOTMAX];
+    public SkillSlot[] GetNewSlot()
+    {
+        return newSlot;
+    }
+    public void SetNewSlot(string _name, int _value, int _slotNum)
+    {
+        newSlot[_slotNum].name = _name;
+        newSlot[_slotNum].value = _value;
+        newSlot[_slotNum].active = 1;
+    }
     // CSV読み込み用
-    private CSV csv;
+    private CSV csv = new CSV();
     // CSVのList
     private List<string[]> csvDatas;
-
     // 仮描画
-    private GameObject text = null;
-
+    private GameObject text;
     // 戻り値がerrの場合、正しい値を受け取っていないです
     public string GetParameter(string _pass)
     {
@@ -77,7 +75,6 @@ public class Parameter : MonoBehaviour
         // エラーチェック
         return "err";
     }
-
     // パラメーター設定
     // 0リターンで正常、-1リターンでエラーです
     public int SetParameter(string _pass, string _value)
@@ -92,11 +89,6 @@ public class Parameter : MonoBehaviour
         }
         return -1;
     }
-    // Parameter取得
-    public Param GetParameter()
-    {
-        return param;
-    }
 
     // CSVのList取得用
     public List<string[]> GetList()
@@ -107,41 +99,45 @@ public class Parameter : MonoBehaviour
     void Awake()
     {
         // CSVReaderでデータ読み込み
-        csv = new CSV();
         csvDatas = new List<string[]>();
         csv.Read(ref csvDatas, "Read.csv");
-        // パラメーター設定
-        param = new Param();
-        CSVToParam();
+        // CSV→Statusに変更
+        CSVToStatus();
+        for(var i = 0; i< SLOTMAX; i++)
+        {
+            nowSlot[i] = new SkillSlot();
+        }
+        CSVToSkillSlot();
     }
 
-    // ParamをCSVData用に変換
-    public void ParamToCSV()
+    // StatusをCSVData用に変換
+    public void StatusToCSV()
     {
-        csvDatas[0][1] = param.HP.ToString();
-        csvDatas[1][1] = param.ATK.ToString();
-        csvDatas[2][1] = param.isATK ? "true" : "false";
-        csvDatas[3][1] = param.DEF.ToString();
-        csvDatas[4][1] = param.isDEF ? "true" : "false";
-        csvDatas[5][1] = param.SPD.ToString();
-        csvDatas[6][1] = param.isSPD ? "true" : "false";
-        csvDatas[7][1] = param.Magazine.ToString();
-        csvDatas[8][1] = param.Ammo.ToString();
-        csvDatas[9][1] = param.isPrimary ? "true" : "false";
+        csvDatas[0][1] = status.HP.ToString();
+        csvDatas[1][1] = status.ATK.ToString();
+        csvDatas[2][1] = status.IsATK ? "true" : "false";
+        csvDatas[3][1] = status.DEF.ToString();
+        csvDatas[4][1] = status.IsDEF ? "true" : "false";
+        csvDatas[5][1] = status.SPD.ToString();
+        csvDatas[6][1] = status.IsSPD ? "true" : "false";
+        csvDatas[7][1] = status.Magazine.ToString();
+        csvDatas[8][1] = status.Ammo.ToString();
+        csvDatas[9][1] = status.IsPrimary ? "true" : "false";
     }
-    // CSVDataをParam用に変換
-    public void CSVToParam()
+    // CSVDataをStatus用に変換
+    public void CSVToStatus()
     {
-        param.HP = int.Parse(csvDatas[0][1]);
-        param.ATK = int.Parse(csvDatas[1][1]);
-        param.isATK = csvDatas[2][1] == "true" ? true : false;
-        param.DEF = int.Parse(csvDatas[3][1]);
-        param.isDEF = csvDatas[4][1] == "true" ? true : false;
-        param.SPD = int.Parse(csvDatas[5][1]);
-        param.isSPD = csvDatas[6][1] == "true" ? true : false;
-        param.Magazine = int.Parse(csvDatas[7][1]);
-        param.Ammo = int.Parse(csvDatas[8][1]);
-        param.isPrimary = csvDatas[9][1] == "true" ? true : false;
+        
+        status.HP = int.Parse(csvDatas[0][1]);
+        status.ATK = int.Parse(csvDatas[1][1]);
+        status.IsATK = csvDatas[2][1] == "true" ? true : false;
+        status.DEF = int.Parse(csvDatas[3][1]);
+        status.IsDEF = csvDatas[4][1] == "true" ? true : false;
+        status.SPD = int.Parse(csvDatas[5][1]);
+        status.IsSPD = csvDatas[6][1] == "true" ? true : false;
+        status.Magazine = int.Parse(csvDatas[7][1]);
+        status.Ammo = int.Parse(csvDatas[8][1]);
+        status.IsPrimary = csvDatas[9][1] == "true" ? true : false;
     }
 
     // csvDataからskillSlotへ変換
@@ -153,31 +149,35 @@ public class Parameter : MonoBehaviour
         for(var i = 0; i < csvDatas.Count(); i++)
         {
             // CSVデータからアクティブのパラメータをスキルスロットにセット
-            if(csvDatas[i][(int)CSVValue.ACTIVE] == "1")
+            if (csvDatas[i][(int)SkillStatus.CSVParameter.ACTIVE] == "1")
             {
-                skillSlot[(int)CSVValue.SLOTNUMBER].name = csvDatas[i][(int)CSVValue.NAME];
-                skillSlot[(int)CSVValue.SLOTNUMBER].value = int.Parse(csvDatas[i][(int)CSVValue.VALUE]);
-                skillSlot[(int)CSVValue.SLOTNUMBER].active = 1;
+                // スロット番号を取得
+                var num = int.Parse(csvDatas[i][(int)SkillStatus.CSVParameter.SLOTNUMBER]);
+                // そのスロット番号に格納
+                nowSlot[num].name = csvDatas[i][(int)SkillStatus.CSVParameter.NAME];
+                nowSlot[num].value = int.Parse(csvDatas[i][(int)SkillStatus.CSVParameter.VALUE]);
+                nowSlot[num].active = 1;
                 cnt++;
             }
         }
         // 3枠未満だった場合の処理
+        if(cnt < 3)
+        {
+            // noneを入れる
+            for (var i = cnt; i < SLOTMAX; i++)
+            {
+                nowSlot[i].name = "none";
+                nowSlot[i].value = 0;
+                nowSlot[i].active = 0;
+            }
+        }
     }
 
 
     // Start is called before the first frame update
     void Start()
     {
-        text = new GameObject();
         text = GameObject.Find("CheckParameter");
-
-        // 初期スキル設定
-        for (var i = 0; i < 3; i++)
-        {
-            skillSlot[i].active = 1;
-            skillSlot[i].name = "ATK";
-            skillSlot[i].value = 10;
-        }
     }
     // Update is called once per frame
     void Update()
@@ -185,6 +185,7 @@ public class Parameter : MonoBehaviour
         // 仮文字表示
         string s = "";
         string tmp = "";
+        /*
         {
             s += "HP, " + param.HP.ToString() + Environment.NewLine;
             s += "ATK, " + param.ATK.ToString() + Environment.NewLine;
@@ -201,6 +202,7 @@ public class Parameter : MonoBehaviour
             tmp = param.isPrimary ? "true" : "false";
             s += "isPrimary, " + tmp + Environment.NewLine;
         }
-        text.GetComponent<Text>().text = s;
+        */
+        //text.GetComponent<Text>().text = s;
     }
 }
