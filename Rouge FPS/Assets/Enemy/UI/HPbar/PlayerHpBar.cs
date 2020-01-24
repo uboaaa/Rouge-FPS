@@ -15,13 +15,13 @@ public class PlayerHpBar : MonoBehaviour
     {
         player = GameObject.Find("FPSController");
 
-        slider.maxValue = MyStatus.GetHp();
+        slider.maxValue = player.GetComponent<MyStatus>().GetHp();
         
     }
 
     // Update is called once per frame
     void Update()
     {
-        slider.value = MyStatus.GetHp();
+        slider.value = player.GetComponent<MyStatus>().GetHp();
     }
 }
