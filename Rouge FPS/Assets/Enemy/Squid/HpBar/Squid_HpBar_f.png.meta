@@ -1,19 +1,15 @@
 fileFormatVersion: 2
-guid: 17067409e9821054f80d1bccd4cdaf2e
+guid: bfe947fb243cf294ba89437f6e377ee6
 TextureImporter:
   fileIDToRecycleName:
-    21300000: squid_attack_0
-    21300002: squid_attack_1
-    21300004: squid_attack_2
-    21300006: squid_attack_3
-    21300008: squid_attack_4
-    21300010: squid_attack_5
-    21300012: squid_attack_6
-    21300014: squid_attack_7
-    21300016: squid_attack_8
-    21300018: squid_attack_9
-    21300020: squid_attack_10
-    21300022: squid_attack_11
+    21300000: Squid_HpBar_f_0
+    21300002: Squid_HpBar_f_1
+    21300004: Squid_HpBar_f_2
+    21300006: Squid_HpBar_f_3
+    21300008: Squid_HpBar_f_4
+    21300010: Squid_HpBar_f_5
+    21300012: Squid_HpBar_f_6
+    21300014: Squid_HpBar_f_7
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -44,7 +40,7 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: -1
-    aniso: 1
+    aniso: -1
     mipBias: -100
     wrapU: 1
     wrapV: 1
@@ -96,13 +92,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: squid_attack_0
+      name: Squid_HpBar_f_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 640
-        width: 240
-        height: 320
+        y: 150
+        width: 500
+        height: 50
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -110,19 +106,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f9d3a50d3de502b4585ad54facea5403
+      spriteID: c5a2d404cfc0621448b8680e7b429130
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: squid_attack_1
+      name: Squid_HpBar_f_1
       rect:
         serializedVersion: 2
-        x: 240
-        y: 640
-        width: 240
-        height: 320
+        x: 500
+        y: 150
+        width: 500
+        height: 50
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -130,59 +126,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5ae93fd4315d6904fb7cf49b3a33b419
+      spriteID: 01e96310fa584d44ea90db0356e8a24e
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: squid_attack_2
-      rect:
-        serializedVersion: 2
-        x: 480
-        y: 640
-        width: 240
-        height: 320
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e327ada63d65f5d4b9ac7049e9406526
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: squid_attack_3
-      rect:
-        serializedVersion: 2
-        x: 720
-        y: 640
-        width: 240
-        height: 320
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7bfb1a346c4e3b548af7a89a257ac636
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: squid_attack_4
+      name: Squid_HpBar_f_2
       rect:
         serializedVersion: 2
         x: 0
-        y: 320
-        width: 240
-        height: 320
+        y: 100
+        width: 500
+        height: 50
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -190,19 +146,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6079b8944ed71eb41a6e8a8b7a21d462
+      spriteID: e82754d08fb795b458afe394d4b0335e
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: squid_attack_5
+      name: Squid_HpBar_f_3
       rect:
         serializedVersion: 2
-        x: 240
-        y: 320
-        width: 240
-        height: 320
+        x: 500
+        y: 100
+        width: 500
+        height: 50
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -210,19 +166,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4b67be03e4553944785ffb584618af41
+      spriteID: bfad49101daaff3408fecf107f1da8b0
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: squid_attack_6
+      name: Squid_HpBar_f_4
       rect:
         serializedVersion: 2
-        x: 480
-        y: 320
-        width: 240
-        height: 320
+        x: 0
+        y: 50
+        width: 500
+        height: 50
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -230,19 +186,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a459b201461585745a9542de73822951
+      spriteID: 0e3db9fd9734c0f4aa11fbeb3f883deb
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: squid_attack_7
+      name: Squid_HpBar_f_5
       rect:
         serializedVersion: 2
-        x: 720
-        y: 320
-        width: 240
-        height: 320
+        x: 500
+        y: 50
+        width: 500
+        height: 50
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -250,19 +206,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bdc8a128d79d12442b7bba331d0e6422
+      spriteID: d261fbb2ceb979f40973e61db59e2683
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: squid_attack_8
+      name: Squid_HpBar_f_6
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 240
-        height: 320
+        width: 500
+        height: 50
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -270,19 +226,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2463831fbf0ecde4fb05d5dbc90f37db
+      spriteID: 05be7850410ac6f40b3b202e5c1e155e
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: squid_attack_9
+      name: Squid_HpBar_f_7
       rect:
         serializedVersion: 2
-        x: 240
+        x: 500
         y: 0
-        width: 240
-        height: 320
+        width: 500
+        height: 50
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -290,47 +246,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a8eb38c5015972a4fa4afebac490f8b8
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: squid_attack_10
-      rect:
-        serializedVersion: 2
-        x: 480
-        y: 0
-        width: 240
-        height: 320
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 78cc74435ada01549a47d1ee8d9ad9a1
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: squid_attack_11
-      rect:
-        serializedVersion: 2
-        x: 720
-        y: 0
-        width: 240
-        height: 320
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4694c672c1daeb24285745d851b32450
+      spriteID: 80d18025934e0774287ba53e5fee8d63
       vertices: []
       indices: 
       edges: []
@@ -338,7 +254,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 0da367418fdd5364fbe4300d1df70a76
+    spriteID: 5133716951d9b78408f6c94e9639e1ce
     vertices: []
     indices: 
     edges: []
