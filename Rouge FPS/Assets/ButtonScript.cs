@@ -15,6 +15,7 @@ public class ButtonScript : MonoBehaviour
     {
        UI.GetComponent<SettingScript>().OffPause();
        UI.GetComponent<PauseScript>().OnPause();
-       Debug.Log("shine");
+       Rotation.Save();
+     
     }
 }
