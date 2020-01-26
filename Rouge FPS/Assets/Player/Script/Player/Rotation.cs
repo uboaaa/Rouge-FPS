@@ -17,7 +17,7 @@ public class Rotation : MonoBehaviour
     {
     if(XSensitivity.GetUpPool()){XRotation+=1.0f;XSensitivity.FalseUpPool();}
     if(XSensitivity.GetDownPool()){XRotation-=1.0f;XSensitivity.FalseDownPool();}
-    Debug.Log(XRotation);
+   
         
     }
      public static float GetX(){return XRotation;}

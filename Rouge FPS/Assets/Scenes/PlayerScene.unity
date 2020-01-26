@@ -782,7 +782,7 @@ GameObject:
   - component: {fileID: 127063121}
   - component: {fileID: 127063124}
   m_Layer: 5
-  m_Name: Button (4)
+  m_Name: +
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -858,7 +858,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &127063122
@@ -910,7 +910,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6d6b3c42a1e3ba4fb200ae032f917db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ak: {fileID: 210366063}
 --- !u!1 &127959711
 GameObject:
   m_ObjectHideFlags: 0
@@ -1196,7 +1195,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 90
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -1583,6 +1582,7 @@ GameObject:
   - component: {fileID: 210366067}
   - component: {fileID: 210366066}
   - component: {fileID: 210366065}
+  - component: {fileID: 210366078}
   - component: {fileID: 210366064}
   m_Layer: 0
   m_Name: FPSController
@@ -2009,6 +2009,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &210366078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 210366063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 966eb2544bf48c648b9e36c5a9a74d9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &244126405
 GameObject:
   m_ObjectHideFlags: 0
@@ -2516,8 +2528,9 @@ GameObject:
   - component: {fileID: 466791661}
   - component: {fileID: 466791660}
   - component: {fileID: 466791659}
+  - component: {fileID: 466791662}
   m_Layer: 5
-  m_Name: Button (5)
+  m_Name: '-'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2583,8 +2596,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: OnClick
+      - m_Target: {fileID: 466791662}
+        m_MethodName: Onclick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2633,6 +2646,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 466791657}
   m_CullTransparentMesh: 0
+--- !u!114 &466791662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 466791657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6d6b3c42a1e3ba4fb200ae032f917db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &467525229
 GameObject:
   m_ObjectHideFlags: 0
@@ -4092,8 +4117,9 @@ GameObject:
   - component: {fileID: 1250883456}
   - component: {fileID: 1250883455}
   - component: {fileID: 1250883454}
+  - component: {fileID: 1250883457}
   m_Layer: 5
-  m_Name: Button (7)
+  m_Name: C-
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4209,6 +4235,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1250883452}
   m_CullTransparentMesh: 0
+--- !u!114 &1250883457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1250883452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71ba25c2e11f8dd4b96f96d3cadeb992, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1262889514
 GameObject:
   m_ObjectHideFlags: 0
@@ -4221,8 +4259,9 @@ GameObject:
   - component: {fileID: 1262889518}
   - component: {fileID: 1262889517}
   - component: {fileID: 1262889516}
+  - component: {fileID: 1262889519}
   m_Layer: 5
-  m_Name: Button (6)
+  m_Name: C+
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4338,6 +4377,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1262889514}
   m_CullTransparentMesh: 0
+--- !u!114 &1262889519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1262889514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71ba25c2e11f8dd4b96f96d3cadeb992, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1349261615
 GameObject:
   m_ObjectHideFlags: 0
@@ -5105,6 +5156,7 @@ GameObject:
   - component: {fileID: 1751112791}
   - component: {fileID: 1751112790}
   - component: {fileID: 1751112789}
+  - component: {fileID: 1751112797}
   m_Layer: 0
   m_Name: Object Camera
   m_TagString: MainCamera
@@ -5241,7 +5293,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 90
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -5259,6 +5311,18 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &1751112797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1751112787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c2e22b432a0e7d4ab7bbd8e6a08b6bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1784319881
 GameObject:
   m_ObjectHideFlags: 0
