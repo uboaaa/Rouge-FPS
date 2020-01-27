@@ -20,12 +20,13 @@ public class Came: MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-   Debug.Log(camera.fieldOfView );
-    if(ChangeCamera.GetUpPool()){  camera.fieldOfView =camera.fieldOfView+1;ChangeCamera.FalseUpPool();}
-    if(ChangeCamera.GetDownPool()){ camera.fieldOfView-=1.0f;ChangeCamera.FalseDownPool();}
+
+    if(ChangeCamera.GetUpPool()&& camera.fieldOfView<179){  camera.fieldOfView =camera.fieldOfView+1;ChangeCamera.FalseUpPool();}
+    if(ChangeCamera.GetDownPool() &&camera.fieldOfView>1){ camera.fieldOfView-=1.0f;ChangeCamera.FalseDownPool();}
 
     }
     
+    public float GetNumber(){return camera.fieldOfView;}
     public  void Save(){ 
     PlayerPrefs.SetFloat ("FOV", camera.fieldOfView);
     PlayerPrefs.Save ();}

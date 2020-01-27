@@ -10,14 +10,13 @@ public class FloorCount : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+      Floors=1;  
     }
 
     // Update is called once per frame
     void Update()
     {
-       if(SceneManager.GetActiveScene().name=="GameScene" && Reset){Floors=-1;Reset=false;} 
-       Debug.Log(Floors);
+    
     }
 
     public static int GetFloors(){return Floors;}

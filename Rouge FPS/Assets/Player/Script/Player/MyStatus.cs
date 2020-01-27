@@ -6,7 +6,7 @@ using UnityEngine;
 public class MyStatus : MonoBehaviour
 {
 
-    private float playerHP = 50;
+    private float playerHP = 100;
     private int playerATK;
     private float playerDEF = 1;
     private float HpPlus;
