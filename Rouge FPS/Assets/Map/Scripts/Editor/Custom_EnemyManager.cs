@@ -10,29 +10,53 @@ using UnityEditorInternal;
 [CanEditMultipleObjects]
 public class Custom_EnemyManager : Editor
 {
-    ReorderableList _reorderableList;
+    ReorderableList _groundList;
+    ReorderableList _airList;
+
+    SerializedProperty _popCount;
+    SerializedProperty _popInterval;
 
     private void OnEnable()
     {
-        //表示用リスト
-        _reorderableList = new ReorderableList(serializedObject, serializedObject.FindProperty("m_enemyGroups"));
-        _reorderableList.drawElementCallback += (Rect rect, int index, bool selected, bool focused) =>
+        //地上用リスト
+        _groundList = new ReorderableList(serializedObject, serializedObject.FindProperty("m_groundGroups"));
+        _groundList.drawElementCallback += (Rect rect, int index, bool selected, bool focused) =>
         {
-            SerializedProperty property = _reorderableList.serializedProperty.GetArrayElementAtIndex(index);
+            SerializedProperty property = _groundList.serializedProperty.GetArrayElementAtIndex(index);
             EditorGUI.PropertyField(rect, property, GUIContent.none);
         };
-
-        _reorderableList.drawHeaderCallback += rect =>
+        _groundList.drawHeaderCallback += rect =>
         {
-            EditorGUI.LabelField(rect, "EnemyLevel | EnemyObject");
+            EditorGUI.LabelField(rect, "地上の敵リスト");
         };
+
+        //空中用リスト
+        _airList = new ReorderableList(serializedObject, serializedObject.FindProperty("m_airGroups"));
+        _airList.drawElementCallback += (Rect rect, int index, bool selected, bool focused) =>
+        {
+            SerializedProperty property = _airList.serializedProperty.GetArrayElementAtIndex(index);
+            EditorGUI.PropertyField(rect, property, GUIContent.none);
+        };
+        _airList.drawHeaderCallback += rect =>
+        {
+            EditorGUI.LabelField(rect, "空中の敵リスト");
+        };
+
+        //出現数
+        _popCount = serializedObject.FindProperty("m_PopMax");
+
+        //出現間隔
+        _popInterval = serializedObject.FindProperty("m_PopInterval");
     }
 
     public override void OnInspectorGUI()
     {
         serializedObject.Update();
+        EditorGUILayout.PropertyField(_popCount);
+        EditorGUILayout.PropertyField(_popInterval);
 
-        _reorderableList.DoLayoutList();
+        _groundList.DoLayoutList();
+        _airList.DoLayoutList();
         serializedObject.ApplyModifiedProperties();
     }
 }

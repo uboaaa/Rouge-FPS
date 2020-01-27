@@ -15,7 +15,6 @@ public class MapInitializer : MonoBehaviour
 
     //各種マップパラメータ
     [SerializeField] private int MAX_ROOM_NUMBER = 6;   //最大部屋数（これ以下の場合もある）
-    [SerializeField] private int MAX_MAP_NUMBER = 3;    //最大マップ数
  
 
     public static int MAP_SIZE_X = 30;
@@ -40,6 +39,9 @@ public class MapInitializer : MonoBehaviour
     private GameObject m_floorPrefab;     //床のオブジェクト
     private GameObject m_wallPrefab;      //壁のオブジェクト
     private GameObject m_celingPrefab;    //天井のオブジェクト
+    private GameObject m_cagePrefab;
+
+    private GameObject m_bossRoomPrefab;
 
     //component/class
     private DungeonGenerator DG = null;
@@ -68,14 +70,22 @@ public class MapInitializer : MonoBehaviour
         {
             //リセット
             ResetMap();
-            //マップ基盤生成
-            GenerateBaseMap();
-            //部屋生成
-            GenerateRooms();
-            //通路生成
-            GeneratePass();
-            //オブジェクト配置
-            GenerateObject();
+            if (m_mapID.Value % 5 != 0)
+            {
+                //マップ基盤生成
+                GenerateBaseMap();
+                //部屋生成
+                GenerateRooms();
+                //通路生成
+                GeneratePass();
+                //オブジェクト配置
+                GenerateObject();
+            }
+            else
+            {
+                //ボス部屋生成
+                GenerateBossMap();
+            }
             //マネージャー設定
             //ReloadManager();
         };
@@ -94,7 +104,7 @@ public class MapInitializer : MonoBehaviour
     //更新
     void Update()
     {
-        //簡易マップ移動
+        ////簡易マップ移動
         //if (Input.GetKeyDown(KeyCode.Q))
         //{
         //    MoveNextMap();
@@ -141,6 +151,27 @@ public class MapInitializer : MonoBehaviour
 
         //ベースマップ（部屋のみのマップ）を取得
         m_map = DG.GenerateBaseMap(MAP_SIZE_X, MAP_SIZE_Y, MAX_ROOM_NUMBER);
+
+    }
+
+    //ボス部屋用マップ生成
+    private void GenerateBossMap()
+    {
+        //ボス用prefabを取得し、インスタス化
+        m_bossRoomPrefab = Resources.Load("Prefab/Rooms/BossMap") as GameObject;
+        GameObject _bossRoom = Instantiate(m_bossRoomPrefab, new Vector3(0, 0, 0), new Quaternion());
+
+        //初期座標用のオブジェクトを取得し、座標をセット
+        Transform trans = _bossRoom.transform.Find("StartRoom/StartPosition");
+        g_spawn_posX = trans.position.x;
+        g_spawn_posY = trans.position.y;
+        g_spawn_posZ = trans.position.z;
+        g_spawn_rotX = 0;
+        g_spawn_rotY = 0;
+        g_spawn_rotZ = 0;
+
+        //初期地点更新フラグ
+        g_spawn_enable = true;
 
     }
 
@@ -231,6 +262,7 @@ public class MapInitializer : MonoBehaviour
         m_wallPrefab = Resources.Load("Prefab/DungeonParts/Wall") as GameObject;
         m_floorPrefab = Resources.Load("Prefab/DungeonParts/Floor") as GameObject;
         m_celingPrefab = Resources.Load("Prefab/DungeonParts/Celing") as GameObject;
+        m_cagePrefab = Resources.Load("Prefab/DungeonParts/Cage") as GameObject;
 
         //余分な壁データを削除
         for (int y = 1; y < MAP_SIZE_Y - 1; y++)
@@ -324,8 +356,13 @@ public class MapInitializer : MonoBehaviour
                     goNextFlameTime = Time.realtimeSinceStartup + 0.01f;
                 }
 
-                
+
                 //オブジェクト生成
+                if (m_map[x, y] == 3)
+                {
+                    GameObject _newCage = Instantiate(m_cagePrefab, new Vector3(x * MAP_SCALE, 0, y * MAP_SCALE), new Quaternion());
+                    _newCage.transform.SetParent(m_parentParts.transform);
+                }
                 if (m_map[x, y] == 2)
                 {
                     //通路
@@ -336,7 +373,7 @@ public class MapInitializer : MonoBehaviour
                 if (m_map[x, y] >= 1)
                 {
                     //天井
-                    GameObject _newCeling = Instantiate(m_celingPrefab, new Vector3(x * MAP_SCALE, 6, y * MAP_SCALE), new Quaternion());
+                    GameObject _newCeling = Instantiate(m_celingPrefab, new Vector3(x * MAP_SCALE, 8, y * MAP_SCALE), new Quaternion());
                     _newCeling.transform.SetParent(m_parentParts.transform);
                 }
 

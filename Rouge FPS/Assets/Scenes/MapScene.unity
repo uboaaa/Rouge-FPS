@@ -568,7 +568,6 @@ MonoBehaviour:
   INS_MAP_SIZE_Y: 50
   INS_MAP_SCALE: 3
   MAX_ROOM_NUMBER: 9
-  MAX_MAP_NUMBER: 3
 --- !u!4 &1249066334
 Transform:
   m_ObjectHideFlags: 0
@@ -781,7 +780,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 8192
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: 43674fd9f891a9149b0e7b96600f8561, type: 2}
   m_TargetDisplay: 0
@@ -896,7 +895,7 @@ GameObject:
   - component: {fileID: 1414884909}
   - component: {fileID: 1414884911}
   - component: {fileID: 1414884912}
-  m_Layer: 12
+  m_Layer: 13
   m_Name: MiniMap_Player
   m_TagString: MiniMap
   m_Icon: {fileID: 0}
@@ -1050,7 +1049,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 8192
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: 93a128bf4f3acb14cbe772615c5c39ad, type: 2}
   m_TargetDisplay: 0
