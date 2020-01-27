@@ -54,16 +54,16 @@ public class ItemBox : MonoBehaviour
         }
 
         // 武器のランクをランダムで取得
-        random =　UnityEngine.Random.Range(0, 3);
-        if(random == 0)
+        random =　UnityEngine.Random.Range(0, 6);
+        if(random == 0 || random == 2 || random == 4)
         {
             GIScript.gunRank = GunInfo.GunRank.Rank1;
         }
-        else if(random == 1)
+        else if(random == 1 || random == 5)
         {
             GIScript.gunRank = GunInfo.GunRank.Rank2;
         }
-        else if(random == 2)
+        else if(random == 3)
         {
             GIScript.gunRank = GunInfo.GunRank.Rank3;
         }
