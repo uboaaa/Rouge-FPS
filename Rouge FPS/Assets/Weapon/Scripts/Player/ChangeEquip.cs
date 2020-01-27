@@ -45,12 +45,10 @@ public class ChangeEquip : MonoBehaviour
             SecondaryWeapon.SetActive(false);
             GCSecondaryScript = SecondaryWeapon.GetComponent<GunController>();
         }
-
     }
 
     void Update()
     {
-        //Debug.Log(ownGun);
         if (Input.GetKeyDown(KeyCode.Q) && !activeFlg && SecondaryWeapon != null)
         {
             GCPrimaryScript.shooting = false;
