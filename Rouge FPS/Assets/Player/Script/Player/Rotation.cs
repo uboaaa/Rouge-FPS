@@ -18,8 +18,8 @@ public class Rotation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-    if(XSensitivity.GetUpPool() &&Count<14){XRotation+=0.2f;Count++;XSensitivity.FalseUpPool();}
-    if(XSensitivity.GetDownPool() && Count>1){XRotation-=0.2f;Count--;XSensitivity.FalseDownPool();}
+    if(XSensitivity.GetUpPool() &&Count<14){XRotation+=0.1f;Count++;XSensitivity.FalseUpPool();}
+    if(XSensitivity.GetDownPool() && Count>1){XRotation-=0.1f;Count--;XSensitivity.FalseDownPool();}
    
         
     }

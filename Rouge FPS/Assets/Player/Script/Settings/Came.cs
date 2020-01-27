@@ -21,8 +21,8 @@ public class Came: MonoBehaviour
     void Update()
     {
 
-    if(ChangeCamera.GetUpPool()&& camera.fieldOfView<179){  camera.fieldOfView =camera.fieldOfView+1;ChangeCamera.FalseUpPool();}
-    if(ChangeCamera.GetDownPool() &&camera.fieldOfView>1){ camera.fieldOfView-=1.0f;ChangeCamera.FalseDownPool();}
+    if(ChangeCamera.GetUpPool()&& camera.fieldOfView<110){  camera.fieldOfView =camera.fieldOfView+1;ChangeCamera.FalseUpPool();}
+    if(ChangeCamera.GetDownPool() &&camera.fieldOfView>60){ camera.fieldOfView-=1.0f;ChangeCamera.FalseDownPool();}
 
     }
     
