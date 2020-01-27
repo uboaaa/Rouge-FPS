@@ -11,6 +11,7 @@ public class ChangeEquip : MonoBehaviour
     [HideInInspector] public int ownGun;      // 0:持ってない 1:プライマリ 2:セカンダリ
     [HideInInspector] public bool activeFlg;  // 行動中か  
     GameObject child;
+    private float scroll;                     // マウスホイールの回転値を格納する変数
 
      // スクリプト関係================================================
     public GunController GCPrimaryScript{get;set;}                   // [GunController]用の変数
@@ -49,12 +50,15 @@ public class ChangeEquip : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q) && !activeFlg && SecondaryWeapon != null)
+        scroll = Input.GetAxis("Mouse ScrollWheel");
+
+        if (scroll < 0 || scroll > 0 || Input.GetKeyDown(KeyCode.Q) && !activeFlg && SecondaryWeapon != null)
         {
             GCPrimaryScript.shooting = false;
             GCSecondaryScript.shooting = false;
             activeFlg = true;
             ChangeWeapon();
+            scroll = 0;
         }
     }
 
