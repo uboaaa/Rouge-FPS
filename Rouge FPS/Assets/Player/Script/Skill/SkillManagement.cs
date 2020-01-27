@@ -45,7 +45,7 @@ public class SkillManagement : MonoBehaviour
     if(Input.GetMouseButtonDown(1) && !The_World &&Gg<0.0f ){The_World=true;}
     if(The_World){Invoke("SetTimeStop",5.0f);}
     else{Gg=(SkillCool+CoolCount)-Time.time;}
-    if(Gg<0.0f){Debug.Log("Ready!");}
+    //if(Gg<0.0f){Debug.Log("Ready!");}
     }
 
     private  void SetTimeStop(){The_World=false;SkillCool=5.0f;CoolCount=Time.time;}

@@ -48,12 +48,15 @@ public class BulletController : MonoBehaviour
             Damage = GCScript.Damage;
 
         }
+
+        // ダメージのばらつき +-1
+        Damage += UnityEngine.Random.Range(-1, 2);
+        Debug.Log(Damage);
     }
 
     void Update()
     {
-        // ダメージ量を変更した場合
-        //Damage = 
+        
     }
 
     void HitEffect(GameObject Prefab)

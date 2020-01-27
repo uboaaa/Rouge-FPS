@@ -39,7 +39,7 @@ private float aaaaa;
     void Update()
     {
         rotation = this.transform.localRotation;
-        Debug.Log(GetPlayerRotation());
+        //Debug.Log(GetPlayerRotation());
 
         if(StageReset){
         characterController = GetComponent<CharacterController>();
