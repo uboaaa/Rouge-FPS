@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6140202621480831575}
   - component: {fileID: 4826716503728590190}
   - component: {fileID: 3881293055447456463}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GoalArea
   m_TagString: Goal
   m_Icon: {fileID: 0}
@@ -72,6 +72,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpinBlue
       objectReference: {fileID: 0}
+    - target: {fileID: 1738853587930016833, guid: ecc9186317a25e7478592e59262a1e2d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 1738853587930183671, guid: ecc9186317a25e7478592e59262a1e2d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -126,6 +131,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1738853587929800771, guid: ecc9186317a25e7478592e59262a1e2d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1738853587929842259, guid: ecc9186317a25e7478592e59262a1e2d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1738853587929996247, guid: ecc9186317a25e7478592e59262a1e2d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ecc9186317a25e7478592e59262a1e2d, type: 3}
@@ -147,6 +167,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BasicBlue
       objectReference: {fileID: 0}
+    - target: {fileID: 3607996042722115216, guid: 90da639c3c3740048b73746b4f0f0a67,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 3607996042721774614, guid: 90da639c3c3740048b73746b4f0f0a67,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -201,6 +226,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3607996042721922052, guid: 90da639c3c3740048b73746b4f0f0a67,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3607996042721948148, guid: 90da639c3c3740048b73746b4f0f0a67,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 3607996042703516230, guid: 90da639c3c3740048b73746b4f0f0a67,
         type: 3}

@@ -23,6 +23,7 @@ public static class Utility
         if (list.Count == 0)
         {
             Debug.Log("リストが空です");
+            return default;
         }
 
         return list[Random.Range(0, list.Count)];

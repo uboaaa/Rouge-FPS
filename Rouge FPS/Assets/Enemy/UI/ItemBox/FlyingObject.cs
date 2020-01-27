@@ -12,7 +12,7 @@ public class FlyingObject : MonoBehaviour
 
     void Start()
     {
-        if(basePosition >= 999)
+        if(basePosition <= 999)
         {
             basePosition = transform.position.y;
         }

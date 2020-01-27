@@ -6,7 +6,7 @@ public class RoomEnabler : MonoBehaviour
 {
     public BoxCollider trans_coll = null;
 
-    void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {

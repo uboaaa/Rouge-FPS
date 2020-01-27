@@ -77,6 +77,8 @@ public class DungeonGenerator
                 for (int y = start.Y; y <= end.Y; y++)
                 {
                     _map[x, y] = 2;
+
+                    if ((x == start.X && y == start.Y) || (x == end.X && y == end.Y)) _map[x, y] = 3;
                 }
             }
         }
