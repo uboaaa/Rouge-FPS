@@ -20,7 +20,7 @@ public class HpText : MonoBehaviour
     void Update()
     {
         LookHP = FPSCon.GetComponent<MyStatus>().GetHp();
-        if (LookHP > 0) { text.text = LookHP + ""; }
+        if (LookHP > 0) { text.text = "HP　"+LookHP; }
         else { text.text = "0"; }
     }
 }
