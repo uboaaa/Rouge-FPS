@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class FloorCount : MonoBehaviour
 {
-    private static int Floors;
+    private static int Floors=1;
     private static bool Reset;
     // Start is called before the first frame update
     void Start()
@@ -24,5 +24,7 @@ public class FloorCount : MonoBehaviour
     public static void UpFloors(){Floors++;}
 
     public static void SetReset(){Reset=true;}
+
+    public static void ResetCount(){Floors=1;}
 
 }
