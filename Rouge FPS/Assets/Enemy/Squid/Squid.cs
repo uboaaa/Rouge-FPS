@@ -68,8 +68,8 @@ public class Squid : MonoBehaviour
     // アニメ関数
     int trans = 0;
 
-    // 死んだ時に生成されるオブジェクト
-    public GameObject PopObject = null;
+
+
     // 乱数用
     float mvalue;
     // 爆発エフェクト管理用

@@ -64,7 +64,10 @@ public class Ghost : MonoBehaviour
     private Light plight = null;
 
     // 死んだ時に生成されるオブジェクト
-    public GameObject PopObject = null;
+    private int rnd = 0;
+    public GameObject PopObject1 = null;
+
+    public GameObject PopObject2 = null;
 
 
 
@@ -271,29 +274,6 @@ public class Ghost : MonoBehaviour
         // Debug.Log("GhostFoundFlg");
         // Debug.Log(foundflg);
 
-        // 敵の体力が０になったら
-        if(ep.hp == 0)
-        {
-            // 死亡時の爆発エフェクトを再生
-            GameObject de = Instantiate(deadeffect) as GameObject;
-            de.transform.position = this.gameObject.transform.position;
-            de.transform.position = new Vector3(de.transform.position.x,de.transform.position.y,de.transform.position.z);
-
-            // 死んだときにアイテムポップ
-            if(PopObject)
-            {
-                GameObject po = Instantiate(PopObject) as GameObject;
-                po.transform.position = this.gameObject.transform.position;
-            }
-
-            // 解放処理
-            Destroy(de,2.0f);
-            Destroy(this.gameObject);
-        }
-
-
-
-
         
 
         // // 弾発射
@@ -320,11 +300,32 @@ public class Ghost : MonoBehaviour
             de.transform.position = this.gameObject.transform.position;
             de.transform.position = new Vector3(de.transform.position.x,de.transform.position.y - 1.2f,de.transform.position.z);
 
+            // 乱数処理
+            rnd = Random.Range(0, 3);
+
             // 死んだときにアイテムポップ
-            if(PopObject)
+            // 0は無生成
+            if(rnd == 0)
             {
-                GameObject po = Instantiate(PopObject) as GameObject;
-                po.transform.position = this.gameObject.transform.position;
+
+            }
+            // 1を生成
+            else if(rnd == 1)
+            {
+                if(PopObject1)
+                {
+                    GameObject po1 = Instantiate(PopObject1) as GameObject;
+                    po1.transform.position = this.gameObject.transform.position;
+                }
+            }
+            // 2を生成
+            else if(rnd == 2)
+            {
+                if(PopObject2)
+                {
+                    GameObject po2= Instantiate(PopObject2) as GameObject;
+                    po2.transform.position = this.gameObject.transform.position;
+                }
             }
 
             // 解放処理
