@@ -1,95 +1,138 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
-using System;
 
 // UI管理クラス
 public class UIManager : MonoBehaviour
 {
-    public GameObject[] SkillPrefab;
-    [SerializeField] Vector2[] SkillPosition;
+    public GameObject[] SkillObj;
+    [SerializeField] Vector2[] SkillPos;
     [Header("-----------------------------------------")]
-    public GameObject[] SlotPrefab;
-    [SerializeField] Vector2[] SlotPosition;
+    public GameObject[] SlotObj;
+    [SerializeField] Vector2[] SlotPos;
     [Header("-----------------------------------------")]
-    public GameObject[] ButtonPrefab;
-    [SerializeField] Vector2[] ButtonPosition;
+    public GameObject[] ButtonObj;
+    [SerializeField] Vector2[] ButtonPos;
+    [Header("-----------------------------------------")]
+    public GameObject UIObj;
+    [Header("-----------------------------------------")]
+    public GameObject Parameter;
 
+    // 抽選用の変数
     private Lottery lot;
-    private string[] randomSkill;
-
-    List<GameObject> prefabList;
 
     void Start()
     {
         lot = new Lottery();
-        randomSkill = new string[3];
-        prefabList = new List<GameObject>();
-    }
 
-    public void Test()
+        Init();
+        UIObj.SetActive(false);
+    }
+    
+    // 初期化
+    public void Init()
     {
-        // プレハブ生成
-        // スキルUI
-        GameObject tmp;
         var i = 0;
-        foreach (var prefab in SkillPrefab)
+        foreach (var obj in SkillObj)
         {
-            tmp = Instantiate(prefab, SkillPosition[i], Quaternion.identity, GameObject.Find("SkillCanvas").transform);
-            tmp.name = prefab.name;
-            // テクスチャ読み込み
-            var s = "Skill/" + randomSkill[i];
-            tmp.GetComponent<Image>().sprite = Resources.Load<Sprite>(s);
-            prefabList.Add(tmp);
+            // 初期座標設定
+            obj.transform.position = SkillPos[i];
             i++;
         }
-        // スロットUI
         i = 0;
-        foreach (var prefab in SlotPrefab)
+        // プレイヤーのパラメーター情報を取得
+        var playerParam = GameObject.Find("Parameter").GetComponent<PlayerParameter>();
+        foreach (var obj in SlotObj)
         {
-            tmp = Instantiate(prefab, SlotPosition[i], Quaternion.identity, GameObject.Find("SlotCanvas").transform);
-            tmp.name = prefab.name;
-            tmp.GetComponent<Image>().sprite = Resources.Load<Sprite>("Skill/edge");
-            prefabList.Add(tmp);
+            // 初期座標設定
+            obj.transform.position = SlotPos[i];
+            // スロット名設定
+            obj.GetComponent<Parameter>().SetName(playerParam.GetSlotName(i));
             i++;
         }
-        // ボタンUI
         i = 0;
-        foreach (var prefab in ButtonPrefab)
+        foreach (var obj in ButtonObj)
         {
-            tmp = Instantiate(prefab, ButtonPosition[i], Quaternion.identity, GameObject.Find("ButtonCanvas").transform);
-            tmp.name = prefab.name;
-            prefabList.Add(tmp);
+            // 初期座標設定
+            obj.transform.position = ButtonPos[i];
             i++;
         }
     }
 
-    private void OnClick()
+    // パラメーターをリセット
+    public void ParameterReset()
     {
-        Debug.Log("Enter");
+        var i = 0;
+        foreach (var obj in SkillObj)
+        {
+            obj.GetComponent<Parameter>().AllReset();
+            i++;
+        }
+        i = 0;
+        foreach (var obj in SlotObj)
+        {
+            obj.GetComponent<Parameter>().AllReset();
+            i++;
+        }
     }
+
+    // スキルの画像セット
+    public void SetSkill()
+    {
+        var i = 0;
+        foreach (var obj in SkillObj)
+        {
+            // 抽選
+            var status = lot.LevelUp("0", 4, 3, 3);
+            // テクスチャ設定
+            var tex = "Skill/" + status[0];
+            obj.GetComponent<Image>().sprite = Resources.Load<Sprite>(tex);
+            // パラメーター設定
+            var param = obj.GetComponent<Parameter>();
+            param.AllReset();
+            param.SetParameter(status[0], status[1]);
+            // 名前設定
+            param.SetName(status[0]);
+
+            i++;
+        }
+    }
+    
+    // スロットの画像セット
+    public void SetSlot()
+    {
+        var i = 0;
+        var pp = Parameter.GetComponent<PlayerParameter>();
+        foreach(var obj in SlotObj)
+        {
+            // パラメーター取得
+            var param = obj.GetComponent<Parameter>();
+            param.AllReset();
+            // i番目のスロットの情報をセット
+            var name = pp.GetSlotName(i);
+            var tex = "Skill/" + name;
+            // テクスチャ設定
+            obj.GetComponent<Image>().sprite = Resources.Load<Sprite>(tex);
+            // パラメーターの値も取得
+            param.SetParameter(name, pp.GetParameterToString(name));
+            i++;
+        }
+    }
+
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
-            for (var i = 0; i < 3; i++)
-            {
-                randomSkill[i] = lot.LevelUp("0", 4, 3, 3)[0];
-            }
-            Test();
+            SetSkill();
+            SetSlot();
+            DropUI.UnLock();
+            UIObj.SetActive(true);
         }
-
-        // フラグの初期化とかしてないけどいったん削除
+        
         if(Input.GetKeyDown(KeyCode.S))
         {
-            foreach (var prefab in prefabList) 
-            {
-                Destroy(prefab);
-            }
+
+            UIObj.SetActive(false);
         }
-
     }
-
 }

@@ -16,12 +16,22 @@ public class DropUI : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointe
     private Sprite nowSprite;
     // もともとのスプライト記憶用
     private Sprite defaultSprite;
+    private string defaultName;
 
     void Start()
     {
+
+    }
+
+    // スプライト初期設定
+    public void InitSprite()
+    {
         // もともとのスプライト記憶
         defaultSprite = nowSprite = GetComponent<Image>().sprite;
+        defaultName = defaultSprite.name;
     }
+
+
 
     // UIにマウスがはいったとき
     public void OnPointerEnter(PointerEventData pointerEventData)
@@ -57,6 +67,21 @@ public class DropUI : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointe
     public void OnDrop(PointerEventData pointerEventData)
     {
         if (Lock) return;
+
+        // パラメーター変更
+
+        // ドラッグしてきたスキルのパラメーター
+        var param = pointerEventData.pointerDrag.GetComponent<Parameter>();
+        // その名前
+        var name = param.GetName();
+        // スロットのパラメーター
+        var slotParam = GetComponent<Parameter>();
+        //  スロットの名前をスキルの名前に変更
+        slotParam.SetName(name);
+        // スロットの値を書き換える
+        slotParam.AllReset();
+        slotParam.SetParameter(name, param.GetParameter(name));
+
         // スプライト変更
         Image droppedImage = pointerEventData.pointerDrag.GetComponent<Image>();
         iconImage.sprite = droppedImage.sprite;
@@ -66,11 +91,14 @@ public class DropUI : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointe
         Lock = true;
     }
 
+
     // キャンセルボタン押されたとき
     public void CancelClick()
     {
         // 初期状態に戻す
         iconImage.sprite = nowSprite = defaultSprite;
+        // ドラッグした後キャンセルした場合名前だけ変更されるのでこれも元に戻す
+        GetComponent<Parameter>().SetName(defaultName);
         UnLock();
     }
 }
