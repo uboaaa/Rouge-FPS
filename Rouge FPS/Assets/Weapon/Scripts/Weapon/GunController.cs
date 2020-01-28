@@ -227,7 +227,6 @@ public class GunController : MonoBehaviour
             {
                 // 弾の生成
 		        GameObject bullet = Instantiate<GameObject>(bulletPrefab, muzzle.position, muzzle.rotation);
-                bullet.transform.parent = this.transform;
                 bullet.transform.localScale = bulletScale;
 		        bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * bulletPower);
 		        Destroy(bullet, 10.0f);
