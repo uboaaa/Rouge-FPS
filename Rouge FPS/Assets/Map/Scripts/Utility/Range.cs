@@ -197,7 +197,6 @@ public class Range
         }
         else if (!(connect_Start || connect_End))       //直線では接続できない
         {
-            Debug.Log("生成なし(方向:" + direction + "/" + self_start + "," + self_end + "/" + other_start + "," + other_end + ")");
             return false;
         }
 

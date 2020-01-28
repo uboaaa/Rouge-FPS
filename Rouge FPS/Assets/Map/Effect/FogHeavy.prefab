@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8698589351272464139}
   - component: {fileID: 8698589351258316673}
   - component: {fileID: 8698589351256320927}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FogHeavy
   m_TagString: Untagged
   m_Icon: {fileID: 0}

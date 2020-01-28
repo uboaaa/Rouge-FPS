@@ -15,6 +15,7 @@ public class Custom_EnemyManager : Editor
 
     SerializedProperty _popCount;
     SerializedProperty _popInterval;
+    SerializedProperty _popParent;
 
     private void OnEnable()
     {
@@ -47,6 +48,9 @@ public class Custom_EnemyManager : Editor
 
         //出現間隔
         _popInterval = serializedObject.FindProperty("m_PopInterval");
+
+        //親
+        _popParent = serializedObject.FindProperty("m_Enemies");
     }
 
     public override void OnInspectorGUI()
@@ -54,6 +58,7 @@ public class Custom_EnemyManager : Editor
         serializedObject.Update();
         EditorGUILayout.PropertyField(_popCount);
         EditorGUILayout.PropertyField(_popInterval);
+        EditorGUILayout.PropertyField(_popParent);
 
         _groundList.DoLayoutList();
         _airList.DoLayoutList();

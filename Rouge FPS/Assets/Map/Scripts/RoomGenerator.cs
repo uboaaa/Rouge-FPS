@@ -43,7 +43,6 @@ public class RoomGenerator : MonoBehaviour
     //初期化
     void Start()
     {
-        Debug.Log("部屋タイプの数：" + m_roomTypeList.Length);
     }
 
     //==============================================================
@@ -137,9 +136,6 @@ public class RoomGenerator : MonoBehaviour
         //部屋の座標をランダムで設定
         int r_posX = Utility.GetRandomInt(_data.Start.X, _data.End.X - r_width);
         int r_posY = Utility.GetRandomInt(_data.Start.Y, _data.End.Y - r_height);
-
-        Debug.Log(r_posX);
-        Debug.Log(r_posY);
 
         //サイズをfor文で回して、マップデータに書き込む
         for (int x = 0; x < r_width; x++)

@@ -331,7 +331,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_airGroups.Array.data[1].obj
       value: 
-      objectReference: {fileID: 6058750359548090081, guid: b10119cdd5e836a4792a0abfb8c25662,
+      objectReference: {fileID: 6873453550040116975, guid: 81f239b041322ca4694f301b70b07b26,
         type: 3}
     - target: {fileID: 4035611609774066677, guid: 449f920b019da76428324cb416be6810,
         type: 3}
@@ -355,6 +355,21 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: a2784742399c89f489d9703351c865aa, type: 2}
+    - target: {fileID: 3566191308262949090, guid: 449f920b019da76428324cb416be6810,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6496662439266723291, guid: 449f920b019da76428324cb416be6810,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6446889060749562594, guid: 449f920b019da76428324cb416be6810,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 449f920b019da76428324cb416be6810, type: 3}
 --- !u!4 &1033986170556968754 stripped

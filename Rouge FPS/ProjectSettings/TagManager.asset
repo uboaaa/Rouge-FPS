@@ -16,6 +16,7 @@ TagManager:
   - EnemyBullet
   - GroundSpawner
   - AirSpawner
+  - Explored
   layers:
   - Default
   - TransparentFX

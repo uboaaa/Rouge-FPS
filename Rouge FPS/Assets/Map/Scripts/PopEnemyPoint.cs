@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class PopEnemyPoint : MonoBehaviour
 {
-    
     //敵マネージャー
     private EnemyManager enemyManager;
+
+    //ポップ時エフェクト
+    public GameObject PopEffect;
 
     //初期化
     void Awake()
@@ -15,6 +17,8 @@ public class PopEnemyPoint : MonoBehaviour
         GameObject parentObj = transform.parent.gameObject;
         enemyManager = parentObj.GetComponent<EnemyManager>();
     }
+
+
 
     public void Pop()
     {
@@ -29,6 +33,12 @@ public class PopEnemyPoint : MonoBehaviour
 
         //敵データをランダム取得
         GameObject _newEnemy = enemyManager.GetEnemyObject(this.gameObject.tag);
+
+        //nullチェック
+        if (_newEnemy == null) return;
+
+        //ポップエフェクト
+        var _effect = Instantiate(PopEffect, this.transform.position, Quaternion.identity);
 
         //取得した敵をインスタンス化し、マネージャーのリストに追加
         enemyManager.AddEnemy(Instantiate(_newEnemy, this.transform.position, new Quaternion()));
