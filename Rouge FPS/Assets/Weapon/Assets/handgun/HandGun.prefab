@@ -205,7 +205,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootMode: 1
   gunType: 3
-  gunRank: 2
+  gunRank: 0
   skillSlot: 1
   MagazineSize: 10
   AmmoSize: 0

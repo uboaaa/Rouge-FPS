@@ -2398,10 +2398,13 @@ MonoBehaviour:
   HandGun: {fileID: 6450164897633310034, guid: 3582477c0b353c745b9552b2dad03171, type: 3}
   LightMachineGun: {fileID: 4051110895912933288, guid: a04d227ce5414ce49a99adea56b198c6,
     type: 3}
-  AssaultRifle: {fileID: 0}
-  SubMachineGun: {fileID: 0}
-  GrenadeLauncher: {fileID: 0}
-  ShotGun: {fileID: 0}
+  AssaultRifle: {fileID: 6847620235215801634, guid: b2e4e90a8db09f64094e00a170a42f42,
+    type: 3}
+  SubMachineGun: {fileID: 2486167993059112666, guid: 07fcfb285811700448ac39c69bf8c998,
+    type: 3}
+  GrenadeLauncher: {fileID: 8702378763311960002, guid: 370ad1451af12f34bab33206ed7a4bae,
+    type: 3}
+  ShotGun: {fileID: 2158512696167874446, guid: 76efeab63cb1f6a4488cc9b4b8134ac2, type: 3}
   FlameThrower: {fileID: 0}
 --- !u!114 &658423656
 MonoBehaviour:

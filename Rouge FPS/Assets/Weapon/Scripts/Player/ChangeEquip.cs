@@ -16,6 +16,7 @@ public class ChangeEquip : MonoBehaviour
      // スクリプト関係================================================
     public GunController GCPrimaryScript{get;set;}                   // [GunController]用の変数
     public GunController GCSecondaryScript{get;set;}                 // [GunController]用の変数
+    LoadGunPrefab　LGPScript;
 
     void Start()
     {
@@ -23,15 +24,29 @@ public class ChangeEquip : MonoBehaviour
         child = transform.FindChild("FirstPersonCharacter").gameObject;
 
         ownGun = 0;
+        // // 何も持っていないとき
+        // if(ownGun == 0)
+        // {
+        //     LGPScript = GetComponent<LoadGunPrefab>();
+        //     // ハンドガンをFirstPersonCharacterの直下に生成する
+        //     GameObject tmp = Instantiate(LGPScript.HandGun,child.transform,false);
+            
+        //     // 生成したものをプライマリにセットする
+        //     PrimaryWeapon = tmp;
+
+        //     PrimaryWeapon.SetActive(true);
+        //     GCPrimaryScript = PrimaryWeapon.GetComponent<GunController>();
+        // }
+
         if(PrimaryWeapon != null)
-        { 
+        {
             // 拾った武器をFirstPersonCharacterの直下に生成する
             GameObject tmp = Instantiate(PrimaryWeapon,child.transform,false);
             
             // 生成したものをプライマリにセットする
             PrimaryWeapon = tmp;
 
-            PrimaryWeapon.SetActive(true);
+            PrimaryWeapon.SetActive(false);
             GCPrimaryScript = PrimaryWeapon.GetComponent<GunController>();
         }
 
@@ -40,8 +55,8 @@ public class ChangeEquip : MonoBehaviour
             // 拾った武器をFirstPersonCharacterの直下に生成する
             GameObject tmp = Instantiate(SecondaryWeapon,child.transform,false);
             
-            // 生成したものをプライマリにセットする
-            PrimaryWeapon = tmp;
+            // 生成したものをセカンダリにセットする
+            SecondaryWeapon = tmp;
 
             SecondaryWeapon.SetActive(false);
             GCSecondaryScript = SecondaryWeapon.GetComponent<GunController>();
@@ -50,7 +65,11 @@ public class ChangeEquip : MonoBehaviour
 
     void Update()
     {
-        scroll = Input.GetAxis("Mouse ScrollWheel");
+        if(SecondaryWeapon != null && PrimaryWeapon != null)
+        {
+            scroll = Input.GetAxis("Mouse ScrollWheel");
+        }
+        
 
         if (scroll < 0 || scroll > 0 || Input.GetKeyDown(KeyCode.Q) && !activeFlg && SecondaryWeapon != null)
         {
