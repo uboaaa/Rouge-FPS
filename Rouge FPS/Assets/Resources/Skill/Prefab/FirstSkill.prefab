@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 1776731548141591876}
   - component: {fileID: 1776731548141591875}
   - component: {fileID: 7960178772383019781}
-  - component: {fileID: 716461928518212822}
   m_Layer: 5
   m_Name: FirstSkill
   m_TagString: Untagged
@@ -264,17 +263,3 @@ MonoBehaviour:
   initialScale: {x: 0, y: 0, z: 0}
   initialRotation: {x: 0, y: 0, z: 0, w: 0}
   initialPivot: {x: 0, y: 0}
---- !u!114 &716461928518212822
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1776731548141591934}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f6ee2e2e5409044292e6dd05ebc0675, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skillName: 
-  skillValue: 0

@@ -98,6 +98,11 @@ public class UIEvent : MonoBehaviour
         Destroy(clone);
     }
 
+    public void DeleteThis()
+    {
+        Destroy(this);
+    }
+
     // UI縮小解除
     [SerializeField] float BaseRect = 0;
     public void Extension()
