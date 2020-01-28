@@ -227,12 +227,13 @@ public class GunController : MonoBehaviour
             {
                 // 弾の生成
 		        GameObject bullet = Instantiate<GameObject>(bulletPrefab, muzzle.position, muzzle.rotation);
+                bullet.transform.parent = this.transform;
                 bullet.transform.localScale = bulletScale;
 		        bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * bulletPower);
 		        Destroy(bullet, 10.0f);
 
                 // ショットガンの場合
-                // 6. 子オブジェクトにアタッチしているスクリプトを参照する
+                // 子オブジェクトにアタッチしているスクリプトを参照する
                 if(GunInfo.GunType.ShotGun == gunType)
                 for(int i = 1; i < 5;i++)
                 {

@@ -68,7 +68,7 @@ public class GunInfo : MonoBehaviour
         }
 
         // ※※※※※※※※※※※※※※※※※※※※※※※※※※※※
-        // 修正した方がいいかも
+        // 修正した方がいいかも～
         // ※※※※※※※※※※※※※※※※※※※※※※※※※※※※
         MagazineSize   = GunObj.GetComponent<GunController>().MagazineSize;
         ammoMax        = GunObj.GetComponent<GunController>().remAmmo;
