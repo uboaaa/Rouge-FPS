@@ -40,7 +40,7 @@ public class Spider : MonoBehaviour
 
     // 発見フラグ
     bool foundflg = false;
-    
+
     // アニメ関数
     int trans = 0;
 
@@ -104,7 +104,7 @@ public class Spider : MonoBehaviour
         propID_s = Shader.PropertyToID("_Saturation");
         propID_c = Shader.PropertyToID("_Contrast");
 
-        if(AILevel == 1)
+        if (AILevel == 1)
         {
             // マテリアル
             material.SetFloat(propID_h, 0.0f);
@@ -120,11 +120,11 @@ public class Spider : MonoBehaviour
             ep.startrot = 60;
 
             // ポイントライト
-            plight.color = new Color(0.5f,0.5f,1.0f,1.0f);
+            plight.color = new Color(0.5f, 0.5f, 1.0f, 1.0f);
 
-            
+
         }
-        else if(AILevel == 2)
+        else if (AILevel == 2)
         {
             material.SetFloat(propID_h, 0.45f);
             material.SetFloat(propID_s, 1.0f);
@@ -137,9 +137,9 @@ public class Spider : MonoBehaviour
             //ep.speed = 0.0f;
             ep.startrot = 60;
 
-            plight.color = new Color(1.0f,0.5f,0.5f,1.0f);
+            plight.color = new Color(1.0f, 0.5f, 0.5f, 1.0f);
         }
-        else if(AILevel == 3)
+        else if (AILevel == 3)
         {
             material.SetFloat(propID_h, 0.3f);
             material.SetFloat(propID_s, 0.4f);
@@ -152,261 +152,267 @@ public class Spider : MonoBehaviour
             //ep.speed = 0.0f;
             ep.startrot = 60;
 
-            plight.color = new Color(1.0f,0.5f,1.0f,1.0f);
+            plight.color = new Color(1.0f, 0.5f, 1.0f, 1.0f);
         }
 
-        
-        
+
+
     }
 
 
     void Update()
     {
 
-        //if(!PauseScript.pause()){
-        //if(!SkillManagement.GetTimeStop()){
-
-        // ========
-        // アニメーション 
-        // ========
-        //あらかじめ設定していたintパラメーター「trans」の値を取り出す.
-        trans = animator.GetInteger("trans");
-
-
-        // 発見フラグ条件判定
-        if (foundflg == false)
+        if (!PauseScript.pause())
         {
-            // 敵が正面を向いていて知覚できる範囲内なら
-            if ((transform.position - player.gameObject.transform.position).magnitude < 15 && trans == 0)
-            {
-                foundflg = true;
-                fireflg = true;
-                trans = 0;
-                //intパラメーターの値を設定する.
-                animator.SetInteger("trans", trans);
-            }
-
-            // プレイヤーとの距離が範囲内なら
-            if ((transform.position - player.gameObject.transform.position).magnitude < 5)
-            {
-                foundflg = true;
-                fireflg = true;
-                trans = 0;
-                //intパラメーターの値を設定する.
-                animator.SetInteger("trans", trans);
-            }
-
-            // プレイヤーから攻撃を受けたら
-
-
-        }
-
-        // 発見フラグがONなら
-        if (foundflg == true)
-        {
-            // 正面を向き
-            trans = 0;
-            animator.SetInteger("trans", trans);
-            
-            //targetに向かって進む
-            this.gameObject.transform.position += transform.forward * ep.speed * 0.1f;
-        }
-        // 発見フラグがOFFなら
-        else if (foundflg == false)
-        {
-            // 角度計算
-            rot = GetAim(new Vector2(this.gameObject.transform.position.x, this.gameObject.transform.position.z),
-                new Vector2(player.gameObject.transform.position.x, player.gameObject.transform.position.z));
-
-            rot = rot + ep.startrot;
-
-
-            // 角度計算
-            // 正面
-            if (rot >= -45.0f && rot <= 45.0f)
-            {
-                trans = 0;
-
-            }
-            // 右面
-            else if (rot >= 45.0f && rot <= 135.0f)
-            {
-                trans = 1;
-
-            }
-            // 左面
-            else if (rot >= -135 && rot <= -45)
-            {
-                trans = 3;
-
-            }
-            // 後面
-            else
-            {
-                trans = 2;
-
-            }
-
-            //intパラメーターの値を設定する
-            animator.SetInteger("trans", trans);
-
-        }
-
-
-
-        // デバッグ表示
-        //Debug.Log(foundflg);
-
-
-        // 敵の体力が０になったら
-        if(ep.hp == 0)
-        {
-            // 死亡時の爆発エフェクトを再生
-            GameObject de = Instantiate(deadeffect) as GameObject;
-            de.transform.position = this.gameObject.transform.position;
-            de.transform.position = new Vector3(de.transform.position.x,de.transform.position.y - 1.2f,de.transform.position.z);
-
-            // 乱数処理
-            rnd = Random.Range(0, 3);
-
-            // 死んだときにアイテムポップ
-            // 0は無生成
-            if(rnd == 0)
+            if (!SkillManagement.GetTimeStop())
             {
 
-            }
-            // 1を生成
-            else if(rnd == 1)
-            {
-                if(PopObject1)
+                // ========
+                // アニメーション 
+                // ========
+                //あらかじめ設定していたintパラメーター「trans」の値を取り出す.
+                trans = animator.GetInteger("trans");
+
+
+                // 発見フラグ条件判定
+                if (foundflg == false)
                 {
-                    GameObject po1 = Instantiate(PopObject1) as GameObject;
-                    po1.transform.position = this.gameObject.transform.position;
+                    // 敵が正面を向いていて知覚できる範囲内なら
+                    if ((transform.position - player.gameObject.transform.position).magnitude < 15 && trans == 0)
+                    {
+                        foundflg = true;
+                        fireflg = true;
+                        trans = 0;
+                        //intパラメーターの値を設定する.
+                        animator.SetInteger("trans", trans);
+                    }
+
+                    // プレイヤーとの距離が範囲内なら
+                    if ((transform.position - player.gameObject.transform.position).magnitude < 5)
+                    {
+                        foundflg = true;
+                        fireflg = true;
+                        trans = 0;
+                        //intパラメーターの値を設定する.
+                        animator.SetInteger("trans", trans);
+                    }
+
+                    // プレイヤーから攻撃を受けたら
+
+
                 }
-            }
-            // 2を生成
-            else if(rnd == 2)
-            {
-                if(PopObject2)
+
+                // 発見フラグがONなら
+                if (foundflg == true)
                 {
-                    GameObject po2= Instantiate(PopObject2) as GameObject;
-                    po2.transform.position = this.gameObject.transform.position;
+                    // 正面を向き
+                    trans = 0;
+                    animator.SetInteger("trans", trans);
+
+                    //targetに向かって進む
+                    this.gameObject.transform.position += transform.forward * ep.speed * 0.1f;
                 }
-            }
+                // 発見フラグがOFFなら
+                else if (foundflg == false)
+                {
+                    // 角度計算
+                    rot = GetAim(new Vector2(this.gameObject.transform.position.x, this.gameObject.transform.position.z),
+                        new Vector2(player.gameObject.transform.position.x, player.gameObject.transform.position.z));
 
-            // 解放処理
-            Destroy(de,2.0f);
-            Destroy(this.gameObject);
+                    rot = rot + ep.startrot;
+
+
+                    // 角度計算
+                    // 正面
+                    if (rot >= -45.0f && rot <= 45.0f)
+                    {
+                        trans = 0;
+
+                    }
+                    // 右面
+                    else if (rot >= 45.0f && rot <= 135.0f)
+                    {
+                        trans = 1;
+
+                    }
+                    // 左面
+                    else if (rot >= -135 && rot <= -45)
+                    {
+                        trans = 3;
+
+                    }
+                    // 後面
+                    else
+                    {
+                        trans = 2;
+
+                    }
+
+                    //intパラメーターの値を設定する
+                    animator.SetInteger("trans", trans);
+
+                }
+
+
+
+                // デバッグ表示
+                //Debug.Log(foundflg);
+
+
+                // 敵の体力が０になったら
+                if (ep.hp == 0)
+                {
+                    // 死亡時の爆発エフェクトを再生
+                    GameObject de = Instantiate(deadeffect) as GameObject;
+                    de.transform.position = this.gameObject.transform.position;
+                    de.transform.position = new Vector3(de.transform.position.x, de.transform.position.y - 1.2f, de.transform.position.z);
+
+                    // 乱数処理
+                    rnd = Random.Range(0, 3);
+
+                    // 死んだときにアイテムポップ
+                    // 0は無生成
+                    if (rnd == 0)
+                    {
+
+                    }
+                    // 1を生成
+                    else if (rnd == 1)
+                    {
+                        if (PopObject1)
+                        {
+                            GameObject po1 = Instantiate(PopObject1) as GameObject;
+                            po1.transform.position = this.gameObject.transform.position;
+                        }
+                    }
+                    // 2を生成
+                    else if (rnd == 2)
+                    {
+                        if (PopObject2)
+                        {
+                            GameObject po2 = Instantiate(PopObject2) as GameObject;
+                            po2.transform.position = this.gameObject.transform.position;
+                        }
+                    }
+
+                    // 解放処理
+                    Destroy(de, 2.0f);
+                    Destroy(this.gameObject);
+                }
+
+                // // Xを押したら
+                // if (Input.GetKey(KeyCode.X))
+                // {
+                //     GameObject go = Instantiate(this.gameObject) as GameObject;
+                //     go.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z + 5);
+                // }
+
+                // 発射フラグがONなら
+                if (fireflg == true)
+                {
+                    if (ftime == 0)
+                    {
+                        // 弾丸の複製
+                        GameObject poizons = Instantiate(poizon) as GameObject;
+
+
+                        // 攻撃力の挿入
+                        eap = poizons.GetComponent<EnemyAttackPower>();
+                        eap.SetAtkPower(ep.atk);
+
+                        // 向き方向の取得
+                        //Vector3 aim = player.gameObject.transform.position - this.transform.position;
+
+                        // 弾丸の位置を調整
+                        poizons.transform.position = this.gameObject.transform.position;
+
+                        poizons.transform.LookAt(player.transform);
+
+                        // // Rigidbodyに力を加えて発射
+                        // poizons.GetComponent<Rigidbody>().AddForce(aim, ForceMode.Impulse);
+
+
+
+                        // 三秒後に削除
+                        Destroy(poizons, 3.0f);
+                    }
+
+                    ftime++;
+                    if (AILevel == 1)
+                    {
+                        if (ftime > 60) { ftime = 0; }
+                    }
+                    else if (AILevel == 2)
+                    {
+                        if (ftime > 50) { ftime = 0; }
+                    }
+                    else if (AILevel == 3)
+                    {
+                        if (ftime > 40) { ftime = 0; }
+                    }
+                }
+
+
+
+
+            }
         }
-
-        // // Xを押したら
-        // if (Input.GetKey(KeyCode.X))
-        // {
-        //     GameObject go = Instantiate(this.gameObject) as GameObject;
-        //     go.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z + 5);
-        // }
-
-        // 発射フラグがONなら
-        if(fireflg == true)
-        {
-            if (ftime == 0)
-            {
-                // 弾丸の複製
-                GameObject poizons = Instantiate(poizon) as GameObject;
-
-
-                // 攻撃力の挿入
-                eap = poizons.GetComponent<EnemyAttackPower>();
-                eap.SetAtkPower(ep.atk);
-
-                // 向き方向の取得
-                //Vector3 aim = player.gameObject.transform.position - this.transform.position;
-
-                // 弾丸の位置を調整
-                poizons.transform.position = this.gameObject.transform.position;
-
-                poizons.transform.LookAt(player.transform);
-
-                // // Rigidbodyに力を加えて発射
-                // poizons.GetComponent<Rigidbody>().AddForce(aim, ForceMode.Impulse);
-
-                
-
-                // 三秒後に削除
-                Destroy(poizons, 3.0f);
-            }
-
-            ftime++;
-            if(AILevel == 1)
-            {
-                if(ftime > 60){ ftime = 0;}
-            }
-            else if(AILevel == 2)
-            {
-                if(ftime > 50){ ftime = 0;}
-            }
-            else if(AILevel == 3)
-            {
-                if(ftime > 40){ ftime = 0;}
-            }
-        }
-
-
-
-
-        //}
-        //}
 
     }
 
     // 弾との当たり判定
     private void OnCollisionEnter(Collision collision)
     {
-        //if(!PauseScript.pause()){
-        //if(!SkillManagement.GetTimeStop()){
-        if (collision.gameObject.tag == "Bullet")
+        if (!PauseScript.pause())
         {
-            // 弾のダメージを取得
-            dn.SetBulletDamage(collision.gameObject.GetComponent<BulletController>().Damage);
+            if (!SkillManagement.GetTimeStop())
+            {
+                if (collision.gameObject.tag == "Bullet")
+                {
+                    // 弾のダメージを取得
+                    dn.SetBulletDamage(collision.gameObject.GetComponent<BulletController>().Damage);
 
 
-            eh.SetHitFlg(true);
-            dn.SetHitFlg(true);
-            foundflg = true;
-            fireflg = true;
+                    eh.SetHitFlg(true);
+                    dn.SetHitFlg(true);
+                    foundflg = true;
+                    fireflg = true;
 
-            ep.hp -= collision.gameObject.GetComponent<BulletController>().Damage;
-            if(ep.hp < 0){ep.hp = 0;}
-            //intパラメーターの値を設定する.
-            animator.SetInteger("trans", trans);
+                    ep.hp -= collision.gameObject.GetComponent<BulletController>().Damage;
+                    if (ep.hp < 0) { ep.hp = 0; }
+                    //intパラメーターの値を設定する.
+                    animator.SetInteger("trans", trans);
+                }
+            }
         }
-        //    }
-        //}
 
     }
 
     private void OnTriggerEnter(Collider collider)
     {
 
-        //if(!PauseScript.pause()){
-        //if(!SkillManagement.GetTimeStop()){
-        if (collider.gameObject.tag == "Bullet")
+        if (!PauseScript.pause())
         {
-            // 弾のダメージを取得
-            dn.SetBulletDamage(collider.gameObject.GetComponent<BulletController>().Damage);
+            if (!SkillManagement.GetTimeStop())
+            {
+                if (collider.gameObject.tag == "Bullet")
+                {
+                    // 弾のダメージを取得
+                    dn.SetBulletDamage(collider.gameObject.GetComponent<BulletController>().Damage);
 
 
-            eh.SetHitFlg(true);
-            dn.SetHitFlg(true);
-            foundflg = true;
-            fireflg = true;
+                    eh.SetHitFlg(true);
+                    dn.SetHitFlg(true);
+                    foundflg = true;
+                    fireflg = true;
 
-            ep.hp -= collider.gameObject.GetComponent<BulletController>().Damage;
-            if(ep.hp < 0){ep.hp = 0;}
-            //intパラメーターの値を設定する.
-            animator.SetInteger("trans", trans);
-        //    }
-        //}
+                    ep.hp -= collider.gameObject.GetComponent<BulletController>().Damage;
+                    if (ep.hp < 0) { ep.hp = 0; }
+                    //intパラメーターの値を設定する.
+                    animator.SetInteger("trans", trans);
+                }
+            }
 
         }
 

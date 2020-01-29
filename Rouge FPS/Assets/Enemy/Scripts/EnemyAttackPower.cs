@@ -59,6 +59,8 @@ public class EnemyAttackPower : MonoBehaviour
 
 
             default:
+                DamageFlg = false;
+
                 break;
         }
 

@@ -37,7 +37,7 @@ public class MiniSquid : MonoBehaviour
     // 角度計算用
     private float rot = 0;
 
-    
+
     // アニメ関数
     int trans = 0;
 
@@ -46,7 +46,7 @@ public class MiniSquid : MonoBehaviour
     public GameObject PopObject1 = null;
 
     public GameObject PopObject2 = null;
-    
+
 
 
 
@@ -93,7 +93,7 @@ public class MiniSquid : MonoBehaviour
         propID_s = Shader.PropertyToID("_Saturation");
         propID_c = Shader.PropertyToID("_Contrast");
 
-        if(AILevel == 1)
+        if (AILevel == 1)
         {
             // マテリアル
             material.SetFloat(propID_h, 0.08f);
@@ -108,9 +108,9 @@ public class MiniSquid : MonoBehaviour
             ep.startrot = 60;
 
             // ポイントライト
-            plight.color = new Color(0.5f,0.5f,1.0f,1.0f);
+            plight.color = new Color(0.5f, 0.5f, 1.0f, 1.0f);
 
-            
+
         }
         // else if(AILevel == 2)
         // {
@@ -141,104 +141,136 @@ public class MiniSquid : MonoBehaviour
         //     plight.color = new Color(1.0f,0.5f,1.0f,1.0f);
         // }
 
-        
-        
+
+
     }
 
 
     void Update()
     {
 
-        //if(!PauseScript.pause()){
-        //if(!SkillManagement.GetTimeStop()){
-
-
-        // ========
-        // アニメーション 
-        // ========
-        //あらかじめ設定していたintパラメーター「trans」の値を取り出す.
-        trans = animator.GetInteger("trans");
-
-
-
-        // 正面を向き
-        trans = 0;
-        animator.SetInteger("trans", trans);
-            
-        //targetに向かって進む
-        this.gameObject.transform.position += transform.forward * ep.speed * 0.1f;
-
-
-
-        // デバッグ表示
-        //Debug.Log("LizardHP");
-        //Debug.Log(ep.hp);
-
-        // 敵の体力が０になったら
-        if(ep.hp == 0)
+        if (!PauseScript.pause())
         {
-            // 死亡時の爆発エフェクトを再生
-            GameObject de = Instantiate(deadeffect) as GameObject;
-            de.transform.position = this.gameObject.transform.position;
-            de.transform.position = new Vector3(de.transform.position.x,de.transform.position.y - 1.2f,de.transform.position.z);
-
-            // 乱数処理
-            rnd = Random.Range(0, 3);
-
-            // 死んだときにアイテムポップ
-            // 0は無生成
-            if(rnd == 0)
+            if (!SkillManagement.GetTimeStop())
             {
 
-            }
-            // 1を生成
-            else if(rnd == 1)
-            {
-                if(PopObject1)
+
+                // ========
+                // アニメーション 
+                // ========
+                //あらかじめ設定していたintパラメーター「trans」の値を取り出す.
+                trans = animator.GetInteger("trans");
+
+
+
+                // 正面を向き
+                trans = 0;
+                animator.SetInteger("trans", trans);
+
+                //targetに向かって進む
+                this.gameObject.transform.position += transform.forward * ep.speed * 0.1f;
+
+
+
+                // デバッグ表示
+                //Debug.Log("LizardHP");
+                //Debug.Log(ep.hp);
+
+                // 敵の体力が０になったら
+                if (ep.hp == 0)
                 {
-                    GameObject po1 = Instantiate(PopObject1) as GameObject;
-                    po1.transform.position = this.gameObject.transform.position;
-                }
-            }
-            // 2を生成
-            else if(rnd == 2)
-            {
-                if(PopObject2)
-                {
-                    GameObject po2= Instantiate(PopObject2) as GameObject;
-                    po2.transform.position = this.gameObject.transform.position;
-                }
-            }
+                    // 死亡時の爆発エフェクトを再生
+                    GameObject de = Instantiate(deadeffect) as GameObject;
+                    de.transform.position = this.gameObject.transform.position;
+                    de.transform.position = new Vector3(de.transform.position.x, de.transform.position.y - 1.2f, de.transform.position.z);
 
-            // 解放処理
-            Destroy(de,2.0f);
-            Destroy(this.gameObject);
+                    // 乱数処理
+                    rnd = Random.Range(0, 3);
+
+                    // 死んだときにアイテムポップ
+                    // 0は無生成
+                    if (rnd == 0)
+                    {
+
+                    }
+                    // 1を生成
+                    else if (rnd == 1)
+                    {
+                        if (PopObject1)
+                        {
+                            GameObject po1 = Instantiate(PopObject1) as GameObject;
+                            po1.transform.position = this.gameObject.transform.position;
+                        }
+                    }
+                    // 2を生成
+                    else if (rnd == 2)
+                    {
+                        if (PopObject2)
+                        {
+                            GameObject po2 = Instantiate(PopObject2) as GameObject;
+                            po2.transform.position = this.gameObject.transform.position;
+                        }
+                    }
+
+                    // 解放処理
+                    Destroy(de, 2.0f);
+                    Destroy(this.gameObject);
+                }
+
+            }
         }
 
-        
+
     }
 
     // 弾との当たり判定
     private void OnCollisionEnter(Collision collision)
     {
 
-        //if(!PauseScript.pause()){
-        //if(!SkillManagement.GetTimeStop()){
-        if (collision.gameObject.tag == "Bullet")
+        if (!PauseScript.pause())
         {
-            // 弾のダメージを取得
-            dn.SetBulletDamage(collision.gameObject.GetComponent<BulletController>().Damage);
+            if (!SkillManagement.GetTimeStop())
+            {
+                if (collision.gameObject.tag == "Bullet")
+                {
+                    // 弾のダメージを取得
+                    dn.SetBulletDamage(collision.gameObject.GetComponent<BulletController>().Damage);
 
 
-            eh.SetHitFlg(true);
-            dn.SetHitFlg(true);
-            ep.hp -= collision.gameObject.GetComponent<BulletController>().Damage;
-            if(ep.hp < 0){ep.hp = 0;}
-            //intパラメーターの値を設定する.
-            animator.SetInteger("trans", trans);
+                    eh.SetHitFlg(true);
+                    dn.SetHitFlg(true);
+                    ep.hp -= collision.gameObject.GetComponent<BulletController>().Damage;
+                    if (ep.hp < 0) { ep.hp = 0; }
+                    //intパラメーターの値を設定する.
+                    animator.SetInteger("trans", trans);
+                }
+            }
         }
-        //    }
-        //}
+
+    }
+
+    private void OnTriggerEnter(Collider collider)
+    {
+
+        if (!PauseScript.pause())
+        {
+            if (!SkillManagement.GetTimeStop())
+            {
+                if (collider.gameObject.tag == "Bullet")
+                {
+                    // 弾のダメージを取得
+                    dn.SetBulletDamage(collider.gameObject.GetComponent<BulletController>().Damage);
+
+
+                    eh.SetHitFlg(true);
+                    dn.SetHitFlg(true);
+                    ep.hp -= collider.gameObject.GetComponent<BulletController>().Damage;
+                    if (ep.hp < 0) { ep.hp = 0; }
+                    //intパラメーターの値を設定する.
+                    animator.SetInteger("trans", trans);
+                }
+            }
+        }
 
     }
 }

@@ -150,8 +150,8 @@ public class Lizard : MonoBehaviour
     void Update()
     {
 
-        //if(!PauseScript.pause()){
-        //if(!SkillManagement.GetTimeStop()){
+        if(!PauseScript.pause()){
+        if(!SkillManagement.GetTimeStop()){
 
 
         // ========
@@ -294,16 +294,16 @@ public class Lizard : MonoBehaviour
         //     go.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z + 5);
         // }
 
-        //}
-        //}
+        }
+        }
     }
 
     // 弾との当たり判定
     private void OnCollisionEnter(Collision collision)
     {
 
-        //if(!PauseScript.pause()){
-        //if(!SkillManagement.GetTimeStop()){
+        if(!PauseScript.pause()){
+        if(!SkillManagement.GetTimeStop()){
         if (collision.gameObject.tag == "Bullet")
         {
             // 弾のダメージを取得
@@ -318,16 +318,16 @@ public class Lizard : MonoBehaviour
             //intパラメーターの値を設定する.
             animator.SetInteger("trans", trans);
         }
-        //    }
-        //}
+           }
+        }
 
     }
 
     private void OnTriggerEnter(Collider collider)
     {
 
-        //if(!PauseScript.pause()){
-        //if(!SkillManagement.GetTimeStop()){
+        if(!PauseScript.pause()){
+        if(!SkillManagement.GetTimeStop()){
         if (collider.gameObject.tag == "Bullet")
         {
             // 弾のダメージを取得
@@ -342,8 +342,8 @@ public class Lizard : MonoBehaviour
             //intパラメーターの値を設定する.
             animator.SetInteger("trans", trans);
         }
-        //    }
-        //}
+           }
+        }
 
     }
 }
