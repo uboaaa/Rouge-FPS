@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: dfc49c10f931cd74fb08bf0ab16659b0
+guid: e8f85d96cbb19d145a0208ff04cd34cf
 TextureImporter:
   fileIDToRecycleName:
     21300000: free-colour-christmas-tree-vector-graphics_0
@@ -10,7 +10,7 @@ TextureImporter:
     21300010: free-colour-christmas-tree-vector-graphics_6
     21300012: free-colour-christmas-tree-vector-graphics_7
   externalObjects: {}
-  serializedVersion: 7
+  serializedVersion: 9
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0

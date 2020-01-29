@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7e762b4b6b3331d4ea0cc148ee304a6f
+guid: 76ef92fc345caea4eae4dc57de23478c
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -11,7 +11,8 @@ TrueTypeFontImporter:
   fontName: Beautiful People Personal Use
   fontNames:
   - Beautiful People Personal Use
-  fallbackFontReferences: []
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 7e762b4b6b3331d4ea0cc148ee304a6f, type: 3}
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1

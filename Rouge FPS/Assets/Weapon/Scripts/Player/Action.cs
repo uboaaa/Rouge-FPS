@@ -1,6 +1,6 @@
 //=======================================================================
-// ’²‚×‚½‚èAE‚¤‚È‚Ç‚Ì“®ì—pƒXƒNƒŠƒvƒg
-// FPSController‚É•t‚¯‚é
+// ï¿½ï¿½ï¿½×‚ï¿½ï¿½ï¿½Aï¿½Eï¿½ï¿½ï¿½È‚Ç‚Ì“ï¿½ï¿½ï¿½pï¿½Xï¿½Nï¿½ï¿½ï¿½vï¿½g
+// FPSControllerï¿½É•tï¿½ï¿½ï¿½ï¿½
 //=======================================================================
 using System.Collections;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ public class Action : MonoBehaviour
 {
     private GameObject DropWeapon;      
     DropGun DGScript;
-    ChangeEquip CEScript;                   // [ChangeEquip]—p‚Ì•Ï”
+    ChangeEquip CEScript;                   // [ChangeEquip]ï¿½pï¿½Ì•Ïï¿½
     LoadGunPrefab LGPScript;
     public bool actionFlg;
     GameObject ObjectInfo;
@@ -26,10 +26,11 @@ public class Action : MonoBehaviour
 
     void Update()
     {
-        // E‚¤‚Æ‚«‚ÌƒeƒLƒXƒg—p
+        // ï¿½Eï¿½ï¿½ï¿½Æ‚ï¿½ï¿½Ìƒeï¿½Lï¿½Xï¿½gï¿½p
         if(actionFlg && !isCalledOnce)
         {
             isCalledOnce = true;
+            Debug.Log(UIEvent);
             UIEvent.ShowMenu();
         } else if(!actionFlg && isCalledOnce) {
             UIEvent.HideMenu();
@@ -38,10 +39,10 @@ public class Action : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.E) && actionFlg)
         {
-            // •ó” ˆ—
+            // ï¿½ó” ï¿½ï¿½ï¿½
             if(ObjectInfo.tag == "DropBox"){BoxAction(ObjectInfo);}
             
-            // —‚¿‚Ä‚ée‚Ìˆ—
+            // ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½eï¿½Ìï¿½ï¿½ï¿½
             if(ObjectInfo.tag == "DropGun"){WeaponAction(ObjectInfo);}
 
             actionFlg = false;
@@ -50,55 +51,55 @@ public class Action : MonoBehaviour
 
     void BoxAction(GameObject Object)
     {
-        // •ó” ‚ğíœ
+        // ï¿½ó” ‚ï¿½ï¿½íœ
         Destroy(Object.gameObject);
 
-        // DropItem‚ğ¶¬
+        // DropItemï¿½ğ¶ï¿½
         var IBScript = Object.GetComponent<ItemBox>();
         IBScript.Open();
     }
 
     void WeaponAction(GameObject Object)
     {
-        // DropItem‚ğæ“¾
+        // DropItemï¿½ï¿½ï¿½æ“¾
         var DIScript = Object.GetComponent<DropGun>();
 
-        // —‚¿‚Ä‚¢‚é•Ší‚ğ‘•”õ‚·‚é
-        // ¦DropWeapon‚É‚Í‚Á‚Ä‚½•Ší
+        // ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½é•ï¿½ï¿½ğ‘•”ï¿½ï¿½ï¿½ï¿½ï¿½
+        // ï¿½ï¿½DropWeaponï¿½É‚Íï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½ï¿½
         DropWeapon = CEScript.GetWeapon(Object);
 
-        // •ŠíŒğŠ·‚Ìê‡A¶¬‚·‚é
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ìê‡ï¿½Aï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         if(DropWeapon != null)
         {
-            // ¦getWeapon‚É‚Íè‚É“ü‚ê‚é•Ší
+            // ï¿½ï¿½getWeaponï¿½É‚Íï¿½É“ï¿½ï¿½ï¿½é•ï¿½ï¿½
 		    GameObject getWeapon = Instantiate<GameObject>(Object);
             getWeapon.name = DIScript.WeaponInfo.name;
 
-            // •Šíî•ñ‚ÌŒğŠ·
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÌŒï¿½ï¿½ï¿½
             GunInfo getGIScript = getWeapon.GetComponent<GunInfo>();
             GunController dropGCScript = DropWeapon.GetComponent<GunController>();
 
-            // —‚¿‚Ä‚¢‚é•Ší‚ğíœ
+            // ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½é•ï¿½ï¿½ï¿½ï¿½íœ
             Destroy(Object.gameObject);
 
-            // ‚Á‚Ä‚½•Ší‚Ìî•ñ‚ğ•Û
-            var RankInfo            = dropGCScript.gunRank;          // •Šíƒ‰ƒ“ƒN
-            var TypeInfo            = dropGCScript.gunType;          // •Šíí—Ş
-            var SlotInfo            = dropGCScript.skillSlot;        // ƒXƒLƒ‹ƒXƒƒbƒg”
-            var MaxMagazineInfo     = dropGCScript.MagazineSize;     // ‚Pƒ}ƒKƒWƒ“‚ÌƒTƒCƒY
-            var remMagazineInfo     = dropGCScript.Ammo;             // ƒ}ƒKƒWƒ““à‚Ìc’e”
-            var MaxAmmoInfo         = dropGCScript.AmmoSize;         // —\”õ’e”ƒTƒCƒY
-            var remAmmoInfo         = dropGCScript.remAmmo;          // —\”õ’e”
-            var DamageInfo          = dropGCScript.Damage;           // ‰Î—Í
-            var shootIntervalInfo   = dropGCScript.shootInterval;    // ËŒ‚ŠÔŠu
-            var reloadIntervalInfo  = dropGCScript.reloadInterval;   // ƒŠƒ[ƒhƒXƒs[ƒh
-            var PowerInfo           = dropGCScript.bulletPower;      // ’e‚Ì”ò‚Î‚·—Í
-            var EXPInfo             = dropGCScript.GunEXP;           // e‚ÌŒoŒ±’l
+            // ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½ï¿½Ìï¿½ï¿½ï¿½Ûï¿½
+            var RankInfo            = dropGCScript.gunRank;          // ï¿½ï¿½ï¿½íƒ‰ï¿½ï¿½ï¿½N
+            var TypeInfo            = dropGCScript.gunType;          // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+            var SlotInfo            = dropGCScript.skillSlot;        // ï¿½Xï¿½Lï¿½ï¿½ï¿½Xï¿½ï¿½ï¿½bï¿½gï¿½ï¿½
+            var MaxMagazineInfo     = dropGCScript.MagazineSize;     // ï¿½Pï¿½}ï¿½Kï¿½Wï¿½ï¿½ï¿½ÌƒTï¿½Cï¿½Y
+            var remMagazineInfo     = dropGCScript.Ammo;             // ï¿½}ï¿½Kï¿½Wï¿½ï¿½ï¿½ï¿½ï¿½Ìcï¿½eï¿½ï¿½
+            var MaxAmmoInfo         = dropGCScript.AmmoSize;         // ï¿½\ï¿½ï¿½ï¿½eï¿½ï¿½ï¿½Tï¿½Cï¿½Y
+            var remAmmoInfo         = dropGCScript.remAmmo;          // ï¿½\ï¿½ï¿½ï¿½eï¿½ï¿½
+            var DamageInfo          = dropGCScript.Damage;           // ï¿½Î—ï¿½
+            var shootIntervalInfo   = dropGCScript.shootInterval;    // ï¿½ËŒï¿½ï¿½ÔŠu
+            var reloadIntervalInfo  = dropGCScript.reloadInterval;   // ï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½hï¿½Xï¿½sï¿½[ï¿½h
+            var PowerInfo           = dropGCScript.bulletPower;      // ï¿½eï¿½Ì”ï¿½Î‚ï¿½ï¿½ï¿½
+            var EXPInfo             = dropGCScript.GunEXP;           // ï¿½eï¿½ÌŒoï¿½ï¿½ï¿½l
 
-            // —‚Æ‚·•Ší‚Éî•ñ‚ğ“ü‚ê‚é(dropGCScript <= getGIScript)
+            // ï¿½ï¿½ï¿½Æ‚ï¿½ï¿½ï¿½ï¿½ï¿½Éï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(dropGCScript <= getGIScript)
             CEScript.ChangeGunConInfo(dropGCScript,getGIScript,1);
 
-            // E‚¤•Ší‚Éî•ñ‚ğ“ü‚ê‚é
+            // ï¿½Eï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Éï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             getGIScript.gunRank        = RankInfo;
             getGIScript.gunType        = TypeInfo;
             getGIScript.skillSlot      = SlotInfo;
@@ -112,7 +113,7 @@ public class Action : MonoBehaviour
             getGIScript.bulletPower    = PowerInfo;
             getGIScript.GunEXP         = EXPInfo;
         } else {
-            // —‚¿‚Ä‚¢‚é•Ší‚ğíœ
+            // ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½é•ï¿½ï¿½ï¿½ï¿½íœ
             Destroy(Object.gameObject);
         }     
     }

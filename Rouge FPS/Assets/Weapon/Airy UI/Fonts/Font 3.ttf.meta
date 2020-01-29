@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 540af095b0b487a4f81d2d30c250df69
+guid: 83b174aa8f6313d4787979a85bf51226
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -11,7 +11,8 @@ TrueTypeFontImporter:
   fontName: Merry Christmas Color
   fontNames:
   - Merry Christmas Color
-  fallbackFontReferences: []
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 540af095b0b487a4f81d2d30c250df69, type: 3}
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1
