@@ -9,11 +9,15 @@ public class EnemyAttackPower : MonoBehaviour
     public int enemyatkpow = 0;
     public void SetAtkPower(int i){ enemyatkpow = i;}
     public bool BulletFlg = false;
-
+    
+    private GameObject FPSCon;
+    private GameObject Flush;
     public static bool DamageFlg;
     void Start()
     {
         DamageFlg = false;
+        FPSCon=GameObject.Find("FPSController");
+        Flush=GameObject.Find("DamageRed");
     }
 
     // Update is called once per frame
@@ -47,8 +51,8 @@ public class EnemyAttackPower : MonoBehaviour
 
 
             case "Player":
-
-                MyStatus.downHp((float)enemyatkpow);
+                if(Flush.GetComponent<FlushController>().GetRed()<0.1f)
+                FPSCon.GetComponent<MyStatus>().downHp((float)enemyatkpow);
                 DamageFlg = true;
 
                 break;
@@ -88,7 +92,7 @@ public class EnemyAttackPower : MonoBehaviour
             // "Player"タグに当たった場合、エフェクトを出して弾を削除する
             case "Player":
                 //HitEffect(HitEffectPrefab);
-                MyStatus.downHp((float)enemyatkpow);
+                FPSCon.GetComponent<MyStatus>().downHp((float)enemyatkpow);
                 DamageFlg = true;
                 if(this.gameObject.tag == "EnemyBullet")
                 {
