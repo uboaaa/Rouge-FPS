@@ -42,27 +42,35 @@ public class Tentacle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ep = Squid.GetComponent<EnemyParameter>();
-
-   
-        if(ep.hp <= (SquidSc.GetHp()/2)){
-            material.SetFloat(propID_h, 0.45f);
-        }
-     
-
-
-        Tentacle_Y += i;
-        if(Tentacle_Y > 5.0f)
+        if (!PauseScript.pause())
         {
-            // 反転
-            i = -0.12f;
-        }
-        if(Tentacle_Y < -7.0f)
-        {
-            Destroy(this.gameObject);
-        }
+            if (!SkillManagement.GetTimeStop())
+            {
 
-        this.gameObject.transform.position = new Vector3(this.transform.position.x, Tentacle_Y, this.transform.position.z);
+                ep = Squid.GetComponent<EnemyParameter>();
 
+
+                if (ep.hp <= (SquidSc.GetHp() / 2))
+                {
+                    material.SetFloat(propID_h, 0.45f);
+                }
+
+
+
+                Tentacle_Y += i;
+                if (Tentacle_Y > 5.0f)
+                {
+                    // 反転
+                    i = -0.12f;
+                }
+                if (Tentacle_Y < -7.0f)
+                {
+                    Destroy(this.gameObject);
+                }
+
+                this.gameObject.transform.position = new Vector3(this.transform.position.x, Tentacle_Y, this.transform.position.z);
+
+            }
+        }
     }
 }
