@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &367222933668873569
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3719122853489637331}
+  m_Layer: 0
+  m_Name: Enemies
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3719122853489637331
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 367222933668873569}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 452944451612513749}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &888478201384640454
 GameObject:
   m_ObjectHideFlags: 0
@@ -11,7 +41,7 @@ GameObject:
   - component: {fileID: 5543672474053700802}
   - component: {fileID: 4623355960633481032}
   - component: {fileID: 2500394218014198776}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ObserveArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -150,6 +180,67 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &4311932189502948198
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4578239023964720553}
+  - component: {fileID: 6666605244864305329}
+  - component: {fileID: 5732724612406903800}
+  m_Layer: 9
+  m_Name: ExploredArea
+  m_TagString: Explored
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4578239023964720553
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4311932189502948198}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.3, z: 0}
+  m_LocalScale: {x: 3, y: 1, z: 3.6}
+  m_Children: []
+  m_Father: {fileID: 452944451612513749}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &6666605244864305329
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4311932189502948198}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 10, y: 1, z: 10}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &5732724612406903800
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4311932189502948198}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &5778030460111112049
 GameObject:
   m_ObjectHideFlags: 0
@@ -162,7 +253,7 @@ GameObject:
   - component: {fileID: 2223718899188101217}
   - component: {fileID: 6481587401516046520}
   - component: {fileID: 493834292517195682}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: R10x12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,6 +274,8 @@ Transform:
   - {fileID: 4157861523621543000}
   - {fileID: 6017438866675075528}
   - {fileID: 5543672474053700802}
+  - {fileID: 4578239023964720553}
+  - {fileID: 3719122853489637331}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -200,6 +293,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_groundGroups: []
   m_airGroups: []
+  m_Enemies: {fileID: 367222933668873569}
   m_PopMax: 0
   m_PopInterval: 1
 --- !u!114 &6481587401516046520
@@ -225,8 +319,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 30, y: 10, z: 35}
+  m_Center: {x: 0, y: 5, z: 0}
 --- !u!1 &7580668185551361266
 GameObject:
   m_ObjectHideFlags: 0
@@ -238,7 +332,7 @@ GameObject:
   - component: {fileID: 6017438866675075528}
   - component: {fileID: 145925942545814432}
   - component: {fileID: 4024269299114846533}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: TransWallArea
   m_TagString: Room
   m_Icon: {fileID: 0}

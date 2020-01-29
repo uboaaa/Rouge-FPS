@@ -64,7 +64,10 @@ public class MapInitializer : MonoBehaviour
         DG = new DungeonGenerator();
         //部屋生成コンポーネント取得
         RG = this.gameObject.GetComponent<RoomGenerator>();
-        
+
+        //親を取得
+        m_parentParts = GameObject.Find("DungeonParts");
+
         //マップ切り替え時の処理を設定
         m_mapID.mChanged += value =>
         {
@@ -96,9 +99,6 @@ public class MapInitializer : MonoBehaviour
     {
         //マップ1生成
         m_mapID.Value = 1;
-
-        //***初期スタート部屋IDが他コンポーネント内スタートで取得しているので、Update内で行う
-        //***ステージ切替時のみ関数使用するようにする
     }
 
     //更新
@@ -123,7 +123,7 @@ public class MapInitializer : MonoBehaviour
         //パーツを削除
         //==================
         //パーツの親オブジェクトを取得
-        m_parentParts = GameObject.Find("DungeonParts");
+        //m_parentParts = GameObject.Find("DungeonParts");
 
         //子オブジェクトがあったら全削除
         if (m_parentParts.transform.childCount > 0)
@@ -160,6 +160,8 @@ public class MapInitializer : MonoBehaviour
         //ボス用prefabを取得し、インスタス化
         m_bossRoomPrefab = Resources.Load("Prefab/Rooms/BossMap") as GameObject;
         GameObject _bossRoom = Instantiate(m_bossRoomPrefab, new Vector3(0, 0, 0), new Quaternion());
+        //ダンジョンパーツ用親オブジェクトを親に設定
+        _bossRoom.transform.SetParent(m_parentParts.transform);
 
         //初期座標用のオブジェクトを取得し、座標をセット
         Transform trans = _bossRoom.transform.Find("StartRoom/StartPosition");
@@ -230,7 +232,6 @@ public class MapInitializer : MonoBehaviour
             }
             data += "\n";
         }
-        Debug.Log(data);
     }
 
     //通路生成
@@ -248,7 +249,6 @@ public class MapInitializer : MonoBehaviour
             }
             data += "\n";
         }
-        Debug.Log(data);
 
     }
 
@@ -256,7 +256,7 @@ public class MapInitializer : MonoBehaviour
     private void GenerateObject()
     {
         //パーツの親オブジェクトを取得
-        m_parentParts = GameObject.Find("DungeonParts");
+        //m_parentParts = GameObject.Find("DungeonParts");
 
         //床と壁のモデル読み込み
         m_wallPrefab = Resources.Load("Prefab/DungeonParts/Wall") as GameObject;
@@ -370,13 +370,6 @@ public class MapInitializer : MonoBehaviour
                     _newFloor.transform.SetParent(m_parentParts.transform);
                 }
 
-                if (m_map[x, y] >= 1)
-                {
-                    //天井
-                    GameObject _newCeling = Instantiate(m_celingPrefab, new Vector3(x * MAP_SCALE, 8, y * MAP_SCALE), new Quaternion());
-                    _newCeling.transform.SetParent(m_parentParts.transform);
-                }
-
                 if (m_map[x, y] == 0)
                 {
                     //壁
@@ -385,14 +378,17 @@ public class MapInitializer : MonoBehaviour
                 }
             }
         }
+
+        //天井
+        GameObject _newCeling = Instantiate(m_celingPrefab, new Vector3((MAP_SIZE_X / 2) * MAP_SCALE, 8, (MAP_SIZE_Y / 2) * MAP_SCALE), new Quaternion());
+        _newCeling.transform.localScale = new Vector3(MAP_SIZE_X * MAP_SCALE, 1, MAP_SIZE_Y * MAP_SCALE);
+        _newCeling.transform.SetParent(m_parentParts.transform);
     }
 
     // プレイヤーの出現座標を設定
     private void SpawnPlayer()
     {
         Transform trans = RG.GetStartPosition();
-
-        Debug.Log("初期座標X：" + trans.position.x);
         g_spawn_posX = trans.position.x;
         g_spawn_posY = trans.position.y;
         g_spawn_posZ = trans.position.z;

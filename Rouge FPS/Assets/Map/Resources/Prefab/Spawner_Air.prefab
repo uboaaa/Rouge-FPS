@@ -43,3 +43,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f451bcc5083c8649bbe5c6e8692194c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PopEffect: {fileID: 2195329256449331098, guid: ec1f0dd298ea3d649b14895978189bbd,
+    type: 3}

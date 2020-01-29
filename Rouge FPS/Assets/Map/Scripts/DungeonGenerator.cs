@@ -286,7 +286,6 @@ public class DungeonGenerator
     //=========================================================//
     private void CreatePass()
     {
-        Debug.Log(m_rangeIdComb.Count);
 
         foreach (int[] rangeId in m_rangeIdComb)
         {
@@ -331,7 +330,6 @@ public class DungeonGenerator
             m_passList.Add(newPass);
 
         }
-        Debug.Log(m_passList.Count);
         
     }
 
