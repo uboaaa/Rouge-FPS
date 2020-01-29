@@ -5,18 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
-  - DropBox
-  - DropGun
-  - MiniMap
-  - Room
-  - Goal
   - Bullet
   - DroppableField
   - mousePoint
   - EnemyBullet
-  - GroundSpawner
-  - AirSpawner
-  - Explored
+  - Back
   layers:
   - Default
   - TransparentFX
@@ -31,7 +24,7 @@ TagManager:
   - Gun
   - Object
   - Enemy
-  - MiniMap
+  - 
   - 
   - 
   - 
@@ -51,6 +44,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: EnemyBullet
+    uniqueID: 1035046789
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
