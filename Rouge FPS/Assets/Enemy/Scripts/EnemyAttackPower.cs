@@ -13,10 +13,13 @@ public class EnemyAttackPower : MonoBehaviour
     public static bool DamageFlg;
 
     private GameObject FPSCon;
+
+    private GameObject Flush;
     void Start()
     {
 
         FPSCon = GameObject.Find("FPSController");
+        Flush=GameObject.Find("DamageRed");
         DamageFlg=false;
 
         // 弾じゃなかったらそのまま攻撃力を取得
@@ -38,7 +41,7 @@ public class EnemyAttackPower : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
-            if( FPSCon.GetComponent<MyStatus>().GetHp()>0){
+            if( FPSCon.GetComponent<MyStatus>().GetHp()>0 && Flush.GetComponent<FlushController>().GetRed()<0.1f){
           FPSCon.GetComponent<MyStatus>().downHp((float)enemyatkpow);
             
             DamageFlg = true;
