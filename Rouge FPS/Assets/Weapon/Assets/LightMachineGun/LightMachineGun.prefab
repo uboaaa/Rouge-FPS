@@ -128,7 +128,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 7906399819038171674, guid: 38a4b56b79cd5614bae2f306c0be2631,
     type: 3}
   bulletScale: {x: 0.3, y: 0.3, z: 0.3}
-  muzzleFlashPrefab: {fileID: 5657120087087244624, guid: d350cb83ef033eb4b9ed15b5054ff9fa,
+  muzzleFlashPrefab: {fileID: 1919838961472022921, guid: bd5db7be93b90254f8abfbf976f0e082,
     type: 3}
   muzzleFlashScale: {x: 1, y: 1, z: 1}
   cameraShakePow: 0.3

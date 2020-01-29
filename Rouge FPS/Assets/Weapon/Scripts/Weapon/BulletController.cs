@@ -51,7 +51,6 @@ public class BulletController : MonoBehaviour
 
         // ダメージのばらつき +-1
         Damage += UnityEngine.Random.Range(-1, 2);
-        Debug.Log(Damage);
     }
 
     void Update()

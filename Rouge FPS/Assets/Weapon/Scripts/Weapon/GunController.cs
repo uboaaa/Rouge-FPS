@@ -232,7 +232,7 @@ public class GunController : MonoBehaviour
 		        Destroy(bullet, 10.0f);
 
                 // ショットガンの場合
-                // 6. 子オブジェクトにアタッチしているスクリプトを参照する
+                // 子オブジェクトにアタッチしているスクリプトを参照する
                 if(GunInfo.GunType.ShotGun == gunType)
                 for(int i = 1; i < 5;i++)
                 {

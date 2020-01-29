@@ -12,9 +12,12 @@ public class Action : MonoBehaviour
     DropGun DGScript;
     ChangeEquip CEScript;                   // [ChangeEquip]用の変数
     LoadGunPrefab LGPScript;
-    bool actionFlg;
+    public bool actionFlg;
     GameObject ObjectInfo;
     GameObject tmp;
+    public AiryUIAnimationManager UIEvent;
+    bool isCalledOnce = false;
+
     void Start()
     {
         CEScript = GetComponent<ChangeEquip>();
@@ -23,6 +26,16 @@ public class Action : MonoBehaviour
 
     void Update()
     {
+        // 拾うときのテキスト用
+        if(actionFlg && !isCalledOnce)
+        {
+            isCalledOnce = true;
+            UIEvent.ShowMenu();
+        } else if(!actionFlg && isCalledOnce) {
+            UIEvent.HideMenu();
+            isCalledOnce = false;
+        }
+
         if(Input.GetKeyDown(KeyCode.E) && actionFlg)
         {
             // 宝箱処理
