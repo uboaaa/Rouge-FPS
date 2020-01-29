@@ -50,6 +50,7 @@ public class FlushController : MonoBehaviour
        if(NowHP<=0){GameOverEnter();
        if(alpha>=1){Invoke("GameOver",1.0f);}
        }
+       
         //ここのif文に当たった処理を！
         if(NowHP>0){
         if (EnemyAttackPower.GetEnemyBHitGet() && this.img.color.r<0.1f)
