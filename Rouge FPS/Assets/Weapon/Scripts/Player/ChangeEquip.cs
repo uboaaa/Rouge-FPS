@@ -24,42 +24,29 @@ public class ChangeEquip : MonoBehaviour
         child = transform.FindChild("FirstPersonCharacter").gameObject;
 
         ownGun = 0;
-        // // 何も持っていないとき
-        // if(ownGun == 0)
-        // {
-        //     LGPScript = GetComponent<LoadGunPrefab>();
-        //     // ハンドガンをFirstPersonCharacterの直下に生成する
-        //     GameObject tmp = Instantiate(LGPScript.HandGun,child.transform,false);
-            
-        //     // 生成したものをプライマリにセットする
-        //     PrimaryWeapon = tmp;
-
-        //     PrimaryWeapon.SetActive(true);
-        //     GCPrimaryScript = PrimaryWeapon.GetComponent<GunController>();
-        // }
-
-        if(PrimaryWeapon != null)
+        
+        // 初期武器設定
+        if(ownGun == 0)
         {
-            // 拾った武器をFirstPersonCharacterの直下に生成する
-            GameObject tmp = Instantiate(PrimaryWeapon,child.transform,false);
+            ownGun = 1;
+            LGPScript = GetComponent<LoadGunPrefab>();
+            // ハンドガンをFirstPersonCharacterの直下に生成する
+            GameObject tmp = Instantiate(LGPScript.HandGun,child.transform,false);
             
             // 生成したものをプライマリにセットする
             PrimaryWeapon = tmp;
 
-            PrimaryWeapon.SetActive(false);
+            PrimaryWeapon.SetActive(true);
             GCPrimaryScript = PrimaryWeapon.GetComponent<GunController>();
-        }
-
-        if(SecondaryWeapon != null)
-        {
-            // 拾った武器をFirstPersonCharacterの直下に生成する
-            GameObject tmp = Instantiate(SecondaryWeapon,child.transform,false);
             
-            // 生成したものをセカンダリにセットする
-            SecondaryWeapon = tmp;
-
-            SecondaryWeapon.SetActive(false);
-            GCSecondaryScript = SecondaryWeapon.GetComponent<GunController>();
+            // 能力値
+            GCPrimaryScript.gunRank = GunInfo.GunRank.Rank1;
+            GCPrimaryScript.skillSlot = 1;
+            GCPrimaryScript.MagazineSize = 10;
+            GCPrimaryScript.Ammo = 500;
+            GCPrimaryScript.remAmmo = 500;
+            GCPrimaryScript.AmmoSize = 500;
+            GCPrimaryScript.Damage = 7;
         }
     }
 

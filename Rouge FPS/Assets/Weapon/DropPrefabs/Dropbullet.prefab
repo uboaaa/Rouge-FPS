@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2500672720240144831}
   - component: {fileID: 535331463383731304}
   m_Layer: 11
-  m_Name: Dropbullet
+  m_Name: DropBullet
   m_TagString: DropBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
