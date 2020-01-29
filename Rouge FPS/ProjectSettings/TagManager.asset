@@ -9,6 +9,7 @@ TagManager:
   - DroppableField
   - mousePoint
   - EnemyBullet
+  - Back
   layers:
   - Default
   - TransparentFX
@@ -43,6 +44,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: EnemyBullet
+    uniqueID: 1035046789
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
