@@ -59,7 +59,11 @@ public class GunController : MonoBehaviour
     GameObject FPSCon;
     Material material;                      // マテリアル
 
-    
+    public AudioClip shotSound;             // 撃つときのサウンド
+    public AudioClip noShotSound;           // 弾がないときのサウンド
+    public AudioClip reloadStartSound;      // リロード始めのサウンド
+    public AudioClip reloadSound;           // リロード終わりのサウンド
+    AudioSource audioSource;                // オーディオ用
 
     
     void Start()
@@ -80,6 +84,9 @@ public class GunController : MonoBehaviour
         propID_s = Shader.PropertyToID("_Saturation");
         propID_b = Shader.PropertyToID("_Brightness");
         propID_c = Shader.PropertyToID("_Contrast");
+
+        // 武器ごとのAUDIOを取得
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -148,6 +155,9 @@ public class GunController : MonoBehaviour
             {
                 StartCoroutine(ShootTimer());
                 animator.SetBool("ShootFlg",true);
+            } else if(Input.GetMouseButtonDown(0) && Ammo == 0) {
+                // 射撃音を鳴らす
+                audioSource.PlayOneShot(noShotSound);
             }
 
             // リロード
@@ -210,6 +220,9 @@ public class GunController : MonoBehaviour
     {
         if (!shooting)
         {
+            // 射撃音を鳴らす
+            audioSource.PlayOneShot(shotSound);
+
             // 射撃中は追加で撃てないようにする
             shooting = true;
             shootEnabled = false;
@@ -260,8 +273,16 @@ public class GunController : MonoBehaviour
     {
         if(shootEnabled)
         {
+            // リロード音を鳴らす
+            audioSource.PlayOneShot(reloadStartSound);
+
             // 連射速度の調整
             yield return new WaitForSeconds(reloadInterval);
+
+            audioSource.Stop(); 
+            // リロード音を鳴らす
+            audioSource.PlayOneShot(reloadSound);
+            
             // リロードできる弾の数なら
             if (remAmmo >= MagazineSize)
             {
@@ -269,7 +290,6 @@ public class GunController : MonoBehaviour
                 Ammo = MagazineSize;
                 reloading = false;
             } else {
-                // 
                 int NowAmmo = MagazineSize - Ammo;
                 if (NowAmmo > remAmmo)
                 {
@@ -285,6 +305,5 @@ public class GunController : MonoBehaviour
         } else {
             yield return null;
         }
-
     }
 }
