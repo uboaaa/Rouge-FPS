@@ -26,6 +26,10 @@ public class Action : MonoBehaviour
 
     void Update()
     {
+        // ポーズ中動作しないようにする
+        if(!PauseScript.pause()){}
+        if(!SkillManagement.GetTimeStop()){}
+        
         // 拾うときのテキスト用
         if(actionFlg && !isCalledOnce)
         {

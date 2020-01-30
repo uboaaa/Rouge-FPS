@@ -52,6 +52,10 @@ public class ChangeEquip : MonoBehaviour
 
     void Update()
     {
+        // ポーズ中動作しないようにする
+        if(!PauseScript.pause()){}
+        if(!SkillManagement.GetTimeStop()){}
+        
         if(SecondaryWeapon != null && PrimaryWeapon != null)
         {
             scroll = Input.GetAxis("Mouse ScrollWheel");

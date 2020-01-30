@@ -309,17 +309,16 @@ MonoBehaviour:
   remAmmo: 100
   Damage: 12
   shootInterval: 0.2
-  reloadInterval: 0.9
+  reloadInterval: 0.5
   bulletPower: 1200
   muzzle: {fileID: 6847620235173698571}
   bulletPrefab: {fileID: 1713645307709442939, guid: ac909c278bf6664408afe7577d5f376c,
     type: 3}
   bulletScale: {x: 0.5, y: 0.5, z: 0.5}
-  muzzleFlashPrefab: {fileID: 3603018863987298478, guid: 1f4e70dda0db11845b2ca5c2da41892f,
+  muzzleFlashPrefab: {fileID: 1660853992487398773, guid: cc517faf9188fcf4cade16bf2ea4c88f,
     type: 3}
   muzzleFlashScale: {x: 1, y: 1, z: 1}
   cameraShakePow: 0.01
-  muzzleShakePow: 0.2
   GunEXP: 1
   shootEnabled: 1
   shooting: 0

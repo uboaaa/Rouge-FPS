@@ -28,7 +28,6 @@ public class GunController : MonoBehaviour
     [SerializeField] GameObject muzzleFlashPrefab;                                  // マズルフラッシュのPrefab
     [SerializeField] Vector3    muzzleFlashScale = new Vector3(1.0f,1.0f,1.0f);     // マズルフラッシュの大きさ変更用
     [SerializeField] float cameraShakePow;                                          // カメラ揺らし用
-    [SerializeField] float muzzleShakePow;                                          // マズル揺らし用
 
     // パラメーター関係==============================================
     public float GunEXP;                                    // 経験値
@@ -91,6 +90,10 @@ public class GunController : MonoBehaviour
 
     void Update()
     {
+        // ポーズ中動作しないようにする
+        if(!PauseScript.pause()){}
+        if(!SkillManagement.GetTimeStop()){}
+
         // 武器レベルに応じてのカラーにする
         switch(gunRank)
         {
@@ -231,7 +234,7 @@ public class GunController : MonoBehaviour
             {
                 // マズルフラッシュの生成
                 GameObject  muzzleFlash = Instantiate<GameObject>(muzzleFlashPrefab,muzzle.position,muzzle.rotation);
-                muzzleFlash.transform.parent = this.transform;
+                //muzzleFlash.transform.parent = this.transform;
                 muzzleFlash.transform.localScale = muzzleFlashScale;
                 Destroy(muzzleFlash,1.0f);
             }
