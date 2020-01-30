@@ -80,7 +80,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7495487147564384630}
-  m_Text: 8
+  m_Text: 6
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -107,7 +107,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Inversion: 1
-  posZ: 0
 --- !u!54 &384449087706377004
 Rigidbody:
   m_ObjectHideFlags: 0
