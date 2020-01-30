@@ -12,7 +12,7 @@ public class EnemyAttackPower : MonoBehaviour
     
     private GameObject FPSCon;
     private GameObject Flush;
-    public static bool DamageFlg;
+    public static bool DamageFlg=false;
     void Start()
     {
         DamageFlg = false;
@@ -24,6 +24,7 @@ public class EnemyAttackPower : MonoBehaviour
     void Update()
     {
         //Debug.Log(ep.atk);
+        if(FPSCon.GetComponent<MyStatus>().GetHp()<1){DamageFlg=false;}
     }
     void OnCollisionEnter(Collision collision)
     {
