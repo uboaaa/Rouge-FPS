@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 5814169533934205218}
   - component: {fileID: 3549657525009627140}
   m_Layer: 11
-  m_Name: Flyer 1
+  m_Name: Flyer
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -149,11 +149,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baf799be1782b374783ee2c346c2c51e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 2213535263619949937, guid: 39943176753089f4ab907ac13eaffefc, type: 3}
+  bullet: {fileID: 9084416443107330477, guid: 2ee27d76444fe1e458c5815ae0a68425, type: 3}
   deadeffect: {fileID: 7053788834288727124, guid: 5535e049c4f89b743bc21b34e2d93445,
     type: 3}
   fireflg: 0
-  bspeed: 1000
+  PopObject1: {fileID: 0}
+  PopObject2: {fileID: 0}
 --- !u!114 &2694852381825030977
 MonoBehaviour:
   m_ObjectHideFlags: 0
