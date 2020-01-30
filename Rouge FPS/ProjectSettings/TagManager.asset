@@ -17,6 +17,7 @@ TagManager:
   - GroundSpawner
   - AirSpawner
   - Explored
+  - Back
   layers:
   - Default
   - TransparentFX

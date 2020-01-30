@@ -175,6 +175,9 @@ public class MapInitializer : MonoBehaviour
         //初期地点更新フラグ
         g_spawn_enable = true;
 
+        //フェードイン開始
+        MapFade.FadeIn();
+
     }
 
     //部屋生成
@@ -276,40 +279,6 @@ public class MapInitializer : MonoBehaviour
             }
         }
 
-        //一気に生成する版
-        //データからオブジェクトを配置
-        //for (int y = 0; y < MAP_SIZE_Y; y++)
-        //{
-        //    for (int x = 0; x < MAP_SIZE_X; x++)
-        //    {
-        //        //囲い部分の壁を削除
-        //        if (x == 0 || y == 0) m_map[x, y] = -1;
-        //        if (x == MAP_SIZE_X - 1 || y == MAP_SIZE_Y - 1) m_map[x, y] = -1;
-
-        //        //オブジェクト生成
-        //        if (m_map[x, y] == 2)
-        //        {
-        //            //通路
-        //            Instantiate(m_floorPrefab, new Vector3(x * MAP_SCALE, 0, y * MAP_SCALE), new Quaternion());
-        //        }
-
-        //        if (m_map[x, y] >= 1)
-        //        {
-        //            //天井
-        //            Instantiate(m_celingPrefab, new Vector3(x * MAP_SCALE, 6, y * MAP_SCALE), new Quaternion());
-        //        }
-
-        //        if (m_map[x, y] == 0)
-        //        {
-        //            //壁
-        //            Instantiate(m_wallPrefab, new Vector3(x * MAP_SCALE, 5, y * MAP_SCALE), new Quaternion());
-        //        }
-
-        //        //グローバルのマップデータを更新
-        //        MAP_DATA[x, y] = m_map[x, y];
-        //    }
-        //}
-
         //非同期前にマップデータを作る
         for (int y = 0; y < MAP_SIZE_Y; y++)
         {
@@ -335,8 +304,6 @@ public class MapInitializer : MonoBehaviour
     {
         StartCoroutine(InstatiateObjectsInternal(floor, celling, wall));
     }
-
-    public delegate void InstatiateObjectsCallback(List<GameObject> objects);
 
     private IEnumerator InstatiateObjectsInternal(GameObject floor, GameObject celling, GameObject wall)
     {
@@ -383,6 +350,9 @@ public class MapInitializer : MonoBehaviour
         GameObject _newCeling = Instantiate(m_celingPrefab, new Vector3((MAP_SIZE_X / 2) * MAP_SCALE, 8, (MAP_SIZE_Y / 2) * MAP_SCALE), new Quaternion());
         _newCeling.transform.localScale = new Vector3(MAP_SIZE_X * MAP_SCALE, 1, MAP_SIZE_Y * MAP_SCALE);
         _newCeling.transform.SetParent(m_parentParts.transform);
+
+        //フェードイン開始
+        MapFade.FadeIn();
     }
 
     // プレイヤーの出現座標を設定
