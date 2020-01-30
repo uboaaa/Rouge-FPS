@@ -22,7 +22,7 @@ public class DropUI : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointe
 
     void Start()
     {
-
+       
     }
 
     // スプライト初期設定

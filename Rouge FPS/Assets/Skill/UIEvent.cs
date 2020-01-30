@@ -85,6 +85,12 @@ public class UIEvent : MonoBehaviour
         rt.sizeDelta = new Vector2(ReduceRect, 0);
     }
 
+    // 文字用縮小
+    public void ReduceText()
+    {
+        GetComponent<RectTransform>().localScale = new Vector3(0.9f, 0.9f);
+    }
+
 
 
     // =================
@@ -111,6 +117,12 @@ public class UIEvent : MonoBehaviour
         rt.sizeDelta = new Vector2(BaseRect, 0);
     }
 
+    // 文字用縮小解除
+    public void ExtensionText()
+    {
+        GetComponent<RectTransform>().localScale = new Vector3(1, 1);
+    }
+
     // ==============
     // ドラッグしている間
     // ==============
@@ -130,7 +142,7 @@ public class UIEvent : MonoBehaviour
     // グレーアウト解除
     public void Active()
     {
-        GetComponent<Image>().color = new Color(1, 1, 1, 1);
+        GetComponent<Image>().color = new Color(1, 1, 1, 0.5f);
         grayFlag = false;
     }
 }
