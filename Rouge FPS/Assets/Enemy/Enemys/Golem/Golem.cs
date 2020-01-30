@@ -122,7 +122,7 @@ public class Golem : MonoBehaviour
             ep.hp = 70;
             ep.atk = 20;
             ep.def = 10;
-            ep.speed = 1.3f;
+            ep.speed = 0.4f;
             ep.startrot = 60;
 
             plight.color = new Color(1.0f, 0.5f, 0.5f, 1.0f);
@@ -136,7 +136,7 @@ public class Golem : MonoBehaviour
             ep.hp = 100;
             ep.atk = 30;
             ep.def = 20;
-            ep.speed = 1.5f;
+            ep.speed = 0.4f;
             ep.startrot = 60;
 
             plight.color = new Color(1.0f, 0.5f, 1.0f, 1.0f);

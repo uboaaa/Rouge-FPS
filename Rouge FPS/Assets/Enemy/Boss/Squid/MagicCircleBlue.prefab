@@ -4883,6 +4883,7 @@ GameObject:
   - component: {fileID: 4081289230464036834}
   - component: {fileID: 4081289230444604856}
   - component: {fileID: 4081289230445758620}
+  - component: {fileID: 8501267365293123895}
   m_Layer: 11
   m_Name: MagicCircleBlue
   m_TagString: Untagged
@@ -9640,6 +9641,20 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &8501267365293123895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4081289230463681726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcf25f19673000b44b5fddb183368fec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Inversion: 0
+  posZ: 0
 --- !u!1 &4081289230463698504
 GameObject:
   m_ObjectHideFlags: 0

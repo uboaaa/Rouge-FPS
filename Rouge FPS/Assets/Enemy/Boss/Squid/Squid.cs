@@ -176,7 +176,7 @@ public class Squid : MonoBehaviour
             material.SetFloat(propID_c, 0.5f);
 
             // パラメータ
-            ep.hp = 20;
+            ep.hp = 1000;
             ep.atk = 30;
             ep.def = 0;
             //ep.speed = 1.0f;
@@ -229,11 +229,14 @@ public class Squid : MonoBehaviour
                     // 敵が正面を向いていて知覚できる範囲内なら
                     if ((transform.position - player.gameObject.transform.position).magnitude < 15 && trans == 0)
                     {
+
+
                         foundflg = true;
 
                         trans = 0;
                         //intパラメーターの値を設定する.
                         animator.SetInteger("trans", trans);
+
                     }
 
                     // プレイヤーとの距離が範囲内なら
@@ -244,6 +247,8 @@ public class Squid : MonoBehaviour
                         trans = 0;
                         //intパラメーターの値を設定する.
                         animator.SetInteger("trans", trans);
+
+                        
                     }
 
                     // プレイヤーから攻撃を受けたら
@@ -344,7 +349,7 @@ public class Squid : MonoBehaviour
                         if (ActionCnt > 60)
                         {
                             ActionCnt = 0;
-                            ActionFlg = Random.Range(0, 4);
+                            ActionFlg = Random.Range(2, 3);
                         }
                     }
                     // 攻撃１モーション
@@ -369,16 +374,16 @@ public class Squid : MonoBehaviour
                         if (ActionCnt == 0)
                         {
                             GameObject ps1 = Instantiate(PopSmoke) as GameObject;
-                            ps1.transform.position = new Vector3(this.transform.position.x + 2, this.transform.position.y - 3, this.transform.position.z + 3);
+                            ps1.transform.position = new Vector3(this.transform.localPosition.x + 2, this.transform.position.y - 3, this.transform.localPosition.z + 3);
                             Destroy(ps1, 2.0f);
                             GameObject go1 = Instantiate(MiniSquid) as GameObject;
-                            go1.transform.position = new Vector3(this.transform.position.x + 2, this.transform.position.y - 3, this.transform.position.z + 3);
+                            go1.transform.position = new Vector3(this.transform.localPosition.x + 2, this.transform.position.y - 3, this.transform.localPosition.z + 3);
 
                             GameObject ps2 = Instantiate(PopSmoke) as GameObject;
-                            ps2.transform.position = new Vector3(this.transform.position.x + 2, this.transform.position.y - 3, this.transform.position.z - 3);
+                            ps2.transform.position = new Vector3(this.transform.localPosition.x + 2, this.transform.position.y - 3, this.transform.localPosition.z - 3);
                             Destroy(ps2, 2.0f);
                             GameObject go2 = Instantiate(MiniSquid) as GameObject;
-                            go2.transform.position = new Vector3(this.transform.position.x + 2, this.transform.position.y - 3, this.transform.position.z - 3);
+                            go2.transform.position = new Vector3(this.transform.localPosition.x + 2, this.transform.position.y - 3, this.transform.localPosition.z - 3);
                         }
 
                         ActionCnt++;
@@ -416,7 +421,7 @@ public class Squid : MonoBehaviour
                         {
                             GameObject fe = Instantiate(FireEffect) as GameObject;
                             fe.transform.position = new Vector3(
-                                this.gameObject.transform.position.x + 1,
+                                this.gameObject.transform.position.x,
                                 this.gameObject.transform.position.y,
                                 this.gameObject.transform.position.z
                             );
