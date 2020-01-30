@@ -4767,7 +4767,7 @@ GameObject:
   - component: {fileID: 4309325269948016628}
   - component: {fileID: 4309325269966349396}
   - component: {fileID: 4309325269965619624}
-  - component: {fileID: 514877708391458560}
+  - component: {fileID: 8100691790973072255}
   m_Layer: 11
   m_Name: MageFireEffectGreen
   m_TagString: Untagged
@@ -9525,7 +9525,7 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &514877708391458560
+--- !u!114 &8100691790973072255
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9538,7 +9538,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Inversion: 0
-  posZ: 1
 --- !u!1 &4309325269947816616
 GameObject:
   m_ObjectHideFlags: 0

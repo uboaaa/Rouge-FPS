@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 449510803709023190}
   - component: {fileID: 449510803694834060}
   - component: {fileID: 449510803695056040}
-  - component: {fileID: 776676924588871522}
+  - component: {fileID: 7767326574472164264}
   m_Layer: 11
   m_Name: MageFireEffectBlue
   m_TagString: Untagged
@@ -4769,7 +4769,7 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &776676924588871522
+--- !u!114 &7767326574472164264
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4782,7 +4782,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Inversion: 0
-  posZ: 1
 --- !u!1 &449510803708788830
 GameObject:
   m_ObjectHideFlags: 0
