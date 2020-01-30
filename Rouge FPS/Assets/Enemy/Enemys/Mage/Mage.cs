@@ -139,7 +139,7 @@ public class Mage : MonoBehaviour
 
 
             // 弾取得
-            bullet = Resources.Load("GhostBulletRed") as GameObject;
+            bullet = Resources.Load("GhostBulletBlue") as GameObject;
             // 発射エフェクト
             FireEffect = Resources.Load("MageFireEffectBlue") as GameObject;
 
@@ -159,7 +159,7 @@ public class Mage : MonoBehaviour
 
             plight.color = new Color(1.0f, 0.5f, 0.5f, 1.0f);
 
-            bullet = Resources.Load("GhostBulletBlue") as GameObject;
+            bullet = Resources.Load("GhostBulletGreen") as GameObject;
             FireEffect = Resources.Load("MageFireEffectGreen") as GameObject;
         }
         else if (AILevel == 3)
@@ -177,7 +177,7 @@ public class Mage : MonoBehaviour
 
             plight.color = new Color(1.0f, 0.5f, 1.0f, 1.0f);
 
-            bullet = Resources.Load("GhostBulletGreen") as GameObject;
+            bullet = Resources.Load("GhostBulletRed") as GameObject;
             FireEffect = Resources.Load("MageFireEffectYellow") as GameObject;
         }
     }

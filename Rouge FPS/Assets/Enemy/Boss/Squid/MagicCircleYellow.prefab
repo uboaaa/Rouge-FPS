@@ -19175,3 +19175,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Inversion: 0
+  posZ: 1

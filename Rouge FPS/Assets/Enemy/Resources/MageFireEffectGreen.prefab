@@ -9538,6 +9538,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Inversion: 0
+  posZ: 1
 --- !u!1 &4309325269947816616
 GameObject:
   m_ObjectHideFlags: 0
