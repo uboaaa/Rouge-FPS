@@ -5,10 +5,18 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - DropBox
+  - DropGun
+  - MiniMap
+  - Room
+  - Goal
   - Bullet
   - DroppableField
   - mousePoint
   - EnemyBullet
+  - GroundSpawner
+  - AirSpawner
+  - Explored
   - Back
   layers:
   - Default
@@ -24,7 +32,7 @@ TagManager:
   - Gun
   - Object
   - Enemy
-  - 
+  - MiniMap
   - 
   - 
   - 
