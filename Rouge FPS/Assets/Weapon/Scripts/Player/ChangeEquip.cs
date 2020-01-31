@@ -41,30 +41,45 @@ public class ChangeEquip : MonoBehaviour
             
             // 能力値
             GCPrimaryScript.gunRank = GunInfo.GunRank.Rank1;
-            GCPrimaryScript.skillSlot = 1;
-            GCPrimaryScript.MagazineSize = 10;
-            GCPrimaryScript.Ammo = 500;
-            GCPrimaryScript.remAmmo = 500;
-            GCPrimaryScript.AmmoSize = 500;
-            GCPrimaryScript.Damage = 7;
+            GCPrimaryScript.skillSlot = 2;
+            GCPrimaryScript.Ammo = 60;
+            GCPrimaryScript.AmmoSize = 60;
         }
     }
 
     void Update()
     {
+        // ポーズ中動作しないようにする
+        if(!PauseScript.pause()){}
+        if(!SkillManagement.GetTimeStop()){}
+        
         if(SecondaryWeapon != null && PrimaryWeapon != null)
         {
             scroll = Input.GetAxis("Mouse ScrollWheel");
         }
         
-
-        if (scroll < 0 || scroll > 0 || Input.GetKeyDown(KeyCode.Q) && !activeFlg && SecondaryWeapon != null)
+        // 武器交換処理
+        if (scroll < 0 || scroll > 0 || Input.GetKeyDown(KeyCode.Q) && !activeFlg && SecondaryWeapon != null && !GCPrimaryScript.reloading)
         {
-            GCPrimaryScript.shooting = false;
-            GCSecondaryScript.shooting = false;
             activeFlg = true;
             ChangeWeapon();
             scroll = 0;
+
+            GCPrimaryScript.shooting = false;
+            GCSecondaryScript.shooting = false;
+            GCPrimaryScript.reloading = false;
+            GCSecondaryScript.reloading = false;
+        }
+        else if (scroll < 0 || scroll > 0 || Input.GetKeyDown(KeyCode.Q) && !activeFlg && SecondaryWeapon != null && !GCSecondaryScript.reloading)
+        {
+            activeFlg = true;
+            ChangeWeapon();
+            scroll = 0;
+
+            GCPrimaryScript.shooting = false;
+            GCSecondaryScript.shooting = false;
+            GCPrimaryScript.reloading = false;
+            GCSecondaryScript.reloading = false;
         }
     }
 

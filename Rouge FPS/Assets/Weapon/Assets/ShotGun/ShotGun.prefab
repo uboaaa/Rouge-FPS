@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2158512696167874440}
   - component: {fileID: 2158512696167874442}
   - component: {fileID: 2158512696167874441}
+  - component: {fileID: 6710174059750332252}
   m_Layer: 0
   m_Name: ShotGun
   m_TagString: Untagged
@@ -27,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2158512696167874446}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.81, y: -1.7107954, z: 6.759243}
+  m_LocalPosition: {x: 3.01, y: -1.7107954, z: 6.12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2158512696211746471}
@@ -119,12 +120,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootMode: 1
   gunType: 5
-  gunRank: 1
+  gunRank: 0
   skillSlot: 2
-  MagazineSize: 6
+  MagazineSize: 8
   AmmoSize: 0
-  remAmmo: 40
-  Damage: 1
+  remAmmo: 64
+  Damage: 12
   shootInterval: 1
   reloadInterval: 0.9
   bulletPower: 5000
@@ -135,11 +136,110 @@ MonoBehaviour:
   muzzleFlashPrefab: {fileID: 5657120087087244624, guid: d350cb83ef033eb4b9ed15b5054ff9fa,
     type: 3}
   muzzleFlashScale: {x: 1, y: 1, z: 1}
-  cameraShakePow: 0.01
-  muzzleShakePow: 0.2
+  cameraShakePow: 0.05
   GunEXP: 1
   shootEnabled: 1
   shooting: 0
+  shotSound: {fileID: 8300000, guid: 972c217dd8ed7654abfd94e5ee7082c0, type: 3}
+  noShotSound: {fileID: 8300000, guid: 53e02a1a0a132904283b5e6b9e2015df, type: 3}
+  reloadStartSound: {fileID: 8300000, guid: 7478e104ae6c0db4085e4fb99ba6c3ea, type: 3}
+  reloadSound: {fileID: 8300000, guid: 7aa31c9bdd257bd4f979e3e1ec996fdb, type: 3}
+--- !u!82 &6710174059750332252
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2158512696167874446}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 752e489c2639c144c91b3e6f2dc43dcb, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &2158512696211746470
 GameObject:
   m_ObjectHideFlags: 0
@@ -167,8 +267,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2158512696211746470}
   m_LocalRotation: {x: -0.0528116, y: -0.1258847, z: -0.006436014, w: 0.9906173}
-  m_LocalPosition: {x: -2.2, y: 1.49, z: -5.54}
-  m_LocalScale: {x: 0.091446444, y: 0.0914464, z: 0.45861918}
+  m_LocalPosition: {x: -1.9, y: 1.27, z: -3.8429}
+  m_LocalScale: {x: 0.037858557, y: 0.049482614, z: 0.013476252}
   m_Children: []
   m_Father: {fileID: 2158512696167874447}
   m_RootOrder: 0
@@ -258,8 +358,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2415547209182668704}
   m_LocalRotation: {x: -0.0528116, y: -0.1258847, z: -0.006436014, w: 0.9906173}
-  m_LocalPosition: {x: -2.0028, y: 0.9528, z: -5.54}
-  m_LocalScale: {x: 0.0914464, y: 0.0914464, z: 0.45861924}
+  m_LocalPosition: {x: -1.8184, y: 0.97938, z: -3.9208}
+  m_LocalScale: {x: 0.03785854, y: 0.049482614, z: 0.0134762535}
   m_Children: []
   m_Father: {fileID: 2158512696167874447}
   m_RootOrder: 2
@@ -365,8 +465,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3184767946191285686}
   m_LocalRotation: {x: -0.0528116, y: -0.1258847, z: -0.006436014, w: 0.9906173}
-  m_LocalPosition: {x: -1.8804, y: 1.2588, z: -5.54}
-  m_LocalScale: {x: 0.0914464, y: 0.0914464, z: 0.45861924}
+  m_LocalPosition: {x: -1.7677, y: 1.1449599, z: -3.7812}
+  m_LocalScale: {x: 0.03785854, y: 0.049482614, z: 0.0134762535}
   m_Children: []
   m_Father: {fileID: 2158512696167874447}
   m_RootOrder: 4
@@ -472,8 +572,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6431326379420302053}
   m_LocalRotation: {x: -0.0528116, y: -0.1258847, z: -0.006436014, w: 0.9906173}
-  m_LocalPosition: {x: -2.5196, y: 1.2588, z: -5.54}
-  m_LocalScale: {x: 0.0914464, y: 0.0914464, z: 0.45861924}
+  m_LocalPosition: {x: -2.0323, y: 1.1449599, z: -4.1112}
+  m_LocalScale: {x: 0.03785854, y: 0.049482614, z: 0.0134762535}
   m_Children: []
   m_Father: {fileID: 2158512696167874447}
   m_RootOrder: 3
@@ -579,8 +679,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7455293452482352471}
   m_LocalRotation: {x: -0.0528116, y: -0.1258847, z: -0.006436014, w: 0.9906173}
-  m_LocalPosition: {x: -2.3428, y: 0.9324, z: -5.54}
-  m_LocalScale: {x: 0.0914464, y: 0.0914464, z: 0.45861924}
+  m_LocalPosition: {x: -1.9591, y: 0.96834993, z: -4.0248}
+  m_LocalScale: {x: 0.03785854, y: 0.049482614, z: 0.0134762535}
   m_Children: []
   m_Father: {fileID: 2158512696167874447}
   m_RootOrder: 1

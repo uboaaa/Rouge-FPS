@@ -1,6 +1,6 @@
 //=======================================================================
-// ���ׂ���A�E���Ȃǂ̓���p�X�N���v�g
-// FPSController�ɕt����
+// 調べたり、拾うなどの動作用スクリプト
+// FPSControllerに付ける
 //=======================================================================
 using System.Collections;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ public class Action : MonoBehaviour
 {
     private GameObject DropWeapon;      
     DropGun DGScript;
-    ChangeEquip CEScript;                   // [ChangeEquip]�p�̕ϐ�
+    ChangeEquip CEScript;                   // [ChangeEquip]用の変数
     LoadGunPrefab LGPScript;
     public bool actionFlg;
     GameObject ObjectInfo;
@@ -26,11 +26,14 @@ public class Action : MonoBehaviour
 
     void Update()
     {
-        // �E���Ƃ��̃e�L�X�g�p
+        // ポーズ中動作しないようにする
+        if(!PauseScript.pause()){
+        if(!SkillManagement.GetTimeStop()){
+        
+        // 拾うときのテキスト用
         if(actionFlg && !isCalledOnce)
         {
             isCalledOnce = true;
-            Debug.Log(UIEvent);
             UIEvent.ShowMenu();
         } else if(!actionFlg && isCalledOnce) {
             UIEvent.HideMenu();
@@ -39,67 +42,69 @@ public class Action : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.E) && actionFlg)
         {
-            // �󔠏���
+            // 宝箱処理
             if(ObjectInfo.tag == "DropBox"){BoxAction(ObjectInfo);}
             
-            // �����Ă�e�̏���
+            // 落ちてる銃の処理
             if(ObjectInfo.tag == "DropGun"){WeaponAction(ObjectInfo);}
 
             actionFlg = false;
         }
     }
+}
+    }
 
     void BoxAction(GameObject Object)
     {
-        // �󔠂��폜
+        // 宝箱を削除
         Destroy(Object.gameObject);
 
-        // DropItem�𐶐�
+        // DropItemを生成
         var IBScript = Object.GetComponent<ItemBox>();
         IBScript.Open();
     }
 
     void WeaponAction(GameObject Object)
     {
-        // DropItem���擾
+        // DropItemを取得
         var DIScript = Object.GetComponent<DropGun>();
 
-        // �����Ă��镐��𑕔�����
-        // ��DropWeapon�ɂ͎����Ă�����
+        // 落ちている武器を装備する
+        // ※DropWeaponには持ってた武器
         DropWeapon = CEScript.GetWeapon(Object);
 
-        // ��������̏ꍇ�A��������
+        // 武器交換の場合、生成する
         if(DropWeapon != null)
         {
-            // ��getWeapon�ɂ͎�ɓ���镐��
+            // ※getWeaponには手に入れる武器
 		    GameObject getWeapon = Instantiate<GameObject>(Object);
             getWeapon.name = DIScript.WeaponInfo.name;
 
-            // ������̌���
+            // 武器情報の交換
             GunInfo getGIScript = getWeapon.GetComponent<GunInfo>();
             GunController dropGCScript = DropWeapon.GetComponent<GunController>();
 
-            // �����Ă��镐����폜
+            // 落ちている武器を削除
             Destroy(Object.gameObject);
 
-            // �����Ă�����̏���ێ�
-            var RankInfo            = dropGCScript.gunRank;          // ���탉���N
-            var TypeInfo            = dropGCScript.gunType;          // ������
-            var SlotInfo            = dropGCScript.skillSlot;        // �X�L���X���b�g��
-            var MaxMagazineInfo     = dropGCScript.MagazineSize;     // �P�}�K�W���̃T�C�Y
-            var remMagazineInfo     = dropGCScript.Ammo;             // �}�K�W�����̎c�e��
-            var MaxAmmoInfo         = dropGCScript.AmmoSize;         // �\���e���T�C�Y
-            var remAmmoInfo         = dropGCScript.remAmmo;          // �\���e��
-            var DamageInfo          = dropGCScript.Damage;           // �Η�
-            var shootIntervalInfo   = dropGCScript.shootInterval;    // �ˌ��Ԋu
-            var reloadIntervalInfo  = dropGCScript.reloadInterval;   // �����[�h�X�s�[�h
-            var PowerInfo           = dropGCScript.bulletPower;      // �e�̔�΂���
-            var EXPInfo             = dropGCScript.GunEXP;           // �e�̌o���l
+            // 持ってた武器の情報を保持
+            var RankInfo            = dropGCScript.gunRank;          // 武器ランク
+            var TypeInfo            = dropGCScript.gunType;          // 武器種類
+            var SlotInfo            = dropGCScript.skillSlot;        // スキルスロット数
+            var MaxMagazineInfo     = dropGCScript.MagazineSize;     // １マガジンのサイズ
+            var remMagazineInfo     = dropGCScript.Ammo;             // マガジン内の残弾数
+            var MaxAmmoInfo         = dropGCScript.AmmoSize;         // 予備弾数サイズ
+            var remAmmoInfo         = dropGCScript.remAmmo;          // 予備弾数
+            var DamageInfo          = dropGCScript.Damage;           // 火力
+            var shootIntervalInfo   = dropGCScript.shootInterval;    // 射撃間隔
+            var reloadIntervalInfo  = dropGCScript.reloadInterval;   // リロードスピード
+            var PowerInfo           = dropGCScript.bulletPower;      // 弾の飛ばす力
+            var EXPInfo             = dropGCScript.GunEXP;           // 銃の経験値
 
-            // ���Ƃ�����ɏ�������(dropGCScript <= getGIScript)
+            // 落とす武器に情報を入れる(dropGCScript <= getGIScript)
             CEScript.ChangeGunConInfo(dropGCScript,getGIScript,1);
 
-            // �E������ɏ�������
+            // 拾う武器に情報を入れる
             getGIScript.gunRank        = RankInfo;
             getGIScript.gunType        = TypeInfo;
             getGIScript.skillSlot      = SlotInfo;
@@ -113,7 +118,7 @@ public class Action : MonoBehaviour
             getGIScript.bulletPower    = PowerInfo;
             getGIScript.GunEXP         = EXPInfo;
         } else {
-            // �����Ă��镐����폜
+            // 落ちている武器を削除
             Destroy(Object.gameObject);
         }     
     }
