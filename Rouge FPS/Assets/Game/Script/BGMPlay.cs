@@ -15,7 +15,7 @@ public class BGMPlay : MonoBehaviour
     {  
         switch(SceneManager.GetActiveScene().name){
             case "TitleScene": AudioManager.Instance.PlayBGM("bgm_maoudamashii_fantasy14");break;
-            case "GameScene": AudioManager.Instance.PlayBGM("game_maoudamashii_6_dangeon18");break;
+            case "GameScene": AudioManager.Instance.PlayBGM("苔の洞窟");break;
             case "GameOverScene": AudioManager.Instance.PlayBGM("bgm_maoudamashii_orchestra26");break;
             default :break;
         }
