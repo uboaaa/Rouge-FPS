@@ -24,7 +24,8 @@ public class EnemyAttackPower : MonoBehaviour
     void Update()
     {
         //Debug.Log(ep.atk);
-        if(FPSCon.GetComponent<MyStatus>().GetHp()<1){DamageFlg=false;}
+        if(Flush.GetComponent<FlushController>().GetRed()<0.1f){DamageFlg=false;}
+        Debug.Log(DamageFlg);
     }
     void OnCollisionEnter(Collision collision)
     {
@@ -58,7 +59,9 @@ public class EnemyAttackPower : MonoBehaviour
 
                 break;
 
+          
 
+        
             default:
                 DamageFlg = false;
 
@@ -96,11 +99,12 @@ public class EnemyAttackPower : MonoBehaviour
             // "Player"タグに当たった場合、エフェクトを出して弾を削除する
             case "Player":
                 //HitEffect(HitEffectPrefab);
+                 if(Flush.GetComponent<FlushController>().GetRed()<0.1f)
                 FPSCon.GetComponent<MyStatus>().downHp((float)enemyatkpow);
                 DamageFlg = true;
                 if(this.gameObject.tag == "EnemyBullet")
                 {
-                    Destroy(this.gameObject);
+                    Invoke("DestroyObject",3.0f);
                 }
                 
                 break;
@@ -121,5 +125,7 @@ public class EnemyAttackPower : MonoBehaviour
         }
 
     }
+    private void DestroyObject(){ Destroy(this.gameObject);}
+    private void OnDestroy() {DamageFlg=false;}
    public static bool GetEnemyBHitGet(){return DamageFlg;}
 }
