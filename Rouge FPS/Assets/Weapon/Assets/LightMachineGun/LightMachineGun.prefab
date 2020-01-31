@@ -116,12 +116,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootMode: 0
   gunType: 2
-  gunRank: 1
+  gunRank: 0
   skillSlot: 2
   MagazineSize: 120
   AmmoSize: 0
   remAmmo: 240
-  Damage: 4
+  Damage: 20
   shootInterval: 0.3
   reloadInterval: 1.1
   bulletPower: 1000
@@ -133,7 +133,6 @@ MonoBehaviour:
     type: 3}
   muzzleFlashScale: {x: 1, y: 1, z: 1}
   cameraShakePow: 0.3
-  muzzleShakePow: 0.2
   GunEXP: 1
   shootEnabled: 1
   shooting: 0

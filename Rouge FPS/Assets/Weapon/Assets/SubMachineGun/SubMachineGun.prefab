@@ -48,7 +48,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2486167992965359602}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -206,12 +206,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootMode: 0
   gunType: 1
-  gunRank: 1
+  gunRank: 0
   skillSlot: 2
   MagazineSize: 400
   AmmoSize: 0
   remAmmo: 120
-  Damage: 6
+  Damage: 5
   shootInterval: 0.1
   reloadInterval: 0.9
   bulletPower: 1000

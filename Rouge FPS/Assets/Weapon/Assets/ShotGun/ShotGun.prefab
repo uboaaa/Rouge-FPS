@@ -125,7 +125,7 @@ MonoBehaviour:
   MagazineSize: 6
   AmmoSize: 0
   remAmmo: 40
-  Damage: 1
+  Damage: 12
   shootInterval: 1
   reloadInterval: 0.9
   bulletPower: 5000
@@ -137,7 +137,6 @@ MonoBehaviour:
     type: 3}
   muzzleFlashScale: {x: 1, y: 1, z: 1}
   cameraShakePow: 0.01
-  muzzleShakePow: 0.2
   GunEXP: 1
   shootEnabled: 1
   shooting: 0

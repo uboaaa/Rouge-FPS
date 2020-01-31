@@ -41,12 +41,9 @@ public class ChangeEquip : MonoBehaviour
             
             // 能力値
             GCPrimaryScript.gunRank = GunInfo.GunRank.Rank1;
-            GCPrimaryScript.skillSlot = 1;
-            GCPrimaryScript.MagazineSize = 10;
-            GCPrimaryScript.Ammo = 500;
-            GCPrimaryScript.remAmmo = 500;
-            GCPrimaryScript.AmmoSize = 500;
-            GCPrimaryScript.Damage = 7;
+            GCPrimaryScript.skillSlot = 2;
+            GCPrimaryScript.Ammo = 60;
+            GCPrimaryScript.AmmoSize = 60;
         }
     }
 

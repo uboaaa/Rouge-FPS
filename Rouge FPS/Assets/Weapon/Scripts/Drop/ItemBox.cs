@@ -71,22 +71,7 @@ public class ItemBox : MonoBehaviour
         // スキルスロット数をランダムで取得
         GIScript.skillSlot = UnityEngine.Random.Range(1, 4);     // 1~3個
 
-        // ランクごとにダメージを取得
-        if(GIScript.gunRank == GunInfo.GunRank.Rank1)
-        {
-            
-        }
-        else if(GIScript.gunRank == GunInfo.GunRank.Rank2)
-        {
-            
-        }
-        else if(GIScript.gunRank == GunInfo.GunRank.Rank3)
-        {
-            
-        }
-
-
-        //表示するときの演出
+        // 表示するときの演出
         if (openEffectPrefab != null)
         {
             // オープンエフェクトの生成

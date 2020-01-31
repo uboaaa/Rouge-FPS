@@ -86,6 +86,20 @@ public class GunController : MonoBehaviour
 
         // 武器ごとのAUDIOを取得
         audioSource = GetComponent<AudioSource>();
+
+        // ランクごと武器種ごとにダメージを変化
+        if(gunRank == GunInfo.GunRank.Rank1)
+        {
+            // ランク１はそのまま
+        }
+        else if(gunRank == GunInfo.GunRank.Rank2)
+        {
+            Damage = Damage * 3;
+        }
+        else if(gunRank == GunInfo.GunRank.Rank3)
+        {
+            Damage = Damage * 5;
+        }
     }
 
     void Update()
@@ -194,15 +208,6 @@ public class GunController : MonoBehaviour
         }
 
         cameraScript.Shake(cameraShakePow,shooting);  // 画面を揺らす
-        
-
-        //==================================================================================================
-        // デバッグ表示
-        //==================================================================================================
-        // if(animatorInfo.shortNameHash ==  Animator.StringToHash("Idle")){Debug.Log("現在は：Idle");}
-        // if(animatorInfo.shortNameHash ==  Animator.StringToHash("Shot")){Debug.Log("現在は：Shot");}
-        // if(animatorInfo.shortNameHash ==  Animator.StringToHash("Reload")){Debug.Log("現在は：Reload");}
-        // if(animatorInfo.shortNameHash ==  Animator.StringToHash("Get")){Debug.Log("現在は：Get");}
     }
 
     // セミオートかフルオートかの判定

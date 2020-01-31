@@ -211,7 +211,7 @@ MonoBehaviour:
   MagazineSize: 10
   AmmoSize: 0
   remAmmo: 60
-  Damage: 7
+  Damage: 23
   shootInterval: 0.5
   reloadInterval: 0.7
   bulletPower: 1000

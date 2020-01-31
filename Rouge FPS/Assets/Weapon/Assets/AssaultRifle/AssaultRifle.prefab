@@ -302,12 +302,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootMode: 0
   gunType: 0
-  gunRank: 1
+  gunRank: 0
   skillSlot: 2
   MagazineSize: 20
   AmmoSize: 0
   remAmmo: 100
-  Damage: 12
+  Damage: 17
   shootInterval: 0.2
   reloadInterval: 0.5
   bulletPower: 1200
