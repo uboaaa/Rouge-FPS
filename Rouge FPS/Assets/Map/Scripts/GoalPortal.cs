@@ -31,6 +31,7 @@ public class GoalPortal : MonoBehaviour
             {
                 return;
             }
+            //スキル関連の関数追加の予定
 
             //階層の更新
             FloorCount.UpFloors();

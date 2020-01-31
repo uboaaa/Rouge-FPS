@@ -301,26 +301,49 @@ public class Lizard : MonoBehaviour
     // 弾との当たり判定
     private void OnCollisionEnter(Collision collision)
     {
-
-        if(!PauseScript.pause()){
-        if(!SkillManagement.GetTimeStop()){
-        if (collision.gameObject.tag == "Bullet")
+        if (PauseScript.pause())
         {
-            // 弾のダメージを取得
-            dn.SetBulletDamage(collision.gameObject.GetComponent<BulletController>().Damage);
-
-
-            eh.SetHitFlg(true);
-            dn.SetHitFlg(true);
-            foundflg = true;
-            ep.hp -= collision.gameObject.GetComponent<BulletController>().Damage;
-            if(ep.hp < 0){ep.hp = 0;}
-            //intパラメーターの値を設定する.
-            animator.SetInteger("trans", trans);
-        }
-           }
+            return;
         }
 
+        if (SkillManagement.GetTimeStop())
+        {
+            return;
+        }
+
+        //Bulletタグ以外は判定しない
+        if (collision.gameObject.tag != "Bullet")
+        {
+            return;
+        }
+
+        foreach (ContactPoint contact in collision.contacts)
+        {
+            GameObject _bullet = contact.otherCollider.gameObject;
+
+            //弾のダメージを取得
+            int _damage = _bullet.GetComponent<BulletController>().Damage;
+
+            //弾のダメージ数値を反映
+            dn.SetBulletDamage(_damage);
+
+            //体力減少
+            ep.hp -= _damage;
+            if (ep.hp < 0) { ep.hp = 0; }
+
+        }
+
+        //数値エフェクトを反映
+        dn.SetHitFlg(true);
+
+        //ダメージエフェクト反映
+        eh.SetHitFlg(true);
+
+        //発見フラグ立つ
+        foundflg = true;
+
+        //intパラメーターの値を設定する.
+        animator.SetInteger("trans", trans);
     }
 
     private void OnTriggerEnter(Collider collider)
