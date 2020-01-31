@@ -9,6 +9,9 @@ public class Mage : MonoBehaviour
 
     // プレイヤー
     private GameObject player = null;
+    // オーラエフェクト
+    private GameObject AuraEffect = null;
+    private GameObject ae = null;
     // アニメータ
     private Animator animator = null;
     // マテリアル
@@ -128,8 +131,8 @@ public class Mage : MonoBehaviour
             material.SetFloat(propID_c, 0.5f);
 
             // パラメータ
-            ep.hp = 20;
-            ep.atk = 10;
+            ep.hp = 60;
+            ep.atk = 12;
             ep.def = 0;
             ep.speed = 0;
             ep.startrot = 60;
@@ -151,8 +154,8 @@ public class Mage : MonoBehaviour
             material.SetFloat(propID_s, 1.0f);
             material.SetFloat(propID_c, 0.7f);
 
-            ep.hp = 30;
-            ep.atk = 15;
+            ep.hp = 240;
+            ep.atk = 18;
             ep.def = 10;
             ep.speed = 0;
             ep.startrot = 60;
@@ -161,6 +164,15 @@ public class Mage : MonoBehaviour
 
             bullet = Resources.Load("GhostBulletGreen") as GameObject;
             FireEffect = Resources.Load("MageFireEffectGreen") as GameObject;
+
+            // オーラエフェクト
+            AuraEffect = Resources.Load("AuraEffectYellow") as GameObject;
+            ae = Instantiate(AuraEffect) as GameObject;
+            ae.transform.position = new Vector3(
+                this.gameObject.transform.position.x,
+                this.gameObject.transform.position.y - 2.0f,
+                this.gameObject.transform.position.z
+            );
         }
         else if (AILevel == 3)
         {
@@ -169,8 +181,8 @@ public class Mage : MonoBehaviour
             material.SetFloat(propID_s, 0.4f);
             material.SetFloat(propID_c, 1.0f);
 
-            ep.hp = 40;
-            ep.atk = 25;
+            ep.hp = 360;
+            ep.atk = 24;
             ep.def = 20;
             ep.speed = 0;
             ep.startrot = 60;
@@ -179,6 +191,14 @@ public class Mage : MonoBehaviour
 
             bullet = Resources.Load("GhostBulletRed") as GameObject;
             FireEffect = Resources.Load("MageFireEffectYellow") as GameObject;
+
+            AuraEffect = Resources.Load("AuraEffectRed") as GameObject;
+            ae = Instantiate(AuraEffect) as GameObject;
+            ae.transform.position = new Vector3(
+                this.gameObject.transform.position.x,
+                this.gameObject.transform.position.y - 2.0f,
+                this.gameObject.transform.position.z
+            );
         }
     }
 
@@ -335,6 +355,7 @@ public class Mage : MonoBehaviour
                     }
 
                     // 解放処理
+                    Destroy(ae);
                     Destroy(de, 2.0f);
                     Destroy(this.gameObject);
                 }
