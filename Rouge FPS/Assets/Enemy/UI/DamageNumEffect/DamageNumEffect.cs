@@ -15,10 +15,10 @@ public class DamageNumEffect : MonoBehaviour
         hitflg = _a;
     }
 
-    private int BulletDamage = 0;
+    private List<int> BulletDamage = new List<int>();
     public void SetBulletDamage(int a)
     {
-        BulletDamage = a;
+        BulletDamage.Add(a);
     }
 
     GameObject DamageNumPrefab;
@@ -72,22 +72,27 @@ public class DamageNumEffect : MonoBehaviour
     {
         if (hitflg == true)
         {
-            // ダメージの値を挿入
-            DamageNumPrefab.GetComponent<TextMesh>().text = "" + BulletDamage;
+            foreach (int _damage in BulletDamage)
+            {
+                // ダメージの値を挿入
+                DamageNumPrefab.GetComponent<TextMesh>().text = "" + _damage;
 
-            // プレハブ生成
-            GameObject dn = Instantiate(DamageNumPrefab) as GameObject;
+                // プレハブ生成
+                GameObject dn = Instantiate(DamageNumPrefab) as GameObject;
 
-            // 敵の座標へ移動
-            float value = Random.Range(-1.0f, 1.0f);    // 乱数
-            dn.gameObject.transform.position = new Vector3(enemy.gameObject.transform.position.x + value, enemy.gameObject.transform.position.y + positionY, enemy.gameObject.transform.position.z + value);
+                // 敵の座標へ移動
+                float value = Random.Range(-1.0f, 1.0f);    // 乱数
+                dn.gameObject.transform.position = new Vector3(enemy.gameObject.transform.position.x + value, enemy.gameObject.transform.position.y + positionY, enemy.gameObject.transform.position.z + value);
 
-            // 向き方向の取得
-            Vector3 force = new Vector3(0.0f, 3.5f, 0);
+                // 向き方向の取得
+                Vector3 force = new Vector3(0.0f, 3.5f, 0);
 
-            // Rigidbodyに力を加えて発射
-            dn.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
+                // Rigidbodyに力を加えて発射
+                dn.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
+            }
 
+            //ダメージリストをリセット
+            BulletDamage.Clear();
 
             hitflg = false;
         }

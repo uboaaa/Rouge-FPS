@@ -69,7 +69,7 @@ GameObject:
   m_Component:
   - component: {fileID: 704642866114911409}
   - component: {fileID: 974479620430002494}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ClearWall
   m_TagString: Back
   m_Icon: {fileID: 0}
