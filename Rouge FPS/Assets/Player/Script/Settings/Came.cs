@@ -13,7 +13,7 @@ public class Came: MonoBehaviour
     {
 
         camera = this.GetComponent<Camera>();
-        camera.fieldOfView = PlayerPrefs.GetFloat("FOV",120.0f);
+        camera.fieldOfView = PlayerPrefs.GetFloat("FOV",90.0f);
         change=false;
     }
 
@@ -21,8 +21,8 @@ public class Came: MonoBehaviour
     void Update()
     {
 
-    if(ChangeCamera.GetUpPool()&& camera.fieldOfView<179){  camera.fieldOfView =camera.fieldOfView+1;ChangeCamera.FalseUpPool();}
-    if(ChangeCamera.GetDownPool() &&camera.fieldOfView>1){ camera.fieldOfView-=1.0f;ChangeCamera.FalseDownPool();}
+    if(ChangeCamera.GetUpPool()&& camera.fieldOfView<110){  camera.fieldOfView =camera.fieldOfView+1;ChangeCamera.FalseUpPool();}
+    if(ChangeCamera.GetDownPool() &&camera.fieldOfView>60){ camera.fieldOfView-=1.0f;ChangeCamera.FalseDownPool();}
 
     }
     

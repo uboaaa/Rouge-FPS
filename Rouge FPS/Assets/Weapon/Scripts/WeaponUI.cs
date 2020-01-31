@@ -70,6 +70,16 @@ public class WeaponUI : MonoBehaviour
                 PrimaryImage.color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
             }
         }
+
+        if(CEScript.ownGun == 1)
+        {
+            PrimaryImage.enabled = true;
+        }
+
+        if(CEScript.ownGun == 2)
+        {
+            SecondaryImage.enabled = true;
+        }
     }
 
     void selectGunSprite(GunInfo.GunType gunType,Image image)

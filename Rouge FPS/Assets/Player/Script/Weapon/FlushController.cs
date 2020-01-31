@@ -50,9 +50,10 @@ public class FlushController : MonoBehaviour
        if(NowHP<=0){GameOverEnter();
        if(alpha>=1){Invoke("GameOver",1.0f);}
        }
+       
         //ここのif文に当たった処理を！
         if(NowHP>0){
-        if (EnemyAttackPower.GetEnemyBHitGet())
+        if (EnemyAttackPower.GetEnemyBHitGet() && this.img.color.r<0.1f)
         {
             AudioManager.Instance.PlaySE("damage1");
             this.img.color = new Color(0.5f, 0f, 0f, 0.5f);
@@ -74,7 +75,7 @@ public class FlushController : MonoBehaviour
            SetAlpha();
 
     }
-
+   public float GetRed(){return this.img.color.r;}
     void SetAlpha()
     {
         fadeImage.color = new Color(red, 0.0f, 0.0f, alpha);

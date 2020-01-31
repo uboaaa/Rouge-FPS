@@ -7,10 +7,13 @@ public class BillBoard : MonoBehaviour
     private GameObject player;
     public bool Inversion = false;
 
+
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("FPSController");
+
+
     }
 
     void Update()

@@ -7,19 +7,18 @@ public class Rotation : MonoBehaviour
     // Start is called before the first frame update
     private static float XRotation;
     private static int Count;
-    void Start()
-    { //PlayerPrefs.SetFloat ("XRotate", 1.0f);
-    // PlayerPrefs.SetInt("Count",1);
+    void Start(){
+    // PlayerPrefs.SetFloat ("XRotate", 4.0f);
     // PlayerPrefs.Save ();
         Count=PlayerPrefs.GetInt("Count",3);
-        XRotation=PlayerPrefs.GetFloat("XRotate",2.0f);
+        XRotation=PlayerPrefs.GetFloat("XRotate",3.0f);
     }
 
     // Update is called once per frame
     void Update()
     {
-    if(XSensitivity.GetUpPool() &&Count<14){XRotation+=0.2f;Count++;XSensitivity.FalseUpPool();}
-    if(XSensitivity.GetDownPool() && Count>1){XRotation-=0.2f;Count--;XSensitivity.FalseDownPool();}
+    if(XSensitivity.GetUpPool() &&Count<14){XRotation+=0.1f;Count++;XSensitivity.FalseUpPool();}
+    if(XSensitivity.GetDownPool() && Count>1){XRotation-=0.1f;Count--;XSensitivity.FalseDownPool();}
    
         
     }

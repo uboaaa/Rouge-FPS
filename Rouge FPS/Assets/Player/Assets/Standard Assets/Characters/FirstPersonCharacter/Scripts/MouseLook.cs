@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
+using UnityEngine.SceneManagement;
 
 namespace UnityStandardAssets.Characters.FirstPerson
 {
@@ -34,9 +35,14 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         public void LookRotation(Transform character, Transform camera)
         {
-           
-            float yRot = CrossPlatformInputManager.GetAxis("Mouse X") * XSensitivity*Rotation.GetX();
-            float xRot = CrossPlatformInputManager.GetAxis("Mouse Y") * YSensitivity*Rotation.GetX();
+            float yRot;
+            float xRot;
+           if(SceneManager.GetActiveScene().name == "GameScene" || SceneManager.GetActiveScene().name == "PlayerScene"){
+             yRot = CrossPlatformInputManager.GetAxis("Mouse X") * XSensitivity*Rotation.GetX();
+             xRot = CrossPlatformInputManager.GetAxis("Mouse Y") * YSensitivity*Rotation.GetX();
+           }
+           else{yRot = CrossPlatformInputManager.GetAxis("Mouse X") * XSensitivity;
+             xRot = CrossPlatformInputManager.GetAxis("Mouse Y") * YSensitivity;}
 
             m_CharacterTargetRot *= Quaternion.Euler (0f, yRot, 0f);
             m_CameraTargetRot *= Quaternion.Euler (-xRot, 0f, 0f);

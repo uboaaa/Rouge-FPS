@@ -9,43 +9,123 @@ public class EnemyAttackPower : MonoBehaviour
     public int enemyatkpow = 0;
     public void SetAtkPower(int i){ enemyatkpow = i;}
     public bool BulletFlg = false;
-
-    public static bool DamageFlg;
-
+    
     private GameObject FPSCon;
+    private GameObject Flush;
+    public static bool DamageFlg=false;
     void Start()
     {
-
-        FPSCon = GameObject.Find("FPSController");
-        DamageFlg=false;
-
-        // 弾じゃなかったらそのまま攻撃力を取得
-        if(BulletFlg == false)
-        {
-            ep = GetComponent<EnemyParameter>();
-        
-            // パラメータから攻撃力を取得
-            enemyatkpow = ep.atk;
-        }
+        DamageFlg = false;
+        FPSCon=GameObject.Find("FPSController");
+        Flush=GameObject.Find("DamageRed");
     }
 
     // Update is called once per frame
     void Update()
     {
-       
+        //Debug.Log(ep.atk);
+        if(Flush.GetComponent<FlushController>().GetRed()<0.1f){DamageFlg=false;}
+        Debug.Log(DamageFlg);
     }
-    void OnTriggerEnter(Collider other)
+    void OnCollisionEnter(Collision collision)
     {
-        if(other.gameObject.tag == "Player")
-        {
-            if( FPSCon.GetComponent<MyStatus>().GetHp()>0){
-          FPSCon.GetComponent<MyStatus>().downHp((float)enemyatkpow);
+
+        // if(collision.gameObject.tag == "Player")
+        // {
             
-            DamageFlg = true;
-            }
-            Destroy(this);
+        //     MyStatus.downHp((float)enemyatkpow);
+        //     DamageFlg = true;
+            
+        //     Destroy(this);
+        // }
+
+        // 弾じゃなかったらそのまま攻撃力を取得
+        if(BulletFlg == false)
+        {
+            ep = this.gameObject.GetComponent<EnemyParameter>();
+            
+            // パラメータから攻撃力を取得
+            enemyatkpow = ep.atk;
+        }
+
+        switch (collision.gameObject.tag)
+        {
+
+
+            case "Player":
+                if(Flush.GetComponent<FlushController>().GetRed()<0.1f)
+                FPSCon.GetComponent<MyStatus>().downHp((float)enemyatkpow);
+                DamageFlg = true;
+
+                break;
+
+          
+
+        
+            default:
+                DamageFlg = false;
+
+                break;
         }
 
     }
+
+    void OnTriggerEnter(Collider other)
+    {
+
+
+            
+        // hitPos = other.ClosestPointOnBounds(this.transform.position);
+        
+
+        // ヒット時接触した点における法線を取得
+        //Vector3 normalVector = collision.contacts[0].normal;
+
+        // 法線方向に回転させる
+        //rotation = Quaternion.LookRotation(normalVector);
+
+        switch (other.gameObject.tag)
+        {
+            // "Back"タグに当たった場合、エフェクトを出して弾を削除する
+            case "Back":
+                //HitEffect(HitEffectPrefab);
+                if(this.gameObject.tag == "EnemyBullet")
+                {
+                    Destroy(this.gameObject);
+                }
+                DamageFlg = false;
+                break;
+
+            // "Player"タグに当たった場合、エフェクトを出して弾を削除する
+            case "Player":
+                //HitEffect(HitEffectPrefab);
+                 if(Flush.GetComponent<FlushController>().GetRed()<0.1f)
+                FPSCon.GetComponent<MyStatus>().downHp((float)enemyatkpow);
+                DamageFlg = true;
+                if(this.gameObject.tag == "EnemyBullet")
+                {
+                    Invoke("DestroyObject",3.0f);
+                }
+                
+                break;
+
+            
+            // // タグをつけてないものに当たった場合、物理マテリアルに応じる
+            // case "Untagged":
+            //     //HitEffect(HitEffectPrefab);
+            //     if(this.gameObject.tag == "EnemyBullet")
+            //     {
+            //         Destroy(this.gameObject);   // 今のところ弾は適当に消す
+            //     }
+            //     DamageFlg = false;
+            //     break;
+
+            default:
+                break;
+        }
+
+    }
+    private void DestroyObject(){ Destroy(this.gameObject);}
+    private void OnDestroy() {DamageFlg=false;}
    public static bool GetEnemyBHitGet(){return DamageFlg;}
 }

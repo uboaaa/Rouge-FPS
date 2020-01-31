@@ -64,10 +64,4 @@ public class CSV : MonoBehaviour
         // 書き込み
         File.WriteAllLines(fn, s, Encoding.GetEncoding("UTF-8"));
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

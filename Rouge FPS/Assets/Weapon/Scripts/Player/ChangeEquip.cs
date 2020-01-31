@@ -11,10 +11,12 @@ public class ChangeEquip : MonoBehaviour
     [HideInInspector] public int ownGun;      // 0:持ってない 1:プライマリ 2:セカンダリ
     [HideInInspector] public bool activeFlg;  // 行動中か  
     GameObject child;
+    private float scroll;                     // マウスホイールの回転値を格納する変数
 
      // スクリプト関係================================================
     public GunController GCPrimaryScript{get;set;}                   // [GunController]用の変数
     public GunController GCSecondaryScript{get;set;}                 // [GunController]用の変数
+    LoadGunPrefab　LGPScript;
 
     void Start()
     {
@@ -22,39 +24,47 @@ public class ChangeEquip : MonoBehaviour
         child = transform.FindChild("FirstPersonCharacter").gameObject;
 
         ownGun = 0;
-        if(PrimaryWeapon != null)
-        { 
-            // 拾った武器をFirstPersonCharacterの直下に生成する
-            GameObject tmp = Instantiate(PrimaryWeapon,child.transform,false);
+        
+        // 初期武器設定
+        if(ownGun == 0)
+        {
+            ownGun = 1;
+            LGPScript = GetComponent<LoadGunPrefab>();
+            // ハンドガンをFirstPersonCharacterの直下に生成する
+            GameObject tmp = Instantiate(LGPScript.HandGun,child.transform,false);
             
             // 生成したものをプライマリにセットする
             PrimaryWeapon = tmp;
 
             PrimaryWeapon.SetActive(true);
             GCPrimaryScript = PrimaryWeapon.GetComponent<GunController>();
-        }
-
-        if(SecondaryWeapon != null)
-        {
-            // 拾った武器をFirstPersonCharacterの直下に生成する
-            GameObject tmp = Instantiate(SecondaryWeapon,child.transform,false);
             
-            // 生成したものをプライマリにセットする
-            PrimaryWeapon = tmp;
-
-            SecondaryWeapon.SetActive(false);
-            GCSecondaryScript = SecondaryWeapon.GetComponent<GunController>();
+            // 能力値
+            GCPrimaryScript.gunRank = GunInfo.GunRank.Rank1;
+            GCPrimaryScript.skillSlot = 1;
+            GCPrimaryScript.MagazineSize = 10;
+            GCPrimaryScript.Ammo = 500;
+            GCPrimaryScript.remAmmo = 500;
+            GCPrimaryScript.AmmoSize = 500;
+            GCPrimaryScript.Damage = 7;
         }
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q) && !activeFlg && SecondaryWeapon != null)
+        if(SecondaryWeapon != null && PrimaryWeapon != null)
+        {
+            scroll = Input.GetAxis("Mouse ScrollWheel");
+        }
+        
+
+        if (scroll < 0 || scroll > 0 || Input.GetKeyDown(KeyCode.Q) && !activeFlg && SecondaryWeapon != null)
         {
             GCPrimaryScript.shooting = false;
             GCSecondaryScript.shooting = false;
             activeFlg = true;
             ChangeWeapon();
+            scroll = 0;
         }
     }
 

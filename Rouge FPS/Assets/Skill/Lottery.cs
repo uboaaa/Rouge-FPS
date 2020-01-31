@@ -19,9 +19,7 @@ public class Lottery : MonoBehaviour
         // 能力(ATK,DEF...等)
         Ability = 0,
         // 効果値(int)
-        Parameter = 1,
-        // 表示するテクスチャの名前
-        Name = 2
+        Parameter = 1
     };
 
     // =============
