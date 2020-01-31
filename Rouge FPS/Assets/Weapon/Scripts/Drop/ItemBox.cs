@@ -16,9 +16,6 @@ public class ItemBox : MonoBehaviour
         boxTrans = this.transform;
 
         GIScript = ItemPrefab.GetComponent<GunInfo>();
-
-        // 中身の抽選
-        random =　UnityEngine.Random.Range(0, 6);
     }
 
     public void Open()
@@ -28,6 +25,10 @@ public class ItemBox : MonoBehaviour
         //===================================================
         // 中身を表示
         Instantiate(ItemPrefab,new Vector3(boxTrans.position.x,boxTrans.position.y + 0.3f,boxTrans.position.z),Quaternion.identity);
+
+        // 中身の抽選
+        random =　UnityEngine.Random.Range(0, 6);
+        
         switch(random)
         {
             case 0:

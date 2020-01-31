@@ -33,7 +33,7 @@ public class GunController : MonoBehaviour
     public float GunEXP;                                    // 経験値
     [HideInInspector] public bool shootEnabled = true;      // 撃てる状態か判定用
     [HideInInspector] public bool shooting = false;         // 射撃中か判定用
-    bool        reloading = false;                          // リロード中か判定用
+    public bool        reloading = false;                   // リロード中か判定用
     public bool        equipping{get;private set;}          // 装備切り替え中か判定用
     int         ammo;                                       // マガジンに入っている弾の数
 

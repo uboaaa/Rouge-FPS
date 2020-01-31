@@ -120,11 +120,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootMode: 1
   gunType: 5
-  gunRank: 1
+  gunRank: 0
   skillSlot: 2
-  MagazineSize: 6
+  MagazineSize: 8
   AmmoSize: 0
-  remAmmo: 40
+  remAmmo: 64
   Damage: 12
   shootInterval: 1
   reloadInterval: 0.9
@@ -136,7 +136,7 @@ MonoBehaviour:
   muzzleFlashPrefab: {fileID: 5657120087087244624, guid: d350cb83ef033eb4b9ed15b5054ff9fa,
     type: 3}
   muzzleFlashScale: {x: 1, y: 1, z: 1}
-  cameraShakePow: 0.01
+  cameraShakePow: 0.05
   GunEXP: 1
   shootEnabled: 1
   shooting: 0

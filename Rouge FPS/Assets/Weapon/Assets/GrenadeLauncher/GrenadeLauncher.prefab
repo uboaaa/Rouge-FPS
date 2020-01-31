@@ -132,8 +132,7 @@ MonoBehaviour:
   muzzleFlashPrefab: {fileID: 7007471749387414326, guid: 055e40ede85ace7449ffdb331b9d4919,
     type: 3}
   muzzleFlashScale: {x: 0.5, y: 0.5, z: 0.5}
-  cameraShakePow: 0.01
-  muzzleShakePow: 0.2
+  cameraShakePow: 0.05
   GunEXP: 1
   shootEnabled: 1
   shooting: 0

@@ -306,7 +306,7 @@ MonoBehaviour:
   skillSlot: 2
   MagazineSize: 20
   AmmoSize: 0
-  remAmmo: 100
+  remAmmo: 120
   Damage: 17
   shootInterval: 0.2
   reloadInterval: 0.5
@@ -318,7 +318,7 @@ MonoBehaviour:
   muzzleFlashPrefab: {fileID: 1660853992487398773, guid: cc517faf9188fcf4cade16bf2ea4c88f,
     type: 3}
   muzzleFlashScale: {x: 1, y: 1, z: 1}
-  cameraShakePow: 0.01
+  cameraShakePow: 0.05
   GunEXP: 1
   shootEnabled: 1
   shooting: 0

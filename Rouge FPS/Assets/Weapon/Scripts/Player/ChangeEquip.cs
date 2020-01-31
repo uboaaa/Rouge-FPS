@@ -58,14 +58,28 @@ public class ChangeEquip : MonoBehaviour
             scroll = Input.GetAxis("Mouse ScrollWheel");
         }
         
-
-        if (scroll < 0 || scroll > 0 || Input.GetKeyDown(KeyCode.Q) && !activeFlg && SecondaryWeapon != null)
+        // 武器交換処理
+        if (scroll < 0 || scroll > 0 || Input.GetKeyDown(KeyCode.Q) && !activeFlg && SecondaryWeapon != null && !GCPrimaryScript.reloading)
         {
-            GCPrimaryScript.shooting = false;
-            GCSecondaryScript.shooting = false;
             activeFlg = true;
             ChangeWeapon();
             scroll = 0;
+
+            GCPrimaryScript.shooting = false;
+            GCSecondaryScript.shooting = false;
+            GCPrimaryScript.reloading = false;
+            GCSecondaryScript.reloading = false;
+        }
+        else if (scroll < 0 || scroll > 0 || Input.GetKeyDown(KeyCode.Q) && !activeFlg && SecondaryWeapon != null && !GCSecondaryScript.reloading)
+        {
+            activeFlg = true;
+            ChangeWeapon();
+            scroll = 0;
+
+            GCPrimaryScript.shooting = false;
+            GCSecondaryScript.shooting = false;
+            GCPrimaryScript.reloading = false;
+            GCSecondaryScript.reloading = false;
         }
     }
 
