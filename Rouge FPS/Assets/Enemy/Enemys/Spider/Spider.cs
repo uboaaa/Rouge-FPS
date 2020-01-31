@@ -6,6 +6,9 @@ public class Spider : MonoBehaviour
 {
     // プレイヤー
     private GameObject player = null;
+    // オーラエフェクト
+    private GameObject AuraEffect = null;
+    private GameObject ae = null;
     // 毒
     public GameObject poizon = null;
     // アニメータ
@@ -112,10 +115,9 @@ public class Spider : MonoBehaviour
             material.SetFloat(propID_c, 0.5f);
 
             // パラメータ
-            ep.hp = 50;
-            ep.atk = 10;
+            ep.hp = 65;
+            ep.atk = 12;
             ep.def = 0;
-            //ep.speed = 1.0f;
             ep.speed = 1.0f;
             ep.startrot = 60;
 
@@ -130,14 +132,19 @@ public class Spider : MonoBehaviour
             material.SetFloat(propID_s, 1.0f);
             material.SetFloat(propID_c, 0.7f);
 
-            ep.hp = 70;
-            ep.atk = 20;
+            ep.hp = 260;
+            ep.atk = 18;
             ep.def = 10;
-            ep.speed = 1.3f;
+            ep.speed = 1.1f;
             //ep.speed = 0.0f;
             ep.startrot = 60;
 
             plight.color = new Color(1.0f, 0.5f, 0.5f, 1.0f);
+
+            // オーラエフェクト
+            AuraEffect = Resources.Load("AuraEffectYellow") as GameObject;
+            ae = Instantiate(AuraEffect) as GameObject;
+            ae.transform.position = this.gameObject.transform.position;
         }
         else if (AILevel == 3)
         {
@@ -145,14 +152,18 @@ public class Spider : MonoBehaviour
             material.SetFloat(propID_s, 0.4f);
             material.SetFloat(propID_c, 1.0f);
 
-            ep.hp = 100;
-            ep.atk = 30;
+            ep.hp = 390;
+            ep.atk = 24;
             ep.def = 20;
-            ep.speed = 1.5f;
+            ep.speed = 1.2f;
             //ep.speed = 0.0f;
             ep.startrot = 60;
 
             plight.color = new Color(1.0f, 0.5f, 1.0f, 1.0f);
+
+            AuraEffect = Resources.Load("AuraEffectRed") as GameObject;
+            ae = Instantiate(AuraEffect) as GameObject;
+            ae.transform.position = this.gameObject.transform.position;
         }
 
 
@@ -212,6 +223,15 @@ public class Spider : MonoBehaviour
 
                     //targetに向かって進む
                     this.gameObject.transform.position += transform.forward * ep.speed * 0.1f;
+
+                    if (ae)
+                    {
+                        ae.transform.position = new Vector3(
+                            this.gameObject.transform.position.x,
+                            this.gameObject.transform.position.y - 2.0f,
+                            this.gameObject.transform.position.z
+                        );
+                    }
                 }
                 // 発見フラグがOFFなら
                 else if (foundflg == false)
@@ -297,6 +317,7 @@ public class Spider : MonoBehaviour
                     }
 
                     // 解放処理
+                    Destroy(ae);
                     Destroy(de, 2.0f);
                     Destroy(this.gameObject);
                 }
