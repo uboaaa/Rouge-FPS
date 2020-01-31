@@ -28,6 +28,13 @@ public class PlayerParameter : MonoBehaviour
     {
         slotName[_num] = _name;
     }
+    // 重複スキル設定時の値を分けるための変数
+    public string[] slotValue;
+    public string GetSlotValue(int _num)
+    {
+        return slotValue[_num];
+    }
+
     // パラメーター取得
     public object GetParameter(string _name)
     {
@@ -84,40 +91,50 @@ public class PlayerParameter : MonoBehaviour
         return "err";
     }
     // パラメーター設定
-    public void SetParameter(string _name, object _value)
+    // _num番目のスロットの_nameと同じ変数名(パラメーター)に_valueを入れる
+    public void SetParameter(string _name, object _value, int _num)
     {
         switch (_value)
         {
             case int n when _name == "HP":
                 HP += (int)_value;
+                slotValue[_num] = _value.ToString();
                 break;
             case int n when _name == "ATK":
                 ATK += (int)_value;
+                slotValue[_num] = _value.ToString();
                 break;
             case int n when _name == "DEF":
                 DEF += (int)_value;
+                slotValue[_num] = _value.ToString();
                 break;
             case int n when _name == "SPD":
                 SPD += (int)_value;
+                slotValue[_num] = _value.ToString();
                 break;
             case int n when _name == "Magazine":
                 Magazine += (int)_value;
+                slotValue[_num] = _value.ToString();
                 break;
             case int n when _name == "Ammo":
                 Ammo += (int)_value;
+                slotValue[_num] = _value.ToString();
                 break;
             case bool b when _name == "IsATK":
                 IsATK = (bool)_value;
+                slotValue[_num] = _value.ToString();
                 break;
             case bool b when _name == "IsDEF":
                 IsDEF = (bool)_value;
+                slotValue[_num] = _value.ToString();
                 break;
             case bool b when _name == "IsSPD":
                 IsSPD = (bool)_value;
+                slotValue[_num] = _value.ToString();
                 break;
             case bool b when _name == "IsPrimary":
-                IsPrimary = (bool)_value
-;
+                IsPrimary = (bool)_value;
+                slotValue[_num] = _value.ToString();
                 break;
         }
     }
@@ -139,4 +156,5 @@ public class PlayerParameter : MonoBehaviour
             slotName[i] = "none";
         }
     }
+    
 }

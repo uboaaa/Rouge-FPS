@@ -93,6 +93,11 @@ public class UIManager : MonoBehaviour
             // 名前設定
             param.SetName(status[0]);
 
+            // スキル効果値の文字描画
+            var child = obj.GetComponentInChildren<SkillValue>();
+            child.SetText();
+
+
             i++;
         }
     }
@@ -113,7 +118,14 @@ public class UIManager : MonoBehaviour
             // テクスチャ設定
             obj.GetComponent<Image>().sprite = Resources.Load<Sprite>(tex);
             // パラメーターの値も取得
-            param.SetParameter(name, pp.GetParameterToString(name));
+            var check = pp.GetSlotValue(i);
+            Debug.Log(check);
+            param.SetParameter(name, (string)pp.GetSlotValue(i));
+
+            // スキル効果値の文字描画
+            var child = obj.GetComponentInChildren<SkillValue>();
+            child.SetText();
+
             i++;
         }
     }
