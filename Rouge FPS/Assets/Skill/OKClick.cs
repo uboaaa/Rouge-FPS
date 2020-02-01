@@ -22,7 +22,6 @@ public class OKClick : MonoBehaviour
             // i番目スキルの名前に変更(次回描画時に切り替わる)
             param.SetSlotName(name, i);
             // i番目スキル値の変更
-            Debug.Log(name + ", " + slotParam.GetParameterToObject(name));
             param.SetParameter(name, slotParam.GetParameterToObject(name), i);
         }
         GameObject.Find("UI").SetActive(false);

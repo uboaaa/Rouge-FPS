@@ -20,12 +20,24 @@ public class UIManager : MonoBehaviour
     // 抽選用の変数
     private Lottery lot;
 
+    // 現在の階層
+    private string nowFloor;
+
+    // 暗転終了フラグ
+    private bool EndTransition = false;
+    public void EndBlackOut()
+    {
+        EndTransition = true;
+    }
+
+    private GameObject TransitionObj;
+
     void Start()
     {
+        TransitionObj = GameObject.Find("TransitionCanvas");
         lot = new Lottery();
-
+        nowFloor = "0";
         Init();
-        UIObj.SetActive(false);
     }
     
     // 初期化
@@ -56,6 +68,9 @@ public class UIManager : MonoBehaviour
             obj.transform.position = ButtonPos[i];
             i++;
         }
+
+        // UI非表示
+        UIObj.SetActive(false);
     }
 
     // パラメーターをリセット
@@ -76,13 +91,14 @@ public class UIManager : MonoBehaviour
     }
 
     // スキルの画像セット
-    public void SetSkill()
+    public void SetSkill(string _floor, params int[] _table)
     {
         var i = 0;
         foreach (var obj in SkillObj)
         {
             // 抽選
-            var status = lot.LevelUp("0", 4, 3, 3);
+            // 第一引数はフロア、第２引数は強いスキルの出やすさ確率をint配列で渡す
+            var status = lot.LevelUp(_floor, _table);
             // テクスチャ設定
             var tex = "Skill/" + status[0];
             obj.GetComponent<Image>().sprite = Resources.Load<Sprite>(tex);
@@ -119,8 +135,7 @@ public class UIManager : MonoBehaviour
             obj.GetComponent<Image>().sprite = Resources.Load<Sprite>(tex);
             // パラメーターの値も取得
             var check = pp.GetSlotValue(i);
-            Debug.Log(check);
-            param.SetParameter(name, (string)pp.GetSlotValue(i));
+            param.SetParameter(name, pp.GetSlotValue(i));
 
             // スキル効果値の文字描画
             var child = obj.GetComponentInChildren<SkillValue>();
@@ -131,19 +146,32 @@ public class UIManager : MonoBehaviour
     }
 
 
+
+
+
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A))
+        // 暗転開始
+        if (Input.GetKeyDown(KeyCode.A)) 
         {
-            SetSkill();
+            GetComponent<Transition>().BeginTransition();
+        }
+        // 暗転終了したら設定
+        if(EndTransition)
+        {
+            EndTransition = false;
+            // スロット、スキル設定・表示
             SetSlot();
+            SetSkill(nowFloor, 5, 4, 1);
             DropUI.UnLock();
             UIObj.SetActive(true);
+            // 明転
+            GetComponent<Transition>().EndTransition();
         }
-        
+
+        // UI非表示
         if(Input.GetKeyDown(KeyCode.S))
         {
-
             UIObj.SetActive(false);
         }
     }

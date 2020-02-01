@@ -7,15 +7,15 @@ using UnityEngine.UI;
 public class SkillValue : MonoBehaviour
 {
     public GameObject parent;
-    private string value;
-    Text text;
+    private string value = "";
+    public Text text;
 
-    private void Start()
+    private void Awake()
     {
         // コンポーネント取得
         text = GetComponent<Text>();
     }
-
+    
     // UI設置時に呼び出す
     public void SetText()
     {
