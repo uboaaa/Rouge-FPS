@@ -48,8 +48,8 @@ public class TitletoGame : MonoBehaviour
                 Mode[0].GetComponent<TextColorChange>().ColorChange(ModeSelect);
                   if (Input.GetKeyDown(KeyCode.Return)){NoMove=true;}}
                 if (FadePanel.AlphaGet()>1.0f) {
-                    if(!MergeScenes.IsLoad()){SceneManager.LoadScene("LoadingScene");}
-                    else{SceneManager.LoadScene("GameScene");}
+                    if(!MergeScenes.IsLoad()){AudioManager.Instance.StopBGM(); SceneManager.LoadScene("LoadingScene");}
+                    else{AudioManager.Instance.StopBGM(); SceneManager.LoadScene("GameScene");}
                     } 
                 break;
 

@@ -31,14 +31,14 @@ private GameObject gameObject;
         {
             case "ReStart":
                 if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow)) { ModeSelect = "Title"; }
-                if (FadePanel.AlphaGet()>1.0f) {FloorCount.ResetCount(); SceneManager.LoadScene("GameScene");}
+                if (FadePanel.AlphaGet()>1.0f) {AudioManager.Instance.StopBGM();FloorCount.ResetCount(); SceneManager.LoadScene("GameScene");}
                     RGame.GetComponent<SelectMode>().ColorChange(ModeSelect);
             
                 break;
 
             case "Title":
                 if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow)) { ModeSelect = "ReStart"; }
-                if (FadePanel.AlphaGet()>1.0f) {FloorCount.ResetCount();SceneManager.LoadScene("TitleScene");}
+                if (FadePanel.AlphaGet()>1.0f) {AudioManager.Instance.StopBGM();FloorCount.ResetCount();SceneManager.LoadScene("TitleScene");}
                 RTitle.GetComponent<SelectMode>().ColorChange(ModeSelect);
                 
                 break;

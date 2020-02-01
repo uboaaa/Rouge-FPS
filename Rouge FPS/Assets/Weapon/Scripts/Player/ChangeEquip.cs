@@ -16,13 +16,15 @@ public class ChangeEquip : MonoBehaviour
      // スクリプト関係================================================
     public GunController GCPrimaryScript{get;set;}                   // [GunController]用の変数
     public GunController GCSecondaryScript{get;set;}                 // [GunController]用の変数
+
+    GameObject FPSCon; //HP取得用
     LoadGunPrefab　LGPScript;
 
     void Start()
     {
         // 子オブジェクトを取得（FirstPersonCharacter）
         child = transform.FindChild("FirstPersonCharacter").gameObject;
-
+        FPSCon = GameObject.Find("FPSController");
         ownGun = 0;
         
         // 初期武器設定
@@ -57,7 +59,7 @@ public class ChangeEquip : MonoBehaviour
         {
             scroll = Input.GetAxis("Mouse ScrollWheel");
         }
-        
+        if(FPSCon.GetComponent<MyStatus>().GetHp()>0){
         // 武器交換処理
         if (scroll < 0 || scroll > 0 || Input.GetKeyDown(KeyCode.Q) && !activeFlg && SecondaryWeapon != null && !GCPrimaryScript.reloading)
         {
@@ -80,6 +82,7 @@ public class ChangeEquip : MonoBehaviour
             GCSecondaryScript.shooting = false;
             GCPrimaryScript.reloading = false;
             GCSecondaryScript.reloading = false;
+        }
         }
     }
 

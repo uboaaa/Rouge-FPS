@@ -12,7 +12,7 @@ public class MergeScenes : MonoBehaviour
     {
        
         FloorCount.SetReset();
-         SceneManager.LoadScene("SkillScene", LoadSceneMode.Additive);
+         //SceneManager.LoadScene("SkillScene", LoadSceneMode.Additive);
         SceneManager.LoadScene("MapScene", LoadSceneMode.Additive);
         SceneManager.LoadScene("PlayerScene", LoadSceneMode.Additive);
         FirstLoad=true;

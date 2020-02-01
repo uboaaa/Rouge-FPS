@@ -68,7 +68,7 @@ public class GametoTitle : MonoBehaviour
                    if (Input.GetKeyDown(KeyCode.Return)) { last=true;NoMove=true;Cursor.visible = false;}
                    }
                   }
-                   if (FadePanel2.AlphaGet()>1.0f) {SceneManager.LoadScene("TitleScene");}
+                   if (FadePanel2.AlphaGet()>1.0f) {AudioManager.Instance.StopBGM(); SceneManager.LoadScene("TitleScene");}
                 break;
 
             case "Settings":
