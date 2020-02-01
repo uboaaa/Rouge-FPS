@@ -8,8 +8,22 @@ public class OKClick : MonoBehaviour
     [Header("-----------------------------------------")]
     public GameObject Parameter;
 
+    // 連打防止
+    private bool nowChange = false;
+    public bool GetChange()
+    {
+        return nowChange;
+    }
+
+    public void NowChange()
+    {
+        nowChange = true;
+    }
+
     public void SkillChange()
     {
+        // 連打防止
+        if (nowChange == false) { return; }
         // プレイヤーのパラメーター取得
         var param = Parameter.GetComponent<PlayerParameter>();
         param.AllReset();
@@ -28,6 +42,7 @@ public class OKClick : MonoBehaviour
         }
         // UI再度ドロップ可能状態にする
         DropUI.UnLock();
+        nowChange = false;
         // ここにUI消す前の処理を書く！
         // GameObject.Find("UI").SetActive(false);
     }
