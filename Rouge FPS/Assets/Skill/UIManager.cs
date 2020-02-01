@@ -33,11 +33,18 @@ public class UIManager : MonoBehaviour
     }
 
     // UI表示フラグ
-    public bool UIFlag = false;
-    public void SetUIFlag(bool _flag)
+    private static bool UIFlag = false;
+    public static void SetUIFlag(bool _flag)
     {
         UIFlag = _flag;
     }
+    
+
+
+    //操作用フラグ
+    private static bool GetUIFlg=false;
+
+    public  static bool GetFlg(){return GetUIFlg;}
 
 
     // 暗転終了フラグ
@@ -202,6 +209,7 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
+        GetUIFlg=UIObj.activeSelf;
         // 仮　UI出すためのフラグ：オンにしてくれたら勝手にアニメーション始まります
         if(Input.GetKeyDown(KeyCode.A))
         {
@@ -231,9 +239,9 @@ public class UIManager : MonoBehaviour
         }
 
         // 仮　UI非表示
-        if(Input.GetKeyDown(KeyCode.S))
-        {
-            UIObj.SetActive(false);
-        }
+        // if(Input.GetKeyDown(KeyCode.S))
+        // {
+        //     UIObj.SetActive(false);
+        // }
     }
 }
