@@ -226,6 +226,7 @@ MonoBehaviour:
   GunEXP: 1
   shootEnabled: 1
   shooting: 0
+  reloading: 0
   shotSound: {fileID: 8300000, guid: 5bfd5fc9fc219b349a8f12c6e6a4f5fa, type: 3}
   noShotSound: {fileID: 8300000, guid: 53e02a1a0a132904283b5e6b9e2015df, type: 3}
   reloadStartSound: {fileID: 8300000, guid: 7478e104ae6c0db4085e4fb99ba6c3ea, type: 3}
