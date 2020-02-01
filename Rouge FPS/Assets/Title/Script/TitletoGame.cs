@@ -47,7 +47,10 @@ public class TitletoGame : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.LeftArrow)) { ModeSelect = "Exit"; }
                 Mode[0].GetComponent<TextColorChange>().ColorChange(ModeSelect);
                   if (Input.GetKeyDown(KeyCode.Return)){NoMove=true;}}
-                if (FadePanel.AlphaGet()>1.0f) {SceneManager.LoadScene("GameScene");} 
+                if (FadePanel.AlphaGet()>1.0f) {
+                    if(!MergeScenes.IsLoad()){SceneManager.LoadScene("LoadingScene");}
+                    else{SceneManager.LoadScene("GameScene");}
+                    } 
                 break;
 
             // case "Setting":
