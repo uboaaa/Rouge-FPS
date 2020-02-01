@@ -23,8 +23,13 @@ public class OKClick : MonoBehaviour
             param.SetSlotName(name, i);
             // i番目スキル値の変更
             param.SetParameter(name, slotParam.GetParameterToObject(name), i);
+            // スロット側初期化設定
+            slotParam.GetComponent<DropUI>().InitParameter();
         }
-        GameObject.Find("UI").SetActive(false);
+        // UI再度ドロップ可能状態にする
+        DropUI.UnLock();
+        // ここにUI消す前の処理を書く！
+        // GameObject.Find("UI").SetActive(false);
     }
 
 }
