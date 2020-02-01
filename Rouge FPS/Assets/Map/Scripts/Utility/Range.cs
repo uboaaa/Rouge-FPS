@@ -13,6 +13,7 @@ public class Range
 
     public Dictionary<int, Direction> m_connectIdList = new Dictionary<int, Direction>();   //接している区画リスト（区画ID,接している辺の方向）
     private Dictionary<Direction, Line> m_lineList = new Dictionary<Direction, Line>();     //辺リスト（辺の方向,辺）
+    public Dictionary<Direction, List<Position>> m_PassPositionDic { get; } = new Dictionary<Direction, List<Position>>();  //通路生成地点リスト（通路のある方向、座標）
 
 
     //==================================
@@ -181,22 +182,21 @@ public class Range
 
         if (connect_Start && connect_End)               //指定先の部屋から引いた直線は全て接続できる
         {
-            pass = CreateStraightPass(other_start, other_end, range.m_Room, direction);
+            pass = CreateStraightPass(other_start, other_end, range, direction);
 
         }
         else if (connect_Start && !connect_End)         //指定先の部屋の始点～指定元の部屋の終点
         {
-            pass = CreateStraightPass(other_start, self_end, range.m_Room, direction);
+            pass = CreateStraightPass(other_start, self_end , range, direction);
 
         }
         else if (!connect_Start && connect_End)         //指定元の部屋の始点～指定先の部屋の終点
         {
-            pass = CreateStraightPass(self_start, other_end, range.m_Room, direction);
+            pass = CreateStraightPass(self_start, other_end, range, direction);
 
         }
         else if (!(connect_Start || connect_End))       //直線では接続できない
         {
-            Debug.Log("生成なし(方向:" + direction + "/" + self_start + "," + self_end + "/" + other_start + "," + other_end + ")");
             return false;
         }
 
@@ -205,10 +205,8 @@ public class Range
 
     //直線で接続可能な場合の通路生成
     //引数：ランダムの最小値、最大値、接続先の部屋クラス、接続する方向
-    private Pass CreateStraightPass(int min, int max, Room other_room, Direction direction)
+    private Pass CreateStraightPass(int min, int max, Range other, Direction direction)
     {
-
-
         int rand;
         if (max - min <= 1)
         {
@@ -222,45 +220,232 @@ public class Range
         Pass pass = new Pass();
 
         //方向毎に通路を生成し返す
+        //***部屋にはみ出している通路部分を削る！
         switch (direction)
         {
             case Direction.LEFT:
-                pass.Start = new Position(m_Room.Start.X, rand);
-                pass.End = new Position(other_room.End.X, rand);
+                pass.Start = new Position(this.m_Room.Start.X - 1, rand);
+                pass.End = new Position(other.m_Room.End.X + 1, rand);
                 break;
             case Direction.RIGHT:
-                pass.Start = new Position(m_Room.End.X, rand);
-                pass.End = new Position(other_room.Start.X, rand);
+                pass.Start = new Position(this.m_Room.End.X + 1, rand);
+                pass.End = new Position(other.m_Room.Start.X - 1, rand);
                 break;
             case Direction.UP:
-                pass.Start = new Position(rand, m_Room.Start.Y);
-                pass.End = new Position(rand, other_room.End.Y);
+                pass.Start = new Position(rand, this.m_Room.Start.Y - 1);
+                pass.End = new Position(rand, other.m_Room.End.Y + 1);
                 break;
             case Direction.DOWN:
-                pass.Start = new Position(rand, m_Room.End.Y);
-                pass.End = new Position(rand, other_room.Start.Y);
+                pass.Start = new Position(rand, this.m_Room.End.Y + 1);
+                pass.End = new Position(rand, other.m_Room.Start.Y - 1);
                 break;
         }
 
-        Debug.Log("直線生成(" + pass.Start.X + "," + pass.Start.Y + "/" + pass.End.X + "," + pass.End.Y + ")");
+        //Debug.Log("直線生成(" + pass.Start.X + "," + pass.Start.Y + "/" + pass.End.X + "," + pass.End.Y + ")");
+
+        //生成した通路の始点を保存
+        if (!this.m_PassPositionDic.ContainsKey(direction))
+        {
+            this.m_PassPositionDic.Add(direction, new List<Position>());
+        }
+        this.m_PassPositionDic[direction].Add(pass.Start);
+
+        //指定された区画に通路の終点を保存
+        //※された側なので方向を反転する
+        Direction inverse = Direction.UP;
+        switch (direction)
+        {
+            case Direction.LEFT:
+                inverse = Direction.RIGHT;
+                break;
+            case Direction.RIGHT:
+                inverse = Direction.LEFT;
+                break;
+            case Direction.UP:
+                inverse = Direction.DOWN;
+                break;
+            case Direction.DOWN:
+                inverse = Direction.UP;
+                break;
+        }
+        if (!other.m_PassPositionDic.ContainsKey(inverse))
+        {
+            other.m_PassPositionDic.Add(inverse, new List<Position>());
+        }
+        other.m_PassPositionDic[inverse].Add(pass.End);
 
         return pass;
     }
 
-    public bool IsCurve(Range range, out Pass pass)
+    //=======================================================
+    //直角通路のチェック
+    //引数：（繋げたい区画の）Rangeクラス、出力用通路クラス
+    //=======================================================
+    public void IsCurve(Range _range, out Pass _pass, out Pass _viaPass1, out Pass _viaPass2)
     {
-        //指定した先の区画への向きを取得
-        Direction direction = m_connectIdList[range.Id];
+        Room other_room = _range.m_Room;
 
-        //
-        switch (direction)
+        //中間地点１，２
+        Position via1 = new Position();
+        Position via2 = new Position();
+
+        //指定した区画への向きを取得(部屋１→部屋２)
+        Direction direction1 = this.m_connectIdList[_range.Id];
+        //中間地点１を求める
+        _viaPass1 = CreateViaPoint(m_Room, other_room, this, direction1, out via1);
+        //始点リストに登録
+        if (!this.m_PassPositionDic.ContainsKey(direction1))
         {
+            this.m_PassPositionDic.Add(direction1, new List<Position>());
+        }
+        this.m_PassPositionDic[direction1].Add(_viaPass1.Start);
 
+        //指定された区画からの向きを取得(部屋２→部屋１)
+        Direction direction2 = _range.m_connectIdList[this.Id];
+        //中間地点２を求める
+        _viaPass2 = CreateViaPoint(other_room, m_Room, _range, direction2, out via2);
+        //始点リストに登録
+        if (!_range.m_PassPositionDic.ContainsKey(direction2))
+        {
+            _range.m_PassPositionDic.Add(direction2, new List<Position>());
+        }
+        _range.m_PassPositionDic[direction2].Add(_viaPass2.Start);
+
+        //中間地点をつなぐ通路を生成
+        _pass = ConnectViaPosition(via1, via2);
+        
+    }
+
+    //中間地点を生成
+    //***生成位置がおかしい、生成してない？部分もある
+    private Pass CreateViaPoint(Room _room1,Room _room2,Range _range,Direction _dir,out Position _via)
+    {
+        _via = new Position();
+
+        //部屋のずれた方向を取得
+        //左右に隣接→上下のどちらにあるか？
+        if (_dir == Direction.LEFT || _dir == Direction.RIGHT)
+        {
+            int dist_Y = _room2.End.Y - _room1.Start.Y;
+            if (dist_Y < 0)
+            {
+                //上にずれている
+                //カウントが1以上の時、最もYが"小さい"データを取得
+                int y = _room1.End.Y;
+                if (_range.m_PassPositionDic.ContainsKey(_dir))
+                {
+                    //通路の始点をループで回す
+                    foreach (Position passPos in _range.m_PassPositionDic[_dir])
+                    {
+                        //より小さいY座標を保存
+                        y = passPos.Y < y ? passPos.Y : y;
+                    }
+                }
+                //中間地点１にセット
+                _via.Y = Utility.GetRandomInt(_room1.Start.Y, y);
+                //二つの通路がくっつくのを防ぐため
+                if (_via.Y == y - 1) _via.Y += 1;
+            }
+            else if(dist_Y > 0)
+            {
+                //下にずれている
+                //カウントが1以上の時、最もYが"大きい"データを取得
+                int y = _room1.Start.Y;
+                if (_range.m_PassPositionDic.ContainsKey(_dir))
+                {
+                    //通路の始点をループで回す
+                    foreach (Position passPos in _range.m_PassPositionDic[_dir])
+                    {
+                        //より大きいY座標を保存
+                        y = passPos.Y > y ? passPos.Y : y;
+                    }
+                }
+                //中間地点１にセット
+                _via.Y = Utility.GetRandomInt(y, _room1.End.Y);
+                if (_via.Y == y + 1) _via.Y -= 1;
+            }
+        }
+        //上下に隣接→左右のどちらにあるか？
+        else if (_dir == Direction.UP || _dir == Direction.DOWN)
+        {
+            int dist_X = _room2.End.X - _room1.Start.X;
+            if (dist_X < 0)
+            {
+                //左
+                //カウントが1以上の時、最もYが"小さい"データを取得
+                int x = _room1.End.X;
+                if (_range.m_PassPositionDic.ContainsKey(_dir))
+                {
+                    //通路の始点をループで回す
+                    foreach (Position passPos in _range.m_PassPositionDic[_dir])
+                    {
+                        //より小さいX座標を保存
+                        x = passPos.X < x ? passPos.X : x;
+                    }
+                }
+                //中間地点１にセット
+                _via.X = Utility.GetRandomInt(_room1.Start.X, x);
+                if (_via.X == x - 1) _via.X += 1;
+            }
+            else if(dist_X > 0)
+            {
+                //右
+                //カウントが1以上の時、最もYが"大きい"データを取得
+                int x = _room1.Start.X;
+                if (_range.m_PassPositionDic.ContainsKey(_dir))
+                {
+                    //通路の始点をループで回す
+                    foreach (Position passPos in _range.m_PassPositionDic[_dir])
+                    {
+                        //より大きいX座標を保存
+                        x = passPos.X > x ? passPos.X : x;
+                    }
+                }
+                //中間地点１にセット
+                _via.X = Utility.GetRandomInt(x, _room1.End.X);
+                if (_via.X == x + 1) _via.X -= 1;
+            }
         }
 
-        pass = new Pass();
+        //
+        Pass viaPass =new Pass();
 
-        return true;
+        //隣接している方向によって軸の座標、通路を設定
+        switch (_dir)
+        {
+            //左
+            case Direction.LEFT:
+                _via.X = _range.Start.X;
+                viaPass = new Pass(_room1.Start.X - 1, _via.Y, _via.X, _via.Y);
+                break;
+            //右
+            case Direction.RIGHT:
+                _via.X = _range.End.X;
+                viaPass = new Pass(_room1.End.X + 1, _via.Y, _via.X, _via.Y);
+                break;
+            //上
+            case Direction.UP:
+                _via.Y = _range.Start.Y;
+                viaPass = new Pass(_via.X, _room1.Start.Y - 1, _via.X, _via.Y);
+                break;
+            //下
+            case Direction.DOWN:
+                _via.Y = _range.End.Y;
+                viaPass = new Pass(_via.X, _room1.End.Y + 1, _via.X, _via.Y);
+                break;
+        }
+
+        //中間地点までの通路を出力
+        return viaPass;
+    }
+
+    //中継通路を生成
+    private Pass ConnectViaPosition(Position via1,Position via2)
+    {
+        //中間地点１，２をつなぐ通路を生成
+        Pass pass = new Pass(via1.X, via1.Y, via2.X, via2.Y);
+
+        return pass;
     }
 
 

@@ -7,18 +7,20 @@ public class HpText : MonoBehaviour
 {
     private float LookHP = 0;
     public Text text;
-
+    
+     GameObject FPSCon;
     // Start is called before the first frame update
     void Start()
     {
-     LookHP= GameObject.Find("FPSController").GetComponent<MyStatus>().GetHp();
+    FPSCon = GameObject.Find("FPSController");
+     LookHP= FPSCon.GetComponent<MyStatus>().GetHp();
     }
 
     // Update is called once per frame
     void Update()
     {
-        LookHP = GameObject.Find("FPSController").GetComponent<MyStatus>().GetHp();
-        if (LookHP > 0) { text.text = LookHP + ""; }
+        LookHP = FPSCon.GetComponent<MyStatus>().GetHp();
+        if (LookHP > 0) { text.text = "HP　"+LookHP; }
         else { text.text = "0"; }
     }
 }

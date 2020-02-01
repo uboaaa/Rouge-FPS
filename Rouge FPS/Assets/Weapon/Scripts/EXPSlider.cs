@@ -5,14 +5,18 @@ using UnityEngine.UI;
  
 public class EXPSlider : MonoBehaviour
 {
-    Slider expSlider;
-    GunController PrimaryScript;
-    GunController SecondaryScript;
-    ChangeEquip CEScript;
+    // インスペクター関係============================================
+    // ※無理やり取得しているため変更予定
+    public GameObject PrimaryObject;           // プライマリ武器の情報
+    public GameObject SecondaryObject;         // セカンダリ武器の情報
 
-    public GameObject PrimaryObject;
-    public GameObject SecondaryObject;
-    float maxEXP = 5000;
+    // パラメーター関係==============================================
+    float maxEXP = 5000;                    // 最大経験値必要数（取得経験値は武器が保持している）
+    // スクリプト関係================================================
+    GunController PrimaryScript;            // プライマリ武器のスクリプト用
+    GunController SecondaryScript;          // セカンダリ武器のスクリプト用
+    ChangeEquip CEScript;                   // [ChangeEquip]用の変数
+    Slider expSlider;                       // スライダー用
  
     void Start()
     {
@@ -27,7 +31,7 @@ public class EXPSlider : MonoBehaviour
         //GameObject SecondaryObject = GameObject.Find(CEScript.Weapon2.name);
         SecondaryScript = SecondaryObject.GetComponent<GunController>();     
 
-        //スライダーの最大値の設定
+        // スライダーの最大値の設定
         expSlider.maxValue = maxEXP;
     }
  

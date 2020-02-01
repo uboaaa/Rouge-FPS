@@ -39,12 +39,20 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private Vector3 m_OriginalCameraPosition;
         private float m_StepCycle;
         private float m_NextStep;
+
         private bool m_Jumping;
         private AudioSource m_AudioSource;
+        private GameObject Pause;
+        private bool aaa;
+        
+         GameObject FPSCon;
+         bool unko=false;
 
         // Use this for initialization
         private void Start()
         {
+            FPSCon = GameObject.Find("FPSController");
+            Pause = GameObject.Find("MainCanvas");
             m_CharacterController = GetComponent<CharacterController>();
             m_Camera = Camera.main;
             m_OriginalCameraPosition = m_Camera.transform.localPosition;
@@ -55,13 +63,22 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_Jumping = false;
             m_AudioSource = GetComponent<AudioSource>();
 			m_MouseLook.Init(transform , m_Camera.transform);
+    
         }
 
-
+     
         // Update is called once per frame
         private void Update()
         {
-            RotateView();
+         
+            // if (Input.GetKey(KeyCode.Return))
+            // { m_MouseLook.Init(transform, m_Camera.transform);
+            //     //m_Camera.transform.rotation = Quaternion.identity;
+            // }
+            if(!PauseScript.pause() && !SettingScript.Settingpause()){
+           if(FPSCon.GetComponent<MyStatus>().GetHp()>1){
+                RotateView();
+            
             // the jump state needs to read here to make sure it is not missed
             if (!m_Jump)
             {
@@ -79,21 +96,27 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 m_MoveDir.y = 0f;
             }
-
+ 
             m_PreviouslyGrounded = m_CharacterController.isGrounded;
+            }
+            }
         }
 
 
         private void PlayLandingSound()
         {
-            m_AudioSource.clip = m_LandSound;
-            m_AudioSource.Play();
+            // m_AudioSource.clip = m_LandSound;
+            AudioManager.Instance.PlaySE ("Land");
+            // m_AudioSource.Play();
             m_NextStep = m_StepCycle + .5f;
         }
 
 
         private void FixedUpdate()
         {
+               if(FPSCon.GetComponent<MyStatus>().GetHp()>1){
+        if(m_IsWalking && Input.GetKeyDown(KeyCode.LeftShift)){m_IsWalking=false;}
+        else if(!m_IsWalking && Input.GetKeyDown(KeyCode.LeftShift)){m_IsWalking=true;}
             float speed;
             GetInput(out speed);
             // always move along the camera forward as it is the direction that it being aimed at
@@ -104,11 +127,29 @@ namespace UnityStandardAssets.Characters.FirstPerson
             Physics.SphereCast(transform.position, m_CharacterController.radius, Vector3.down, out hitInfo,
                                m_CharacterController.height/2f, Physics.AllLayers, QueryTriggerInteraction.Ignore);
             desiredMove = Vector3.ProjectOnPlane(desiredMove, hitInfo.normal).normalized;
+            
+            
+           if(Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow) ||Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow)){
+              if(!unko){ 
+            m_MoveDir.x = 0;
+            m_MoveDir.z =0;
+            unko=false;}
+            else{
+            m_MoveDir.x = 0;
+            m_MoveDir.z =0;}
+            }
 
-            m_MoveDir.x = desiredMove.x*speed;
-            m_MoveDir.z = desiredMove.z*speed;
+            if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) ||Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)){unko=true;}          
+            else{
+            unko=true;
+            m_MoveDir.x = 0;
+            m_MoveDir.z =0;
+            unko=false;}
+ 
 
-
+        if(unko){m_MoveDir.x = desiredMove.x*speed;
+            m_MoveDir.z = desiredMove.z*speed;}
+            
             if (m_CharacterController.isGrounded)
             {
                 m_MoveDir.y = -m_StickToGroundForce;
@@ -131,15 +172,19 @@ namespace UnityStandardAssets.Characters.FirstPerson
             UpdateCameraPosition(speed);
 
             m_MouseLook.UpdateCursorLock();
+               }
         }
 
+     
 
         private void PlayJumpSound()
         {
-            m_AudioSource.clip = m_JumpSound;
-            m_AudioSource.Play();
+            // m_AudioSource.clip = m_JumpSound;
+            // m_AudioSource.Play();
+             AudioManager.Instance.PlaySE ("Jump");
         }
-
+       
+       private void Activeflg(){unko=true;}
 
         private void ProgressStepCycle(float speed)
         {
@@ -169,8 +214,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
             // pick & play a random footstep sound from the array,
             // excluding sound at index 0
             int n = Random.Range(1, m_FootstepSounds.Length);
-            m_AudioSource.clip = m_FootstepSounds[n];
-            m_AudioSource.PlayOneShot(m_AudioSource.clip);
+            // m_AudioSource.clip = m_FootstepSounds[n];
+            // m_AudioSource.PlayOneShot(m_AudioSource.clip);
+            
+             AudioManager.Instance.PlaySE ("Footstep0"+n);
             // move picked sound to index 0 so it's not picked next time
             m_FootstepSounds[n] = m_FootstepSounds[0];
             m_FootstepSounds[0] = m_AudioSource.clip;
@@ -212,10 +259,16 @@ namespace UnityStandardAssets.Characters.FirstPerson
 #if !MOBILE_INPUT
             // On standalone builds, walk/run speed is modified by a key press.
             // keep track of whether or not the character is walking or running
-            m_IsWalking = !Input.GetKey(KeyCode.LeftShift);
+            // m_IsWalking = !Input.GetKey(KeyCode.LeftShift);
 #endif
             // set the desired speed to be walking or running
-            speed = m_IsWalking ? m_WalkSpeed : m_RunSpeed;
+         
+            //�ړ����x�̐ݒ�
+            SkillManagement.SetSpeedMagnification(0);
+            float AccelSpeed= SkillManagement.GetSpeedPlus();
+         speed = m_IsWalking ? m_WalkSpeed+(m_WalkSpeed*AccelSpeed) 
+                             : m_RunSpeed+(m_RunSpeed * AccelSpeed); 
+         
             m_Input = new Vector2(horizontal, vertical);
 
             // normalize input if it exceeds 1 in combined length:
@@ -236,6 +289,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void RotateView()
         {
+
             m_MouseLook.LookRotation (transform, m_Camera.transform);
         }
 

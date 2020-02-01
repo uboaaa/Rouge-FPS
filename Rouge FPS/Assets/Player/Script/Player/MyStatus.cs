@@ -19,7 +19,7 @@ public class MyStatus : MonoBehaviour
     private void Start()
     {
         Skill = GameObject.Find("FPSController");
-        HpPlus = Skill.GetComponent<SkillManagement>().GetHpPlus(0);
+        HpPlus = SkillManagement.GetHpPlus();
         playerHP = playerHP + (playerHP * HpPlus);
         FirstHP = playerHP;
      
@@ -33,15 +33,23 @@ public class MyStatus : MonoBehaviour
     {
         return playerHP;
     }
+    public void AddHp(float hp)
+    {
+        AudioManager.Instance.PlaySE("heal01"); 
+        this.playerHP += hp;
+    }
 
-    public float downHp() {
+    public float GetMaxHp()
+    {
+        return FirstHP;
+    }
+
+
+    public void downHp(float damage) {
       
 
-            playerHP = playerHP - 300f;
-     
-
-        
-        return playerHP;
+            playerHP = playerHP - damage;
+    
     }
 
     public void CureHp() {

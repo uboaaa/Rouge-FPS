@@ -30,9 +30,7 @@ public class TextColorChange : MonoBehaviour
             case "Start":
                 if (text.text == "Start"){text.color = new Color(1.0f, 0.0f, 0.0f, 1.0f);}
                 break;
-            case "Setting":
-                if (text.text == "Setting") { text.color = new Color(1.0f, 0.0f, 0.0f, 1.0f); }
-                break;
+ 
             case "Exit":
                 if (text.text == "Exit") { text.color = new Color(1.0f, 0.0f, 0.0f, 1.0f); }
                 break;

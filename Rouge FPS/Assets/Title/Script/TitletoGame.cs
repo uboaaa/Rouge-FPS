@@ -8,6 +8,10 @@ public class TitletoGame : MonoBehaviour
     private GameObject gameObject;
     private bool GoGame=false;
     private string ModeSelect;
+
+    public static bool GameCheck;
+
+    private bool NoMove;
     private GameObject[] Mode = new GameObject[3];
     // Start is called before the first frame update
     void Start()
@@ -15,8 +19,9 @@ public class TitletoGame : MonoBehaviour
         gameObject = GameObject.Find("Panel");
         Mode[0] = GameObject.Find("Start");
         Mode[1] = GameObject.Find("Exit");
-        Mode[2] = GameObject.Find("Setting");
         ModeSelect = "Start";
+        GameCheck=false;
+        NoMove=false;
     }
     void Quit()
     {
@@ -32,36 +37,42 @@ public class TitletoGame : MonoBehaviour
     {
        GoGame=gameObject.GetComponent<FadePanel>().GetAllBlack();
         if (Input.GetKeyDown(KeyCode.Escape)) { Quit(); }
-        Debug.Log(Mode[0]);
         
         switch (ModeSelect)
         {
             case "Start":
-                if (Input.GetKeyDown(KeyCode.RightArrow)) { ModeSelect = "Setting"; }
+            if(!NoMove){
+                GameCheck=true;
+                if (Input.GetKeyDown(KeyCode.RightArrow)) { ModeSelect = "Exit"; }
                 if (Input.GetKeyDown(KeyCode.LeftArrow)) { ModeSelect = "Exit"; }
-                if (GoGame) { EnterGame(); }
                 Mode[0].GetComponent<TextColorChange>().ColorChange(ModeSelect);
+                  if (Input.GetKeyDown(KeyCode.Return)){NoMove=true;}}
+                if (FadePanel.AlphaGet()>1.0f) {SceneManager.LoadScene("GameScene");} 
                 break;
 
-            case "Setting":
-                if (Input.GetKeyDown(KeyCode.RightArrow)) { ModeSelect = "Exit"; }
-                if (Input.GetKeyDown(KeyCode.LeftArrow)) { ModeSelect = "Start"; }
-                Mode[2].GetComponent<TextColorChange>().ColorChange(ModeSelect);
-                break;
+            // case "Setting":
+            // if(!NoMove){
+            //      GameCheck=false;
+            //     if (Input.GetKeyDown(KeyCode.RightArrow)) { ModeSelect = "Exit"; }
+            //     if (Input.GetKeyDown(KeyCode.LeftArrow)) { ModeSelect = "Start"; }
+            //     Mode[2].GetComponent<TextColorChange>().ColorChange(ModeSelect);}
+            //        if (Input.GetKeyDown(KeyCode.Return)){NoMove=true;}
+            //     break;
 
             case "Exit":
+            if(!NoMove){
+                GameCheck=false;
                 if (Input.GetKeyDown(KeyCode.RightArrow)) { ModeSelect = "Start"; }
-                if (Input.GetKeyDown(KeyCode.LeftArrow)) { ModeSelect = "Setting"; }
-                Mode[1].GetComponent<TextColorChange>().ColorChange(ModeSelect);
-                if (Input.GetKeyDown(KeyCode.Return)) { Quit(); }
+                if (Input.GetKeyDown(KeyCode.LeftArrow)) { ModeSelect = "Start"; }
+                Mode[1].GetComponent<TextColorChange>().ColorChange(ModeSelect);}
+                if (Input.GetKeyDown(KeyCode.Return)) {AudioManager.Instance.PlaySE("button01b"); NoMove=true; Quit(); }
                 break;
         }
+        
 
         
     }
     public bool GetEnterGame() {return GoGame;}
     public string GetModeSelect() { return ModeSelect; }
-    void EnterGame() {
-        SceneManager.LoadScene("GameScene");
-    }
+    public static bool GetGame(){return GameCheck;}
 }
