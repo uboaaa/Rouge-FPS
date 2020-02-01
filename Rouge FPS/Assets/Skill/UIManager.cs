@@ -21,6 +21,10 @@ public class UIManager : MonoBehaviour
     public Vector2 TextPos;
     [Header("-----------------------------------------")]
     public GameObject[] EtcObj;
+    [Header("-----------------------------------------")]
+    public GameObject GuideObj;
+    [Header("-----------------------------------------")]
+    public GameObject CursorObj;
 
     // 抽選用の変数
     private Lottery lot;
@@ -39,6 +43,11 @@ public class UIManager : MonoBehaviour
         UIFlag = _flag;
     }
 
+    private bool guideFlag = false;
+    public void SetGuide(bool _flag)
+    {
+        guideFlag = _flag;
+    }
 
     // 暗転終了フラグ
     private bool EndTransition = false;
@@ -63,6 +72,7 @@ public class UIManager : MonoBehaviour
         // 各フラグ初期化
         UIFlag = false;
         EndTransition = false;
+        guideFlag = false;
 
         // 座標、パラメーター設定
         TextObj.transform.position = TextPos;
@@ -200,6 +210,44 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    // ガイド設定
+    public void SetGuide()
+    {
+        GuideObj.transform.position = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y);
+        GuideObj.SetActive(false);
+    }
+
+    // マウスカーソル設定
+    public void SetCursor()
+    {
+        CursorObj.SetActive(true);
+        CursorObj.GetComponent<AiryUIAnimationManager>().ShowMenu();
+    }
+
+    // 全UI一斉終了アニメーション
+    public void AllHideAnimation()
+    {
+        guideFlag = false;
+        foreach (var obj in SkillObj)
+        {
+            obj.GetComponent<AiryUIAnimationManager>().HideMenu();
+        }
+        foreach (var obj in SlotObj)
+        {
+            obj.GetComponent<AiryUIAnimationManager>().HideMenu();
+        }
+        foreach (var obj in ButtonObj)
+        {
+            obj.GetComponent<AiryUIAnimationManager>().HideMenu();
+        }
+        foreach (var obj in EtcObj)
+        {
+            obj.GetComponent<AiryUIAnimationManager>().HideMenu();
+        }
+        TextObj.GetComponent<AiryUIAnimationManager>().HideMenu();
+        CursorObj.GetComponent<AiryUIAnimationManager>().HideMenu();
+    }
+
     private void Update()
     {
         // 仮　UI出すためのフラグ：オンにしてくれたら勝手にアニメーション始まります
@@ -213,6 +261,7 @@ public class UIManager : MonoBehaviour
             GetComponent<Transition>().BeginTransition();
             // フラグオフ
             UIFlag = false;
+            guideFlag = false;
         }
         // 暗転終了したらUIの設定
         if(EndTransition)
@@ -220,6 +269,8 @@ public class UIManager : MonoBehaviour
             EndTransition = false;
             // 各UIの情報
             UIObj.SetActive(true);
+            SetCursor();
+            SetGuide();
             SetText();
             SetButton();
             SetEtc();
@@ -230,10 +281,21 @@ public class UIManager : MonoBehaviour
             GetComponent<Transition>().EndTransition();
         }
 
+        // ガイド表示
+        if (guideFlag)
+        {
+            GuideObj.SetActive(true);
+        }
+        else
+        {
+            GuideObj.SetActive(false);
+        }
+
         // 仮　UI非表示
         if(Input.GetKeyDown(KeyCode.S))
         {
             UIObj.SetActive(false);
+            guideFlag = false;
         }
     }
 }
