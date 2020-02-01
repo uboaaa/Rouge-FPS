@@ -211,10 +211,10 @@ public class UIManager : MonoBehaviour
     {
         GetUIFlg=UIObj.activeSelf;
         // 仮　UI出すためのフラグ：オンにしてくれたら勝手にアニメーション始まります
-        if(Input.GetKeyDown(KeyCode.A))
-        {
-            UIFlag = true;
-        }
+        // if(Input.GetKeyDown(KeyCode.A))
+        // {
+        //     UIFlag = true;
+        // }
         // 暗転開始
         if (UIFlag) 
         {
