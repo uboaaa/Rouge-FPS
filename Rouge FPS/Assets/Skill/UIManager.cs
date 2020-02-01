@@ -304,6 +304,6 @@ public class UIManager : MonoBehaviour
         // {
         //     UIObj.SetActive(false);
         //    guideFlag = false;
-        }
+       // }
     }
 }
