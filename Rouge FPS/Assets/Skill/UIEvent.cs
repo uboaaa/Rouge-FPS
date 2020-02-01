@@ -58,9 +58,6 @@ public class UIEvent : MonoBehaviour
         sr.sprite = null;
         sr.sprite = current.sprite;
         sr.color = new Color(1, 1, 1, alpha);
-        // レイキャストがブロックされないようにする
-        CanvasGroup canvasGroup = clone.AddComponent<CanvasGroup>();
-        canvasGroup.blocksRaycasts = false;
         // 生成したオブジェクトの名前から(Clone)を消しておく
         clone.name = prefab.name;
     }
@@ -107,9 +104,19 @@ public class UIEvent : MonoBehaviour
             var t = pp.GetSlotName(i);
             var a = pp.GetParameterToString(t);
 
-
-            s.GetComponent<Text>().text = a;
+            if (a != null)
+            {
+                s.GetComponent<Text>().text = a;
+            }
         }
+    }
+
+    // SEがあれば再生
+    public void PlaySE()
+    {
+        var sound = GetComponent<AudioSource>();
+        if (sound == null) return;
+        sound.PlayOneShot(sound.clip);
     }
 
 

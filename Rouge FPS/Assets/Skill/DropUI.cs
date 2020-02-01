@@ -17,8 +17,9 @@ public class DropUI : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointe
     // もともとのスプライト記憶用
     private Sprite memorySprite;
     private string memoryName;
-    // 直前のスキル効果量
-    private string skillValue;
+    // 直前のスキル
+    private string currentSkillValue;
+    private string currentSkillName;
 
     // ドロップ時の文字描画用変数
     // テキスト
@@ -28,6 +29,7 @@ public class DropUI : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointe
     void Start()
     {
         InitSprite();
+        InitParameter();
     }
 
     // スプライト初期設定
@@ -38,6 +40,13 @@ public class DropUI : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointe
         memoryName = memorySprite.name;
     }
 
+    public void InitParameter()
+    {
+        // キャンセル時もとに戻すため記憶
+        var nowParam = GetComponent<Parameter>();
+        currentSkillName = nowParam.GetName();
+        currentSkillValue = nowParam.GetParameter(currentSkillName);
+    }
 
 
     // UIにマウスがはいったとき
@@ -79,11 +88,14 @@ public class DropUI : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointe
     public void OnDrop(PointerEventData pointerEventData)
     {
         if (Lock) return;
+        Lock = true;
 
         // パラメーター変更
         // キャンセル時もとに戻すため記憶
         var nowParam = GetComponent<Parameter>();
-        skillValue = nowParam.GetParameter(nowParam.GetName());
+        currentSkillName = nowParam.GetName();
+        currentSkillValue = nowParam.GetParameter(currentSkillName);
+
         // ドラッグしてきたスキルのパラメーター
         var param = pointerEventData.pointerDrag.GetComponent<Parameter>();
         // その名前
@@ -104,7 +116,13 @@ public class DropUI : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointe
         // １つ前のスプライトも変更
         nowSprite = droppedImage.sprite;
         iconImage.color = new Color(1, 1, 1, 1);
-        Lock = true;
+
+        // ドロップ時のSE再生
+        var sound = GetComponent<AudioSource>();
+        if (sound)
+        {
+            sound.PlayOneShot(sound.clip);
+        }
     }
 
 
@@ -117,8 +135,8 @@ public class DropUI : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointe
         // パラメーターも元に戻す
         var nowParam = GetComponent<Parameter>();
         nowParam.AllReset();
-        nowParam.SetName(memoryName);
-        nowParam.SetParameter(memoryName, skillValue);
+        nowParam.SetName(currentSkillName);
+        nowParam.SetParameter(currentSkillName, currentSkillValue);
 
         // 描画している効果値変更
         textObj.GetComponent<SkillValue>().SetText();
