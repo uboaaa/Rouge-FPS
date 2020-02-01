@@ -75,7 +75,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             // { m_MouseLook.Init(transform, m_Camera.transform);
             //     //m_Camera.transform.rotation = Quaternion.identity;
             // }
-            if(!PauseScript.pause() && !SettingScript.Settingpause()){
+            if(!PauseScript.pause() && !SettingScript.Settingpause() &&  !UIManager.GetFlg()){
            if(FPSCon.GetComponent<MyStatus>().GetHp()>1){
                 RotateView();
             
@@ -114,7 +114,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void FixedUpdate()
         {
-               if(FPSCon.GetComponent<MyStatus>().GetHp()>1){
+               if(FPSCon.GetComponent<MyStatus>().GetHp()>1 && !UIManager.GetFlg()){
         if(m_IsWalking && Input.GetKeyDown(KeyCode.LeftShift)){m_IsWalking=false;}
         else if(!m_IsWalking && Input.GetKeyDown(KeyCode.LeftShift)){m_IsWalking=true;}
             float speed;
@@ -138,7 +138,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_MoveDir.x = 0;
             m_MoveDir.z =0;}
             }
-
+           
             if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) ||Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)){unko=true;}          
             else{
             unko=true;

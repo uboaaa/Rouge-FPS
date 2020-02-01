@@ -105,8 +105,8 @@ public class GunController : MonoBehaviour
     void Update()
     {
         // ポーズ中動作しないようにする
-        if(!PauseScript.pause()){}
-        if(!SkillManagement.GetTimeStop()){}
+        if(!PauseScript.pause()  && !UIManager.GetFlg()){
+        if(!SkillManagement.GetTimeStop()){
 
         // 武器レベルに応じてのカラーにする
         switch(gunRank)
@@ -208,6 +208,8 @@ public class GunController : MonoBehaviour
         }
 
         cameraScript.Shake(cameraShakePow,shooting);  // 画面を揺らす
+        }
+        }
     }
 
     // セミオートかフルオートかの判定
