@@ -78,6 +78,7 @@ public class UIEvent : MonoBehaviour
 
     // Rectの値
     [SerializeField] float ReduceRect = 0;
+    [SerializeField] float BaseRect = 0;
     // UIクリック時の縮小
     public void Reduce()
     {
@@ -91,6 +92,25 @@ public class UIEvent : MonoBehaviour
         GetComponent<RectTransform>().localScale = new Vector3(0.9f, 0.9f);
     }
 
+
+    // パラメータ
+    public GameObject parameter;
+    // スロット
+    public GameObject[] slot;
+    // キャンセルクリック時のスロット側パラメータ文字戻し
+    public void CancelClick()
+    {
+        var i = 0;
+        foreach (var s in slot)
+        {
+            var pp = parameter.GetComponent<PlayerParameter>();
+            var t = pp.GetSlotName(i);
+            var a = pp.GetParameterToString(t);
+
+
+            s.GetComponent<Text>().text = a;
+        }
+    }
 
 
     // =================
@@ -110,7 +130,6 @@ public class UIEvent : MonoBehaviour
     }
 
     // UI縮小解除
-    [SerializeField] float BaseRect = 0;
     public void Extension()
     {
         RectTransform rt = GetComponent(typeof(RectTransform)) as RectTransform;

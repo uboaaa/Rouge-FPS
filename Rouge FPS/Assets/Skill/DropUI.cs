@@ -18,7 +18,7 @@ public class DropUI : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointe
     private Sprite memorySprite;
     private string memoryName;
     // 直前のスキル効果量
-    private object skillValue;
+    private string skillValue;
 
     // ドロップ時の文字描画用変数
     // テキスト
@@ -27,7 +27,7 @@ public class DropUI : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointe
 
     void Start()
     {
-       
+        InitSprite();
     }
 
     // スプライト初期設定
@@ -118,7 +118,7 @@ public class DropUI : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointe
         var nowParam = GetComponent<Parameter>();
         nowParam.AllReset();
         nowParam.SetName(memoryName);
-        nowParam.SetParameter(memoryName, skillValue.ToString());
+        nowParam.SetParameter(memoryName, skillValue);
 
         // 描画している効果値変更
         textObj.GetComponent<SkillValue>().SetText();
