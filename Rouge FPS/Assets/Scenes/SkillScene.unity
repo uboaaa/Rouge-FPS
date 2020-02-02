@@ -265,7 +265,6 @@ MonoBehaviour:
   - {fileID: 1470144479}
   GuideObj: {fileID: 772842768}
   CursorObj: {fileID: 1611208292}
-  UIFlag: 0
 --- !u!114 &59305218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3338,7 +3337,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 823922334}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &823922336
 Camera:
   m_ObjectHideFlags: 0
@@ -5702,16 +5701,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d439dc6c909b63b48a86b82872e08b38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 0
-  ATK: 0
-  IsATK: 0
-  DEF: 0
-  IsDEF: 0
-  SPD: 0
-  IsSPD: 0
-  Magazine: 0
-  Ammo: 0
-  IsPrimary: 0
   slotName:
   - ATK
   - ATK
@@ -6758,7 +6747,18 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
   OnHideComplete:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2472655052986607196}
+        m_MethodName: EndAnimation
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   showItemOnMenuEnable: 1
@@ -6994,17 +6994,6 @@ MonoBehaviour:
           m_CallState: 2
         - m_Target: {fileID: 59305217}
           m_MethodName: AllHideAnimation
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 2472655052986607196}
-          m_MethodName: NowChange
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

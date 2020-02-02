@@ -9,21 +9,15 @@ public class CursorState : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // マウスカーソル設定
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.None;
         sprite = Resources.Load<Sprite>("Skill/cursor");
         image = GetComponent<Image>();
+        image.sprite = sprite;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Cursor.visible)
-        {
-            Cursor.visible = false;
-        }
+        // 常にマウスの座標に更新
         transform.position = new Vector3(Input.mousePosition.x, Input.mousePosition.y);
-        image.sprite = sprite;
     }
 }
