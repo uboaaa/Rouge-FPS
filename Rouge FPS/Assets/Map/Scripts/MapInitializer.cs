@@ -49,11 +49,14 @@ public class MapInitializer : MonoBehaviour
 
     private int[,] m_map;                   //マップ配置データの2次配列
     private int m_startId = -1;             //スタート地点の部屋ID
-    public static Selectable<int> m_mapID = new Selectable<int>();
+    public static Selectable<int> m_mapID;
 
 
     private void Awake()
     {
+        //マップ切り替え用変数を初期化
+        m_mapID=new Selectable<int>();
+
         //static変数を設定
         MAP_SIZE_X = INS_MAP_SIZE_X;
         MAP_SIZE_Y = INS_MAP_SIZE_Y;
@@ -64,9 +67,6 @@ public class MapInitializer : MonoBehaviour
         DG = new DungeonGenerator();
         //部屋生成コンポーネント取得
         RG = this.gameObject.GetComponent<RoomGenerator>();
-
-        //親を取得
-        m_parentParts = GameObject.Find("DungeonParts");
 
         //マップ切り替え時の処理を設定
         m_mapID.mChanged += value =>
@@ -89,14 +89,15 @@ public class MapInitializer : MonoBehaviour
                 //ボス部屋生成
                 GenerateBossMap();
             }
-            //マネージャー設定
-            //ReloadManager();
         };
     }
 
     // 初期化
     void Start()
     {
+        //親を取得
+        m_parentParts = GameObject.Find("DungeonParts");
+
         //マップ1生成
         m_mapID.Value = 1;
     }
