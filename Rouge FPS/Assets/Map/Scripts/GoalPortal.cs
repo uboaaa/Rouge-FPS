@@ -37,7 +37,7 @@ public class GoalPortal : MonoBehaviour
             //階層の更新
             FloorCount.UpFloors();
             //次の階層を生成、移動
-            m_MapInitializer.MoveNextMap();
+            MapInitializer.MoveNextMap();
             //オブジェクトを非アクティブにする
             this.gameObject.SetActive(false);
         }
