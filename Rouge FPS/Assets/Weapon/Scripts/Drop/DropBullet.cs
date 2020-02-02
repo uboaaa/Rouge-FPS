@@ -9,22 +9,23 @@ public class DropBullet : MonoBehaviour
 
     ChangeEquip CEScript;               // [ChangeEquip]用の変数
     GameObject Weapon;                  // 今持っている武器
-    float maxDis = 30.0f;
+    public float maxDistance = 100.0f;   // 計測可能な最大距離
+    public float distance;              // 計測距離
     Rigidbody rd;
     FlyingObject FOScript;
 
     void Update()
     {
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit,maxDis))
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit,maxDistance))
         {
             if(hit.collider.tag == "Back")
             {
-                maxDis -= 0.7f;
+                distance = hit.distance;
             }
         }
 
-        if(maxDis <= 0.5f)
+        if(distance <= 0.8f)
         {
             rd = this.GetComponent<Rigidbody>();
             rd.useGravity = false;
