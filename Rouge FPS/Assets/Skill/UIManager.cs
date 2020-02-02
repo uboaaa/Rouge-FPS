@@ -76,12 +76,12 @@ public class UIManager : MonoBehaviour
         guideFlag = false;
 
         // 座標、パラメーター設定
-        TextObj.transform.position = TextPos;
+        TextObj.GetComponent<RectTransform>().anchoredPosition = TextPos;
         var i = 0;
         foreach (var obj in SkillObj)
         {
             // 初期座標設定
-            obj.transform.position = SkillPos[i];
+            obj.GetComponent<RectTransform>().anchoredPosition = SkillPos[i];
             i++;
         }
         i = 0;
@@ -90,7 +90,7 @@ public class UIManager : MonoBehaviour
         foreach (var obj in SlotObj)
         {
             // 初期座標設定
-            obj.transform.position = SlotPos[i];
+            obj.GetComponent<RectTransform>().anchoredPosition = SlotPos[i];
             // スロット名設定
             obj.GetComponent<Parameter>().SetName(playerParam.GetSlotName(i));
             i++;
@@ -99,7 +99,7 @@ public class UIManager : MonoBehaviour
         foreach (var obj in ButtonObj)
         {
             // 初期座標設定
-            obj.transform.position = ButtonPos[i];
+            obj.GetComponent<RectTransform>().anchoredPosition = ButtonPos[i];
             i++;
         }
         // UI非表示
