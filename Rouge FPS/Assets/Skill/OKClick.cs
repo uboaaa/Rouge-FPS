@@ -30,6 +30,7 @@ public class OKClick : MonoBehaviour
         // UI再度ドロップ可能状態にする
         DropUI.UnLock();
         UIManager.SetFalseUIFlg();
+        MyStatus.NewMaxHP();
         // GameObject.Find("UI").SetActive(false);
     }
 

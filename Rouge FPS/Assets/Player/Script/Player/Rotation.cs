@@ -8,10 +8,12 @@ public class Rotation : MonoBehaviour
     private static float XRotation;
     private static int Count;
     void Start(){
-    // PlayerPrefs.SetFloat ("XRotate", 4.0f);
+    // PlayerPrefs.SetInt ("Count", 5);
+   
+    // PlayerPrefs.SetFloat ("XRotate", 1.0f);
     // PlayerPrefs.Save ();
-        Count=PlayerPrefs.GetInt("Count",3);
-        XRotation=PlayerPrefs.GetFloat("XRotate",3.0f);
+        Count=PlayerPrefs.GetInt("Count",5);
+        XRotation=PlayerPrefs.GetFloat("XRotate",1.0f);
     }
 
     // Update is called once per frame
