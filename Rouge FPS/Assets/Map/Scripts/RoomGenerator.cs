@@ -51,6 +51,8 @@ public class RoomGenerator : MonoBehaviour
     //===============================================================
     public void ResetRoom()
     {
+        //m_parentRoom = GameObject.Find("Rooms");
+
         //子オブジェクトがあるかを確認
         if (m_parentRoom.transform.childCount > 0)
         {
