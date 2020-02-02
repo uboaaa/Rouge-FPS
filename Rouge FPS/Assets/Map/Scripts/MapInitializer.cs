@@ -49,7 +49,7 @@ public class MapInitializer : MonoBehaviour
 
     private int[,] m_map;                   //マップ配置データの2次配列
     private int m_startId = -1;             //スタート地点の部屋ID
-    private Selectable<int> m_mapID = new Selectable<int>();
+    public static Selectable<int> m_mapID = new Selectable<int>();
 
 
     private void Awake()
@@ -456,7 +456,7 @@ public class MapInitializer : MonoBehaviour
         _roomList.AddRange(DG.GetRooms());
     }
 
-    public void MoveNextMap()
+    public static void MoveNextMap()
     {
         m_mapID.Value += 1;
     }
