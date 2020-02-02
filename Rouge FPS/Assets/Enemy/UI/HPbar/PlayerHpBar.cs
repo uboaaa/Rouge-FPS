@@ -22,6 +22,7 @@ public class PlayerHpBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(!UIManager.GetFlg()){ slider.maxValue = player.GetComponent<MyStatus>().GetMaxHp();}
         slider.value = player.GetComponent<MyStatus>().GetHp();
     }
 }

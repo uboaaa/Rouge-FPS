@@ -31,6 +31,8 @@ public class FlushController : MonoBehaviour
 
     void Update()
     {
+
+        
         // Debug.Log(EnemyAttackPower.GetEnemyBHitGet());
 
         if (!once) {

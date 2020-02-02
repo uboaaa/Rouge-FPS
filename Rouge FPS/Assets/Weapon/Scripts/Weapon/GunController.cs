@@ -105,7 +105,7 @@ public class GunController : MonoBehaviour
     void Update()
     {
         // ポーズ中動作しないようにする
-        if(!PauseScript.pause()  && !UIManager.GetFlg() && FPSCon.GetComponent<MyStatus>().GetHp()>0){
+        if(!PauseScript.pause()  && !UIManager.GetFlg() && FPSCon.GetComponent<MyStatus>().GetHp()>0 &&!SettingScript.Settingpause()){
         if(!SkillManagement.GetTimeStop()){
 
         // 武器レベルに応じてのカラーにする

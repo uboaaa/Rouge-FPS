@@ -10,7 +10,7 @@ public class MyStatus : MonoBehaviour
     private int playerATK;
     private float playerDEF = 1;
     private float HpPlus;
-    private float FirstHP;
+    private static float FirstHP;
     private GameObject equip;
     private GameObject Skill;
     private bool InfinityHealth = false;
@@ -20,7 +20,7 @@ public class MyStatus : MonoBehaviour
     {
         Skill = GameObject.Find("FPSController");
         HpPlus = SkillManagement.GetHpPlus();
-        playerHP = playerHP + (playerHP * HpPlus);
+        playerHP = 100;
         FirstHP = playerHP;
      
     }
@@ -43,6 +43,8 @@ public class MyStatus : MonoBehaviour
     {
         return FirstHP;
     }
+
+    public static void NewMaxHP(){FirstHP+=(float)PlayerParameter.GetParameter("HP");}
 
 
     public void downHp(float damage) {
