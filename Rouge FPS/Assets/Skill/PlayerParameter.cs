@@ -5,16 +5,36 @@ using UnityEngine;
 public class PlayerParameter : MonoBehaviour
 {
     // プレイヤーのパラメーター
-    public int HP;
-    public int ATK;
-    public bool IsATK;
-    public int DEF;
-    public bool IsDEF;
-    public int SPD;
-    public bool IsSPD;
-    public int Magazine;
-    public int Ammo;
-    public bool IsPrimary;
+    static public int HP;
+    static public int ATK;
+    static public bool IsATK;
+    static public int DEF;
+    static public bool IsDEF;
+    static public int SPD;
+    static public bool IsSPD;
+    static public int Magazine;
+    static public int Ammo;
+    static public bool IsPrimary;
+
+    private void Start()
+    {
+        Init();
+    }
+
+    static void Init()
+    {
+        // 数値初期化
+        HP = 0;
+        ATK = 0;
+        IsATK = false;
+        DEF = 0;
+        IsDEF = false;
+        SPD = 0;
+        IsSPD = false;
+        Magazine = 0;
+        Ammo = 0;
+        IsPrimary = false;
+    }
 
     // 現在のスキルスロット名
     public string[] slotName;
@@ -36,7 +56,7 @@ public class PlayerParameter : MonoBehaviour
     }
 
     // パラメーター取得
-    public object GetParameter(string _name)
+    static public object GetParameter(string _name)
     {
         switch (_name)
         {

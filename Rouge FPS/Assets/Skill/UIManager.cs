@@ -67,6 +67,7 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {
+        Cursor.visible = false;
         TransitionObj = GameObject.Find("TransitionCanvas");
         lot = new Lottery();
         nowFloor = "0";
@@ -229,6 +230,7 @@ public class UIManager : MonoBehaviour
     {
         CursorObj.SetActive(true);
         CursorObj.GetComponent<AiryUIAnimationManager>().ShowMenu();
+        Cursor.lockState = CursorLockMode.None;
     }
 
     // 全UI一斉終了アニメーション
