@@ -10,6 +10,7 @@ public class OKClick : MonoBehaviour
 
     public void SkillChange()
     {
+
         // プレイヤーのパラメーター取得
         var param = Parameter.GetComponent<PlayerParameter>();
         param.AllReset();
@@ -28,6 +29,7 @@ public class OKClick : MonoBehaviour
         }
         // UI再度ドロップ可能状態にする
         DropUI.UnLock();
+        UIManager.SetFalseUIFlg();
         // GameObject.Find("UI").SetActive(false);
     }
 

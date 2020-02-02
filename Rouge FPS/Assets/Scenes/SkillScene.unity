@@ -265,7 +265,6 @@ MonoBehaviour:
   - {fileID: 1470144479}
   GuideObj: {fileID: 772842768}
   CursorObj: {fileID: 1611208292}
-  UIFlag: 0
 --- !u!114 &59305218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3338,7 +3337,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 823922334}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &823922336
 Camera:
   m_ObjectHideFlags: 0
@@ -5702,16 +5701,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d439dc6c909b63b48a86b82872e08b38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 0
-  ATK: 0
-  IsATK: 0
-  DEF: 0
-  IsDEF: 0
-  SPD: 0
-  IsSPD: 0
-  Magazine: 0
-  Ammo: 0
-  IsPrimary: 0
   slotName:
   - ATK
   - ATK

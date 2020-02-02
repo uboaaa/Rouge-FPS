@@ -50,6 +50,8 @@ public class UIManager : MonoBehaviour
 
     public  static bool GetFlg(){return GetUIFlg;}
 
+     public  static void SetFalseUIFlg(){GetUIFlg=false;}
+
     private bool guideFlag = false;
     public void SetGuide(bool _flag)
     {
@@ -259,7 +261,6 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
-        GetUIFlg=UIObj.activeSelf;
         // 仮　UI出すためのフラグ：オンにしてくれたら勝手にアニメーション始まります
         // if(Input.GetKeyDown(KeyCode.A))
         // {
@@ -268,6 +269,7 @@ public class UIManager : MonoBehaviour
         // 暗転開始
         if (UIFlag) 
         {
+            GetUIFlg=true;
             GetComponent<Transition>().BeginTransition();
             // フラグオフ
             UIFlag = false;

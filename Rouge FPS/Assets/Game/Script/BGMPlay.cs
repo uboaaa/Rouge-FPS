@@ -14,7 +14,7 @@ public class BGMPlay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {  
-        Debug.Log(SceneName +":"+SceneManager.GetActiveScene().name);
+        // Debug.Log(SceneName +":"+SceneManager.GetActiveScene().name);
         if(SceneManager.GetActiveScene().name==SceneName){
         switch(SceneManager.GetActiveScene().name){
             case "TitleScene": AudioManager.Instance.PlayBGM("Different_Dimension");break;
