@@ -16,9 +16,6 @@ public class ItemBox : MonoBehaviour
         boxTrans = this.transform;
 
         GIScript = ItemPrefab.GetComponent<GunInfo>();
-
-        // 中身の抽選
-        random =　UnityEngine.Random.Range(0, 6);
     }
 
     public void Open()
@@ -28,6 +25,10 @@ public class ItemBox : MonoBehaviour
         //===================================================
         // 中身を表示
         Instantiate(ItemPrefab,new Vector3(boxTrans.position.x,boxTrans.position.y + 0.3f,boxTrans.position.z),Quaternion.identity);
+
+        // 中身の抽選
+        random =　UnityEngine.Random.Range(0, 6);
+        
         switch(random)
         {
             case 0:
@@ -71,22 +72,7 @@ public class ItemBox : MonoBehaviour
         // スキルスロット数をランダムで取得
         GIScript.skillSlot = UnityEngine.Random.Range(1, 4);     // 1~3個
 
-        // ランクごとにダメージを取得
-        if(GIScript.gunRank == GunInfo.GunRank.Rank1)
-        {
-            
-        }
-        else if(GIScript.gunRank == GunInfo.GunRank.Rank2)
-        {
-            
-        }
-        else if(GIScript.gunRank == GunInfo.GunRank.Rank3)
-        {
-            
-        }
-
-
-        //表示するときの演出
+        // 表示するときの演出
         if (openEffectPrefab != null)
         {
             // オープンエフェクトの生成

@@ -62,7 +62,8 @@ public class PlayerParameter : MonoBehaviour
                 return IsPrimary;
         }
         return "err";
-    }// 引数_nameと同じ変数名の値をstringで返す
+    }
+    // 引数_nameと同じ変数名の値をstringで返す
     public string GetParameterToString(string _name)
     {
         switch (_name)

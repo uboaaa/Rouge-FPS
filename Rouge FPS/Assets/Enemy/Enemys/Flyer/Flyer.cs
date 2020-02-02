@@ -10,6 +10,11 @@ public class Flyer : MonoBehaviour
 
     // プレイヤー
     private GameObject player = null;
+
+    // オーラエフェクト
+    private GameObject AuraEffect = null;
+    private GameObject ae = null;
+
     // アニメータ
     private Animator animator = null;
     // マテリアル
@@ -126,8 +131,8 @@ public class Flyer : MonoBehaviour
             material.SetFloat(propID_c, 0.5f);
 
             // パラメータ
-            ep.hp = 20;
-            ep.atk = 10;
+            ep.hp = 50;
+            ep.atk = 8;
             ep.def = 0;
             ep.speed = 0;
             ep.startrot = 60;
@@ -143,13 +148,18 @@ public class Flyer : MonoBehaviour
             material.SetFloat(propID_s, 1.0f);
             material.SetFloat(propID_c, 0.7f);
 
-            ep.hp = 30;
-            ep.atk = 15;
+            ep.hp = 200;
+            ep.atk = 12;
             ep.def = 10;
             ep.speed = 0;
             ep.startrot = 60;
 
             plight.color = new Color(1.0f, 0.5f, 0.5f, 1.0f);
+
+            // オーラエフェクト
+            AuraEffect = Resources.Load("AuraEffectYellow") as GameObject;
+            ae = Instantiate(AuraEffect) as GameObject;
+            ae.transform.position = this.gameObject.transform.position;
         }
         else if (AILevel == 3)
         {
@@ -158,13 +168,17 @@ public class Flyer : MonoBehaviour
             material.SetFloat(propID_s, 0.4f);
             material.SetFloat(propID_c, 1.0f);
 
-            ep.hp = 40;
-            ep.atk = 25;
+            ep.hp = 300;
+            ep.atk = 16;
             ep.def = 20;
             ep.speed = 0;
             ep.startrot = 60;
 
             plight.color = new Color(1.0f, 0.5f, 1.0f, 1.0f);
+
+            AuraEffect = Resources.Load("AuraEffectRed") as GameObject;
+            ae = Instantiate(AuraEffect) as GameObject;
+            ae.transform.position = this.gameObject.transform.position;
         }
     }
 
@@ -307,6 +321,7 @@ public class Flyer : MonoBehaviour
                 }
             }
             // 解放処理
+            Destroy(ae);
             Destroy(de, 2.0f);
             Destroy(this.gameObject);
         }
@@ -411,6 +426,15 @@ public class Flyer : MonoBehaviour
                 this.gameObject.transform.position.y + mvalue,
                 this.gameObject.transform.position.z + mvalue
             );
+
+            if (ae)
+            {
+                ae.transform.position = new Vector3(
+                    this.gameObject.transform.position.x,
+                    this.gameObject.transform.position.y - 2.0f,
+                    this.gameObject.transform.position.z
+                );
+            }
 
             mtime++;
             if (mtime > 15)

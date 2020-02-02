@@ -58,9 +58,6 @@ public class UIEvent : MonoBehaviour
         sr.sprite = null;
         sr.sprite = current.sprite;
         sr.color = new Color(1, 1, 1, alpha);
-        // レイキャストがブロックされないようにする
-        CanvasGroup canvasGroup = clone.AddComponent<CanvasGroup>();
-        canvasGroup.blocksRaycasts = false;
         // 生成したオブジェクトの名前から(Clone)を消しておく
         clone.name = prefab.name;
     }
@@ -78,6 +75,7 @@ public class UIEvent : MonoBehaviour
 
     // Rectの値
     [SerializeField] float ReduceRect = 0;
+    [SerializeField] float BaseRect = 0;
     // UIクリック時の縮小
     public void Reduce()
     {
@@ -91,6 +89,35 @@ public class UIEvent : MonoBehaviour
         GetComponent<RectTransform>().localScale = new Vector3(0.9f, 0.9f);
     }
 
+
+    // パラメータ
+    public GameObject parameter;
+    // スロット
+    public GameObject[] slot;
+    // キャンセルクリック時のスロット側パラメータ文字戻し
+    public void CancelClick()
+    {
+        var i = 0;
+        foreach (var s in slot)
+        {
+            var pp = parameter.GetComponent<PlayerParameter>();
+            var t = pp.GetSlotName(i);
+            var a = pp.GetParameterToString(t);
+
+            if (a != null)
+            {
+                s.GetComponent<Text>().text = a;
+            }
+        }
+    }
+
+    // SEがあれば再生
+    public void PlaySE()
+    {
+        var sound = GetComponent<AudioSource>();
+        if (sound == null) return;
+        sound.PlayOneShot(sound.clip);
+    }
 
 
     // =================
@@ -110,7 +137,6 @@ public class UIEvent : MonoBehaviour
     }
 
     // UI縮小解除
-    [SerializeField] float BaseRect = 0;
     public void Extension()
     {
         RectTransform rt = GetComponent(typeof(RectTransform)) as RectTransform;

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5161828635108075269}
   - component: {fileID: 3759961891614154708}
   - component: {fileID: 1072405856273174230}
+  - component: {fileID: 6726291932873743552}
   m_Layer: 11
   m_Name: SpikyExplosionFire
   m_TagString: Bullet
@@ -4702,7 +4703,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 8dfcae34791b3a447b81d6653208f596, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.6
   m_Pitch: 1.1
   Loop: 0
   Mute: 0
@@ -4814,6 +4815,18 @@ MonoBehaviour:
   backHitEffectPrefab: {fileID: 0}
   enemyHitEffectPrefab: {fileID: 0}
   hitEffectScale: {x: 1, y: 1, z: 1}
+--- !u!114 &6726291932873743552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5161828635114567537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c522e14f8b119a74e8f75390a8688303, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5161828635114583665
 GameObject:
   m_ObjectHideFlags: 0

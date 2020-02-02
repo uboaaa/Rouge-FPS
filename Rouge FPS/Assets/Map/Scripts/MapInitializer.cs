@@ -157,6 +157,8 @@ public class MapInitializer : MonoBehaviour
     //ボス部屋用マップ生成
     private void GenerateBossMap()
     {
+        //通常ダンジョン用BGM停止
+        AudioManager.Instance.StopBGM();
         //ボス用prefabを取得し、インスタス化
         m_bossRoomPrefab = Resources.Load("Prefab/Rooms/BossMap") as GameObject;
         GameObject _bossRoom = Instantiate(m_bossRoomPrefab, new Vector3(0, 0, 0), new Quaternion());
@@ -177,6 +179,9 @@ public class MapInitializer : MonoBehaviour
 
         //フェードイン開始
         MapFade.FadeIn();
+        
+        //ボス用BGM再生開始
+        AudioManager.Instance.PlayBGM("n100");
 
     }
 

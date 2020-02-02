@@ -388,7 +388,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationX:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 0
       maxCurve:
@@ -441,7 +441,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 0
       maxCurve:
@@ -4642,7 +4642,7 @@ GameObject:
   - component: {fileID: 3594573147228163266}
   - component: {fileID: 7142089944906719866}
   m_Layer: 11
-  m_Name: ShotGunFire
+  m_Name: SGFire
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5020,7 +5020,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationX:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 0
       maxCurve:
@@ -5073,7 +5073,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 0
       maxCurve:
@@ -9259,8 +9259,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: d6dbb92a655eeb549a408aa59fed63f4, type: 3}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
   m_Volume: 0.6
   m_Pitch: 0.8
   Loop: 0
@@ -9386,9 +9386,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68db6363547ec5a4a9d05769e2431fa4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backHitEffectPrefab: {fileID: 4123201191448864854, guid: 855320abb32eb9d4da3f7d88b5ee431f,
+  backHitEffectPrefab: {fileID: 493485654278275449, guid: 8afb0e2dc42a08742be0bee9a30f1653,
     type: 3}
-  enemyHitEffectPrefab: {fileID: 4123201191448864854, guid: 855320abb32eb9d4da3f7d88b5ee431f,
+  enemyHitEffectPrefab: {fileID: 493485654278275449, guid: 8afb0e2dc42a08742be0bee9a30f1653,
     type: 3}
   hitEffectScale: {x: 1, y: 1, z: 1}
 --- !u!1 &2086486858025567458
@@ -9673,7 +9673,7 @@ ParticleSystem:
         m_RotationOrder: 0
     startSizeY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -9726,7 +9726,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startSizeZ:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 1
       maxCurve:

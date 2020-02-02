@@ -28,13 +28,12 @@ public class GunController : MonoBehaviour
     [SerializeField] GameObject muzzleFlashPrefab;                                  // マズルフラッシュのPrefab
     [SerializeField] Vector3    muzzleFlashScale = new Vector3(1.0f,1.0f,1.0f);     // マズルフラッシュの大きさ変更用
     [SerializeField] float cameraShakePow;                                          // カメラ揺らし用
-    [SerializeField] float muzzleShakePow;                                          // マズル揺らし用
 
     // パラメーター関係==============================================
     public float GunEXP;                                    // 経験値
     [HideInInspector] public bool shootEnabled = true;      // 撃てる状態か判定用
     [HideInInspector] public bool shooting = false;         // 射撃中か判定用
-    bool        reloading = false;                          // リロード中か判定用
+    public bool        reloading = false;                   // リロード中か判定用
     public bool        equipping{get;private set;}          // 装備切り替え中か判定用
     int         ammo;                                       // マガジンに入っている弾の数
 
@@ -59,7 +58,11 @@ public class GunController : MonoBehaviour
     GameObject FPSCon;
     Material material;                      // マテリアル
 
-    
+    public AudioClip shotSound;             // 撃つときのサウンド
+    public AudioClip noShotSound;           // 弾がないときのサウンド
+    public AudioClip reloadStartSound;      // リロード始めのサウンド
+    public AudioClip reloadSound;           // リロード終わりのサウンド
+    AudioSource audioSource;                // オーディオ用
 
     
     void Start()
@@ -80,10 +83,31 @@ public class GunController : MonoBehaviour
         propID_s = Shader.PropertyToID("_Saturation");
         propID_b = Shader.PropertyToID("_Brightness");
         propID_c = Shader.PropertyToID("_Contrast");
+
+        // 武器ごとのAUDIOを取得
+        audioSource = GetComponent<AudioSource>();
+
+        // ランクごと武器種ごとにダメージを変化
+        if(gunRank == GunInfo.GunRank.Rank1)
+        {
+            // ランク１はそのまま
+        }
+        else if(gunRank == GunInfo.GunRank.Rank2)
+        {
+            Damage = Damage * 3;
+        }
+        else if(gunRank == GunInfo.GunRank.Rank3)
+        {
+            Damage = Damage * 5;
+        }
     }
 
     void Update()
     {
+        // ポーズ中動作しないようにする
+        if(!PauseScript.pause()  && !UIManager.GetFlg() && FPSCon.GetComponent<MyStatus>().GetHp()>0){
+        if(!SkillManagement.GetTimeStop()){
+
         // 武器レベルに応じてのカラーにする
         switch(gunRank)
         {
@@ -148,6 +172,9 @@ public class GunController : MonoBehaviour
             {
                 StartCoroutine(ShootTimer());
                 animator.SetBool("ShootFlg",true);
+            } else if(Input.GetMouseButtonDown(0) && Ammo == 0) {
+                // 射撃音を鳴らす
+                audioSource.PlayOneShot(noShotSound);
             }
 
             // リロード
@@ -181,15 +208,8 @@ public class GunController : MonoBehaviour
         }
 
         cameraScript.Shake(cameraShakePow,shooting);  // 画面を揺らす
-        
-
-        //==================================================================================================
-        // デバッグ表示
-        //==================================================================================================
-        // if(animatorInfo.shortNameHash ==  Animator.StringToHash("Idle")){Debug.Log("現在は：Idle");}
-        // if(animatorInfo.shortNameHash ==  Animator.StringToHash("Shot")){Debug.Log("現在は：Shot");}
-        // if(animatorInfo.shortNameHash ==  Animator.StringToHash("Reload")){Debug.Log("現在は：Reload");}
-        // if(animatorInfo.shortNameHash ==  Animator.StringToHash("Get")){Debug.Log("現在は：Get");}
+        }
+        }
     }
 
     // セミオートかフルオートかの判定
@@ -210,6 +230,9 @@ public class GunController : MonoBehaviour
     {
         if (!shooting)
         {
+            // 射撃音を鳴らす
+            audioSource.PlayOneShot(shotSound);
+
             // 射撃中は追加で撃てないようにする
             shooting = true;
             shootEnabled = false;
@@ -218,7 +241,7 @@ public class GunController : MonoBehaviour
             {
                 // マズルフラッシュの生成
                 GameObject  muzzleFlash = Instantiate<GameObject>(muzzleFlashPrefab,muzzle.position,muzzle.rotation);
-                muzzleFlash.transform.parent = this.transform;
+                //muzzleFlash.transform.parent = this.transform;
                 muzzleFlash.transform.localScale = muzzleFlashScale;
                 Destroy(muzzleFlash,1.0f);
             }
@@ -260,8 +283,16 @@ public class GunController : MonoBehaviour
     {
         if(shootEnabled)
         {
+            // リロード音を鳴らす
+            audioSource.PlayOneShot(reloadStartSound);
+
             // 連射速度の調整
             yield return new WaitForSeconds(reloadInterval);
+
+            audioSource.Stop(); 
+            // リロード音を鳴らす
+            audioSource.PlayOneShot(reloadSound);
+            
             // リロードできる弾の数なら
             if (remAmmo >= MagazineSize)
             {
@@ -269,7 +300,6 @@ public class GunController : MonoBehaviour
                 Ammo = MagazineSize;
                 reloading = false;
             } else {
-                // 
                 int NowAmmo = MagazineSize - Ammo;
                 if (NowAmmo > remAmmo)
                 {
@@ -285,6 +315,5 @@ public class GunController : MonoBehaviour
         } else {
             yield return null;
         }
-
     }
 }

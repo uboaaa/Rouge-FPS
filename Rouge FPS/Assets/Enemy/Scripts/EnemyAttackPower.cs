@@ -110,17 +110,8 @@ public class EnemyAttackPower : MonoBehaviour
                 break;
 
             
-            // // タグをつけてないものに当たった場合、物理マテリアルに応じる
-            // case "Untagged":
-            //     //HitEffect(HitEffectPrefab);
-            //     if(this.gameObject.tag == "EnemyBullet")
-            //     {
-            //         Destroy(this.gameObject);   // 今のところ弾は適当に消す
-            //     }
-            //     DamageFlg = false;
-            //     break;
-
             default:
+            DamageFlg = false;
                 break;
         }
 

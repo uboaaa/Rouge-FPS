@@ -6,18 +6,21 @@ public class MergeScenes : MonoBehaviour
 
     private static bool isMerge = false;       //シーン統合フラグ
 
+    private static bool FirstLoad=false;
+
     void Start()
     {
        
         FloorCount.SetReset();
+         //SceneManager.LoadScene("SkillScene", LoadSceneMode.Additive);
         SceneManager.LoadScene("MapScene", LoadSceneMode.Additive);
-         SceneManager.LoadScene("PlayerScene", LoadSceneMode.Additive);
-        
+        SceneManager.LoadScene("PlayerScene", LoadSceneMode.Additive);
+        FirstLoad=true;
 
         // SceneManager.LoadScene("EnemyScene", LoadSceneMode.Additive);
         // // SceneManager.LoadScene("EnemyScene", LoadSceneMode.Additive);
 
-        // //SceneManager.LoadScene("SkillScene", LoadSceneMode.Additive);
+       
          //SceneManager.LoadScene("WeaponScene", LoadSceneMode.Additive);
 
         isMerge = true;
@@ -50,5 +53,10 @@ public class MergeScenes : MonoBehaviour
     public static bool IsMerge()
     {
         return isMerge;
+    }
+
+        public static bool IsLoad()
+    {
+        return FirstLoad;
     }
 }

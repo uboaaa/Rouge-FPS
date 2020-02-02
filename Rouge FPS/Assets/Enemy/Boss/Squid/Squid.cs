@@ -176,7 +176,7 @@ public class Squid : MonoBehaviour
             material.SetFloat(propID_c, 0.5f);
 
             // パラメータ
-            ep.hp = 1000;
+            ep.hp = 3000;
             ep.atk = 30;
             ep.def = 0;
             //ep.speed = 1.0f;
@@ -349,7 +349,7 @@ public class Squid : MonoBehaviour
                         if (ActionCnt > 60)
                         {
                             ActionCnt = 0;
-                            ActionFlg = Random.Range(2, 3);
+                            ActionFlg = Random.Range(0, 4);
                         }
                     }
                     // 攻撃１モーション

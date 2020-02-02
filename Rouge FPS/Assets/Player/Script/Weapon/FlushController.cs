@@ -68,7 +68,7 @@ public class FlushController : MonoBehaviour
      }
 
     }
-   void GameOver(){ SceneManager.LoadScene("GameOverScene");}
+   void GameOver(){AudioManager.Instance.StopBGM(); SceneManager.LoadScene("GameOverScene");}
     void GameOverEnter(){
             alpha += fadeSpeed; 
             red+=fadeSpeed;

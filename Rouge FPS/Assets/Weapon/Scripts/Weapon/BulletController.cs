@@ -106,10 +106,10 @@ public class BulletController : MonoBehaviour
                 Destroy(gameObject);
                 break;
             
-            // タグをつけてないものに当たった場合、物理マテリアルに応じる
-            case "Untagged":
-                Destroy(gameObject);
-                break;
+            // // タグをつけてないものに当たった場合、物理マテリアルに応じる
+            // case "Untagged":
+            //     Destroy(gameObject);
+            //     break;
 
             default:
                 break;

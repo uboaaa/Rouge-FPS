@@ -32,7 +32,8 @@ public class GoalPortal : MonoBehaviour
                 return;
             }
             //スキル関連の関数追加の予定
-
+            UIManager.SetUIFlag(true);
+        
             //階層の更新
             FloorCount.UpFloors();
             //次の階層を生成、移動
