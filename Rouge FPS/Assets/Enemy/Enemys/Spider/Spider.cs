@@ -9,6 +9,8 @@ public class Spider : MonoBehaviour
     // オーラエフェクト
     private GameObject AuraEffect = null;
     private GameObject ae = null;
+    // オーディオ
+    AudioSource audioSource;
     // 毒
     public GameObject poizon = null;
     // アニメータ
@@ -85,6 +87,8 @@ public class Spider : MonoBehaviour
         player = GameObject.Find("FPSController");
 
         //GetComponentを用いてコンポーネントを取り出す.
+        // オーディオ
+        audioSource = this.gameObject.GetComponent<AudioSource>();
         // アニメータ
         animator = this.gameObject.GetComponent<Animator>();
         // マテリアル
@@ -354,6 +358,9 @@ public class Spider : MonoBehaviour
 
                             // // Rigidbodyに力を加えて発射
                             // poizons.GetComponent<Rigidbody>().AddForce(aim, ForceMode.Impulse);
+
+                            // SE再生
+                            audioSource.PlayOneShot(audioSource.clip);
 
 
 

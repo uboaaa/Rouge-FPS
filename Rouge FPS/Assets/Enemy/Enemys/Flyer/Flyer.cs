@@ -159,7 +159,11 @@ public class Flyer : MonoBehaviour
             // オーラエフェクト
             AuraEffect = Resources.Load("AuraEffectYellow") as GameObject;
             ae = Instantiate(AuraEffect) as GameObject;
-            ae.transform.position = this.gameObject.transform.position;
+            ae.transform.position = new Vector3(
+                    this.gameObject.transform.position.x,
+                    this.gameObject.transform.position.y - 1.0f,
+                    this.gameObject.transform.position.z
+                );
         }
         else if (AILevel == 3)
         {
@@ -178,7 +182,11 @@ public class Flyer : MonoBehaviour
 
             AuraEffect = Resources.Load("AuraEffectRed") as GameObject;
             ae = Instantiate(AuraEffect) as GameObject;
-            ae.transform.position = this.gameObject.transform.position;
+            ae.transform.position = new Vector3(
+                    this.gameObject.transform.position.x,
+                    this.gameObject.transform.position.y - 1.0f,
+                    this.gameObject.transform.position.z
+                );
         }
     }
 
@@ -432,7 +440,7 @@ public class Flyer : MonoBehaviour
             {
                 ae.transform.position = new Vector3(
                     this.gameObject.transform.position.x,
-                    this.gameObject.transform.position.y - 2.0f,
+                    this.gameObject.transform.position.y - 1.0f,
                     this.gameObject.transform.position.z
                 );
             }

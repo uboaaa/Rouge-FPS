@@ -7,6 +7,12 @@ public class Squid : MonoBehaviour
     // プレイヤー
     private GameObject player = null;
 
+    // オーディオ
+    AudioSource audioSource = null;
+    public AudioClip sound1 = null;
+    public AudioClip sound2 = null;
+    public AudioClip sound3 = null;
+
     // アニメータ
     private Animator animator = null;
     // マテリアル
@@ -140,6 +146,8 @@ public class Squid : MonoBehaviour
         player = GameObject.Find("FPSController");
 
         //GetComponentを用いてコンポーネントを取り出す.
+        // オーディオ
+        audioSource = this.gameObject.GetComponent<AudioSource>();
         // アニメータ
         animator = this.gameObject.GetComponent<Animator>();
         // マテリアル
@@ -351,7 +359,7 @@ public class Squid : MonoBehaviour
                             if (ActionCnt > 60)
                             {
                                 ActionCnt = 0;
-                                ActionFlg = Random.Range(0, 4);
+                                ActionFlg = Random.Range(3, 4);
                             }
                         }
                         // 攻撃１モーション
@@ -375,6 +383,9 @@ public class Squid : MonoBehaviour
                         {
                             if (ActionCnt == 0)
                             {
+                                audioSource.volume = 0.3f;
+                                audioSource.PlayOneShot(sound3);
+
                                 GameObject ps1 = Instantiate(PopSmoke) as GameObject;
                                 ps1.transform.position = new Vector3(this.transform.localPosition.x + 2, this.transform.position.y - 3, this.transform.localPosition.z + 3);
                                 Destroy(ps1, 2.0f);
@@ -421,6 +432,9 @@ public class Squid : MonoBehaviour
                         {
                             if (ftime == 0)
                             {
+                                audioSource.volume = 0.3f;
+                                audioSource.PlayOneShot(sound3);
+
                                 GameObject fe = Instantiate(FireEffect) as GameObject;
                                 fe.transform.position = new Vector3(
                                     this.gameObject.transform.position.x,
@@ -486,15 +500,20 @@ public class Squid : MonoBehaviour
                                     ds1.transform.position = new Vector3(this.transform.position.x, this.transform.position.y - 2, this.transform.position.z);
                                     Destroy(ds1, 4.0f);
 
-
+                                    audioSource.volume = 1.0f;
+                                    audioSource.PlayOneShot(sound1);
                                 }
 
-                                if (AttackCnt == 40)
+
+                                if (AttackCnt == 30)
                                 {
                                     SavePlayerPos = new Vector3(player.transform.position.x, 0, player.transform.position.z);
                                 }
                                 if (AttackCnt == 50)
                                 {
+                                    audioSource.volume = 1.0f;
+                                    audioSource.PlayOneShot(sound2);
+
                                     GameObject tentacle = Instantiate(Tentacle) as GameObject;
                                     tentacle.transform.position = SavePlayerPos;
 
