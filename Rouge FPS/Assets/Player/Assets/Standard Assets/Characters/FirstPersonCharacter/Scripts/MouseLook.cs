@@ -85,7 +85,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void InternalLockUpdate()
         {
-            Debug.Log(UIManager.GetFlg());
+            // Debug.Log(UIManager.GetFlg());
             if(Input.GetKeyUp(KeyCode.Escape)|| UIManager.GetFlg() )
             {
                 m_cursorIsLocked = false;
