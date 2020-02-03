@@ -34,7 +34,8 @@ public class CSV : MonoBehaviour
     {
         // 拡張子チェック
         string fn = _pass.Substring(_pass.Length - 4) == ".csv" ? _pass : _pass + ".csv";
-        string s = "Assets/Resources/CSV/" + fn;
+        //string s = "Assets/Resources/CSV/" + fn;
+        string s = Application.streamingAssetsPath + "/CSV/" + fn;
         // UTF-8指定
         var encoding = Encoding.GetEncoding("UTF-8");
         // すべて読み込み
