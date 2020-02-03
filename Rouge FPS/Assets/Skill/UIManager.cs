@@ -235,6 +235,12 @@ public class UIManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
     }
 
+
+    public void SetFalse()
+    {
+        UIObj.SetActive(false);
+    }
+
     // 全UI一斉終了アニメーション
     public void AllHideAnimation()
     {
@@ -287,6 +293,7 @@ public class UIManager : MonoBehaviour
             SetButton();
             SetEtc();
             SetSlot();
+            nowFloor = FloorCount.GetFloors().ToString();
             SetSkill(nowFloor, 85, 10, 5);
             DropUI.UnLock();
             // 明転
