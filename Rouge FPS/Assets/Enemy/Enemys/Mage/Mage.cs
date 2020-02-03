@@ -12,6 +12,8 @@ public class Mage : MonoBehaviour
     // オーラエフェクト
     private GameObject AuraEffect = null;
     private GameObject ae = null;
+    // オーディオ
+    AudioSource audioSource;
     // アニメータ
     private Animator animator = null;
     // マテリアル
@@ -99,6 +101,8 @@ public class Mage : MonoBehaviour
         player = GameObject.Find("FPSController");
 
         //GetComponentを用いてコンポーネントを取り出す.
+        // オーディオ
+        audioSource = this.gameObject.GetComponent<AudioSource>();
         // アニメータ
         animator = this.gameObject.GetComponent<Animator>();
         // マテリアル
@@ -375,6 +379,8 @@ public class Mage : MonoBehaviour
                     {
                         GameObject fe = Instantiate(FireEffect) as GameObject;
 
+                        // SE再生
+                        audioSource.PlayOneShot(audioSource.clip);
 
                         fe.transform.position = new Vector3(
                             this.gameObject.transform.position.x,

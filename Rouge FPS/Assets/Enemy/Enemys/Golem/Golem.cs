@@ -10,6 +10,11 @@ public class Golem : MonoBehaviour
     private GameObject AuraEffect = null;
     private GameObject ae = null;
 
+
+    // オーディオ
+    AudioSource audioSource = null;
+    private int SeCnt = 0;
+
     // アニメータ
     private Animator animator = null;
     // マテリアル
@@ -75,6 +80,8 @@ public class Golem : MonoBehaviour
         player = GameObject.Find("FPSController");
 
         //GetComponentを用いてコンポーネントを取り出す.
+        // オーディオ
+        audioSource = this.gameObject.GetComponent<AudioSource>();
         // アニメータ
         animator = this.gameObject.GetComponent<Animator>();
         // マテリアル
@@ -185,6 +192,9 @@ public class Golem : MonoBehaviour
                         {
                             foundflg = true;
 
+
+                            
+
                             trans = 0;
                             //intパラメーターの値を設定する.
                             animator.SetInteger("trans", trans);
@@ -194,6 +204,8 @@ public class Golem : MonoBehaviour
                         if ((transform.position - player.gameObject.transform.position).magnitude < 5)
                         {
                             foundflg = true;
+
+
 
                             trans = 0;
                             //intパラメーターの値を設定する.
@@ -214,6 +226,17 @@ public class Golem : MonoBehaviour
 
                         //targetに向かって進む
                         transform.position += transform.forward * ep.speed * 0.1f;
+
+
+                        
+                        if(SeCnt == 0)
+                        {
+                            // SE再生
+                            audioSource.PlayOneShot(audioSource.clip);
+                        }
+                        SeCnt++;
+                        if(SeCnt > 95) { SeCnt = 0;}
+
 
                         if (ae)
                         {
@@ -322,6 +345,7 @@ public class Golem : MonoBehaviour
                 }
             }
         }
+
     }
 
     // 弾との当たり判定
@@ -343,6 +367,7 @@ public class Golem : MonoBehaviour
                         eh.SetHitFlg(true);
                         dn.SetHitFlg(true);
                         foundflg = true;
+
                         ep.hp -= collision.gameObject.GetComponent<BulletController>().Damage;
                         if (ep.hp < 0) { ep.hp = 0; }
                         //intパラメーターの値を設定する.
@@ -372,6 +397,7 @@ public class Golem : MonoBehaviour
                         eh.SetHitFlg(true);
                         dn.SetHitFlg(true);
                         foundflg = true;
+                        
                         ep.hp -= collider.gameObject.GetComponent<BulletController>().Damage;
                         if (ep.hp < 0) { ep.hp = 0; }
                         //intパラメーターの値を設定する.
