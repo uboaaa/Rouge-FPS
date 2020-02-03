@@ -32,6 +32,8 @@ public class OKClick : MonoBehaviour
         UIManager.SetFalseUIFlg();
         MyStatus.NewMaxHP();
         // GameObject.Find("UI").SetActive(false);
+        //次のマップへ生成・移動
+        MapInitializer.MoveNextMap();
     }
 
     public void EndAnimation()
