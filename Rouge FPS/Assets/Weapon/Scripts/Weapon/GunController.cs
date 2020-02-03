@@ -16,9 +16,16 @@ public class GunController : MonoBehaviour
     [SerializeField] public GunInfo.GunRank    gunRank     = GunInfo.GunRank.Rank1;         // ランク情報
     [SerializeField] public int        skillSlot;                              // スキルスロット数
     [SerializeField] public int        MagazineSize;                           // マガジンサイズ
-    [HideInInspector]public int        AmmoSize;                               // 予備弾数MAX
+    [HideInInspector] static public int       skillMagazine;                   // スキルのマガジン
+    [HideInInspector] public int       AmmoSize;                               // 予備弾数MAX
+    [HideInInspector] static public int       skillAmmo;                       // スキルのAmmo
     [SerializeField] public int        remAmmo;                                // 残弾数
     [SerializeField] public int        Damage;                                 // 火力
+    [HideInInspector] static public int       skillDamage;                     // スキルの火力
+
+    static public string[] skillName;
+    static public int[] skillValue = new int[3];
+
     [SerializeField] public float      shootInterval;                          // 次発射までの間の時間
     [SerializeField] public float      reloadInterval;                         // リロード終わりまでの時間
 	[SerializeField] public float      bulletPower;                            // 弾を飛ばす力
@@ -40,7 +47,7 @@ public class GunController : MonoBehaviour
     public int Ammo
     {
         get { return ammo;}
-        set { ammo = Mathf.Clamp(value, 0, MagazineSize);}
+        set { ammo = Mathf.Clamp(value, 0, MagazineSize + skillMagazine);}
     }
     // シェーダパラメータ管理用
     int propID_h = 0;   // Hue
@@ -64,6 +71,51 @@ public class GunController : MonoBehaviour
     public AudioClip reloadSound;           // リロード終わりのサウンド
     AudioSource audioSource;                // オーディオ用
 
+    public void SetSkillName(string[] _name)
+    {   
+        var i = 0;
+        foreach(var s in _name)
+        {
+            skillName[i++] = s;
+        }
+    }
+    public string[] GetSkillName()
+    {
+        return skillName;
+    }   
+     public void SetSkillValue(int[] _value)
+    {   
+        var i = 0;
+        foreach(var n in _value)
+        {
+            skillValue[i++] = n;
+        }
+    }
+    public int[] GetSkillValue()
+    {
+        return skillValue;
+    }
+
+    public void Conversion()
+    {
+        var i = 0;
+        foreach(var s in skillName)
+        {
+            switch(s)
+            {
+                case "ATK":
+                skillDamage += skillValue[i];
+                break;
+                case "Magazine":
+                skillMagazine += skillValue[i];
+                break;
+                case "Ammo":
+                skillAmmo += skillValue[i];
+                break;
+            }
+            i++;   
+        }
+    }
     
     void Start()
     {
@@ -137,9 +189,9 @@ public class GunController : MonoBehaviour
                 break;
         }
 
-        if(remAmmo > AmmoSize)
+        if(remAmmo > AmmoSize + skillAmmo)
         {
-            remAmmo = AmmoSize;
+            remAmmo = AmmoSize + skillAmmo;
         }
 
         animatorInfo = animator.GetCurrentAnimatorStateInfo(0);
@@ -178,7 +230,7 @@ public class GunController : MonoBehaviour
             }
 
             // リロード
-            if(Input.GetKeyDown(KeyCode.R) && remAmmo > 0 && Ammo != MagazineSize && !shooting  && !reloading && !equipping)
+            if(Input.GetKeyDown(KeyCode.R) && remAmmo > 0 && Ammo != MagazineSize + skillMagazine && !shooting  && !reloading && !equipping)
             {
                 reloading = true;
                 animator.SetBool("ReloadFlg",true);
@@ -292,13 +344,13 @@ public class GunController : MonoBehaviour
             audioSource.PlayOneShot(reloadSound);
             
             // リロードできる弾の数なら
-            if (remAmmo >= MagazineSize)
+            if (remAmmo >= MagazineSize + skillMagazine)
             {
-                remAmmo = remAmmo - (MagazineSize - Ammo);
-                Ammo = MagazineSize;
+                remAmmo = remAmmo - (MagazineSize + skillMagazine - Ammo);
+                Ammo = MagazineSize + skillMagazine;
                 reloading = false;
             } else {
-                int NowAmmo = MagazineSize - Ammo;
+                int NowAmmo = MagazineSize + skillMagazine - Ammo;
                 if (NowAmmo > remAmmo)
                 {
                     Ammo = remAmmo+Ammo;

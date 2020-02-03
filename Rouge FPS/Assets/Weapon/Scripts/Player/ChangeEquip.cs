@@ -4,11 +4,11 @@ using System.Collections;
 public class ChangeEquip : MonoBehaviour
 {
     // インスペクター関係============================================
-    public GameObject PrimaryWeapon;          // プライマリ武器の情報
-    public GameObject SecondaryWeapon;        // セカンダリ武器の情報
+    static public GameObject PrimaryWeapon;          // プライマリ武器の情報
+    static public GameObject SecondaryWeapon;        // セカンダリ武器の情報
 
     // パラメーター関係==============================================
-    [HideInInspector] public int ownGun;      // 0:持ってない 1:プライマリ 2:セカンダリ
+    [HideInInspector] static public int ownGun;      // 0:持ってない 1:プライマリ 2:セカンダリ
     [HideInInspector] public bool activeFlg;  // 行動中か  
     GameObject child;
     private float scroll;                     // マウスホイールの回転値を格納する変数
@@ -262,7 +262,7 @@ public class ChangeEquip : MonoBehaviour
     }
 
     // 持っている武器を返す関数
-    public GameObject nowWeapon()
+    static public GameObject nowWeapon()
     {
         if(ownGun == 1)
         {

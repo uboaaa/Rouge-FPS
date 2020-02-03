@@ -41,6 +41,10 @@ public class DropBullet : MonoBehaviour
         // 当たった時の処理 && 武器を持っていた場合
         if(hitFlg && Weapon)
         {
+            // サウンドを鳴らす
+            SoundManager soundManager = GameObject.Find("DropBullet").GetComponent<SoundManager>();
+            soundManager.Play(0);
+
             // 弾を追加する
             Weapon.GetComponent<GunController>().remAmmo += bulletNum;
             //Weapon.GetComponent<GunController>().Ammo += bulletNum;
@@ -58,7 +62,7 @@ public class DropBullet : MonoBehaviour
             CEScript = other.GetComponent<ChangeEquip>();
 
             // 今持っている武器を取ってくる
-            Weapon = CEScript.nowWeapon();
+            Weapon = ChangeEquip.nowWeapon();
             if(!Weapon)
             {
                 return;
