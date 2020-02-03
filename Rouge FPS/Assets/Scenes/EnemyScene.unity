@@ -7339,12 +7339,14 @@ PrefabInstance:
         type: 3}
       propertyPath: PopObject1
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 6297636772104832161, guid: ab516d3b60580b04ab23db217c0354cb,
+        type: 3}
     - target: {fileID: 5766536720936514835, guid: 91b9f190123511c498d98a3d12d36a23,
         type: 3}
       propertyPath: PopObject2
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2500672720240144816, guid: bb2b5d9bea7a15a48838bb5a11f24ff0,
+        type: 3}
     - target: {fileID: 8300027551365344582, guid: 91b9f190123511c498d98a3d12d36a23,
         type: 3}
       propertyPath: m_IsTrigger
@@ -9596,6 +9598,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6390273302411902570, guid: f719814680d41a04e8d073533581feab,
+        type: 3}
+      propertyPath: PopObject1
+      value: 
+      objectReference: {fileID: 6297636772104832161, guid: ab516d3b60580b04ab23db217c0354cb,
+        type: 3}
+    - target: {fileID: 6390273302411902570, guid: f719814680d41a04e8d073533581feab,
+        type: 3}
+      propertyPath: PopObject2
+      value: 
+      objectReference: {fileID: 2500672720240144816, guid: bb2b5d9bea7a15a48838bb5a11f24ff0,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f719814680d41a04e8d073533581feab, type: 3}
 --- !u!1001 &6809356228011480845

@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: 6873453550040116966}
   - component: {fileID: 6873453550040116961}
   m_Layer: 11
-  m_Name: Ghost Lv1
+  m_Name: Ghost
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -166,8 +166,10 @@ MonoBehaviour:
   deadeffect: {fileID: 7053788834288727124, guid: 5535e049c4f89b743bc21b34e2d93445,
     type: 3}
   fireflg: 0
-  bspeed: 1000
-  PopObject: {fileID: 0}
+  PopObject1: {fileID: 2500672720240144816, guid: bb2b5d9bea7a15a48838bb5a11f24ff0,
+    type: 3}
+  PopObject2: {fileID: 6297636772104832161, guid: ab516d3b60580b04ab23db217c0354cb,
+    type: 3}
 --- !u!114 &6873453550040116960
 MonoBehaviour:
   m_ObjectHideFlags: 0
