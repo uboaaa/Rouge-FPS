@@ -38,11 +38,11 @@ public class EXPSlider : MonoBehaviour
     void Update()
     {
         // 持っている銃の経験値を入れる
-        if(CEScript.ownGun == 1)
+        if(ChangeEquip.ownGun == 1)
         {   
             expSlider.value = PrimaryScript.GunEXP;
         }
-        else if(CEScript.ownGun == 2)
+        else if(ChangeEquip.ownGun == 2)
         {   
             expSlider.value = SecondaryScript.GunEXP;
         }

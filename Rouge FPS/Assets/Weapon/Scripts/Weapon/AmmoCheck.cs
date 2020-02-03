@@ -20,17 +20,17 @@ public class AmmoCheck : MonoBehaviour
     
     void Update()
     {
-        switch(CEScript.ownGun)
+        switch(ChangeEquip.ownGun)
         {
             case 0:             // 武器を持っていない時
                 myText.text = "";
                 break;
             case 1:             // プライマリ武器を持っている時
-                GCScript = CEScript.PrimaryWeapon.GetComponent<GunController>();
+                GCScript = ChangeEquip.PrimaryWeapon.GetComponent<GunController>();
                 myText.text = GCScript.Ammo + "/" + GCScript.remAmmo;
                 break;
             case 2:             // セカンダリ武器を持っている時
-                GCScript = CEScript.SecondaryWeapon.GetComponent<GunController>();
+                GCScript = ChangeEquip.SecondaryWeapon.GetComponent<GunController>();
                 myText.text = GCScript.Ammo + "/" + GCScript.remAmmo;
                 break;
             default:

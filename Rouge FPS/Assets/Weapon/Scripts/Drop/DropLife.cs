@@ -44,6 +44,10 @@ public class DropLife : MonoBehaviour
         // 当たった時の処理
         if(hitFlg)
         {
+            // サウンドを鳴らす
+            SoundManager soundManager = GameObject.Find("DropLife").GetComponent<SoundManager>();
+            soundManager.Play(1);
+
             // 体力の回復
             FPSCon.GetComponent<MyStatus>().AddHp(LifeNum);
             

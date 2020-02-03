@@ -38,9 +38,9 @@ public class WeaponUI : MonoBehaviour
 
     void Update()
     {
-        if(CEScript.ownGun == 1 && UIImage == OwnImage.Primary)
+        if(ChangeEquip.ownGun == 1 && UIImage == OwnImage.Primary)
         {
-            PriGCScript = CEScript.PrimaryWeapon.GetComponent<GunController>();
+            PriGCScript = ChangeEquip.PrimaryWeapon.GetComponent<GunController>();
 
             // 武器を更新する
             selectGunSprite(PriGCScript.gunType,PrimaryImage);
@@ -54,9 +54,9 @@ public class WeaponUI : MonoBehaviour
                 SecondaryImage.color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
             }
         }
-        else if(CEScript.ownGun == 2 && UIImage == OwnImage.Secondary)
+        else if(ChangeEquip.ownGun == 2 && UIImage == OwnImage.Secondary)
         {
-            SecGCScript = CEScript.SecondaryWeapon.GetComponent<GunController>();
+            SecGCScript = ChangeEquip.SecondaryWeapon.GetComponent<GunController>();
 
             // 武器を更新する
             selectGunSprite(SecGCScript.gunType,SecondaryImage);
@@ -71,12 +71,12 @@ public class WeaponUI : MonoBehaviour
             }
         }
 
-        if(CEScript.ownGun == 1)
+        if(ChangeEquip.ownGun == 1)
         {
             PrimaryImage.enabled = true;
         }
 
-        if(CEScript.ownGun == 2)
+        if(ChangeEquip.ownGun == 2)
         {
             SecondaryImage.enabled = true;
         }

@@ -32,21 +32,22 @@ public class BulletController : MonoBehaviour
         GameObject FPSCon = GameObject.Find("FPSController");
         CEScript = FPSCon.GetComponent<ChangeEquip>();   
 
-        if(CEScript.ownGun == 1)
+        if(ChangeEquip.ownGun == 1)
         {
             // プライマリ武器のGunControllerを持ってくる
-            anotherObject = GameObject.Find(CEScript.PrimaryWeapon.name);
+            anotherObject = GameObject.Find(ChangeEquip.PrimaryWeapon.name);
             GCScript = anotherObject.GetComponent<GunController>();
             // ダメージを取得
             Damage = GCScript.Damage;
+            Damage += GunController.skillDamage;
 
-        } else if(CEScript.ownGun == 2) {
+        } else if(ChangeEquip.ownGun == 2) {
             // セカンダリ武器のGunControllerを持ってくる
-            anotherObject = GameObject.Find(CEScript.SecondaryWeapon.name);
+            anotherObject = GameObject.Find(ChangeEquip.SecondaryWeapon.name);
             GCScript = anotherObject.GetComponent<GunController>();
             // ダメージを取得
             Damage = GCScript.Damage;
-
+            Damage += GunController.skillDamage;
         }
 
         // ダメージのばらつき +-1
@@ -55,7 +56,7 @@ public class BulletController : MonoBehaviour
 
     void Update()
     {
-        
+
     }
 
     void HitEffect(GameObject Prefab)
