@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 5543672474053700802}
   - component: {fileID: 4623355960633481032}
   - component: {fileID: 2500394218014198776}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: ObserveArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -191,7 +191,7 @@ GameObject:
   - component: {fileID: 4578239023964720553}
   - component: {fileID: 6666605244864305329}
   - component: {fileID: 5732724612406903800}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: ExploredArea
   m_TagString: Explored
   m_Icon: {fileID: 0}
@@ -253,7 +253,7 @@ GameObject:
   - component: {fileID: 2223718899188101217}
   - component: {fileID: 6481587401516046520}
   - component: {fileID: 493834292517195682}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: R10x12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -332,7 +332,7 @@ GameObject:
   - component: {fileID: 6017438866675075528}
   - component: {fileID: 145925942545814432}
   - component: {fileID: 4024269299114846533}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: TransWallArea
   m_TagString: Room
   m_Icon: {fileID: 0}

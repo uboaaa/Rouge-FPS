@@ -213,11 +213,11 @@ Transform:
   m_Children:
   - {fileID: 1568223055239801728}
   - {fileID: 1099686320086580436}
+  - {fileID: 4108420052834034466}
   - {fileID: 1309077229361564613}
   - {fileID: 6172850525997160237}
   - {fileID: 6478919085356761473}
   - {fileID: 1821422865638796867}
-  - {fileID: 4108420052834034466}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -799,13 +799,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4794260420532020093}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.3, y: 18.8, z: 24.644531}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
+  m_LocalPosition: {x: 0, y: 9.8, z: 18.2}
+  m_LocalScale: {x: 4, y: 1, z: 9}
   m_Children: []
   m_Father: {fileID: 3372365112958336860}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!33 &5395043814819353774
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -831,7 +831,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 2dadb6fdd1e77ca49b748ebf46a5bd73, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -905,7 +905,7 @@ Transform:
   - {fileID: 1981657937219515972}
   - {fileID: 2689501262158683347}
   m_Father: {fileID: 3372365112958336860}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5075389079680239333
 GameObject:
@@ -1399,7 +1399,7 @@ Transform:
   - {fileID: 8990129616073044091}
   - {fileID: 9131614224671181036}
   m_Father: {fileID: 3372365112958336860}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &558530830854540103
 MonoBehaviour:
@@ -1659,7 +1659,7 @@ PrefabInstance:
     - target: {fileID: 2603287240325944157, guid: 6aaaf558ea3a71f41a1a8ac098b9b2d6,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2603287240325944157, guid: 6aaaf558ea3a71f41a1a8ac098b9b2d6,
         type: 3}
@@ -1739,7 +1739,7 @@ PrefabInstance:
     - target: {fileID: 7773790292508199710, guid: e1d94919ab4a4e843a296ca8add13343,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7773790292508199710, guid: e1d94919ab4a4e843a296ca8add13343,
         type: 3}
