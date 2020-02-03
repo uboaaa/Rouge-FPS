@@ -253,8 +253,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletNum: 10
-  maxDistance: 100
-  distance: 0
 --- !u!135 &7499557988816257568
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -266,7 +264,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.5
+  m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &5605299247091662839
 Rigidbody:

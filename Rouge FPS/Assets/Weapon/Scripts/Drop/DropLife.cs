@@ -8,8 +8,6 @@ public class DropLife : MonoBehaviour
     private bool hitFlg;                // 当たった判定用
 
     GameObject FPSCon;
-    public float maxDistance = 100.0f;   // 計測可能な最大距離
-    public float distance;              // 計測距離
     Rigidbody rd;
     FlyingObject FOScript;
 
@@ -20,27 +18,10 @@ public class DropLife : MonoBehaviour
 
     void Update()
     {
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit,maxDistance))
-        {
-             if(hit.collider.tag == "Back")
-            {
-                distance = hit.distance;
-            }
-        }
-
-        if(distance <= 0.8f)
-        {
-            rd = this.GetComponent<Rigidbody>();
-            rd.useGravity = false;
-
-            if(!FOScript)
-            {
-                FOScript = gameObject.AddComponent<FlyingObject>();
-                FOScript.swingPow = 0.05f; 
-                FOScript.Range = 4;
-            }
-        }
+        // ポーズ中動作しないようにする
+        if(!PauseScript.pause()){}
+        if(!SkillManagement.GetTimeStop()){}
+        
         // 当たった時の処理
         if(hitFlg)
         {
@@ -63,6 +44,19 @@ public class DropLife : MonoBehaviour
             if(FPSCon.GetComponent<MyStatus>().GetMaxHp() > FPSCon.GetComponent<MyStatus>().GetHp())
             {
                 hitFlg = true;
+            }
+        }
+
+        if(other.gameObject.tag == "Back")
+        {
+            rd = this.GetComponent<Rigidbody>();
+            rd.useGravity = false;
+
+            if(!FOScript)
+            {
+                FOScript = gameObject.AddComponent<FlyingObject>();
+                FOScript.swingPow = 0.05f; 
+                FOScript.Range = 4;
             }
         }
     }
