@@ -762,6 +762,9 @@ MonoBehaviour:
   - rtype: 1
     roomObj: {fileID: 4981343627033454670, guid: cb22735a53b7ec1429670a40002abbb5,
       type: 3}
+  - rtype: 1
+    roomObj: {fileID: 5686020645251892754, guid: ec39a3c086b0c3440b066593bb8dd1d4,
+      type: 3}
   - rtype: 4
     roomObj: {fileID: 3424705591942629624, guid: fa73f75e340f1df4f860594033fb0afe,
       type: 3}

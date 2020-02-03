@@ -39,7 +39,7 @@ public class GoalPortal : MonoBehaviour
 
             //次の階層を生成、移動
             //↓この関数をスキルの方に移動する
-            MapInitializer.MoveNextMap();
+            //MapInitializer.MoveNextMap();
 
             //オブジェクトを非アクティブにする
             this.gameObject.SetActive(false);

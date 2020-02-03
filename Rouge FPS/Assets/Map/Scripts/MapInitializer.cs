@@ -376,12 +376,7 @@ public class MapInitializer : MonoBehaviour
         g_spawn_enable = true;
     }
 
-    //マネージャーを更新
-    private void ReloadManager()
-    {
-
-    }
-
+   
     //初期地点の更新フラグの取得関数
     public static bool GetSpawnEnable()
     {
