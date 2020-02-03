@@ -14,6 +14,11 @@ public class DropUI : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointe
     {
         Lock = false;
     }
+    static bool InsideFlag = false;
+    static public bool IsInside()
+    {
+        return InsideFlag;
+    }
     // 変更するUI
     public Image iconImage;
     // 今描画しているスプライト
@@ -59,6 +64,8 @@ public class DropUI : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointe
         // 早期リターン
         if (Lock) return;
         if (pointerEventData.pointerDrag == null) return;
+        // UI内判定
+        InsideFlag = true;
         // マウスで掴んでいるUIの画像に変更
         Image droppedImage = pointerEventData.pointerDrag.GetComponent<Image>();
         iconImage.sprite = droppedImage.sprite;
@@ -72,6 +79,8 @@ public class DropUI : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointe
     {
         if (Lock) return;
         if (pointerEventData.pointerDrag == null) return;
+        // UI内判定
+        InsideFlag = false;
         // １つ前のスプライトに戻す
         iconImage.sprite = nowSprite;
 
@@ -87,7 +96,7 @@ public class DropUI : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointe
             iconImage.color = Vector4.one;
         }
     }
-
+    
     // UI内でドロップしたとき
     public void OnDrop(PointerEventData pointerEventData)
     {
@@ -99,7 +108,7 @@ public class DropUI : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointe
         var nowParam = GetComponent<Parameter>();
         currentSkillName = nowParam.GetName();
         currentSkillValue = nowParam.GetParameter(currentSkillName);
-
+        
         // ドラッグしてきたスキルのパラメーター
         var param = pointerEventData.pointerDrag.GetComponent<Parameter>();
         // その名前
@@ -147,5 +156,6 @@ public class DropUI : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointe
 
         // 切り替え可能状態に戻す
         UnLock();
+        InsideFlag = false;
     }
 }

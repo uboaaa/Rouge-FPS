@@ -44,9 +44,11 @@ public class UIEvent : MonoBehaviour
     private Image current;
     // アルファ値
     [SerializeField] float alpha = 0.5f;
+    [SerializeField] bool nowDrop = false;
     // クリックした場所に生成
     public void Create()
     {
+        if (DropUI.CheckLock()) { return; }
         // 生成
         prefab = (GameObject)Resources.Load("Skill/Prefab/Clone");
         var mouse = Input.mousePosition;
@@ -58,9 +60,11 @@ public class UIEvent : MonoBehaviour
         sr.sprite = null;
         sr.sprite = current.sprite;
         sr.color = new Color(1, 1, 1, alpha);
-        // 生成したオブジェクトの名前から(Clone)を消しておく
-        clone.name = prefab.name;
+        // 生成したオブジェクトの名前を変更
+        clone.name = name;
+        nowDrop = true;
     }
+
 
     // キャンセルボタン押したとき
     // グレー値
@@ -69,8 +73,16 @@ public class UIEvent : MonoBehaviour
     // グレーアウト
     public void GrayOut()
     {
+        if (nowDrop)
+        {
+            GetComponent<Image>().color = new Color(gray, gray, gray, 1);
+            grayFlag = true;
+        }
+    }
+    public void SkillGrayOut()
+    {
         GetComponent<Image>().color = new Color(gray, gray, gray, 1);
-        grayFlag = true;
+        grayFlag = true;    
     }
     // ドロップ側のグレーアウト
     public void DropGrayOut()
@@ -123,6 +135,7 @@ public class UIEvent : MonoBehaviour
         }
     }
 
+
     // SEがあれば再生
     public void PlaySE()
     {
@@ -160,6 +173,13 @@ public class UIEvent : MonoBehaviour
     {
         GetComponent<RectTransform>().localScale = new Vector3(1, 1);
     }
+    // ホールド解除
+    public void DropOff()
+    {
+        if (DropUI.CheckLock()) { return; }
+        nowDrop = false;
+    }
+
 
     // ==============
     // ドラッグしている間
@@ -167,6 +187,7 @@ public class UIEvent : MonoBehaviour
     // 移動
     public void Move()
     {
+        if (DropUI.CheckLock()) { return; }
         // ドラッグフラグオン
         dragFlag = true;
         // マウスの座標に移動
@@ -185,7 +206,15 @@ public class UIEvent : MonoBehaviour
     }
     public void DropActive()
     {
+        if (nowDrop) { return; }
         GetComponent<Image>().color = new Color(1, 1, 1, 1);
         grayFlag = false;
     }
+    public void SkillActive()
+    {
+        if (DropUI.IsInside()) { return; }
+        GetComponent<Image>().color = new Color(1, 1, 1, 1);
+        grayFlag = false;
+    }
+
 }
