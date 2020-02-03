@@ -8,9 +8,10 @@ public class CameraRay : MonoBehaviour
     void Update()
     {
         // Back Gun
-        int layerMask = 9 << 11;
+        //int layerMask = 9 << 11;
+        int layerMask = 1 << 9 | 1 << 10;
 
-        layerMask = ~layerMask;
+        //layerMask = ~layerMask;
         
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask))
         {
