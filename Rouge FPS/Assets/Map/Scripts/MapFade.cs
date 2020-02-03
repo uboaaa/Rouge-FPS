@@ -32,7 +32,7 @@ public class MapFade : MonoBehaviour
         FadeCanvasObject.AddComponent<MapFade>();
 
         //最前面になるよう適当なソートオーダー設定
-        m_FadeCanvas.sortingOrder = 100;
+        m_FadeCanvas.sortingOrder = 0;
 
         //フェード用のImage生成
         m_FadeImage = new GameObject("ImageFade").AddComponent<Image>();
