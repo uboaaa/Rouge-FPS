@@ -25,11 +25,11 @@ public class load : MonoBehaviour
 
         while (_async.progress < 0.9f) //0.9で止まる
         {
-             Debug.Log(_async.progress);
+            //  Debug.Log(_async.progress);
             _loadingBar.value = _async.progress;
             yield return 0;
         }
-        Debug.Log("ロード完了");
+        // Debug.Log("ロード完了");
         _loadingBar.value = 1.0f;
         _async.allowSceneActivation = true;
 
