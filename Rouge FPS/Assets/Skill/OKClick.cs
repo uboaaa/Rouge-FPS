@@ -31,6 +31,7 @@ public class OKClick : MonoBehaviour
         DropUI.UnLock();
         UIManager.SetFalseUIFlg();
         MyStatus.NewMaxHP();
+        MapInitializer.MoveNextMap();
         // GameObject.Find("UI").SetActive(false);
     }
 
