@@ -164,6 +164,7 @@ public class Wolf : MonoBehaviour
 
         if(!PauseScript.pause()){
         if(!SkillManagement.GetTimeStop()){
+            if(!SettingScript.Settingpause()){
 
 
         // ========
@@ -318,6 +319,7 @@ public class Wolf : MonoBehaviour
 
         }
         }
+        }
     }
 
     // 弾との当たり判定
@@ -326,6 +328,7 @@ public class Wolf : MonoBehaviour
 
         if(!PauseScript.pause()){
         if(!SkillManagement.GetTimeStop()){
+            if(!SettingScript.Settingpause()){
         if (collision.gameObject.tag == "Bullet")
         {
             // 弾のダメージを取得
@@ -342,6 +345,7 @@ public class Wolf : MonoBehaviour
         }
            }
         }
+        }
 
     }
 
@@ -350,6 +354,7 @@ public class Wolf : MonoBehaviour
 
         if(!PauseScript.pause()){
         if(!SkillManagement.GetTimeStop()){
+            if(!SettingScript.Settingpause()){
         if (collider.gameObject.tag == "Bullet")
         {
             // 弾のダメージを取得
@@ -366,6 +371,6 @@ public class Wolf : MonoBehaviour
         }
            }
         }
-
+        }
     }
 }

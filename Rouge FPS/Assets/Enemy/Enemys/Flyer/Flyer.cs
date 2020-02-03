@@ -189,6 +189,7 @@ public class Flyer : MonoBehaviour
         {
             if (!SkillManagement.GetTimeStop())
             {
+                if(!SettingScript.Settingpause()){
 
 
 
@@ -444,6 +445,7 @@ public class Flyer : MonoBehaviour
             }
 
         }
+        }
 
     }
 
@@ -456,6 +458,7 @@ public class Flyer : MonoBehaviour
         {
             if (!SkillManagement.GetTimeStop())
             {
+                if(!SettingScript.Settingpause()){
 
                 if (collision.gameObject.tag == "Bullet")
                 {
@@ -473,6 +476,7 @@ public class Flyer : MonoBehaviour
                     //intパラメーターの値を設定する.
                     animator.SetInteger("trans", trans);
                 }
+                }
 
             }
         }
@@ -486,6 +490,7 @@ public class Flyer : MonoBehaviour
         {
             if (!SkillManagement.GetTimeStop())
             {
+                if(!SettingScript.Settingpause()){
                 if (collider.gameObject.tag == "Bullet")
                 {
                     // 弾のダメージを取得
@@ -503,6 +508,7 @@ public class Flyer : MonoBehaviour
                     animator.SetInteger("trans", trans);
                 }
 
+            }
             }
         }
     }

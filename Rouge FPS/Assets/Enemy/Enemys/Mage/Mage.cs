@@ -209,6 +209,7 @@ public class Mage : MonoBehaviour
         {
             if (!SkillManagement.GetTimeStop())
             {
+                if(!SettingScript.Settingpause()){
 
                 // ========
                 // アニメーション 
@@ -422,7 +423,7 @@ public class Mage : MonoBehaviour
                         if (ftime > 60) { ftime = 0; }
                     }
                 }
-
+                }
 
             }
         }
@@ -438,7 +439,7 @@ public class Mage : MonoBehaviour
             if (!SkillManagement.GetTimeStop())
             {
 
-
+                if(!SettingScript.Settingpause()){
                 if (collision.gameObject.tag == "Bullet")
                 {
                     // 弾のダメージを取得
@@ -455,7 +456,7 @@ public class Mage : MonoBehaviour
                     //intパラメーターの値を設定する.
                     animator.SetInteger("trans", trans);
                 }
-
+                }
             }
         }
 
@@ -468,6 +469,7 @@ public class Mage : MonoBehaviour
         {
             if (!SkillManagement.GetTimeStop())
             {
+                if(!SettingScript.Settingpause()){
                 if (collider.gameObject.tag == "Bullet")
                 {
                     // 弾のダメージを取得
@@ -484,7 +486,7 @@ public class Mage : MonoBehaviour
                     //intパラメーターの値を設定する.
                     animator.SetInteger("trans", trans);
                 }
-
+                }
             }
         }
 

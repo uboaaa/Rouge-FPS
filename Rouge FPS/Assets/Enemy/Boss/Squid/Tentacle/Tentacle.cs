@@ -46,6 +46,7 @@ public class Tentacle : MonoBehaviour
         {
             if (!SkillManagement.GetTimeStop())
             {
+                if(!SettingScript.Settingpause()){
 
                 ep = Squid.GetComponent<EnemyParameter>();
 
@@ -70,6 +71,7 @@ public class Tentacle : MonoBehaviour
 
                 this.gameObject.transform.position = new Vector3(this.transform.position.x, Tentacle_Y, this.transform.position.z);
 
+            }
             }
         }
     }
