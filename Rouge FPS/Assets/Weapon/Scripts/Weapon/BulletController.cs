@@ -56,7 +56,9 @@ public class BulletController : MonoBehaviour
 
     void Update()
     {
-
+        // ポーズ中動作しないようにする
+        if(!PauseScript.pause()){}
+        if(!SkillManagement.GetTimeStop()){}
     }
 
     void HitEffect(GameObject Prefab)
