@@ -72,6 +72,18 @@ public class UIEvent : MonoBehaviour
         GetComponent<Image>().color = new Color(gray, gray, gray, 1);
         grayFlag = true;
     }
+    // ドロップ側のグレーアウト
+    public void DropGrayOut()
+    {
+        if (DropUI.CheckLock()) { return; }
+        GetComponent<Image>().color = new Color(gray, gray, gray, 1);
+        grayFlag = true;
+    }
+    public void CancelGrayOut()
+    {
+        GetComponent<Image>().color = new Color(1, 1, 1, gray);
+        grayFlag = true;
+    }
 
     // Rectの値
     [SerializeField] float ReduceRect = 0;
@@ -168,7 +180,12 @@ public class UIEvent : MonoBehaviour
     // グレーアウト解除
     public void Active()
     {
-        GetComponent<Image>().color = new Color(1, 1, 1, 0.5f);
+        GetComponent<Image>().color = new Color(1, 1, 1, 0.6f);
+        grayFlag = false;
+    }
+    public void DropActive()
+    {
+        GetComponent<Image>().color = new Color(1, 1, 1, 1);
         grayFlag = false;
     }
 }

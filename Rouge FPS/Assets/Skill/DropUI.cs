@@ -6,6 +6,10 @@ public class DropUI : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointe
 {
     // 複数スキル変更をやめる
     static bool Lock = false;
+    static public bool CheckLock()
+    {
+        return Lock;
+    }
     static public void UnLock()
     {
         Lock = false;

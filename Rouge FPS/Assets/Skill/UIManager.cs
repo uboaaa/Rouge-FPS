@@ -167,19 +167,20 @@ public class UIManager : MonoBehaviour
     {
         var i = 0;
         var pp = Parameter.GetComponent<PlayerParameter>();
+        var Gun = ChangeEquip.nowWeapon();
         foreach(var obj in SlotObj)
         {
             // パラメーター取得
             var param = obj.GetComponent<Parameter>();
             param.AllReset();
             // i番目のスロットの情報をセット
-            var name = pp.GetSlotName(i);
+            var gunCon = Gun.GetComponent<GunController>();
+            var name = gunCon.GetSkillName()[i];
             var tex = "Skill/" + name;
             // テクスチャ設定
             obj.GetComponent<Image>().sprite = Resources.Load<Sprite>(tex);
             // パラメーターの値も取得
-            var check = pp.GetSlotValue(i);
-            param.SetParameter(name, pp.GetSlotValue(i));
+            param.SetParameter(name, gunCon.GetSkillValue()[i].ToString());
 
             // スキル効果値の文字描画
             var child = obj.GetComponentInChildren<SkillValue>();
@@ -265,6 +266,23 @@ public class UIManager : MonoBehaviour
         CursorObj.GetComponent<AiryUIAnimationManager>().HideMenu();
     }
 
+    // スキル→武器に値渡し
+    public void SetWeapon()
+    {
+        var weapon = ChangeEquip.nowWeapon().GetComponent<GunController>();
+        var param = Parameter.GetComponent<PlayerParameter>();
+        weapon.SetSkillName(param.GetAllSlotName());
+
+        // スキルを数値に変換
+        int[] value = { int.Parse(param.GetSlotValue(0)), int.Parse(param.GetSlotValue(1)), int.Parse(param.GetSlotValue(2)) };
+        weapon.SetSkillValue(value);
+
+        // スキルが武器に適応されるものの場合変換
+        weapon.Conversion();
+
+    }
+
+
     private void Update()
     {
         // 仮　UI出すためのフラグ：オンにしてくれたら勝手にアニメーション始まります
@@ -293,7 +311,8 @@ public class UIManager : MonoBehaviour
             SetButton();
             SetEtc();
             SetSlot();
-            nowFloor = FloorCount.GetFloors().ToString();
+            // ホワイトアウト後にスキル画面いく仕様上階層－１の値で渡す
+            nowFloor = (FloorCount.GetFloors() - 1).ToString();
             SetSkill(nowFloor, 85, 10, 5);
             DropUI.UnLock();
             // 明転
