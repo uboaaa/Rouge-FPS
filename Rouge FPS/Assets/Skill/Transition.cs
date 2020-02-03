@@ -46,7 +46,7 @@ public class Transition : MonoBehaviour
                 time = 1.0f;
                 beginFlag = false;
                 // 暗転終了
-                GetComponent<UIManager>().EndBlackOut();
+                GameObject.Find("UIManager").GetComponent<UIManager>().EndBlackOut();
             }
             transition.SetFloat(PropID, time);
         }
