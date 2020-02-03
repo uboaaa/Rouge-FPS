@@ -44,7 +44,7 @@ public class MyStatus : MonoBehaviour
         return FirstHP;
     }
 
-    public static void NewMaxHP(){FirstHP+=(float)PlayerParameter.GetParameter("HP");}
+    public static void NewMaxHP(){FirstHP+=PlayerParameter.HP;}
 
 
     public void downHp(float damage) {
