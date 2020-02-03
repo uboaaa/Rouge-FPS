@@ -22,8 +22,7 @@ public class DropBullet : MonoBehaviour
         if(hitFlg && Weapon)
         {
             // サウンドを鳴らす
-            SoundManager soundManager = GameObject.Find("DropBullet").GetComponent<SoundManager>();
-            soundManager.Play(0);
+       AudioManager.Instance.PlaySE("machinegun-slide1");
 
             // 弾を追加する
             Weapon.GetComponent<GunController>().remAmmo += bulletNum;
