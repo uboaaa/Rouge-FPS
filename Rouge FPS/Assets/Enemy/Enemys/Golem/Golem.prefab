@@ -153,9 +153,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deadeffect: {fileID: 7053788834288727124, guid: 5535e049c4f89b743bc21b34e2d93445,
     type: 3}
-  PopObject1: {fileID: 6297636772104832161, guid: ab516d3b60580b04ab23db217c0354cb,
+  PopObject1: {fileID: 7449877454162974788, guid: 65c04705f1799124ab7546eba90e7616,
     type: 3}
-  PopObject2: {fileID: 2500672720240144816, guid: bb2b5d9bea7a15a48838bb5a11f24ff0,
+  PopObject2: {fileID: 1641943505865801085, guid: 6a7450e5d0d4bf840a5abdb1dbacd7df,
     type: 3}
 --- !u!114 &1998624265329093381
 MonoBehaviour:

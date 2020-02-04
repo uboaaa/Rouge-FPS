@@ -164,9 +164,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8d236a22ed02341a08d855fcce06fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deadeffect: {fileID: 0}
-  PopObject1: {fileID: 0}
-  PopObject2: {fileID: 0}
+  deadeffect: {fileID: 7053788834288727124, guid: 5535e049c4f89b743bc21b34e2d93445,
+    type: 3}
+  PopObject1: {fileID: 7449877454162974788, guid: 65c04705f1799124ab7546eba90e7616,
+    type: 3}
+  PopObject2: {fileID: 1641943505865801085, guid: 6a7450e5d0d4bf840a5abdb1dbacd7df,
+    type: 3}
 --- !u!114 &6390273302411902571
 MonoBehaviour:
   m_ObjectHideFlags: 0
