@@ -124,7 +124,7 @@ MonoBehaviour:
   deadeffect: {fileID: 8425474575133995118, guid: b9713eb48f1ee574282072874f896482,
     type: 3}
   fireflg: 0
-  Hpbar: {fileID: 0}
+  Hpbar: {fileID: 6809356227748764984, guid: bc2274b23911f074abf6e0455dba1f2b, type: 3}
   Bullet: {fileID: 7691401416737572974, guid: a61d558ac66e79145a20977bff90721a, type: 3}
   FireEffect: {fileID: 163380929738211070, guid: 0c546129d8b6b804881164d39be1f903,
     type: 3}

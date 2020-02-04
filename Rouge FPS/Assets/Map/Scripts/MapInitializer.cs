@@ -98,6 +98,15 @@ public class MapInitializer : MonoBehaviour
         //親を取得
         m_parentParts = GameObject.Find("DungeonParts");
 
+        //床と壁のモデル読み込み
+        m_wallPrefab = Resources.Load("Prefab/DungeonParts/Wall") as GameObject;
+        m_floorPrefab = Resources.Load("Prefab/DungeonParts/Floor") as GameObject;
+        m_celingPrefab = Resources.Load("Prefab/DungeonParts/Celing") as GameObject;
+        m_cagePrefab = Resources.Load("Prefab/DungeonParts/Cage") as GameObject;
+
+        //ボス部屋のモデル読み込み
+        m_bossRoomPrefab = Resources.Load("Prefab/Rooms/BossMap") as GameObject;
+
         //マップ1生成
         m_mapID.Value = 1;
     }
@@ -160,8 +169,7 @@ public class MapInitializer : MonoBehaviour
     {
         //通常ダンジョン用BGM停止
         AudioManager.Instance.StopBGM();
-        //ボス用prefabを取得し、インスタス化
-        m_bossRoomPrefab = Resources.Load("Prefab/Rooms/BossMap") as GameObject;
+        //インスタンス化
         GameObject _bossRoom = Instantiate(m_bossRoomPrefab, new Vector3(0, 0, 0), new Quaternion());
         //ダンジョンパーツ用親オブジェクトを親に設定
         _bossRoom.transform.SetParent(m_parentParts.transform);
@@ -267,11 +275,7 @@ public class MapInitializer : MonoBehaviour
         //パーツの親オブジェクトを取得
         //m_parentParts = GameObject.Find("DungeonParts");
 
-        //床と壁のモデル読み込み
-        m_wallPrefab = Resources.Load("Prefab/DungeonParts/Wall") as GameObject;
-        m_floorPrefab = Resources.Load("Prefab/DungeonParts/Floor") as GameObject;
-        m_celingPrefab = Resources.Load("Prefab/DungeonParts/Celing") as GameObject;
-        m_cagePrefab = Resources.Load("Prefab/DungeonParts/Cage") as GameObject;
+        
 
         //余分な壁データを削除
         for (int y = 1; y < MAP_SIZE_Y - 1; y++)
@@ -299,11 +303,11 @@ public class MapInitializer : MonoBehaviour
             }
         }
 
-        //非同期ロード版
-        InstatiateObjects(m_floorPrefab, m_celingPrefab, m_wallPrefab);
-
         //プレイヤー出現座標を設定
         SpawnPlayer();
+
+        //非同期ロード版
+        InstatiateObjects(m_floorPrefab, m_celingPrefab, m_wallPrefab);   
     }
 
     public void InstatiateObjects(GameObject floor, GameObject celling, GameObject wall)
