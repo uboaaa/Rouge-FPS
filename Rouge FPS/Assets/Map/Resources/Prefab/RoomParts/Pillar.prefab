@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2437323129554048744}
   - component: {fileID: 2375827328671864208}
   m_Layer: 9
-  m_Name: Wall
+  m_Name: Pillar
   m_TagString: Back
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
