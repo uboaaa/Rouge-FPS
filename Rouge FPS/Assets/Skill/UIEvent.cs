@@ -180,6 +180,11 @@ public class UIEvent : MonoBehaviour
         nowDrop = false;
     }
 
+    public void DropFalse()
+    {
+        nowDrop = false;
+    }
+
 
     // ==============
     // ドラッグしている間
