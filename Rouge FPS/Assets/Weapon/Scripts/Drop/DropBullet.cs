@@ -48,7 +48,7 @@ public class DropBullet : MonoBehaviour
                 return;
             }
 
-            if(Weapon.GetComponent<GunController>().remAmmo < Weapon.GetComponent<GunController>().AmmoSize)
+            if(Weapon.GetComponent<GunController>().remAmmo < Weapon.GetComponent<GunController>().AmmoSize + GunController.skillAmmo)
             {
                 hitFlg = true;
             }
