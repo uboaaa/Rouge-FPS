@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 5778929023481333610}
   - component: {fileID: 5778929023481333613}
   - component: {fileID: 6771244984671535046}
+  - component: {fileID: 2916177968347566935}
   m_Layer: 11
   m_Name: MiniSquid
   m_TagString: Enemy
@@ -263,3 +264,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyatkpow: 0
   BulletFlg: 0
+--- !u!114 &2916177968347566935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5778929023481333615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b05549d67d0882f4fa1b0100af8152b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BulletPrefab: {fileID: 1641943505865801085, guid: 6a7450e5d0d4bf840a5abdb1dbacd7df,
+    type: 3}
+  LifePrefab: {fileID: 7449877454162974788, guid: 65c04705f1799124ab7546eba90e7616,
+    type: 3}
