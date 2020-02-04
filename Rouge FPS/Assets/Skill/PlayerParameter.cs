@@ -43,6 +43,10 @@ public class PlayerParameter : MonoBehaviour
     {
         return slotName[_num];
     }
+    public string[] GetAllSlotName()
+    {
+        return slotName;
+    }
     // スロット名設定
     public void SetSlotName(string _name, int _num)
     {

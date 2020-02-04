@@ -28,6 +28,6 @@ public class SkillValue : MonoBehaviour
         {
             value = "";
         }
-        text.text = value;
+        text.text = "+" + value;
     }
 }

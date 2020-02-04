@@ -23,8 +23,8 @@ public class GunController : MonoBehaviour
     [SerializeField] public int        Damage;                                 // 火力
     [HideInInspector] static public int       skillDamage;                     // スキルの火力
 
-    static public string[] skillName;
-    static public int[] skillValue = new int[3];
+    static public string[] skillName = { "ATK", "ATK", "ATK" };
+    static public int[] skillValue = { 1, 1, 1 };
 
     [SerializeField] public float      shootInterval;                          // 次発射までの間の時間
     [SerializeField] public float      reloadInterval;                         // リロード終わりまでの時間
