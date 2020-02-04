@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 6390273302411902565}
   - component: {fileID: 6390273302411902566}
   - component: {fileID: 6390273302411902567}
+  - component: {fileID: 7611557710219586320}
   m_Layer: 11
   m_Name: Wolf
   m_TagString: Enemy
@@ -261,6 +262,22 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &7611557710219586320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6390273302411902558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b05549d67d0882f4fa1b0100af8152b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BulletPrefab: {fileID: 1641943505865801085, guid: 6a7450e5d0d4bf840a5abdb1dbacd7df,
+    type: 3}
+  LifePrefab: {fileID: 7449877454162974788, guid: 65c04705f1799124ab7546eba90e7616,
+    type: 3}
 --- !u!1001 &2825630238711945519
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -268,11 +285,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6390273302411902561}
     m_Modifications:
-    - target: {fileID: 7959186981857451705, guid: b217578709ca4ac46a455ed01269f595,
-        type: 3}
-      propertyPath: m_Name
-      value: EnemyMarker
-      objectReference: {fileID: 0}
     - target: {fileID: 9071490521626752200, guid: b217578709ca4ac46a455ed01269f595,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -327,6 +339,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7959186981857451705, guid: b217578709ca4ac46a455ed01269f595,
+        type: 3}
+      propertyPath: m_Name
+      value: EnemyMarker
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b217578709ca4ac46a455ed01269f595, type: 3}
