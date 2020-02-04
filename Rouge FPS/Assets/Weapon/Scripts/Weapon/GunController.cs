@@ -98,6 +98,9 @@ public class GunController : MonoBehaviour
 
     public void Conversion()
     {
+        skillDamage = 0;
+        skillMagazine = 0;
+        skillAmmo = 0;
         var i = 0;
         foreach(var s in skillName)
         {
@@ -119,6 +122,10 @@ public class GunController : MonoBehaviour
     
     void Start()
     {
+        // スキル
+        GetSkillName();
+        GetSkillValue();
+
         FPSCon = GameObject.Find("FPSController");
         CEScript = FPSCon.GetComponent<ChangeEquip>();
 
