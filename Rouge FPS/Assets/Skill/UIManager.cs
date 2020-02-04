@@ -317,7 +317,7 @@ public class UIManager : MonoBehaviour
             SetEtc();
             SetSlot();
             // 5段階のスキル設定
-            SetSkill("1", 5, 4, 3, 2, 1);
+            SetSkill("1", 10, 8, 5, 2, 1);
             DropUI.UnLock();
             // 明転
             GetComponent<Transition>().EndTransition();
