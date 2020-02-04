@@ -221,7 +221,7 @@ MonoBehaviour:
   bulletScale: {x: 0.1, y: 0.1, z: 0.1}
   muzzleFlashPrefab: {fileID: 2880087096183500547, guid: 6d83fc1479a15d5449c26c3c797dd02c,
     type: 3}
-  muzzleFlashScale: {x: 1, y: 1, z: 1}
+  muzzleFlashScale: {x: 0.5, y: 0.5, z: 0.5}
   cameraShakePow: 0.05
   GunEXP: 1
   shootEnabled: 1
