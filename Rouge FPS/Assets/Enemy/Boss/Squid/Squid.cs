@@ -83,13 +83,7 @@ public class Squid : MonoBehaviour
 
 
     // HpBar関連
-    public GameObject Hpbar = null;
-
-
-
-
-
-
+    private GameObject Hpbar = null;
 
 
 
@@ -138,12 +132,13 @@ public class Squid : MonoBehaviour
         return rad * Mathf.Rad2Deg;
     }
 
-
-
     void Start()
     {
         // プレイヤー情報取得
         player = GameObject.Find("FPSController");
+
+        Hpbar = GameObject.Find("FPSController/UI/SquidHpBar");
+        
 
         //GetComponentを用いてコンポーネントを取り出す.
         // オーディオ
@@ -184,7 +179,7 @@ public class Squid : MonoBehaviour
             material.SetFloat(propID_c, 0.5f);
 
             // パラメータ
-            ep.hp = 3000;
+            ep.hp = 6000;
             ep.atk = 30;
             ep.def = 0;
             //ep.speed = 1.0f;
@@ -272,8 +267,7 @@ public class Squid : MonoBehaviour
 
                         if (!AttackFlg)
                         {
-                            // // 体力を元に戻す
-                            // ep.hp = 120;
+   
 
                             // 正面を向き
                             trans = 0;
@@ -561,7 +555,7 @@ public class Squid : MonoBehaviour
 
                             // // 解放処理
                             Destroy(this.gameObject, 5.5f);
-                            Destroy(Hpbar.gameObject, 5.5f);
+                            //Destroy(Hpbar.gameObject, 5.5f);
                         }
                     }
 

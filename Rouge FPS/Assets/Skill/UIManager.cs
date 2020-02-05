@@ -226,8 +226,7 @@ public class UIManager : MonoBehaviour
     // ガイド設定
     public void SetGuide()
     {
-        GuideObj.transform.position = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y);
-        GuideObj.SetActive(false);
+        GuideObj.GetComponent<AiryUIAnimationManager>().ShowMenu();
     }
 
     // マウスカーソル設定
@@ -266,6 +265,7 @@ public class UIManager : MonoBehaviour
         }
         TextObj.GetComponent<AiryUIAnimationManager>().HideMenu();
         CursorObj.GetComponent<AiryUIAnimationManager>().HideMenu();
+        GuideObj.GetComponent<AiryUIAnimationManager>().HideMenu();
     }
 
     // スキル→武器に値渡し
@@ -287,11 +287,6 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
-        // 仮　UI出すためのフラグ：オンにしてくれたら勝手にアニメーション始まります
-        // if(Input.GetKeyDown(KeyCode.A))
-        // {
-        //     UIFlag = true;
-        // }
         // 暗転開始
         if (UIFlag) 
         {
@@ -319,22 +314,5 @@ public class UIManager : MonoBehaviour
             // 明転
             GetComponent<Transition>().EndTransition();
         }
-
-        // ガイド表示
-        if (guideFlag)
-        {
-            GuideObj.SetActive(true);
-        }
-        else
-        {
-            GuideObj.SetActive(false);
-        }
-
-        // 仮　UI非表示
-        // if(Input.GetKeyDown(KeyCode.S))
-        // {
-        //     UIObj.SetActive(false);
-        //    guideFlag = false;
-       // }
     }
 }

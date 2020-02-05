@@ -10,7 +10,6 @@ public class SquidHpBar : MonoBehaviour
 
     public GameObject Hpani = null;
     public GameObject HpFrame = null;
-    public GameObject HpRed = null;
 
     private int AniCnt = 0;
 
@@ -18,15 +17,21 @@ public class SquidHpBar : MonoBehaviour
     public Slider slider = null;
 
 
+    public void Restart()
+    {
+        Hpani.SetActive(true);
+        HpFrame.SetActive(false);
+        sliderObj.SetActive(false);
+
+        this.gameObject.SetActive(false);
+
+        AniCnt = 0;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        Squid = GameObject.Find("Squid");
-
-        SquidSc = Squid.GetComponent<Squid>();
-
-        slider.maxValue = SquidSc.GetHp();
+        
 
 
     }
@@ -34,6 +39,14 @@ public class SquidHpBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(AniCnt < 2)
+        {
+            Squid = GameObject.Find("Squid");
+
+            SquidSc = Squid.GetComponent<Squid>();
+
+            slider.maxValue = SquidSc.GetHp();
+        }
         
         if(AniCnt <= 50)
         {
@@ -57,6 +70,11 @@ public class SquidHpBar : MonoBehaviour
 
         // Debug.Log(SquidSc.GetEp().hp);
         // Debug.Log(SquidSc.GetHp());
+
+        if(!Squid)
+        {
+            Restart();
+        }
 
 
     }
