@@ -37,7 +37,7 @@ public class MyStatus : MonoBehaviour
     {
         // AudioManager.Instance.PlaySE("heal01"); 
         if((this.playerHP += hp) >FirstHP){this.playerHP=FirstHP;}
-        else{this.playerHP += hp;}
+        if((this.playerHP += hp) <FirstHP){this.playerHP += hp;}
     }
 
     public float GetMaxHp()
@@ -45,7 +45,9 @@ public class MyStatus : MonoBehaviour
         return FirstHP;
     }
 
-    public static void NewMaxHP(){FirstHP+=PlayerParameter.HP;}
+    public static void NewMaxHP(){
+        FirstHP=0;
+        FirstHP=100+PlayerParameter.HP;}
 
 
     public void downHp(float damage) {

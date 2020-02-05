@@ -265,7 +265,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
          
             //�ړ����x�̐ݒ�
             // SkillManagement.SetSpeedMagnification(0);
-            float AccelSpeed= PlayerParameter.SPD;
+            float AccelSpeed= PlayerParameter.SPD*0.5f;
+
          speed = m_IsWalking ? m_WalkSpeed+AccelSpeed 
                              : m_RunSpeed+AccelSpeed ; 
          

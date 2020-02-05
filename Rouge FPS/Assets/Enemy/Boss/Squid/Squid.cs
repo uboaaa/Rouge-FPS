@@ -359,7 +359,7 @@ public class Squid : MonoBehaviour
                             if (ActionCnt > 60)
                             {
                                 ActionCnt = 0;
-                                ActionFlg = Random.Range(3, 4);
+                                ActionFlg = Random.Range(0, 4);
                             }
                         }
                         // 攻撃１モーション

@@ -147,6 +147,11 @@ public class UIManager : MonoBehaviour
             // パラメーター設定
             var param = obj.GetComponent<Parameter>();
             param.AllReset();
+            // 階層に合わせてスキル調整
+            var intStatus = int.Parse(status[1]);
+            intStatus = intStatus + (FloorCount.GetFloors() - 2);
+            status[1] = intStatus.ToString();
+            // 設定
             param.SetParameter(status[0], status[1]);
             // 名前設定
             param.SetName(status[0]);
@@ -157,7 +162,7 @@ public class UIManager : MonoBehaviour
 
             // アニメーション再設定
             obj.GetComponent<AiryUIAnimationManager>().ShowMenu();
-
+            obj.GetComponent<UIEvent>().DropFalse();
             i++;
         }
     }
@@ -311,9 +316,8 @@ public class UIManager : MonoBehaviour
             SetButton();
             SetEtc();
             SetSlot();
-            // ホワイトアウト後にスキル画面いく仕様上階層－１の値で渡す
-            nowFloor = (FloorCount.GetFloors() - 1).ToString();
-            SetSkill(nowFloor, 85, 10, 5);
+            // 5段階のスキル設定
+            SetSkill("1", 10, 8, 5, 2, 1);
             DropUI.UnLock();
             // 明転
             GetComponent<Transition>().EndTransition();

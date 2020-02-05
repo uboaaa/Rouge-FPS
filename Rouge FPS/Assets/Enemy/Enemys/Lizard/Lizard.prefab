@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 2386876929843754797}
   - component: {fileID: 9048631101856651989}
   - component: {fileID: 5925790416437750199}
+  - component: {fileID: 7352466930662609496}
   m_Layer: 11
   m_Name: Lizard
   m_TagString: Enemy
@@ -171,9 +172,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deadeffect: {fileID: 7053788834288727124, guid: 5535e049c4f89b743bc21b34e2d93445,
     type: 3}
-  PopObject1: {fileID: 2500672720240144816, guid: bb2b5d9bea7a15a48838bb5a11f24ff0,
+  PopObject1: {fileID: 7449877454162974788, guid: 65c04705f1799124ab7546eba90e7616,
     type: 3}
-  PopObject2: {fileID: 6297636772104832161, guid: ab516d3b60580b04ab23db217c0354cb,
+  PopObject2: {fileID: 1641943505865801085, guid: 6a7450e5d0d4bf840a5abdb1dbacd7df,
     type: 3}
 --- !u!114 &1749410121330487597
 MonoBehaviour:
@@ -361,6 +362,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7352466930662609496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8539691789550445935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b05549d67d0882f4fa1b0100af8152b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BulletPrefab: {fileID: 1641943505865801085, guid: 6a7450e5d0d4bf840a5abdb1dbacd7df,
+    type: 3}
+  LifePrefab: {fileID: 7449877454162974788, guid: 65c04705f1799124ab7546eba90e7616,
+    type: 3}
 --- !u!1001 &8575179328547954439
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -368,6 +385,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2522867320245764553}
     m_Modifications:
+    - target: {fileID: 7959186981857451705, guid: b217578709ca4ac46a455ed01269f595,
+        type: 3}
+      propertyPath: m_Name
+      value: EnemyMarker
+      objectReference: {fileID: 0}
     - target: {fileID: 9071490521626752200, guid: b217578709ca4ac46a455ed01269f595,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -422,11 +444,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7959186981857451705, guid: b217578709ca4ac46a455ed01269f595,
-        type: 3}
-      propertyPath: m_Name
-      value: EnemyMarker
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b217578709ca4ac46a455ed01269f595, type: 3}
