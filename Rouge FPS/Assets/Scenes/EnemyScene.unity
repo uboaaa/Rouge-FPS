@@ -646,8 +646,8 @@ RectTransform:
   m_Children:
   - {fileID: 1433430745}
   - {fileID: 1897650196}
-  - {fileID: 1016550021}
   - {fileID: 1758279733}
+  - {fileID: 1016550021}
   - {fileID: 363381379}
   - {fileID: 1723619354}
   - {fileID: 873814037}
@@ -1789,7 +1789,7 @@ PrefabInstance:
     - target: {fileID: 5944068327154352794, guid: 12bb6c80de3378a4aae91f759f8d7c66,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5944068327154352794, guid: 12bb6c80de3378a4aae91f759f8d7c66,
         type: 3}
@@ -5038,12 +5038,6 @@ RectTransform:
   m_AnchoredPosition: {x: 711, y: -313}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1433430744 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6809356227748764984, guid: bc2274b23911f074abf6e0455dba1f2b,
-    type: 3}
-  m_PrefabInstance: {fileID: 2009165535}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1433430745 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6809356227748764987, guid: bc2274b23911f074abf6e0455dba1f2b,
@@ -6389,7 +6383,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 179823307}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -7360,7 +7354,7 @@ PrefabInstance:
     - target: {fileID: 8539691789550445935, guid: 91b9f190123511c498d98a3d12d36a23,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8539691789550445935, guid: 91b9f190123511c498d98a3d12d36a23,
         type: 3}
@@ -7726,6 +7720,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SquidHpBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 6809356227748764984, guid: bc2274b23911f074abf6e0455dba1f2b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6809356227748764987, guid: bc2274b23911f074abf6e0455dba1f2b,
         type: 3}
@@ -9297,7 +9296,7 @@ PrefabInstance:
     - target: {fileID: 2603287240325944146, guid: 6aaaf558ea3a71f41a1a8ac098b9b2d6,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2603287240325944157, guid: 6aaaf558ea3a71f41a1a8ac098b9b2d6,
         type: 3}
@@ -9358,7 +9357,7 @@ PrefabInstance:
         type: 3}
       propertyPath: Hpbar
       value: 
-      objectReference: {fileID: 1433430744}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6aaaf558ea3a71f41a1a8ac098b9b2d6, type: 3}
 --- !u!1001 &3099886284135702241
