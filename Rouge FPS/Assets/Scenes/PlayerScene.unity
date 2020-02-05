@@ -6031,6 +6031,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SquidHpBar
       objectReference: {fileID: 0}
+    - target: {fileID: 6809356227748764984, guid: bc2274b23911f074abf6e0455dba1f2b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6809356227748764987, guid: bc2274b23911f074abf6e0455dba1f2b,
         type: 3}
       propertyPath: m_LocalPosition.x
