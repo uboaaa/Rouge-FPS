@@ -25,7 +25,7 @@ public class EnemyAttackPower : MonoBehaviour
     {
         //Debug.Log(ep.atk);
         if(Flush.GetComponent<FlushController>().GetRed()<0.1f){DamageFlg=false;}
-        Debug.Log(DamageFlg);
+        // Debug.Log(DamageFlg);
     }
     void OnCollisionEnter(Collision collision)
     {

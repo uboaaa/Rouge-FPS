@@ -35,9 +35,12 @@ public class MyStatus : MonoBehaviour
     }
     public void AddHp(float hp)
     {
+        //  Debug.Log(FirstHP);
+         float Check=this.playerHP + hp;
+        //  Debug.Log(Check);
         // AudioManager.Instance.PlaySE("heal01"); 
-        if((this.playerHP += hp) >FirstHP){this.playerHP=FirstHP;}
-        if((this.playerHP += hp) <FirstHP){this.playerHP += hp;}
+        if(Check >FirstHP){this.playerHP=FirstHP;}
+        else{this.playerHP += hp;}
     }
 
     public float GetMaxHp()
