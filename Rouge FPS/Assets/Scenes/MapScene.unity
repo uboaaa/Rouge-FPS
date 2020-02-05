@@ -754,16 +754,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_roomTypeList:
   - rtype: 0
-    roomObj: {fileID: 2535331291487812590, guid: 3da739c2c9343a94881ba86540edb7f9,
+    roomObj: {fileID: 7991591374502799742, guid: 3da739c2c9343a94881ba86540edb7f9,
       type: 3}
   - rtype: 3
-    roomObj: {fileID: 4705646781071271282, guid: 02fc3a60692e9754ba3049f875a388fa,
+    roomObj: {fileID: 6582688253476645942, guid: 02fc3a60692e9754ba3049f875a388fa,
       type: 3}
   - rtype: 1
-    roomObj: {fileID: 2765964382741922258, guid: cb22735a53b7ec1429670a40002abbb5,
+    roomObj: {fileID: 4981343627033454670, guid: cb22735a53b7ec1429670a40002abbb5,
       type: 3}
   - rtype: 1
-    roomObj: {fileID: 2765964382741922258, guid: cb22735a53b7ec1429670a40002abbb5,
+    roomObj: {fileID: 5686020645251892754, guid: ec39a3c086b0c3440b066593bb8dd1d4,
       type: 3}
   - rtype: 4
     roomObj: {fileID: 3424705591942629624, guid: fa73f75e340f1df4f860594033fb0afe,
@@ -772,7 +772,8 @@ MonoBehaviour:
     roomObj: {fileID: 3136213933544909444, guid: dfe43a80cc8b4954398485389eae3145,
       type: 3}
   - rtype: 2
-    roomObj: {fileID: 41489231369342178, guid: 64bbb4ecaff8ef5429153896f0840a1f, type: 3}
+    roomObj: {fileID: 559895850958081706, guid: 64bbb4ecaff8ef5429153896f0840a1f,
+      type: 3}
   m_parentRoom: {fileID: 293144133}
   m_startPrefab: {fileID: 3119169724939059216, guid: e1d94919ab4a4e843a296ca8add13343,
     type: 3}
