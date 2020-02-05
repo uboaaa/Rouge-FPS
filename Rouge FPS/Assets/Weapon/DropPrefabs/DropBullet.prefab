@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1641943505865801075}
   - component: {fileID: 1641943505865801074}
   - component: {fileID: 1641943505865801072}
+  - component: {fileID: 7365864633356925357}
   m_Layer: 0
   m_Name: DropBullet
   m_TagString: Untagged
@@ -144,6 +145,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7365864633356925357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1641943505865801085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed6f83ac44a41cb4581b06713adfed1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7499557988816257583
 GameObject:
   m_ObjectHideFlags: 0
