@@ -57,7 +57,7 @@ Light:
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -292,16 +292,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5768850029930859047}
     m_Modifications:
-    - target: {fileID: 278547084305569969, guid: 0761fbb2d762bca438a57d0f45f29ecc,
-        type: 3}
-      propertyPath: m_Name
-      value: CartoonFireTorchRed
-      objectReference: {fileID: 0}
-    - target: {fileID: 278547084305569969, guid: 0761fbb2d762bca438a57d0f45f29ecc,
-        type: 3}
-      propertyPath: m_Layer
-      value: 11
-      objectReference: {fileID: 0}
     - target: {fileID: 278547084305785933, guid: 0761fbb2d762bca438a57d0f45f29ecc,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -356,6 +346,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 278547084305569969, guid: 0761fbb2d762bca438a57d0f45f29ecc,
+        type: 3}
+      propertyPath: m_Name
+      value: CartoonFireTorchRed
+      objectReference: {fileID: 0}
+    - target: {fileID: 278547084305569969, guid: 0761fbb2d762bca438a57d0f45f29ecc,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 278547084305622811, guid: 0761fbb2d762bca438a57d0f45f29ecc,
         type: 3}
