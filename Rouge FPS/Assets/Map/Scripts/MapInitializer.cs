@@ -114,10 +114,13 @@ public class MapInitializer : MonoBehaviour
     //更新
     void Update()
     {
-        ////簡易マップ移動
-        //if (Input.GetKeyDown(KeyCode.Q))
+        //if (Input.GetKeyDown(KeyCode.M))
         //{
-        //    MoveNextMap();
+        //    //スキル関連の関数追加の予定
+        //    UIManager.SetUIFlag(true);
+
+        //    //階層の更新
+        //    FloorCount.UpFloors();
         //}
     }
 
