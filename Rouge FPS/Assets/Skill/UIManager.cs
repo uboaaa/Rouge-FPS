@@ -147,10 +147,7 @@ public class UIManager : MonoBehaviour
             // パラメーター設定
             var param = obj.GetComponent<Parameter>();
             param.AllReset();
-            // 階層に合わせてスキル調整
-            var intStatus = int.Parse(status[1]);
-            intStatus = intStatus + (FloorCount.GetFloors() - 2);
-            status[1] = intStatus.ToString();
+            
             // 設定
             param.SetParameter(status[0], status[1]);
             // 名前設定
